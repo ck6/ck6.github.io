@@ -3,56 +3,44 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Cute Pastel Hex Grid</title>
+<title>Pastel Hex Grid Rewards with Tabs and Multiple Rewards</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
   body {
     margin: 0;
-    background: linear-gradient(to bottom, #2d1b64, #f8cdda); /* a dreamy gradient bg */
-    font-family: 'Comic Sans MS', 'Helvetica', sans-serif; /* playful font */
+    font-family: sans-serif;
+    background: linear-gradient(to bottom, #2d1b64, #f8cdda);
     color: #fff;
     display: flex;
     flex-direction: column;
     height: 100vh;
     overflow: hidden;
-    background-size: cover;
-    background-position: center;
   }
 
   .top-bar {
     background: rgba(0,0,0,0.3);
+    position: relative;
     padding: 10px;
     display: flex;
+    justify-content: center;
     align-items: center;
-    position: relative;
-  }
-
-  .top-bar button {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 16px;
-    margin-right: 10px;
-    cursor: pointer;
   }
 
   .top-bar h1 {
-    flex:1;
-    text-align:center;
-    margin:0;
     font-size: 18px;
-    letter-spacing: 1px;
+    margin: 0;
+    z-index: 2;
   }
 
-  /* Cat Image at the top, positioned behind title */
   .cat-container {
     position: absolute;
     top: 0; left: 50%;
     transform: translateX(-50%);
-    height: 500px;
+    height: 500px; 
     width: 500px;
     overflow: hidden;
-    z-index: 10;
+    z-index: 5; 
+    pointer-events: none; /* Ensure cat image doesn't block clicks if needed */
   }
 
   .cat-container img {
@@ -61,21 +49,28 @@
   }
 
   .content {
-    flex:1;
-    overflow:auto;
-    position: relative;
-    padding: 230px;
+    flex: 1;
+    overflow: auto;
+    padding-top: 150px; /* Ensure tiles start below cat image */
     box-sizing: border-box;
+    position: relative;
+  }
+
+  .tab-content {
+    display: none; /* Hide all content by default */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .tab-content.active {
+    display: block;
   }
 
   .hex-grid {
     display: flex;
     flex-direction: column;
     align-items: center;
-    --hex-size: 80px;
-    position: relative;
-    z-index: 1;
-
+    --hex-size: 80px; /* Bigger tiles */
   }
 
   .hex-row {
@@ -87,8 +82,6 @@
     margin-left: calc(var(--hex-size)/2);
   }
 
-  /* Pastel color palette for hexes */
-  /* We'll randomize from a list of gradients in JS */
   .hex {
     width: var(--hex-size);
     height: calc(var(--hex-size)*1.1547);
@@ -101,18 +94,25 @@
       0% 75%, 
       0% 25%
     );
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    transition: transform 0.2s ease, box-shadow 0.2s;
+    transition: transform 0.2s, background 0.2s;
+    font-size: 24px;
+    text-align: center;
+    color: #333;
+    font-weight: bold;
   }
 
   .hex:hover {
     transform: scale(1.1);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  }
+
+  .hex.revealed {
+    background: #007f5f; 
+    color: #fff;
+    font-size: 16px;
   }
 
   .bottom-nav {
@@ -132,7 +132,6 @@
     cursor: pointer;
     flex: 1;
     text-align: center;
-    position: relative;
   }
 
   .bottom-nav button.active,
@@ -144,15 +143,32 @@
 </head>
 <body>
 <div class="top-bar">
-  <button onclick="closeWebApp()">✕</button>
   <h1>Cute Pastel Cluster</h1>
   <div class="cat-container">
-    <!-- Add a cute cat image -->
     <img src="btc_cat.jpg" alt="Cute cat" />
   </div>
 </div>
 <div class="content">
-  <div class="hex-grid" id="hexGridContainer"></div>
+  <!-- Tab contents -->
+  <div id="bonusesContent" class="tab-content">
+    <h2>Bonuses</h2>
+    <p>Here you can see your bonuses.</p>
+  </div>
+
+  <div id="fieldContent" class="tab-content active">
+    <h2 style="text-align:center; margin-bottom:20px;">Click a tile to reveal a reward!</h2>
+    <div class="hex-grid" id="hexGridContainer"></div>
+  </div>
+
+  <div id="statsContent" class="tab-content">
+    <h2>Stats</h2>
+    <p>Your game stats will appear here.</p>
+  </div>
+
+  <div id="balanceContent" class="tab-content">
+    <h2>Balance</h2>
+    <p>Check your balance and recent rewards here.</p>
+  </div>
 </div>
 <div class="bottom-nav">
   <button id="bonusesTab" onclick="showTab('bonuses')">Bonuses</button>
@@ -160,7 +176,6 @@
   <button id="statsTab" onclick="showTab('stats')">Stats</button>
   <button id="balanceTab" onclick="showTab('balance')">Balance</button>
 </div>
-
 <script>
   const tg = window.Telegram.WebApp;
   tg.expand();
@@ -171,10 +186,11 @@
     tg.close();
   });
 
-  function closeWebApp() {
-    tg.close();
-  }
+  const rows = 5;
+  const cols = 5;
+  const container = document.getElementById('hexGridContainer');
 
+  // Pastel gradients for initial backgrounds
   const pastelGradients = [
     "linear-gradient(135deg, #fbc2eb 0%, #a18cd1 100%)",
     "linear-gradient(135deg, #fdcbf1 0%, #e6dee9 100%)",
@@ -188,20 +204,39 @@
 
   const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🦴","💎","📦","🎀","💕"];
 
+  // Define multiple possible rewards
+  const rewards = [
+    "0 BTC",
+    "0 BTC",
+    "0 BTC",
+    "0.5 BTC",
+    "1 BTC",
+    "1 BTC",
+    "2 BTC"
+  ];
+
+  // Store state of each tile
+  const gridState = [];
+  for (let r = 0; r < rows; r++) {
+    gridState[r] = [];
+    for (let c = 0; c < cols; c++) {
+      const gradient = pastelGradients[Math.floor(Math.random()*pastelGradients.length)];
+      const emoji = emojis[Math.floor(Math.random()*emojis.length)];
+      gridState[r][c] = { revealed: false, reward: null, emoji, gradient };
+    }
+  }
+
   function createHexGrid(rows, cols) {
-    const container = document.getElementById('hexGridContainer');
     for (let r = 0; r < rows; r++) {
       const rowDiv = document.createElement('div');
       rowDiv.className = 'hex-row';
       for (let c = 0; c < cols; c++) {
+        const tileData = gridState[r][c];
         const hex = document.createElement('div');
         hex.className = 'hex';
-        // Random gradient background
-        const gradient = pastelGradients[Math.floor(Math.random()*pastelGradients.length)];
-        hex.style.background = gradient;
-        // Random emoji
-        const emoji = emojis[Math.floor(Math.random()*emojis.length)];
-        hex.textContent = emoji;
+        // Set initial background and emoji
+        hex.style.background = tileData.gradient;
+        hex.textContent = tileData.emoji;
         hex.onclick = () => onHexClick(r, c, hex);
         rowDiv.appendChild(hex);
       }
@@ -210,18 +245,34 @@
   }
 
   function onHexClick(row, col, element) {
-    // Toggle a "selected" state or send data to the bot
-    element.style.transform = element.style.transform === 'scale(1.1)' ? 'scale(1)' : 'scale(1.1)';
-    // You can also send data:
-    // tg.sendData(JSON.stringify({action:'hex_click', row:row, col:col}));
+    const tile = gridState[row][col];
+    if (!tile.revealed) {
+      // Pick a random reward from the rewards array
+      const randomIndex = Math.floor(Math.random() * rewards.length);
+      tile.reward = rewards[randomIndex];
+      tile.revealed = true;
+
+      element.classList.add('revealed');
+      element.textContent = tile.reward;
+      element.style.background = "#007f5f";
+
+      // If you want to notify the bot:
+      // tg.sendData(JSON.stringify({action:'tile_revealed', row, col, reward: tile.reward}));
+    }
   }
 
-  createHexGrid(7,7);
+  createHexGrid(rows, cols);
 
   function showTab(tab) {
+    // Remove active state from all buttons
     document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
     document.getElementById(tab+'Tab').classList.add('active');
-    // In a real app, you'd switch out the displayed content area
+
+    // Hide all tab contents
+    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+    // Show the selected tab content
+    document.getElementById(tab+'Content').classList.add('active');
   }
 </script>
 </body>
