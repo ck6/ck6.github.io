@@ -39,7 +39,7 @@
     top: 0; left: 50%;
     transform: translateX(-50%);
     /* Cat container width scales between mobile and desktop */
-    width: clamp(200px, 70vw, 500px);
+    width: clamp(500px, 70vw, 500px);
     height: auto;
     overflow: hidden;
     z-index: 5; 
@@ -57,7 +57,7 @@
     flex: 1;
     overflow: auto;
     /* Give enough top padding to push tiles below the cat, adjust as needed */
-    padding-top: clamp(200px, 50vw, 200px);
+    padding-top: clamp(100px, 50vw, 200px);
     box-sizing: border-box;
     position: relative;
     max-width:100vw;
@@ -79,7 +79,7 @@
     flex-direction: column;
     align-items: center;
     /* Use clamp to ensure tiles aren't too small on mobile or huge on desktop */
-    --hex-size: clamp(60px, 18vw, 100px);
+    --hex-size: clamp(60px, 30vw, 100px);
     max-width: 100vw;
     box-sizing: border-box;
     margin:0 auto;
