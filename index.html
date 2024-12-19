@@ -1,7 +1,256 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Telegram Mini App Demo</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+  body {
+    margin: 0;
+    background: #000;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  /* Container for the main content */
+  .main-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    padding: 10px;
+  }
+
+  /* Title or top bar area */
+  .top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  .top-bar h1 {
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .balance-box {
+    background: #111;
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .balance-box span {
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  /* Hex grid container */
+  .hex-grid {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    --hex-size: 40px; 
+  }
+
+  /* Each hex cell */
+  .hex {
+    width: var(--hex-size);
+    height: calc(var(--hex-size) * 1.1547); /* height for a hex based on width */
+    background: #444;
+    margin: calc(var(--hex-size) * 0.05);
+    clip-path: polygon(
+      50% 0%, 
+      100% 25%, 
+      100% 75%, 
+      50% 100%, 
+      0% 75%, 
+      0% 25%
+    );
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .hex:hover {
+    background: #777;
+  }
+
+  /* Example bottom nav */
+  .bottom-nav {
+    background: #111;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px 0;
+  }
+
+  .bottom-nav button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    padding: 10px;
+    cursor: pointer;
+    flex: 1;
+    text-align: center;
+  }
+
+  .bottom-nav button.active {
+    background: #333;
+    border-radius: 4px;
+  }
+
+  .action-bar {
+    display: flex;
+    background: #222;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 8px;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .action-bar button {
+    background: #444;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 16px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .field-content,
+  .stats-content,
+  .balance-content,
+  .bonuses-content {
+    display: none;
+  }
+
+  /* Show the active tab’s content */
+  .active-tab {
+    display: block;
+  }
+</style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm the fluffy chonk.</p>
+<div class="top-bar">
+  <button onclick="closeWebApp()" style="background:none;border:none;color:#fff;">✕ Close</button>
+  <h1>CLUSTER #1 323 927</h1>
+  <div class="balance-box">
+    <span>USDT: 0.78 (~0.8$)</span>
+    <span>BTC: 0 (~0$)</span>
+    <span>TON: 0 (~0$)</span>
+  </div>
+</div>
+<div class="main-container">
+  <div class="action-bar">
+    <button onclick="randomCluster()">Random Cluster</button>
+    <button onclick="selectCluster()">Select Cluster</button>
+  </div>
+
+  <!-- Tabs Content -->
+  <div id="bonuses" class="bonuses-content">
+    <p>Bonuses content goes here.</p>
+  </div>
+  
+  <div id="field" class="field-content active-tab">
+    <div class="hex-grid" id="hexGridContainer">
+      <!-- Dynamically generated hex tiles -->
+    </div>
+  </div>
+
+  <div id="stats" class="stats-content">
+    <p>Stats content goes here.</p>
+  </div>
+
+  <div id="balance" class="balance-content">
+    <p>Balance details go here.</p>
+  </div>
+</div>
+
+<div class="bottom-nav">
+  <button id="bonusesTab" class="" onclick="showTab('bonuses')">BONUSES</button>
+  <button id="fieldTab" class="active" onclick="showTab('field')">FIELD</button>
+  <button id="statsTab" class="" onclick="showTab('stats')">STATS</button>
+  <button id="balanceTab" class="" onclick="showTab('balance')">BALANCE</button>
+</div>
+
+<script>
+  // Telegram WebApp
+  const tg = window.Telegram.WebApp;
+  tg.expand();
+  tg.setBackgroundColor("#000000");
+  tg.MainButton.setText("Close WebApp");
+  tg.MainButton.show();
+  tg.onEvent('mainButtonClicked', () => {
+    tg.close();
+  });
+
+  // Generate a hex grid pattern
+  const hexGridContainer = document.getElementById('hexGridContainer');
+
+  function createHexGrid(rows, cols) {
+    // Example: Create a hex grid of given rows/cols
+    for (let r = 0; r < rows; r++) {
+      for (let c=0; c<cols; c++) {
+        const hex = document.createElement('div');
+        hex.className = 'hex';
+        hex.onclick = () => onHexClick(r,c,hex);
+        hexGridContainer.appendChild(hex);
+      }
+    }
+  }
+
+  function onHexClick(row, col, element) {
+    // Toggle the background or send data to bot
+    if (element.style.background === 'rgb(119, 119, 119)') {
+      element.style.background = '#444';
+    } else {
+      element.style.background = '#777';
+    }
+
+    // Send data to bot if needed
+    // tg.sendData(JSON.stringify({action:'hex_click', row: row, col: col}));
+  }
+
+  createHexGrid(7,7); // Example 7x7 hex grid
+
+  // Tab functionality
+  function showTab(tabId) {
+    document.querySelectorAll('.field-content, .stats-content, .balance-content, .bonuses-content').forEach(el => {
+      el.classList.remove('active-tab');
+    });
+    document.getElementById(tabId).classList.add('active-tab');
+
+    // Update active button
+    document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(tabId+'Tab').classList.add('active');
+  }
+
+  function randomCluster() {
+    // Example action
+    alert('Random cluster clicked');
+  }
+
+  function selectCluster() {
+    // Example action
+    alert('Select cluster clicked');
+  }
+
+  function closeWebApp() {
+    tg.close();
+  }
+</script>
 </body>
 </html>
