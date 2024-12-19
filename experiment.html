@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Pastel Hex Grid Rewards with Cookies & Invites</title>
+<title>Pastel Hex Grid with Leaderboard</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
   body {
@@ -51,7 +51,7 @@
   .content {
     flex: 1;
     overflow: auto;
-    padding-top: 200px; /* Ensure tiles start below cat image */
+    padding-top: 200px; 
     box-sizing: border-box;
     position: relative;
   }
@@ -70,7 +70,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    --hex-size: 80px; /* Bigger tiles */
+    --hex-size: 80px; 
   }
 
   .hex-row {
@@ -141,23 +141,7 @@
     border-radius: 4px;
   }
 
-  .random-cluster-button, .select-cluster-button {
-    display: inline-block;
-    background: #444;
-    border: none;
-    color: #fff;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 4px;
-    margin: 5px;
-  }
-
-  .random-cluster-button:hover,
-  .select-cluster-button:hover {
-    background: #666;
-  }
-
+  .random-cluster-button, .select-cluster-button,
   .buy-cookie-button, .buy-choc-cookie-button, .invite-friend-button {
     display:inline-block;
     background: #444;
@@ -170,6 +154,8 @@
     margin:5px;
   }
 
+  .random-cluster-button:hover,
+  .select-cluster-button:hover,
   .buy-cookie-button:hover,
   .buy-choc-cookie-button:hover,
   .invite-friend-button:hover {
@@ -180,6 +166,100 @@
     background:#333;
     cursor:not-allowed;
   }
+
+  /* Leaderboard styling */
+  .leaderboard {
+    margin-top: 20px;
+  }
+
+  .leaderboard h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+
+  .leaderboard-item {
+    background: #111;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    display:flex;
+    align-items:center;
+  }
+
+  .leaderboard-item-avatar {
+    width: 40px;
+    height:40px;
+    border-radius:50%;
+    overflow:hidden;
+    margin-right:10px;
+    background:#333;
+    flex-shrink:0;
+  }
+
+  .leaderboard-item-avatar img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+
+  .leaderboard-item-info {
+    flex:1;
+  }
+
+  .leaderboard-item-info h4 {
+    font-size:14px;
+    margin:0 0 5px 0;
+  }
+
+  .leaderboard-item-info p {
+    font-size:12px;
+    margin:0;
+    color:#ccc;
+  }
+
+  .leaderboard-item-rank {
+    padding:5px 10px;
+    border-radius:4px;
+    margin-left:10px;
+    font-size:12px;
+    font-weight:bold;
+  }
+
+  /* Rank colors */
+  .rank-1 {
+    background:#ffdd00;
+    color:#000;
+  }
+
+  .rank-2 {
+    background:#879aff;
+    color:#000;
+  }
+
+  .rank-3 {
+    background:#ff9a66;
+    color:#000;
+  }
+
+  .rank-default {
+    background:#333;
+    color:#fff;
+  }
+
+  .avatar-container {
+    display:flex;
+    align-items:center;
+  }
+
+  .avatar-container img {
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    margin-right:10px;
+    background:#111;
+    object-fit:cover;
+  }
+
 </style>
 </head>
 <body>
@@ -193,14 +273,18 @@
   <!-- Bonuses Tab -->
   <div id="bonusesContent" class="tab-content">
     <h2>Bonuses</h2>
-    <p>Invite friends to unlock chocolate cookies!</p>
+    <p>Invite 3friends to unlock chocolate cookies!<br><br>
+    For every 10 friends invited, you get 1 free Cookie!</p>
     <button class="invite-friend-button" onclick="inviteFriend()">Invite Friend</button>
     <p>Friends Invited: <span id="friendsInvitedCount">0</span></p>
   </div>
 
   <!-- Field Tab -->
   <div id="fieldContent" class="tab-content active">
-    <h2 style="text-align:center; margin-bottom:20px;">Click a tile to reveal a reward!<br>Each reveal costs 1 Cookie or 1 Chocolate Reveal.</h2>
+    <h2 style="text-align:center; margin-bottom:20px;">
+      Click a tile to reveal a reward!<br>
+      Each reveal costs 1 Cookie or 1 Chocolate Reveal.
+    </h2>
     <div style="text-align:center;">
       <button class="random-cluster-button" onclick="loadRandomCluster()">Random Cluster</button>
       <button class="select-cluster-button" onclick="selectCluster()">Select Cluster</button>
@@ -211,29 +295,120 @@
   <!-- Stats Tab -->
   <div id="statsContent" class="tab-content">
     <h2>Stats</h2>
-    <p>Your account info and top miners leaderboard:</p>
+    <p>Your account info and top chonkers leaderboard:</p>
+    <!-- Main account block with avatar -->
     <div style="background:#111;padding:10px;border-radius:8px;margin-bottom:20px;">
-      <h3 style="margin:0;font-size:16px;">Account</h3>
-      <p style="margin:5px 0 0;font-size:14px;color:#ccc;">Christian Keller - Total profit of ~1$</p>
-      <p style="margin:5px 0 0;font-size:14px;color:#ccc;">All time winnings: 0.78 USDT (~0.8$), 0 BTC (~0$), 0 TON (~0$)</p>
+      <div class="avatar-container">
+        <img src="ik.jpg" alt="Isabelle Keller">
+        <div>
+          <h3 style="margin:0;font-size:16px;">Isabelle Keller</h3>
+            <p style="margin:5px 0 0;font-size:14px;color:#ccc;" id="statsBalances">...</p>
+        </div>
+      </div>
     </div>
 
-    <h3 style="font-size:16px;margin-bottom:10px;">Top 5 Miners</h3>
-    <div style="background:#111;padding:10px;border-radius:8px;margin-bottom:10px;">
-      <p style="margin:0;font-size:14px;">#1 pagiloy_kirill🍀$SHIC - ~6,411$</p>
+    <h3 style="font-size:16px;margin-bottom:10px;">Top 10 Chonkers</h3>
+    <!-- We'll list 10 players now -->
+    <!-- Isabelle Keller (#1) -->
+    <div class="leaderboard-item">
+      <div class="leaderboard-item-avatar"><img src="ik.jpg"></div>
+      <div class="leaderboard-item-info">
+        <h4>Isabelle Keller</h4>
+        <p>Reflecting actual user profit</p>
+      </div>
+      <div class="leaderboard-item-rank rank-1">#1</div>
     </div>
-    <div style="background:#111;padding:10px;border-radius:8px;margin-bottom:10px;">
-      <p style="margin:0;font-size:14px;">#2 Kirill Filimonoff - ~2,027$</p>
+
+    <!-- Frank Leeman (#2) -->
+    <div class="leaderboard-item">
+      <div class="leaderboard-item-avatar"><img src="https://placekitten.com/106/106"></div>
+      <div class="leaderboard-item-info">
+        <h4>Frank Leeman</h4>
+        <p>Total profit of ~2,000$ (placeholder)</p>
+      </div>
+      <div class="leaderboard-item-rank rank-2">#2</div>
     </div>
-    <div style="background:#111;padding:10px;border-radius:8px;margin-bottom:10px;">
-      <p style="margin:0;font-size:14px;">#3 Коллекционер - ~1,821$</p>
+
+    <!-- Christian Keller (#3) -->
+    <div class="leaderboard-item">
+      <div class="leaderboard-item-avatar"><img src="ck.jpg"></div>
+      <div class="leaderboard-item-info">
+        <h4>Christian Keller</h4>
+        <p>Total profit of ~1,900$ (placeholder)</p>
+      </div>
+      <div class="leaderboard-item-rank rank-3">#3</div>
     </div>
-    <div style="background:#111;padding:10px;border-radius:8px;margin-bottom:10px;">
-      <p style="margin:0;font-size:14px;">#4 HiAiRT - ~1,315$</p>
+
+    <!-- Kirill Filimonoff (#4) -->
+    <div class="leaderboard-item">
+      <div class="leaderboard-item-avatar"><img src="https://placekitten.com/203/203"></div>
+      <div class="leaderboard-item-info">
+        <h4>Kirill Filimonoff</h4>
+        <p>Total profit of ~1,500$ (placeholder)</p>
+      </div>
+      <div class="leaderboard-item-rank rank-default">#4</div>
     </div>
-    <div style="background:#111;padding:10px;border-radius:8px;">
-      <p style="margin:0;font-size:14px;">#5 ChukChiChka - ~1,007$</p>
+
+    <!-- Коллекционер (#5) -->
+    <div class="leaderboard-item">
+      <div class="leaderboard-item-avatar"><img src="https://placekitten.com/204/204"></div>
+      <div class="leaderboard-item-info">
+        <h4>Коллекционер</h4>
+        <p>Total profit of ~1,300$ (placeholder)</p>
+      </div>
+      <div class="leaderboard-item-rank rank-default">#5</div>
     </div>
+
+    <!-- HiAiRT (#6) -->
+    <div class="leaderboard-item">
+      <div class="leaderboard-item-avatar"><img src="https://placekitten.com/205/205"></div>
+      <div class="leaderboard-item-info">
+        <h4>HiAiRT</h4>
+        <p>Total profit of ~1,200$ (placeholder)</p>
+      </div>
+      <div class="leaderboard-item-rank rank-default">#6</div>
+    </div>
+
+    <!-- ChukChiChka (#7) -->
+    <div class="leaderboard-item">
+      <div class="leaderboard-item-avatar"><img src="https://placekitten.com/206/206"></div>
+      <div class="leaderboard-item-info">
+        <h4>ChukChiChka</h4>
+        <p>Total profit of ~1,100$ (placeholder)</p>
+      </div>
+      <div class="leaderboard-item-rank rank-default">#7</div>
+    </div>
+
+    <!-- Alice Berg (#8) -->
+    <div class="leaderboard-item">
+      <div class="leaderboard-item-avatar"><img src="https://placekitten.com/207/207"></div>
+      <div class="leaderboard-item-info">
+        <h4>Alice Berg</h4>
+        <p>Total profit of ~1,000$ (placeholder)</p>
+      </div>
+      <div class="leaderboard-item-rank rank-default">#8</div>
+    </div>
+
+    <!-- John Doe (#9) -->
+    <div class="leaderboard-item">
+      <div class="leaderboard-item-avatar"><img src="https://placekitten.com/208/208"></div>
+      <div class="leaderboard-item-info">
+        <h4>John Doe</h4>
+        <p>Total profit of ~900$ (placeholder)</p>
+      </div>
+      <div class="leaderboard-item-rank rank-default">#9</div>
+    </div>
+
+    <!-- Jane Roe (#10) -->
+    <div class="leaderboard-item">
+      <div class="leaderboard-item-avatar"><img src="https://placekitten.com/209/209"></div>
+      <div class="leaderboard-item-info">
+        <h4>Jane Roe</h4>
+        <p>Total profit of ~800$ (placeholder)</p>
+      </div>
+      <div class="leaderboard-item-rank rank-default">#10</div>
+    </div>
+
   </div>
 
   <!-- Balance Tab -->
@@ -247,9 +422,9 @@
   <div id="storeContent" class="tab-content">
     <h2>Store</h2>
     <p>Buy Cookies or Chocolate Cookies to reveal tiles.</p>
-    <p>Normal Cookie (free, worth 1 tile reveal)</p>
+    <p>Normal Cookie (costs 25 Telegram Stars, but free for now)</p>
     <button class="buy-cookie-button" onclick="buyCookie()">Buy Cookie</button>
-    <p>Chocolate Cookie (3 reveals). Invite 3 friends first!</p>
+    <p>Chocolate Cookie (3 reveals, costs 60 Telegram Stars).</p>
     <button class="buy-choc-cookie-button" id="buyChocCookieBtn" onclick="buyChocolateCookie()" disabled>Buy Chocolate Cookie</button>
     <p id="chocCookieInfo" style="margin-top:10px; color:#ff0;">
       Invite 3 friends to unlock Chocolate Cookies!
@@ -288,17 +463,18 @@
   ];
 
   const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🦴","💎","📦","🎀","💕"];
+  // Include 0.1 TON
   const rewards = [
     "0 BTC", "0 BTC", "0 BTC", 
     "0.25 USDT", "0.5 USDT", 
     "0.5 BTC", "1 BTC", "1 BTC", 
-    "2 BTC"
+    "2 BTC", "0.1 TON"
   ];
 
   let revealedRewards = [];
-  let cookiesOwned = 0;           
-  let chocolateReveals = 0;       
-  let invitedFriends = 0;         
+  let cookiesOwned = 0;
+  let chocolateReveals = 0;
+  let invitedFriends = 0;
 
   let allClusters = [];
   for (let i = 0; i < 10; i++) {
@@ -376,6 +552,7 @@
   function updateBalances() {
     let totalBTC = 0;
     let totalUSDT = 0;
+    let totalTON = 0;
 
     for (let reward of revealedRewards) {
       const parts = reward.split(" ");
@@ -386,12 +563,21 @@
         totalBTC += amount;
       } else if (currency === "USDT") {
         totalUSDT += amount;
+      } else if (currency === "TON") {
+        totalTON += amount;
       }
     }
 
     const balanceTotals = document.getElementById('balanceTotals');
     balanceTotals.textContent = 
-      `Total BTC: ${totalBTC} | Total USDT: ${totalUSDT} | Cookies: ${cookiesOwned} | Chocolate Reveals: ${chocolateReveals}`;
+      `BTC: ${totalBTC} | USDT: ${totalUSDT} | TON: ${totalTON} | Cookies: ${cookiesOwned} | Choc: ${chocolateReveals}`;
+
+    // Update stats and bonuses tabs to show these balances without cookies
+    document.getElementById('statsBalances').textContent =
+      `BTC: ${totalBTC} | USDT: ${totalUSDT} | TON: ${totalTON}`;
+
+    document.getElementById('bonusesBalances').textContent =
+      `BTC: ${totalBTC} | USDT: ${totalUSDT} | TON: ${totalTON}`;
   }
 
   function showTab(tab) {
@@ -401,7 +587,7 @@
     document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
     document.getElementById(tab+'Content').classList.add('active');
 
-    if (tab === 'balance') {
+    if (tab === 'balance' || tab === 'stats' || tab === 'bonuses') {
       updateBalances();
     }
   }
@@ -425,8 +611,9 @@
   }
 
   function buyCookie() {
+    // Costs 25 Telegram Stars (simulated)
+    alert("This cookie costs 25 Telegram Stars (simulated free for now)");
     cookiesOwned += 1;
-    alert("You got a Cookie!");
     updateBalances();
   }
 
@@ -447,6 +634,13 @@
       document.getElementById('buyChocCookieBtn').disabled = false;
       document.getElementById('chocCookieInfo').textContent = "You can now buy Chocolate Cookies!";
       document.getElementById('chocCookieInfo').style.color = '#0f0';
+    }
+
+    // For every 10 friends invited, give 1 free cookie
+    if (invitedFriends % 10 === 0) {
+      cookiesOwned += 1;
+      alert("You got a free Cookie for inviting 10 friends!");
+      updateBalances();
     }
   }
 
