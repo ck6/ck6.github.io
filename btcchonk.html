@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Pastel Hex Grid Rewards</title>
+<title>Pastel Hex Grid Rewards with Cookies</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
   html, body {
@@ -52,7 +52,7 @@
   .content {
     flex: 1;
     overflow: auto;
-    padding-top: 200px; /* Ensure tiles start well below cat image */
+    padding-top: 200px; /* Ensure tiles start below cat image */
     box-sizing: border-box;
     position: relative;
   }
@@ -67,12 +67,11 @@
     display: block;
   }
 
-  /* Responsive hex sizing: using vw for scaling with viewport width */
   .hex-grid {
     display: flex;
     flex-direction: column;
     align-items: center;
-    --hex-size: 15vw; /* Adjust as needed, smaller value for smaller tiles */
+    --hex-size: 15vw; /* Tiles scale with viewport width */
     max-width: 100vw;
     box-sizing: border-box;
   }
@@ -104,7 +103,7 @@
     justify-content: center;
     cursor: pointer;
     transition: transform 0.2s, background 0.2s;
-    font-size: calc(var(--hex-size)*0.3); /* Scale font with tile size */
+    font-size: calc(var(--hex-size)*0.3); 
     text-align: center;
     color: #333;
     font-weight: bold;
@@ -165,6 +164,23 @@
   .select-cluster-button:hover {
     background: #666;
   }
+
+  .buy-cookie-button {
+    display:inline-block;
+    background: #444;
+    border:none;
+    color:#fff;
+    padding:10px 15px;
+    cursor:pointer;
+    font-size:16px;
+    border-radius:4px;
+    margin-top:20px;
+  }
+
+  .buy-cookie-button:hover {
+    background:#666;
+  }
+
 </style>
 </head>
 <body>
@@ -182,8 +198,7 @@
   </div>
 
   <div id="fieldContent" class="tab-content active">
-    <h2 style="text-align:center; margin-bottom:20px;">Click a tile to reveal a reward!</h2>
-    <!-- Add Random Cluster and Select Cluster buttons -->
+    <h2 style="text-align:center; margin-bottom:20px;">Click a tile to reveal a reward!<br>Each reveal costs 1 Cookie.</h2>
     <div style="text-align:center;">
       <button class="random-cluster-button" onclick="loadRandomCluster()">Random Cluster</button>
       <button class="select-cluster-button" onclick="selectCluster()">Select Cluster</button>
@@ -201,12 +216,20 @@
     <p>Check your balance and recent rewards here.</p>
     <div id="balanceTotals" style="font-size:18px; margin-top:20px;"></div>
   </div>
+
+  <div id="storeContent" class="tab-content">
+    <h2>Store</h2>
+    <p>Buy Cookies to distract the cat, letting you reveal tiles.</p>
+    <p>(Normally costs 25 Telegram Stars, but is free for now.)</p>
+    <button class="buy-cookie-button" onclick="buyCookie()">Buy Cookie</button>
+  </div>
 </div>
 <div class="bottom-nav">
   <button id="bonusesTab" onclick="showTab('bonuses')">Bonuses</button>
   <button id="fieldTab" class="active" onclick="showTab('field')">Field</button>
   <button id="statsTab" onclick="showTab('stats')">Stats</button>
   <button id="balanceTab" onclick="showTab('balance')">Balance</button>
+  <button id="storeTab" onclick="showTab('store')">Store</button>
 </div>
 <script>
   const tg = window.Telegram.WebApp;
@@ -243,6 +266,9 @@
 
   // Global array to hold all revealed rewards across clusters
   const revealedRewards = [];
+
+  // Cookies owned by the user
+  let cookiesOwned = 0;
 
   // Create 10 initial clusters
   let allClusters = [];
@@ -294,9 +320,19 @@
   }
 
   function onHexClick(row, col, element) {
+    // Check if user has a cookie
+    if (cookiesOwned <= 0) {
+      alert("You have no cookies! Go to the Store and buy some cookies to reveal tiles.");
+      return;
+    }
+
     const gridState = clusterStates[currentClusterIndex];
     const tile = gridState[row][col];
     if (!tile.revealed) {
+      // Use one cookie to reveal this tile
+      cookiesOwned -= 1;
+      updateBalances(); // to reflect the new cookie count
+
       const randomIndex = Math.floor(Math.random() * rewards.length);
       tile.reward = rewards[randomIndex];
       tile.revealed = true;
@@ -327,7 +363,7 @@
     }
 
     const balanceTotals = document.getElementById('balanceTotals');
-    balanceTotals.textContent = `Total BTC: ${totalBTC} | Total USDT: ${totalUSDT}`;
+    balanceTotals.textContent = `Total BTC: ${totalBTC} | Total USDT: ${totalUSDT} | Cookies: ${cookiesOwned}`;
   }
 
   function showTab(tab) {
@@ -345,7 +381,6 @@
   function loadRandomCluster() {
     currentClusterIndex = Math.floor(Math.random() * clusterStates.length);
     createHexGrid();
-    // No reset of revealedRewards, balances accumulate globally.
     updateBalances();
   }
 
@@ -359,6 +394,13 @@
     } else {
       alert("Invalid cluster number. Please enter a number between 1 and 10.");
     }
+  }
+
+  function buyCookie() {
+    // Normally costs 25 Telegram Stars, but free for now
+    cookiesOwned += 1;
+    alert("You got a Cookie!");
+    updateBalances();
   }
 
   createHexGrid();  
