@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>My Telegram Mini App</title>
+<!-- Import the Telegram WebApp JS library -->
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+  body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #f0f0f0;
+  }
+  .container {
+    padding: 20px;
+  }
+  button {
+    background: #0088cc; 
+    border: none; 
+    color: #fff; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    border-radius: 4px; 
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Hello, Telegram!</h1>
+  <p>This is a mini app running inside Telegram.</p>
+  <button id="sendDataBtn">Send Data to Bot</button>
+</div>
+<script>
+  // The WebApp object is available once Telegram loads this page inside the chat
+  const tg = window.Telegram.WebApp;
+  tg.expand(); // Expands the WebApp to full height.
+
+  // Optional: Set the background color or theme
+  tg.setBackgroundColor("#ffffff");
+  tg.MainButton.setText("Close WebApp");
+  tg.MainButton.show();
+
+  // When the main button is pressed, we can close the WebApp
+  tg.onEvent('mainButtonClicked', () => {
+    tg.close();
+  });
+
+  // Send some data to the bot when a user presses this button
+  const sendDataBtn = document.getElementById('sendDataBtn');
+  sendDataBtn.addEventListener('click', () => {
+    // Sending a simple JSON data string back to the bot
+    const data = {action: "user_clicked_button", timestamp: Date.now()};
+    tg.sendData(JSON.stringify(data));
+  });
+</script>
+</body>
+</html>
