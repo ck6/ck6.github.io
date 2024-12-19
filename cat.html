@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Pastel Hex Grid Rewards with Tabs and Multiple Rewards</title>
+<title>Pastel Hex Grid Rewards with Balances</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
   body {
@@ -40,7 +40,7 @@
     width: 500px;
     overflow: hidden;
     z-index: 5; 
-    pointer-events: none; /* Ensure cat image doesn't block clicks if needed */
+    pointer-events: none;
   }
 
   .cat-container img {
@@ -51,13 +51,13 @@
   .content {
     flex: 1;
     overflow: auto;
-    padding-top: 150px; /* Ensure tiles start below cat image */
+    padding-top: 200px; /* Ensure tiles start well below cat image */
     box-sizing: border-box;
     position: relative;
   }
 
   .tab-content {
-    display: none; /* Hide all content by default */
+    display: none; 
     padding: 20px;
     box-sizing: border-box;
   }
@@ -70,7 +70,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    --hex-size: 80px; /* Bigger tiles */
+    --hex-size: 80px;
   }
 
   .hex-row {
@@ -139,6 +139,7 @@
     background: rgba(255,255,255,0.2);
     border-radius: 4px;
   }
+
 </style>
 </head>
 <body>
@@ -168,6 +169,7 @@
   <div id="balanceContent" class="tab-content">
     <h2>Balance</h2>
     <p>Check your balance and recent rewards here.</p>
+    <div id="balanceTotals" style="font-size:18px; margin-top:20px;"></div>
   </div>
 </div>
 <div class="bottom-nav">
@@ -190,7 +192,6 @@
   const cols = 5;
   const container = document.getElementById('hexGridContainer');
 
-  // Pastel gradients for initial backgrounds
   const pastelGradients = [
     "linear-gradient(135deg, #fbc2eb 0%, #a18cd1 100%)",
     "linear-gradient(135deg, #fdcbf1 0%, #e6dee9 100%)",
@@ -204,14 +205,10 @@
 
   const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🦴","💎","📦","🎀","💕"];
 
-  // Define multiple possible rewards
   const rewards = [
-    "0 BTC",
-    "0 BTC",
-    "0 BTC",
-    "0.5 BTC",
-    "1 BTC",
-    "1 BTC",
+    "0 BTC", "0 BTC", "0 BTC", 
+    "0.25 USDT", "0.5 USDT", 
+    "0.5 BTC", "1 BTC", "1 BTC", 
     "2 BTC"
   ];
 
@@ -234,7 +231,6 @@
         const tileData = gridState[r][c];
         const hex = document.createElement('div');
         hex.className = 'hex';
-        // Set initial background and emoji
         hex.style.background = tileData.gradient;
         hex.textContent = tileData.emoji;
         hex.onclick = () => onHexClick(r, c, hex);
@@ -247,7 +243,6 @@
   function onHexClick(row, col, element) {
     const tile = gridState[row][col];
     if (!tile.revealed) {
-      // Pick a random reward from the rewards array
       const randomIndex = Math.floor(Math.random() * rewards.length);
       tile.reward = rewards[randomIndex];
       tile.revealed = true;
@@ -256,24 +251,49 @@
       element.textContent = tile.reward;
       element.style.background = "#007f5f";
 
-      // If you want to notify the bot:
-      // tg.sendData(JSON.stringify({action:'tile_revealed', row, col, reward: tile.reward}));
+      updateBalances();
+    }
+  }
+
+  // Calculate and display total BTC/USDT
+  function updateBalances() {
+    let totalBTC = 0;
+    let totalUSDT = 0;
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const tile = gridState[r][c];
+        if (tile.revealed && tile.reward) {
+          const parts = tile.reward.split(" ");
+          const amount = parseFloat(parts[0]);
+          const currency = parts[1].toUpperCase();
+
+          if (currency === "BTC") {
+            totalBTC += amount;
+          } else if (currency === "USDT") {
+            totalUSDT += amount;
+          }
+        }
+      }
+    }
+
+    const balanceTotals = document.getElementById('balanceTotals');
+    balanceTotals.textContent = `Total BTC: ${totalBTC} | Total USDT: ${totalUSDT}`;
+  }
+
+  function showTab(tab) {
+    document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(tab+'Tab').classList.add('active');
+
+    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+    document.getElementById(tab+'Content').classList.add('active');
+
+    if (tab === 'balance') {
+      updateBalances();
     }
   }
 
   createHexGrid(rows, cols);
-
-  function showTab(tab) {
-    // Remove active state from all buttons
-    document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
-    document.getElementById(tab+'Tab').classList.add('active');
-
-    // Hide all tab contents
-    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-
-    // Show the selected tab content
-    document.getElementById(tab+'Content').classList.add('active');
-  }
 </script>
 </body>
 </html>
