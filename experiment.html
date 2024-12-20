@@ -260,9 +260,56 @@
     object-fit:cover;
   }
 
+  /* Popup styling */
+  .popup-overlay {
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.7);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+  }
+
+  .popup-content {
+    background:#222;
+    padding:20px;
+    border-radius:8px;
+    text-align:center;
+    max-width:300px;
+  }
+
+  .popup-content h2 {
+    margin-top:0;
+    font-size:18px;
+  }
+
+  .popup-content button {
+    background:#444;
+    border:none;
+    color:#fff;
+    padding:10px 20px;
+    margin-top:20px;
+    border-radius:4px;
+    cursor:pointer;
+  }
+
+  .popup-content button:hover {
+    background:#666;
+  }
 </style>
 </head>
 <body>
+<!-- Popup on load -->
+<div class="popup-overlay" id="onLoadPopup">
+  <div class="popup-content">
+    <h2>The Chonk has hidden BTC under different tiles.</h2>
+    <p>Distract him with cookies to reveal what's underneath!</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+</div>
+
 <div class="top-bar">
   <h1>Cute Pastel Cluster</h1>
   <div class="cat-container">
@@ -296,19 +343,18 @@
   <div id="statsContent" class="tab-content">
     <h2>Stats</h2>
     <p>Your account info and top chonkers leaderboard:</p>
-    <!-- Main account block with avatar -->
+
     <div style="background:#111;padding:10px;border-radius:8px;margin-bottom:20px;">
       <div class="avatar-container">
         <img src="ik.jpg" alt="Isabelle Keller">
         <div>
           <h3 style="margin:0;font-size:16px;">Isabelle Keller</h3>
-            <p style="margin:5px 0 0;font-size:14px;color:#ccc;" id="statsBalances">...</p>
+          <p style="margin:5px 0 0;font-size:14px;color:#ccc;" id="statsBalances">...</p>
         </div>
       </div>
     </div>
 
     <h3 style="font-size:16px;margin-bottom:10px;">Top 10 Chonkers</h3>
-    <!-- We'll list 10 players now -->
     <!-- Isabelle Keller (#1) -->
     <div class="leaderboard-item">
       <div class="leaderboard-item-avatar"><img src="ik.jpg"></div>
@@ -339,7 +385,6 @@
       <div class="leaderboard-item-rank rank-3">#3</div>
     </div>
 
-    <!-- Kirill Filimonoff (#4) -->
     <div class="leaderboard-item">
       <div class="leaderboard-item-avatar"><img src="https://placekitten.com/203/203"></div>
       <div class="leaderboard-item-info">
@@ -349,7 +394,6 @@
       <div class="leaderboard-item-rank rank-default">#4</div>
     </div>
 
-    <!-- Коллекционер (#5) -->
     <div class="leaderboard-item">
       <div class="leaderboard-item-avatar"><img src="https://placekitten.com/204/204"></div>
       <div class="leaderboard-item-info">
@@ -359,7 +403,6 @@
       <div class="leaderboard-item-rank rank-default">#5</div>
     </div>
 
-    <!-- HiAiRT (#6) -->
     <div class="leaderboard-item">
       <div class="leaderboard-item-avatar"><img src="https://placekitten.com/205/205"></div>
       <div class="leaderboard-item-info">
@@ -369,7 +412,6 @@
       <div class="leaderboard-item-rank rank-default">#6</div>
     </div>
 
-    <!-- ChukChiChka (#7) -->
     <div class="leaderboard-item">
       <div class="leaderboard-item-avatar"><img src="https://placekitten.com/206/206"></div>
       <div class="leaderboard-item-info">
@@ -379,7 +421,6 @@
       <div class="leaderboard-item-rank rank-default">#7</div>
     </div>
 
-    <!-- Alice Berg (#8) -->
     <div class="leaderboard-item">
       <div class="leaderboard-item-avatar"><img src="https://placekitten.com/207/207"></div>
       <div class="leaderboard-item-info">
@@ -389,7 +430,6 @@
       <div class="leaderboard-item-rank rank-default">#8</div>
     </div>
 
-    <!-- John Doe (#9) -->
     <div class="leaderboard-item">
       <div class="leaderboard-item-avatar"><img src="https://placekitten.com/208/208"></div>
       <div class="leaderboard-item-info">
@@ -399,7 +439,6 @@
       <div class="leaderboard-item-rank rank-default">#9</div>
     </div>
 
-    <!-- Jane Roe (#10) -->
     <div class="leaderboard-item">
       <div class="leaderboard-item-avatar"><img src="https://placekitten.com/209/209"></div>
       <div class="leaderboard-item-info">
@@ -408,14 +447,50 @@
       </div>
       <div class="leaderboard-item-rank rank-default">#10</div>
     </div>
-
   </div>
 
   <!-- Balance Tab -->
   <div id="balanceContent" class="tab-content">
     <h2>Balance</h2>
     <p>Check your balance and recent rewards here.</p>
-    <div id="balanceTotals" style="font-size:18px; margin-top:20px;"></div>
+
+    <!-- Just one line for currencies and another line for cookies -->
+      <p id="currencyLine" style="margin-top:20px;font-size:16px;"></p>
+    <p id="cookieLine" style="font-size:16px;"></p>
+
+    <!-- Re-introducing the previously shown details except the user-block -->
+   <div style="background:#111;padding:10px;border-radius:8px;margin-bottom:20px;">
+      <div style="text-align:center">
+        <div>💵 USDT: <span id="usdtBalance">0</span> (<span id="usdtUSD">~$0</span>)</div>
+        <div>₿ BTC: <span id="btcBalance">0</span> (<span id="btcUSD">~$0</span>)</div>
+        <div>💎 TON: <span id="tonBalance">0</span> (<span id="tonUSD">~$0</span>)</div>
+      </div>
+    </div>
+
+    <div style="background:#111;padding:10px;border-radius:8px;margin-bottom:20px;">
+      <p style="margin:0;font-size:14px;color:#ccc;line-height:1.4em;margin-bottom:10px;">
+        All withdrawals are automatic and happen once a week.<br><br>
+        Minimum balance for the action to proceed is 20$.
+      </p>
+
+      <div style="font-size:16px;margin-bottom:10px;">Next withdrawal in<br>2 days, 12 hours, 18 minutes</div>
+      <div style="background:#333;border-radius:4px;width:100%;height:10px;position:relative;margin-top:10px;">
+        <div style="background:#00f;height:100%;width:50%;border-radius:4px;"></div>
+      </div>
+    </div>
+
+    <div style="font-size:14px;color:#ccc;margin-bottom:20px;">
+      TON Wallet / Connected
+      <div style="background:#111;border-radius:8px;padding:10px;display:flex;align-items:center;margin-top:10px;">
+        <img src="wallet.jpg" alt="Wallet Icon" style="width:24px;height:24px;margin-right:10px;">
+        <div>Wallet</div>
+      </div>
+    </div>
+
+    <div style="text-align:center;font-size:14px;color:#ccc;margin-top:20px;">
+      <a href="#" style="color:#ccc;text-decoration:none;margin:0 5px;">Terms of service</a> • 
+      <a href="#" style="color:#ccc;text-decoration:none;margin:0 5px;">Privacy</a>
+    </div>
   </div>
 
   <!-- Store Tab -->
@@ -463,16 +538,17 @@
   ];
 
   const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🦴","💎","📦","🎀","💕"];
-  // Include 0.1 TON
+  // Added "0 USDT" reward
   const rewards = [
-    "0 BTC", "0 BTC", "0 BTC", 
+    "0 BTC", "0 BTC", "0 BTC", "0 USDT",
     "0.25 USDT", "0.5 USDT", 
     "0.5 BTC", "1 BTC", "1 BTC", 
     "2 BTC", "0.1 TON"
   ];
 
+  // Start user with 1 cookie
   let revealedRewards = [];
-  let cookiesOwned = 0;
+  let cookiesOwned = 1; 
   let chocolateReveals = 0;
   let invitedFriends = 0;
 
@@ -483,6 +559,10 @@
 
   let clusterStates = JSON.parse(JSON.stringify(allClusters));
   let currentClusterIndex = 0;
+
+  const BTC_PRICE = 100000; 
+  const USDT_PRICE = 1;
+  const TON_PRICE = 6;
 
   function generateCluster() {
     const cluster = [];
@@ -549,6 +629,10 @@
     }
   }
 
+  function formatUSD(value) {
+    return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+  }
+
   function updateBalances() {
     let totalBTC = 0;
     let totalUSDT = 0;
@@ -557,7 +641,8 @@
     for (let reward of revealedRewards) {
       const parts = reward.split(" ");
       const amount = parseFloat(parts[0]);
-      const currency = parts[1].toUpperCase();
+      const currency = parts[1]?.toUpperCase();
+      if (!currency) continue;
 
       if (currency === "BTC") {
         totalBTC += amount;
@@ -568,16 +653,37 @@
       }
     }
 
-    const balanceTotals = document.getElementById('balanceTotals');
-    balanceTotals.textContent = 
-      `BTC: ${totalBTC} | USDT: ${totalUSDT} | TON: ${totalTON} | Cookies: ${cookiesOwned} | Choc: ${chocolateReveals}`;
+    const btcUSD = totalBTC * BTC_PRICE;
+    const usdtUSD = totalUSDT * USDT_PRICE;
+    const tonUSD = totalTON * TON_PRICE;
 
-    // Update stats and bonuses tabs to show these balances without cookies
+    // Update stats and bonuses balances (no cookies)
     document.getElementById('statsBalances').textContent =
-      `BTC: ${totalBTC} | USDT: ${totalUSDT} | TON: ${totalTON}`;
+      `BTC: ${totalBTC} (~${formatUSD(btcUSD)}) | USDT: ${totalUSDT} (~${formatUSD(usdtUSD)}) | TON: ${totalTON} (~${formatUSD(tonUSD)})`;
 
-    document.getElementById('bonusesBalances').textContent =
-      `BTC: ${totalBTC} | USDT: ${totalUSDT} | TON: ${totalTON}`;
+    const bonusesBalancesEl = document.getElementById('bonusesBalances');
+    if (bonusesBalancesEl) {
+      bonusesBalancesEl.textContent =
+        `BTC: ${totalBTC} (~${formatUSD(btcUSD)}) | USDT: ${totalUSDT} (~${formatUSD(usdtUSD)}) | TON: ${totalTON} (~${formatUSD(tonUSD)})`;
+    }
+
+    // Update currency line and cookie line in balance tab
+    const currencyLine = document.getElementById('currencyLine');
+    currencyLine.textContent = 
+      `BTC: ${totalBTC} (~${formatUSD(btcUSD)}) | USDT: ${totalUSDT} (~${formatUSD(usdtUSD)}) | TON: ${totalTON} (~${formatUSD(tonUSD)})`;
+
+    const cookieLine = document.getElementById('cookieLine');
+    cookieLine.textContent = `Cookies: ${cookiesOwned} | Choc: ${chocolateReveals}`;
+
+    // Update detailed balances in the user-block equivalent in balance tab
+    document.getElementById('btcBalance').textContent = totalBTC;
+    document.getElementById('btcUSD').textContent = `~${formatUSD(btcUSD)}`;
+
+    document.getElementById('usdtBalance').textContent = totalUSDT;
+    document.getElementById('usdtUSD').textContent = `~${formatUSD(usdtUSD)}`;
+
+    document.getElementById('tonBalance').textContent = totalTON;
+    document.getElementById('tonUSD').textContent = `~${formatUSD(tonUSD)}`;
   }
 
   function showTab(tab) {
@@ -611,8 +717,6 @@
   }
 
   function buyCookie() {
-    // Costs 25 Telegram Stars (simulated)
-    alert("This cookie costs 25 Telegram Stars (simulated free for now)");
     cookiesOwned += 1;
     updateBalances();
   }
@@ -636,7 +740,6 @@
       document.getElementById('chocCookieInfo').style.color = '#0f0';
     }
 
-    // For every 10 friends invited, give 1 free cookie
     if (invitedFriends % 10 === 0) {
       cookiesOwned += 1;
       alert("You got a free Cookie for inviting 10 friends!");
@@ -644,7 +747,13 @@
     }
   }
 
-  createHexGrid();  
+  function closePopup() {
+    document.getElementById('onLoadPopup').style.display = 'none';
+  }
+
+  window.onload = () => {
+    createHexGrid();
+  };
 </script>
 </body>
 </html>
