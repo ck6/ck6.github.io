@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>The BTC Hiding Chonk</title>
+<title>Pastel Hex Grid with Leaderboard</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
   body {
@@ -298,6 +298,30 @@
   .popup-content button:hover {
     background:#666;
   }
+
+  /* Button animation */
+  .button-animate {
+    animation: pop 0.3s ease;
+  }
+
+  @keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+
+  /* Confetti overlay */
+  #confettiOverlay {
+    position:fixed;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    background:url('confetti.png') center center / cover no-repeat;
+    display:none;
+    z-index:9999;
+  }
+
 </style>
 </head>
 <body>
@@ -309,6 +333,9 @@
     <button onclick="closePopup()">OK</button>
   </div>
 </div>
+
+<!-- Confetti overlay -->
+<div id="confettiOverlay"></div>
 
 <div class="top-bar">
   <h1>Cute Pastel Cluster</h1>
@@ -385,6 +412,7 @@
       <div class="leaderboard-item-rank rank-3">#3</div>
     </div>
 
+    <!-- Others ... -->
     <div class="leaderboard-item">
       <div class="leaderboard-item-avatar"><img src="https://placekitten.com/203/203"></div>
       <div class="leaderboard-item-info">
@@ -454,17 +482,15 @@
     <h2>Balance</h2>
     <p>Check your balance and recent rewards here.</p>
 
-    <!-- Just one line for currencies and another line for cookies -->
-      <p id="currencyLine" style="margin-top:20px;font-size:16px;"></p>
+    <!-- Currencies in one line and cookies in another line -->
+    <p id="currencyLine" style="margin-top:20px;font-size:16px;"></p>
     <p id="cookieLine" style="font-size:16px;"></p>
 
-    <!-- Re-introducing the previously shown details except the user-block -->
-   <div style="background:#111;padding:10px;border-radius:8px;margin-bottom:20px;">
-      <div style="text-align:center">
-        <div>💵 USDT: <span id="usdtBalance">0</span> (<span id="usdtUSD">~$0</span>)</div>
-        <div>₿ BTC: <span id="btcBalance">0</span> (<span id="btcUSD">~$0</span>)</div>
-        <div>💎 TON: <span id="tonBalance">0</span> (<span id="tonUSD">~$0</span>)</div>
-      </div>
+    <!-- Detailed section without user block -->
+    <div style="background:#111;padding:10px;border-radius:8px;margin-bottom:20px;text-align:center;">
+      <div>💵 USDT: <span id="usdtBalance">0</span> (<span id="usdtUSD">~$0</span>)</div>
+      <div>₿ BTC: <span id="btcBalance">0</span> (<span id="btcUSD">~$0</span>)</div>
+      <div>💎 TON: <span id="tonBalance">0</span> (<span id="tonUSD">~$0</span>)</div>
     </div>
 
     <div style="background:#111;padding:10px;border-radius:8px;margin-bottom:20px;">
@@ -482,7 +508,7 @@
     <div style="font-size:14px;color:#ccc;margin-bottom:20px;">
       TON Wallet / Connected
       <div style="background:#111;border-radius:8px;padding:10px;display:flex;align-items:center;margin-top:10px;">
-        <img src="wallet.jpg" alt="Wallet Icon" style="width:24px;height:24px;margin-right:10px;">
+        <img src="https://placekitten.com/30/30" alt="Wallet Icon" style="width:24px;height:24px;margin-right:10px;">
         <div>Wallet</div>
       </div>
     </div>
@@ -498,11 +524,16 @@
     <h2>Store</h2>
     <p>Buy Cookies or Chocolate Cookies to distract the chonk and reveal tiles.</p>
     <p>Normal Cookie (costs 25 Telegram Stars, but free for now)</p>
-    <button class="buy-cookie-button" onclick="buyCookie()">Buy Cookie</button>
+    <!-- Add button-animate class on buy -->
+    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick()">Buy Cookie</button>
     <p>Chocolate Cookie (3 reveals, costs 60 Telegram Stars).</p>
     <button class="buy-choc-cookie-button" id="buyChocCookieBtn" onclick="buyChocolateCookie()" disabled>Buy Chocolate Cookie</button>
     <p id="chocCookieInfo" style="margin-top:10px; color:#ff0;">
       Invite 3 friends to unlock Chocolate Cookies!
+    </p>
+    <!-- Display cookie and choc cookie balances here -->
+    <p id="storeCookieBalances" style="font-size:16px; margin-top:10px;">
+      Cookies: 0 | Choc: 0
     </p>
   </div>
 </div>
@@ -538,7 +569,6 @@
   ];
 
   const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🦴","💎","📦","🎀","💕"];
-  // Added "0 USDT" reward
   const rewards = [
     "0 BTC", "0 BTC", "0 BTC", "0 USDT",
     "0.25 USDT", "0.5 USDT", 
@@ -546,19 +576,10 @@
     "2 BTC", "0.1 TON"
   ];
 
-  // Start user with 1 cookie
   let revealedRewards = [];
-  let cookiesOwned = 1; 
+  let cookiesOwned = 1; // Start with 1 cookie
   let chocolateReveals = 0;
   let invitedFriends = 0;
-
-  let allClusters = [];
-  for (let i = 0; i < 10; i++) {
-    allClusters.push(generateCluster());
-  }
-
-  let clusterStates = JSON.parse(JSON.stringify(allClusters));
-  let currentClusterIndex = 0;
 
   const BTC_PRICE = 100000; 
   const USDT_PRICE = 1;
@@ -576,6 +597,13 @@
     }
     return cluster;
   }
+
+  let allClusters = [];
+  for (let i = 0; i < 10; i++) {
+    allClusters.push(generateCluster());
+  }
+  let clusterStates = JSON.parse(JSON.stringify(allClusters));
+  let currentClusterIndex = 0;
 
   function createHexGrid() {
     const container = document.getElementById('hexGridContainer');
@@ -657,7 +685,6 @@
     const usdtUSD = totalUSDT * USDT_PRICE;
     const tonUSD = totalTON * TON_PRICE;
 
-    // Update stats and bonuses balances (no cookies)
     document.getElementById('statsBalances').textContent =
       `BTC: ${totalBTC} (~${formatUSD(btcUSD)}) | USDT: ${totalUSDT} (~${formatUSD(usdtUSD)}) | TON: ${totalTON} (~${formatUSD(tonUSD)})`;
 
@@ -667,15 +694,14 @@
         `BTC: ${totalBTC} (~${formatUSD(btcUSD)}) | USDT: ${totalUSDT} (~${formatUSD(usdtUSD)}) | TON: ${totalTON} (~${formatUSD(tonUSD)})`;
     }
 
-    // Update currency line and cookie line in balance tab
     const currencyLine = document.getElementById('currencyLine');
     currencyLine.textContent = 
-      `BTC: ${totalBTC} (~${formatUSD(btcUSD)}) | USDT: ${totalUSDT} (~${formatUSD(usdtUSD)}) | TON: ${totalTON} (~${formatUSD(tonUSD)})`;
+      `USDT(💵): ${totalUSDT} (~${formatUSD(usdtUSD)}) | BTC(₿): ${totalBTC} (~${formatUSD(btcUSD)}) | TON(💎): ${totalTON} (~${formatUSD(tonUSD)})`;
 
     const cookieLine = document.getElementById('cookieLine');
     cookieLine.textContent = `Cookies: ${cookiesOwned} | Choc: ${chocolateReveals}`;
 
-    // Update detailed balances in the user-block equivalent in balance tab
+    // Update detailed icons in the balance tab
     document.getElementById('btcBalance').textContent = totalBTC;
     document.getElementById('btcUSD').textContent = `~${formatUSD(btcUSD)}`;
 
@@ -684,6 +710,12 @@
 
     document.getElementById('tonBalance').textContent = totalTON;
     document.getElementById('tonUSD').textContent = `~${formatUSD(tonUSD)}`;
+
+    // Update store balances
+    const storeCookieBalances = document.getElementById('storeCookieBalances');
+    if (storeCookieBalances) {
+      storeCookieBalances.textContent = `Cookies: ${cookiesOwned} | Choc: ${chocolateReveals}`;
+    }
   }
 
   function showTab(tab) {
@@ -693,7 +725,7 @@
     document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
     document.getElementById(tab+'Content').classList.add('active');
 
-    if (tab === 'balance' || tab === 'stats' || tab === 'bonuses') {
+    if (tab === 'balance' || tab === 'stats' || tab === 'bonuses' || tab === 'store') {
       updateBalances();
     }
   }
@@ -716,6 +748,17 @@
     }
   }
 
+  function handleBuyCookieButtonClick() {
+    // Add animation to button
+    const buyCookieBtn = document.querySelector('.buy-cookie-button');
+    buyCookieBtn.classList.add('button-animate');
+    setTimeout(() => {
+      buyCookieBtn.classList.remove('button-animate');
+    }, 300);
+
+    buyCookie();
+  }
+
   function buyCookie() {
     cookiesOwned += 1;
     updateBalances();
@@ -729,6 +772,15 @@
     chocolateReveals += 3;
     alert("You got a Chocolate Cookie, worth 3 reveals!");
     updateBalances();
+    showConfetti();
+  }
+
+  function showConfetti() {
+    const confettiOverlay = document.getElementById('confettiOverlay');
+    confettiOverlay.style.display = 'block';
+    setTimeout(() => {
+      confettiOverlay.style.display = 'none';
+    }, 1000);
   }
 
   function inviteFriend() {

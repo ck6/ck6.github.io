@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pastel Hex Grid with Leaderboard</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+  /* Existing styling from before... */
+
+  /* Wheel styling */
+  .wheel-container {
+    margin-top:20px;
+    text-align:center;
+  }
+
+  .wheel {
+    margin:0 auto;
+    width:200px;
+    height:200px;
+    border-radius:50%;
+    border:6px solid #333;
+    position:relative;
+    overflow:hidden;
+    transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  /* Example segments - you can add more or change colors */
+  .wheel:before {
+    content:'';
+    position:absolute;
+    width:50%; height:50%;
+    background:#f00;
+    top:0; left:0;
+  }
+  .wheel:after {
+    content:'';
+    position:absolute;
+    width:50%; height:50%;
+    background:#0f0;
+    top:0; right:0;
+  }
+
+  .segment {
+    position:absolute;
+    width:100%; height:100%;
+    top:0; left:0;
+    transform-origin:center center;
+  }
+
+  /* For simplicity, let's define 6 segments */
+  .segment1 { background:#f0f; transform:rotate(0deg);}
+  .segment2 { background:#ff0; transform:rotate(60deg);}
+  .segment3 { background:#0ff; transform:rotate(120deg);}
+  .segment4 { background:#00f; transform:rotate(180deg);}
+  .segment5 { background:#f90; transform:rotate(240deg);}
+  .segment6 { background:#f06; transform:rotate(300deg);}
+
+  .pointer {
+    width:0; height:0;
+    border-left:10px solid transparent;
+    border-right:10px solid transparent;
+    border-bottom:20px solid #fff;
+    margin:0 auto;
+    position:relative;
+    top:-20px;
+  }
+
+  #spinButton {
+    background:#444;
+    color:#fff;
+    border:none;
+    padding:10px 20px;
+    font-size:16px;
+    border-radius:4px;
+    cursor:pointer;
+    margin-top:20px;
+  }
+
+  #spinResult {
+    margin-top:20px;
+    font-size:18px;
+    color:#ff0;
+  }
+
+</style>
+</head>
+<body>
+<!-- Popup, top-bar, content, etc. are unchanged from previous code -->
+
+<div class="content">
+  <!-- ... Other Tabs ... -->
+
+  <!-- Store Tab -->
+  <div id="storeContent" class="tab-content">
+    <h2>Store</h2>
+    <p>Buy Cookies or Chocolate Cookies to distract the chonk and reveal tiles.</p>
+    <p>Normal Cookie (costs 25 Telegram Stars, but free for now)</p>
+    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick()">Buy Cookie</button>
+    <p>Chocolate Cookie (3 reveals, costs 60 Telegram Stars).</p>
+    <button class="buy-choc-cookie-button" id="buyChocCookieBtn" onclick="buyChocolateCookie()" disabled>Buy Chocolate Cookie</button>
+    <p id="chocCookieInfo" style="margin-top:10px; color:#ff0;">
+      Invite 3 friends to unlock Chocolate Cookies!
+    </p>
+    <p id="storeCookieBalances" style="font-size:16px; margin-top:10px;">
+      Cookies: 0 | Choc: 0
+    </p>
+
+    <!-- Wheel Section -->
+    <div class="wheel-container">
+      <div class="pointer"></div>
+      <div class="wheel" id="wheel">
+        <div class="segment segment1"></div>
+        <div class="segment segment2"></div>
+        <div class="segment segment3"></div>
+        <div class="segment segment4"></div>
+        <div class="segment segment5"></div>
+        <div class="segment segment6"></div>
+      </div>
+      <button id="spinButton" onclick="spinWheel()">Spin</button>
+      <div id="spinResult"></div>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-nav">
+  <!-- Existing bottom nav buttons... -->
+</div>
+
+<script>
+  const tg = window.Telegram.WebApp;
+  tg.expand();
+  tg.setBackgroundColor("#000000");
+  tg.MainButton.setText("Close");
+  tg.MainButton.show();
+  tg.onEvent('mainButtonClicked', () => {
+    tg.close();
+  });
+
+  // Existing variables and functions...
+  let revealedRewards = [];
+  let cookiesOwned = 1; 
+  let chocolateReveals = 0;
+  let invitedFriends = 0;
+
+  const BTC_PRICE = 100000; 
+  const USDT_PRICE = 1;
+  const TON_PRICE = 6;
+
+  // ... Existing code for generateCluster, createHexGrid, onHexClick, etc. ...
+
+  function spinWheel() {
+    // Possible rewards for wheel segments
+    // Segment order matches CSS rotations: segment1(0deg), segment2(60deg), etc.
+    const wheelRewards = [
+      "5 Cookies",    // segment1
+      "1 Chocolate Cookie", // segment2
+      "0.5 USDT",     // segment3
+      "0.1 TON",      // segment4
+      "0 BTC",        // segment5
+      "1 USDT"        // segment6
+    ];
+
+    const wheel = document.getElementById('wheel');
+    const spinResult = document.getElementById('spinResult');
+
+    // Random rotation between 0 and 360*3 (3 full rotations) + random segment offset
+    const randomDegrees = (360 * 3) + Math.floor(Math.random()*360);
+    wheel.style.transform = `rotate(${randomDegrees}deg)`;
+
+    // After the transition (4s), determine the result
+    // Segment size: 360/6 = 60 degrees each
+    // Final angle = randomDegrees % 360
+    setTimeout(() => {
+      const finalAngle = randomDegrees % 360;
+      // Determine segment index
+      // Each segment is 60 degrees. segment1 starts at 0deg, segment2 at 60deg, etc.
+      const segmentIndex = Math.floor(finalAngle / 60);
+      const reward = wheelRewards[segmentIndex];
+      spinResult.textContent = `You got: ${reward}!`;
+
+      // Apply reward
+      if (reward === "5 Cookies") {
+        cookiesOwned += 5;
+      } else if (reward === "1 Chocolate Cookie") {
+        chocolateReveals += 1;
+      } else if (reward === "0.5 USDT") {
+        revealedRewards.push("0.5 USDT");
+      } else if (reward === "0.1 TON") {
+        revealedRewards.push("0.1 TON");
+      } else if (reward === "0 BTC") {
+        // No actual reward, just a dud
+      } else if (reward === "1 USDT") {
+        revealedRewards.push("1 USDT");
+      }
+
+      updateBalances();
+    }, 4000);
+  }
+
+  function showConfetti() {
+    const confettiOverlay = document.getElementById('confettiOverlay');
+    confettiOverlay.style.display = 'block';
+    setTimeout(() => {
+      confettiOverlay.style.display = 'none';
+    }, 1000);
+  }
+
+  function handleBuyCookieButtonClick() {
+    const buyCookieBtn = document.querySelector('.buy-cookie-button');
+    buyCookieBtn.classList.add('button-animate');
+    setTimeout(() => {
+      buyCookieBtn.classList.remove('button-animate');
+    }, 300);
+    buyCookie();
+  }
+
+  function buyCookie() {
+    cookiesOwned += 1;
+    updateBalances();
+  }
+
+  function buyChocolateCookie() {
+    if (invitedFriends < 3) {
+      alert("You need to invite at least 3 friends first!");
+      return;
+    }
+    chocolateReveals += 3;
+    alert("You got a Chocolate Cookie, worth 3 reveals!");
+    updateBalances();
+    showConfetti();
+  }
+
+  function inviteFriend() {
+    invitedFriends += 1;
+    document.getElementById('friendsInvitedCount').textContent = invitedFriends;
+    if (invitedFriends >= 3) {
+      document.getElementById('buyChocCookieBtn').disabled = false;
+      document.getElementById('chocCookieInfo').textContent = "You can now buy Chocolate Cookies!";
+      document.getElementById('chocCookieInfo').style.color = '#0f0';
+    }
+
+    if (invitedFriends % 10 === 0) {
+      cookiesOwned += 1;
+      alert("You got a free Cookie for inviting 10 friends!");
+      updateBalances();
+    }
+  }
+
+  function closePopup() {
+    document.getElementById('onLoadPopup').style.display = 'none';
+  }
+
+  function formatUSD(value) {
+    return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+  }
+
+  function updateBalances() {
+    let totalBTC = 0;
+    let totalUSDT = 0;
+    let totalTON = 0;
+
+    for (let reward of revealedRewards) {
+      const parts = reward.split(" ");
+      const amount = parseFloat(parts[0]);
+      const currency = parts[1]?.toUpperCase();
+      if (!currency) continue;
+
+      if (currency === "BTC") {
+        totalBTC += amount;
+      } else if (currency === "USDT") {
+        totalUSDT += amount;
+      } else if (currency === "TON") {
+        totalTON += amount;
+      }
+    }
+
+    const btcUSD = totalBTC * BTC_PRICE;
+    const usdtUSD = totalUSDT * USDT_PRICE;
+    const tonUSD = totalTON * TON_PRICE;
+
+    document.getElementById('statsBalances').textContent =
+      `BTC: ${totalBTC} (~${formatUSD(btcUSD)}) | USDT: ${totalUSDT} (~${formatUSD(usdtUSD)}) | TON: ${totalTON} (~${formatUSD(tonUSD)})`;
+
+    const bonusesBalancesEl = document.getElementById('bonusesBalances');
+    if (bonusesBalancesEl) {
+      bonusesBalancesEl.textContent =
+        `BTC: ${totalBTC} (~${formatUSD(btcUSD)}) | USDT: ${totalUSDT} (~${formatUSD(usdtUSD)}) | TON: ${totalTON} (~${formatUSD(tonUSD)})`;
+    }
+
+    const currencyLine = document.getElementById('currencyLine');
+    if (currencyLine) {
+      currencyLine.textContent = 
+        `USDT(💵): ${totalUSDT} (~${formatUSD(usdtUSD)}) | BTC(₿): ${totalBTC} (~${formatUSD(btcUSD)}) | TON(💎): ${totalTON} (~${formatUSD(tonUSD)})`;
+    }
+
+    const cookieLine = document.getElementById('cookieLine');
+    if (cookieLine) {
+      cookieLine.textContent = `Cookies: ${cookiesOwned} | Choc: ${chocolateReveals}`;
+    }
+
+    document.getElementById('btcBalance').textContent = totalBTC;
+    document.getElementById('btcUSD').textContent = `~${formatUSD(btcUSD)}`;
+
+    document.getElementById('usdtBalance').textContent = totalUSDT;
+    document.getElementById('usdtUSD').textContent = `~${formatUSD(usdtUSD)}`;
+
+    document.getElementById('tonBalance').textContent = totalTON;
+    document.getElementById('tonUSD').textContent = `~${formatUSD(tonUSD)}`;
+
+    const storeCookieBalances = document.getElementById('storeCookieBalances');
+    if (storeCookieBalances) {
+      storeCookieBalances.textContent = `Cookies: ${cookiesOwned} | Choc: ${chocolateReveals}`;
+    }
+  }
+
+  function showTab(tab) {
+    document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(tab+'Tab').classList.add('active');
+
+    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+    document.getElementById(tab+'Content').classList.add('active');
+
+    if (tab === 'balance' || tab === 'stats' || tab === 'bonuses' || tab === 'store') {
+      updateBalances();
+    }
+  }
+
+  window.onload = () => {
+    createHexGrid();
+  };
+</script>
+</body>
+</html>
