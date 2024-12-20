@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Pastel Hex Grid with Leaderboard</title>
+<title>The BTC Hiding Chonk/title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
   body {
@@ -319,85 +319,6 @@
     z-index:9999;
   }
 
-  /* Wheel styling */
-  .wheel-container {
-    margin-top:20px;
-    text-align:center;
-    position:relative;
-  }
-
-  .pointer {
-    width:0; height:0;
-    border-left:10px solid transparent;
-    border-right:10px solid transparent;
-    border-bottom:20px solid #fff;
-    margin:0 auto;
-    position:relative;
-    top:-20px;
-  }
-
-  .wheel {
-    margin:0 auto;
-    width:300px;
-    height:300px;
-    border-radius:50%;
-    position:relative;
-    overflow:hidden;
-    transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
-    background: radial-gradient(circle, #444 0%, #111 100%);
-  }
-
-  .segment {
-    position:absolute;
-    width:50%; height:50%;
-    top:50%; left:50%;
-    transform-origin:0 0;
-    display:flex;
-    align-items:flex-end;
-    justify-content:center;
-    padding-bottom:15px;
-  }
-
-  .segment span {
-    transform: rotate(-45deg);
-    display:block;
-    font-size:16px;
-    color:#fff;
-    width:70px;
-    text-align:center;
-    line-height:1.2em;
-  }
-
-  .seg1 { background:#f88; transform: translate(-50%,-50%) rotate(0deg); }
-  .seg2 { background:#8f8; transform: translate(-50%,-50%) rotate(45deg); }
-  .seg3 { background:#88f; transform: translate(-50%,-50%) rotate(90deg); }
-  .seg4 { background:#ff8; transform: translate(-50%,-50%) rotate(135deg); }
-  .seg5 { background:#8ff; transform: translate(-50%,-50%) rotate(180deg); }
-  .seg6 { background:#f8f; transform: translate(-50%,-50%) rotate(225deg); }
-  .seg7 { background:#fc8; transform: translate(-50%,-50%) rotate(270deg); }
-  .seg8 { background:#c8f; transform: translate(-50%,-50%) rotate(315deg); }
-
-  #spinButton {
-    background:#444;
-    color:#fff;
-    border:none;
-    padding:10px 20px;
-    font-size:16px;
-    border-radius:4px;
-    cursor:pointer;
-    margin-top:20px;
-  }
-
-  #spinButton:hover {
-    background:#666;
-  }
-
-  #spinResult {
-    margin-top:20px;
-    font-size:18px;
-    color:#ff0;
-  }
-
   /* Bonuses tab feeding progress bar */
   .feeding-progress-container {
     background:#333;
@@ -444,12 +365,11 @@
     For every 10 friends invited, you get 1 free Cookie!</p>
     <button class="invite-friend-button" onclick="inviteFriend()">Invite Friend</button>
     <p>Friends Invited: <span id="friendsInvitedCount">0</span></p>
-
+    <br>
     <h3>Feeding the Chonk</h3>
     <p>Total Feeds: <span id="totalFeeds">0</span></p>
-   <p>Chonk Level: <span id="chonkLevel">0</span> (Bonus: <span id="chonkBonus">0%</span> on all wins)</p>
-<p>Next Level Reward: <span id="nextLevelReward">N/A</span></p>
-
+    <p>Chonk Level: <span id="chonkLevel">0</span> (Bonus: <span id="chonkBonus">0%</span> on all wins)</p>
+    <p>Next Level Reward: <span id="nextLevelReward">N/A</span></p>
     <p>Next Level Progress:</p>
     <div class="feeding-progress-container">
       <div class="feeding-progress-fill" id="feedingProgress"></div>
@@ -483,7 +403,6 @@
       </div>
     </div>
     <h3 style="font-size:16px;margin-bottom:10px;">Top 10 Chonkers</h3>
-    <!-- Leaderboard items as before -->
     <div class="leaderboard-item">
       <div class="leaderboard-item-avatar"><img src="ik.jpg"></div>
       <div class="leaderboard-item-info">
@@ -547,22 +466,6 @@
     <p id="storeCookieBalances" style="font-size:16px; margin-top:10px;">
       Cookies: 0 | Choc: 0
     </p>
-
-    <div class="wheel-container">
-      <div class="pointer"></div>
-      <div class="wheel" id="wheel">
-        <div class="segment seg1"><span>3 Cookies</span></div>
-        <div class="segment seg2"><span>1 Cookie</span></div>
-        <div class="segment seg3"><span>1 Choc Cookie</span></div>
-        <div class="segment seg4"><span>0.1 USDT</span></div>
-        <div class="segment seg5"><span>0</span></div>
-        <div class="segment seg6"><span>0</span></div>
-        <div class="segment seg7"><span>0</span></div>
-        <div class="segment seg8"><span>0.1 USDT</span></div>
-      </div>
-      <button id="spinButton" onclick="spinWheel()">Spin</button>
-      <div id="spinResult"></div>
-    </div>
   </div>
 </div>
 <div class="bottom-nav">
@@ -631,51 +534,47 @@
     if (level === 0) return 10;
     if (level === 1) return 25;
     if (level === 2) return 50;
-    return 50; // Max level reached, no more thresholds
+    return 50; // Maxed
   }
 
-function updateFeedingProgress() {
-  const level = getChonkLevel();
-  const totalFeedsEl = document.getElementById('totalFeeds');
-  const chonkLevelEl = document.getElementById('chonkLevel');
-  const chonkBonusEl = document.getElementById('chonkBonus');
-  const feedingProgress = document.getElementById('feedingProgress');
-  const nextLevelRewardEl = document.getElementById('nextLevelReward');
+  function updateFeedingProgress() {
+    const level = getChonkLevel();
+    const totalFeedsEl = document.getElementById('totalFeeds');
+    const chonkLevelEl = document.getElementById('chonkLevel');
+    const chonkBonusEl = document.getElementById('chonkBonus');
+    const feedingProgress = document.getElementById('feedingProgress');
+    const nextLevelRewardEl = document.getElementById('nextLevelReward');
 
-  totalFeedsEl.textContent = totalFeeds;
-  chonkLevelEl.textContent = level;
-  chonkBonusEl.textContent = LEVEL_BONUSES[level] + "%";
+    totalFeedsEl.textContent = totalFeeds;
+    chonkLevelEl.textContent = level;
+    chonkBonusEl.textContent = LEVEL_BONUSES[level] + "%";
 
-  const nextThreshold = getNextThreshold(level);
-  let currentBase = 0;
-  if (level === 1) currentBase = 10;
-  if (level === 2) currentBase = 25;
-  if (level === 3) currentBase = 50;
+    const nextThreshold = getNextThreshold(level);
+    let currentBase = 0;
+    if (level === 1) currentBase = 10;
+    if (level === 2) currentBase = 25;
+    if (level === 3) currentBase = 50;
 
-  let currentProgress = 0;
-  let required = nextThreshold - currentBase;
-  let achieved = totalFeeds - currentBase;
-  if (achieved < 0) achieved = 0;
-  if (achieved > required) achieved = required;
-  currentProgress = (achieved / required) * 100;
+    let required = nextThreshold - currentBase;
+    let achieved = totalFeeds - currentBase;
+    if (achieved < 0) achieved = 0;
+    if (achieved > required) achieved = required;
 
-  if (level === 3) {
-    // Max level reached
-    currentProgress = 100;
-    nextLevelRewardEl.textContent = "Max level reached";
-  } else {
-    // Show next level's bonus
-    let nextLevel = level + 1;
-    nextLevelRewardEl.textContent = LEVEL_BONUSES[nextLevel] + "% on all wins.";
+    let currentProgress = (achieved / required) * 100;
+
+    if (level === 3) {
+      // Max level
+      currentProgress = 100;
+      nextLevelRewardEl.textContent = "Max level reached";
+    } else {
+      let nextLevel = level + 1;
+      nextLevelRewardEl.textContent = LEVEL_BONUSES[nextLevel] + "% on all wins.";
+    }
+
+    feedingProgress.style.width = currentProgress + "%";
   }
-
-  feedingProgress.style.width = currentProgress + "%";
-}
-
 
   function incrementFeeds(usingChocolate) {
-    // If using normal cookie => +1 feed
-    // If using chocolate reveal => +3 feeds
     totalFeeds += usingChocolate ? 3 : 1;
     updateFeedingProgress();
   }
@@ -741,7 +640,7 @@ function updateFeedingProgress() {
         return;
       }
 
-      incrementFeeds(usingChocolate); // Update feeds when using cookies
+      incrementFeeds(usingChocolate);
 
       const randomIndex = Math.floor(Math.random() * rewards.length);
       tile.reward = rewards[randomIndex];
@@ -830,7 +729,7 @@ function updateFeedingProgress() {
       storeCookieBalances.textContent = `Cookies: ${cookiesOwned} | Choc: ${chocolateReveals}`;
     }
 
-    updateFeedingProgress(); // Update feeding progress bar on bonuses tab
+    updateFeedingProgress();
   }
 
   function showTab(tab) {
@@ -914,47 +813,6 @@ function updateFeedingProgress() {
 
   function closePopup() {
     document.getElementById('onLoadPopup').style.display = 'none';
-  }
-
-  function spinWheel() {
-    const wheelRewards = [
-      "3 Cookies",
-      "1 Cookie",
-      "1 Chocolate Cookie",
-      "0.1 USDT",
-      "0",
-      "0",
-      "0",
-      "0.1 USDT"
-    ];
-
-    const wheel = document.getElementById('wheel');
-    const spinResult = document.getElementById('spinResult');
-
-    const randomDegrees = (360 * 3) + Math.floor(Math.random()*360);
-    wheel.style.transform = `rotate(${randomDegrees}deg)`;
-
-    setTimeout(() => {
-      const finalAngle = randomDegrees % 360;
-      const segmentSize = 45; // 360/8
-      const segmentIndex = Math.floor(finalAngle / segmentSize);
-
-      const reward = wheelRewards[segmentIndex];
-      spinResult.textContent = `You got: ${reward}!`;
-
-      if (reward === "3 Cookies") {
-        cookiesOwned += 3;
-      } else if (reward === "1 Cookie") {
-        cookiesOwned += 1;
-      } else if (reward === "1 Chocolate Cookie") {
-        chocolateReveals += 1;
-      } else if (reward === "0.1 USDT") {
-        revealedRewards.push("0.1 USDT");
-      } 
-      // 0 means no reward
-
-      updateBalances();
-    }, 4000);
   }
 
   window.onload = () => {
