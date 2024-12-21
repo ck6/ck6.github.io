@@ -8,9 +8,17 @@
   <p id="demo"></p>
 
   <script>
+ 
+      if (!window.Telegram || !window.Telegram.WebApp) {
+    document.getElementById("demo").innerHTML = 'No object found';
+  } else {
+    document.getElementById("demo").innerHTML = 'Found';
+  }
+
+
     // The Telegram WebApp object
     const tg = window.Telegram.WebApp;
-
+    
     // Initialize
     tg.ready(); 
     // Or in older docs: tg.expand(); (to expand the window, optional)
