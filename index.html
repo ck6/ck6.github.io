@@ -23,6 +23,7 @@
 
     // Initialize
     tg.ready(); 
+    tg.expand();
     // Or in older docs: tg.expand(); (to expand the window, optional)
 
     // You can get user info from initDataUnsafe
@@ -37,7 +38,7 @@
       console.log('First name:', firstName);
       console.log('Last name:', lastName);
       console.log('Username:', username);
-      document.getElementById("demo").innerHTML = 'Telegram user ID:';
+      document.getElementById("demo").innerHTML = 'Telegram user ID:' + userId;
     } else {
       document.getElementById("demo").innerHTML = 'No user info available.';
     }
