@@ -65,9 +65,10 @@
         div.innerHTML += 'Error fetching items:' + error;
       } else {
         console.log('Items:', data);
-        div.innerHTML += JSON.stringify(data, null, 2);
+        div.innerHTML += 'Items:' + JSON.stringify(data, null, 2);
       }
     }
+
 
     // 3. Example: Insert data
     async function addNewItem(newItem) {
