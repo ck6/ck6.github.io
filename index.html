@@ -1,228 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Cute Pastel Hex Grid</title>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<style>
-  body {
-    margin: 0;
-    background: linear-gradient(to bottom, #2d1b64, #f8cdda); /* a dreamy gradient bg */
-    font-family: 'Comic Sans MS', 'Helvetica', sans-serif; /* playful font */
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .top-bar {
-    background: rgba(0,0,0,0.3);
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-
-  .top-bar button {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 16px;
-    margin-right: 10px;
-    cursor: pointer;
-  }
-
-  .top-bar h1 {
-    flex:1;
-    text-align:center;
-    margin:0;
-    font-size: 18px;
-    letter-spacing: 1px;
-  }
-
-  /* Cat Image at the top, positioned behind title */
-  .cat-container {
-    position: absolute;
-    top: 0; left: 50%;
-    transform: translateX(-50%);
-    height: 500px;
-    width: 500px;
-    overflow: hidden;
-    z-index: 10;
-  }
-
-  .cat-container img {
-    width: 100%;
-    height: auto;
-  }
-
-  .content {
-    flex:1;
-    overflow:auto;
-    position: relative;
-    padding: 230px;
-    box-sizing: border-box;
-  }
-
-  .hex-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    --hex-size: 80px;
-    position: relative;
-    z-index: 1;
-
-  }
-
-  .hex-row {
-    display: flex;
-    margin-bottom: calc(var(--hex-size)*0.15);
-  }
-
-  .hex-row:nth-child(even) {
-    margin-left: calc(var(--hex-size)/2);
-  }
-
-  /* Pastel color palette for hexes */
-  /* We'll randomize from a list of gradients in JS */
-  .hex {
-    width: var(--hex-size);
-    height: calc(var(--hex-size)*1.1547);
-    margin: calc(var(--hex-size)*0.05);
-    clip-path: polygon(
-      50% 0%, 
-      100% 25%, 
-      100% 75%, 
-      50% 100%, 
-      0% 75%, 
-      0% 25%
-    );
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size: 24px;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    transition: transform 0.2s ease, box-shadow 0.2s;
-  }
-
-  .hex:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-  }
-
-  .bottom-nav {
-    background: rgba(0,0,0,0.3);
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 10px 0;
-  }
-
-  .bottom-nav button {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 14px;
-    padding: 10px;
-    cursor: pointer;
-    flex: 1;
-    text-align: center;
-    position: relative;
-  }
-
-  .bottom-nav button.active,
-  .bottom-nav button:hover {
-    background: rgba(255,255,255,0.2);
-    border-radius: 4px;
-  }
-</style>
+  <title>My Telegram Web App</title>
 </head>
 <body>
-<div class="top-bar">
-  <button onclick="closeWebApp()">✕</button>
-  <h1>Cute Pastel Cluster</h1>
-  <div class="cat-container">
-    <!-- Add a cute cat image -->
-    <img src="btc_cat.jpg" alt="Cute cat" />
-  </div>
-</div>
-<div class="content">
-  <div class="hex-grid" id="hexGridContainer"></div>
-</div>
-<div class="bottom-nav">
-  <button id="bonusesTab" onclick="showTab('bonuses')">Bonuses</button>
-  <button id="fieldTab" class="active" onclick="showTab('field')">Field</button>
-  <button id="statsTab" onclick="showTab('stats')">Stats</button>
-  <button id="balanceTab" onclick="showTab('balance')">Balance</button>
-</div>
+  <h1>Welcome to My Web App2</h1>
+  <p id="demo"></p>
 
-<script>
-  const tg = window.Telegram.WebApp;
-  tg.expand();
-  tg.setBackgroundColor("#000000");
-  tg.MainButton.setText("Close");
-  tg.MainButton.show();
-  tg.onEvent('mainButtonClicked', () => {
-    tg.close();
-  });
-
-  function closeWebApp() {
-    tg.close();
+  <script>
+ 
+      if (!window.Telegram || !window.Telegram.WebApp) {
+    document.getElementById("demo").innerHTML = 'No object found';
+  } else {
+    document.getElementById("demo").innerHTML = 'Found';
   }
 
-  const pastelGradients = [
-    "linear-gradient(135deg, #fbc2eb 0%, #a18cd1 100%)",
-    "linear-gradient(135deg, #fdcbf1 0%, #e6dee9 100%)",
-    "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
-    "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
-    "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)",
-    "linear-gradient(135deg, #fccb90 0%, #d57eeb 100%)",
-    "linear-gradient(135deg, #fddb92 0%, #d1fdff 100%)",
-    "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)"
-  ];
 
-  const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🦴","💎","📦","🎀","💕"];
+    // The Telegram WebApp object
+    const tg = window.Telegram.WebApp;
 
-  function createHexGrid(rows, cols) {
-    const container = document.getElementById('hexGridContainer');
-    for (let r = 0; r < rows; r++) {
-      const rowDiv = document.createElement('div');
-      rowDiv.className = 'hex-row';
-      for (let c = 0; c < cols; c++) {
-        const hex = document.createElement('div');
-        hex.className = 'hex';
-        // Random gradient background
-        const gradient = pastelGradients[Math.floor(Math.random()*pastelGradients.length)];
-        hex.style.background = gradient;
-        // Random emoji
-        const emoji = emojis[Math.floor(Math.random()*emojis.length)];
-        hex.textContent = emoji;
-        hex.onclick = () => onHexClick(r, c, hex);
-        rowDiv.appendChild(hex);
-      }
-      container.appendChild(rowDiv);
+    // Initialize
+    tg.ready(); 
+    // Or in older docs: tg.expand(); (to expand the window, optional)
+
+    // You can get user info from initDataUnsafe
+    const user = tg.initDataUnsafe?.user;
+    if (user) {
+      const userId = user.id;
+      const firstName = user.first_name;
+      const lastName = user.last_name;
+      const username = user.username;
+
+      console.log('Telegram user ID:', userId);
+      console.log('First name:', firstName);
+      console.log('Last name:', lastName);
+      console.log('Username:', username);
+      document.getElementById("demo").innerHTML = 'Telegram user ID:';
+    } else {
+      document.getElementById("demo").innerHTML = 'No user info available.';
     }
-  }
 
-  function onHexClick(row, col, element) {
-    // Toggle a "selected" state or send data to the bot
-    element.style.transform = element.style.transform === 'scale(1.1)' ? 'scale(1)' : 'scale(1.1)';
-    // You can also send data:
-    // tg.sendData(JSON.stringify({action:'hex_click', row:row, col:col}));
-  }
-
-  createHexGrid(7,7);
-
-  function showTab(tab) {
-    document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
-    document.getElementById(tab+'Tab').classList.add('active');
-    // In a real app, you'd switch out the displayed content area
-  }
-</script>
+    document.getElementById("demo").innerHTML = 'No user infoddd available.';
+  </script>
 </body>
 </html>
