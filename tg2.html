@@ -5,6 +5,7 @@
 </head>
 <body>
   <h1>Welcome to My Web App</h1>
+  <p id="demo"></p>
 
   <script>
     // The Telegram WebApp object
@@ -26,8 +27,9 @@
       console.log('First name:', firstName);
       console.log('Last name:', lastName);
       console.log('Username:', username);
+      document.getElementById("demo").innerHTML = 'Telegram user ID:' + userId;
     } else {
-      console.log('No user info available.');
+      document.getElementById("demo").innerHTML = 'No user info available.';
     }
   </script>
 </body>
