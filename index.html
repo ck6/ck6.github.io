@@ -33,12 +33,13 @@
       const firstName = user.first_name;
       const lastName = user.last_name;
       const username = user.username;
+      const profilephoto = user.photo_url;
 
       console.log('Telegram user ID:', userId);
       console.log('First name:', firstName);
       console.log('Last name:', lastName);
       console.log('Username:', username);
-      document.getElementById("demo").innerHTML = 'Telegram user ID:' + userId + username + firstName;
+      document.getElementById("demo").innerHTML = 'Telegram user ID:' + userId + username + firstName +  ' ' + profilephoto;
     } else {
       document.getElementById("demo").innerHTML = 'No user info available.';
     }
