@@ -69,7 +69,8 @@
       }
     }
 
-div.innerHTML += "fun";
+    div.innerHTML += 'fun';
+    
     // 3. Example: Insert data
     async function addNewItem(newItem) {
       const { data, error } = await supabase.from('items').insert([ newItem ]);
