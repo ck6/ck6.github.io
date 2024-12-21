@@ -48,6 +48,11 @@
 
 
     //Supadb
+
+    var div = document.getElementById('output');
+
+    div.innerHTML += 'Extra stuff';
+
     const supabaseUrl = 'https://lsnpgojvhnlfehdhkwul.supabase.co';  // Replace with your own
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxzbnBnb2p2aG5sZmVoZGhrd3VsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ4MTQ3MjIsImV4cCI6MjA1MDM5MDcyMn0.W6a7TbRyC4eTD1zc-LfEyHw7lCNXRryd4CLMEN-JmkE';                  // Replace with your own
     const supabase = supabase.createClient(supabaseUrl, supabaseKey);
@@ -57,10 +62,10 @@
       const { data, error } = await supabase.from('items').select('*');
       
       if (error) {
-        console.error('Error fetching items:', error);
+        div.innerHTML += 'Error fetching items:' + error;
       } else {
         console.log('Items:', data);
-        document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+        div.innerHTML += JSON.stringify(data, null, 2);
       }
     }
 
