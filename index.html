@@ -56,7 +56,7 @@
     const supabaseUrl = 'https://lsnpgojvhnlfehdhkwul.supabase.co';  // Replace with your own
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxzbnBnb2p2aG5sZmVoZGhrd3VsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ4MTQ3MjIsImV4cCI6MjA1MDM5MDcyMn0.W6a7TbRyC4eTD1zc-LfEyHw7lCNXRryd4CLMEN-JmkE';                  // Replace with your own
     const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-
+div.innerHTML += 'fun2';
     // 2. Example: Read data from a table named 'items'
     async function getItems() {
       const { data, error } = await supabase.from('items').select('*');
@@ -70,7 +70,7 @@
     }
 
     div.innerHTML += 'fun';
-    
+
     // 3. Example: Insert data
     async function addNewItem(newItem) {
       const { data, error } = await supabase.from('items').insert([ newItem ]);
