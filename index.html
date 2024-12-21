@@ -2,7 +2,7 @@
 <html>
 <head>
   <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
   <title>My Telegram Web App</title>
 </head>
 <body style="background-color:white;">
@@ -52,15 +52,16 @@
     var div = document.getElementById('output');
 
     div.innerHTML += 'Extra stuff';
-    div.innerHTML += 'fun';
-
+      div.innerHTML += 'Extra stuff2';
     const supabaseUrl = 'https://lsnpgojvhnlfehdhkwul.supabase.co';  // Replace with your own
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxzbnBnb2p2aG5sZmVoZGhrd3VsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQ4MTQ3MjIsImV4cCI6MjA1MDM5MDcyMn0.W6a7TbRyC4eTD1zc-LfEyHw7lCNXRryd4CLMEN-JmkE';                  // Replace with your own
-    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
+  const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+  div.innerHTML += 'Extra stuff3';
     // 2. Example: Read data from a table named 'items'
     async function getItems() {
-      const { data, error } = await supabase.from('items').select('*');
+      const { data, error } = await supabaseClient.from('items').select('*');
       
       if (error) {
         div.innerHTML += 'Error fetching items:' + error;
@@ -72,9 +73,10 @@
 
     
 
+
     // 3. Example: Insert data
     async function addNewItem(newItem) {
-      const { data, error } = await supabase.from('items').insert([ newItem ]);
+      const { data, error } = await supabaseClient.from('items').insert([ newItem ]);
       if (error) {
         console.error('Error inserting item:', error);
       } else {
@@ -86,7 +88,7 @@
     getItems();
 
     // Insert a new item (uncomment to test)
-    // addNewItem({ name: 'Test Item', description: 'This is a test' });
+     addNewItem({ name: firstName, description: 'This is a test2' });
 
 
 
