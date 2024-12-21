@@ -1,34 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>My Telegram Web App</title>
-</head>
-<body>
-  <h1>Welcome to My Web App</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <title>My Telegram Web App</title>
+  </head>
+  <body>
+    <h1>Welcome!</h1>
 
-  <script>
-    // The Telegram WebApp object
-    const tg = window.Telegram.WebApp;
+    <p id="info"></p>
 
-    // Initialize
-    tg.ready(); 
-    // Or in older docs: tg.expand(); (to expand the window, optional)
+    <script>
+      // This object is only available if your site is loaded as a Telegram Web App.
+      const telegram = window.Telegram.WebApp;
+      
+      // Initialize Web App
+      telegram.ready();
 
-    // You can get user info from initDataUnsafe
-    const user = tg.initDataUnsafe?.user;
-    if (user) {
-      const userId = user.id;
-      const firstName = user.first_name;
-      const lastName = user.last_name;
-      const username = user.username;
-
-      console.log('Telegram user ID:', userId);
-      console.log('First name:', firstName);
-      console.log('Last name:', lastName);
-      console.log('Username:', username);
-    } else {
-      console.log('No user info available.');
-    }
-  </script>
-</body>
+      // You can read user data from telegram.initDataUnsafe
+      // For example, the user’s ID and name:
+      const user = telegram.initDataUnsafe?.user;
+      if (user) {
+        document.getElementById('info').innerText =
+          `Hello, ${user.first_name} (ID: ${user.id})!`;
+      } else {
+        document.getElementById('info').innerText =
+          'User data not found (not opened in Telegram?).';
+      }
+    </script>
+  </body>
 </html>
+
