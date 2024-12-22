@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The BTC Hiding Chonk</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+<style>
+  :root {
+    --bg-start: #2d1b64;
+    --bg-end: #f8cdda;
+    --text-color: #fff;
+    --accent-color: #ff9a9e;
+    --font-family: sans-serif;
+    --heading-font-size: 20px;
+    --body-font-size: 16px;
+    --line-height: 1.5;
+    --section-spacing: 20px;
+    --button-padding: 10px 20px;
+    --transition-duration: 0.3s;
+    --tooltip-bg: rgba(0,0,0,0.8);
+    --tooltip-color: #fff;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-family);
+    font-size: var(--body-font-size);
+    line-height: var(--line-height);
+    background: linear-gradient(to bottom, var(--bg-start), var(--bg-end));
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .top-bar {
+    background: rgba(0,0,0,0.3);
+    position: relative;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .top-bar h1 {
+    font-size: var(--heading-font-size);
+    margin: 0;
+    z-index: 2;
+  }
+
+  .cat-container {
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    height: 500px; 
+    width: 500px;
+    overflow: hidden;
+    z-index: 5; 
+    pointer-events: none;
+  }
+
+  .cat-container img {
+    width: 100%;
+    height: auto;
+  }
+
+  .content {
+    flex: 1;
+    overflow: auto;
+    padding-top: 200px; 
+    box-sizing: border-box;
+    position: relative;
+    padding-left: var(--section-spacing);
+    padding-right: var(--section-spacing);
+    padding-bottom: var(--section-spacing);
+  }
+
+  .tab-content {
+    display: none; 
+    padding: var(--section-spacing) 0;
+    opacity: 0;
+    transition: opacity var(--transition-duration) ease;
+  }
+
+  .tab-content.active {
+    display: block;
+    opacity: 1;
+  }
+
+  h2, h3 {
+    font-size: var(--heading-font-size);
+    margin-bottom: var(--section-spacing);
+    margin-top: 0;
+  }
+
+  p {
+    margin: 10px 0;
+  }
+
+.hex-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    --hex-size: 80px; 
+  }
+  .hex-row {
+    display: flex;
+    margin-bottom: calc(var(--hex-size)*0.15);
+  }
+  .hex-row:nth-child(even) {
+    margin-left: calc(var(--hex-size)/2);
+  }
+
+  .hex {
+    width: var(--hex-size);
+    height: calc(var(--hex-size)*1.1547);
+    margin: calc(var(--hex-size)*0.05);
+    clip-path: polygon(
+      50% 0%, 
+      100% 25%, 
+      100% 75%, 
+      50% 100%, 
+      0% 75%, 
+      0% 25%
+    );
+    background: #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    font-size: 24px;
+    text-align: center;
+    color: #333;
+    font-weight: bold;
+    /* For flipping animation */
+    transform-style: preserve-3d;
+  }
+  .hex:hover {
+    transform: scale(1.1);
+  }
+
+  /* Flip animation classes */
+.hex.flipping {
+  transform: rotateY(90deg);
+  transition: transform 0.2s ease;
+}
+.hex.revealed {
+  background: #007f5f; 
+  color: #fff;
+  font-size: 16px;
+  transform: rotateY(0);
+  transition: transform 0.2s ease;
+}
+
+  .bottom-nav {
+    background: rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 10px 0;
+  }
+
+  .bottom-nav button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    padding: var(--button-padding);
+    cursor: pointer;
+    flex: 1;
+    text-align: center;
+    transition: background var(--transition-duration);
+  }
+
+  .bottom-nav button.active,
+  .bottom-nav button:hover {
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
+  }
+
+  .random-cluster-button, .select-cluster-button,
+  .buy-cookie-button, .buy-choc-cookie-button, .invite-friend-button {
+    display:inline-block;
+    background: #444;
+    border:none;
+    color:#fff;
+    padding: var(--button-padding);
+    cursor:pointer;
+    font-size:16px;
+    border-radius:4px;
+    margin:5px;
+    transition: background var(--transition-duration);
+  }
+
+  .random-cluster-button:hover,
+  .select-cluster-button:hover,
+  .buy-cookie-button:hover,
+  .buy-choc-cookie-button:hover,
+  .invite-friend-button:hover {
+    background: var(--accent-color);
+  }
+
+  .buy-choc-cookie-button:disabled {
+    background:#333;
+    cursor:not-allowed;
+  }
+
+  
+  /* Leaderboard styling */
+  .leaderboard {
+    margin-top: 20px;
+  }
+
+  .leaderboard h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+
+  .leaderboard-item {
+    background: #111;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    display:flex;
+    align-items:center;
+  }
+
+  .leaderboard-item-avatar {
+    width: 40px;
+    height:40px;
+    border-radius:50%;
+    overflow:hidden;
+    margin-right:10px;
+    background:#333;
+    flex-shrink:0;
+  }
+
+  .leaderboard-item-avatar img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+
+  .leaderboard-item-info {
+    flex:1;
+  }
+
+  .leaderboard-item-info h4 {
+    font-size:14px;
+    margin:0 0 5px 0;
+  }
+
+  .leaderboard-item-info p {
+    font-size:12px;
+    margin:0;
+    color:#ccc;
+  }
+
+  .leaderboard-item-rank {
+    padding:5px 10px;
+    border-radius:4px;
+    margin-left:10px;
+    font-size:12px;
+    font-weight:bold;
+  }
+
+  /* Rank colors */
+  .rank-1 {
+    background:#ffdd00;
+    color:#000;
+  }
+
+  .rank-2 {
+    background:#879aff;
+    color:#000;
+  }
+
+  .rank-3 {
+    background:#ff9a66;
+    color:#000;
+  }
+
+  .rank-default {
+    background:#333;
+    color:#fff;
+  }
+
+  .avatar-container {
+    display:flex;
+    align-items:center;
+  }
+
+  .avatar-container img {
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    margin-right:10px;
+    background:#111;
+    object-fit:cover;
+  }
+
+  .popup-overlay {
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.7);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+  }
+
+  .popup-content {
+    background:#222;
+    padding:20px;
+    border-radius:8px;
+    text-align:center;
+    max-width:300px;
+  }
+
+  .popup-content h2 {
+    margin-top:0;
+    font-size:18px;
+  }
+
+  .popup-content button {
+    background:#444;
+    border:none;
+    color:#fff;
+    padding:10px 20px;
+    margin-top:20px;
+    border-radius:4px;
+    cursor:pointer;
+    transition:background var(--transition-duration);
+  }
+
+  .popup-content button:hover {
+    background: var(--accent-color);
+  }
+
+  .button-animate {
+    animation: pop 0.3s ease;
+  }
+
+  @keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+
+
+  .feeding-progress-container {
+    background:#333;
+    border-radius:4px;
+    width:100%;
+    height:20px;
+    position:relative;
+    margin-top:10px;
+  }
+
+  .feeding-progress-fill {
+    background:#0f0;
+    height:100%;
+    width:0%;
+    border-radius:4px;
+    transition: width 0.3s ease;
+  }
+
+</style>
+</head>
+<body>
+<div class="popup-overlay" id="onLoadPopup">
+  <div class="popup-content">
+    <h2>The Chonk has hidden BTC under different tiles.</h2>
+    <p>Distract him with cookies to reveal what's underneath!</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+</div>
+
+<div id="confettiOverlay"></div>
+
+<div class="top-bar">
+  <h1>Cute Pastel Cluster</h1>
+  <div class="cat-container">
+    <img src="btc_cat.jpg" alt="Cute cat" />
+  </div>
+</div>
+<div class="content">
+  <div id="bonusesContent" class="tab-content">
+    <h2>Bonuses</h2>
+    <p>Invite 3 friends to unlock chocolate cookies!<br><br>
+    For every 10 friends invited, you get 1 free Cookie!</p>
+    <button class="invite-friend-button" onclick="inviteFriend()">Invite Friend</button>
+    <p>Friends Invited: <span id="friendsInvitedCount">0</span>
+    </p>
+
+    <h3>Feeding the Chonk</h3>
+    <p>Total Feeds: <span id="totalFeeds">0</span></p>
+    <p>Chonk Level: <span id="chonkLevel">0</span> (Bonus: <span id="chonkBonus">0%</span> on all wins)</p>
+    <p>Next Level Reward: <span id="nextLevelReward">N/A</span></p>
+    <div class="feeding-progress-container">
+      <div class="feeding-progress-fill" id="feedingProgress"></div>
+    </div>
+  </div>
+
+  <div id="fieldContent" class="tab-content active">
+    <h2><center>
+      Click a tile to reveal a reward!<br>
+      Each reveal costs 1 Cookie or 1 Chocolate Reveal.</center>
+    </h2>
+    <div style="text-align:center;">
+      <button class="random-cluster-button" onclick="loadRandomCluster()">Random Cluster</button>
+      <button class="select-cluster-button" onclick="selectCluster()">Select Cluster</button>
+    </div>
+    <div class="hex-grid" id="hexGridContainer"></div>
+  </div>
+
+ <!-- Stats Tab -->
+  <div id="statsContent" class="tab-content">
+    <h2>Stats</h2>
+    <p>Your account info and top chonkers leaderboard:</p>
+
+    <div style="background:#111;padding:10px;border-radius:8px;margin-bottom:20px;">
+      <div class="avatar-container">
+        <img src="ik.jpg" alt="Isabelle Keller">
+        <div>
+          <h3 style="margin:0;font-size:16px;">Isabelle Keller</h3>
+          <p style="margin:5px 0 0;font-size:14px;color:#ccc;" id="statsBalances">...</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size:16px;margin-bottom:10px;">Top 10 Chonkers</h3>
+    <!-- Isabelle Keller (#1) -->
+    <div class="leaderboard-item">
+      <div class="leaderboard-item-avatar"><img src="ik.jpg"></div>
+      <div class="leaderboard-item-info">
+        <h4>Isabelle Keller</h4>
+        <p>Reflecting actual user profit</p>
+      </div>
+      <div class="leaderboard-item-rank rank-1">#1</div>
+    </div>
+    <!-- Frank Leeman (#2) -->
+    <div class="leaderboard-item">
+      <div class="leaderboard-item-avatar"><img src="fl.jpg"></div>
+      <div class="leaderboard-item-info">
+        <h4>Frank Leeman</h4>
+        <p>Total profit of ~2,000$ (placeholder)</p>
+      </div>
+      <div class="leaderboard-item-rank rank-2">#2</div>
+    </div>
+    <!-- Christian Keller (#3) -->
+    <div class="leaderboard-item">
+      <div class="leaderboard-item-avatar"><img src="ck.jpg"></div>
+      <div class="leaderboard-item-info">
+        <h4>Christian Keller</h4>
+        <p>Total profit of ~1,900$ (placeholder)</p>
+      </div>
+      <div class="leaderboard-item-rank rank-3">#3</div>
+    </div>
+    <div class="leaderboard-item">
+      <div class="leaderboard-item-avatar"><img src="https://placekitten.com/203/203"></div>
+      <div class="leaderboard-item-info">
+        <h4>Kirill Filimonoff</h4>
+        <p>Total profit of ~1,500$ (placeholder)</p>
+      </div>
+      <div class="leaderboard-item-rank rank-default">#4</div>
+    </div>
+    <div class="leaderboard-item">
+      <div class="leaderboard-item-avatar"><img src="https://placekitten.com/204/204"></div>
+      <div class="leaderboard-item-info">
+        <h4>Коллекционер</h4>
+        <p>Total profit of ~1,300$ (placeholder)</p>
+      </div>
+      <div class="leaderboard-item-rank rank-default">#5</div>
+    </div>
+    <div class="leaderboard-item">
+      <div class="leaderboard-item-avatar"><img src="https://placekitten.com/205/205"></div>
+      <div class="leaderboard-item-info">
+        <h4>HiAiRT</h4>
+        <p>Total profit of ~1,200$ (placeholder)</p>
+      </div>
+      <div class="leaderboard-item-rank rank-default">#6</div>
+    </div>
+    <div class="leaderboard-item">
+      <div class="leaderboard-item-avatar"><img src="https://placekitten.com/206/206"></div>
+      <div class="leaderboard-item-info">
+        <h4>ChukChiChka</h4>
+        <p>Total profit of ~1,100$ (placeholder)</p>
+      </div>
+      <div class="leaderboard-item-rank rank-default">#7</div>
+    </div>
+    <div class="leaderboard-item">
+      <div class="leaderboard-item-avatar"><img src="https://placekitten.com/207/207"></div>
+      <div class="leaderboard-item-info">
+        <h4>Alice Berg</h4>
+        <p>Total profit of ~1,000$ (placeholder)</p>
+      </div>
+      <div class="leaderboard-item-rank rank-default">#8</div>
+    </div>
+    <div class="leaderboard-item">
+      <div class="leaderboard-item-avatar"><img src="https://placekitten.com/208/208"></div>
+      <div class="leaderboard-item-info">
+        <h4>John Doe</h4>
+        <p>Total profit of ~900$ (placeholder)</p>
+      </div>
+      <div class="leaderboard-item-rank rank-default">#9</div>
+    </div>
+    <div class="leaderboard-item">
+      <div class="leaderboard-item-avatar"><img src="https://placekitten.com/209/209"></div>
+      <div class="leaderboard-item-info">
+        <h4>Jane Roe</h4>
+        <p>Total profit of ~800$ (placeholder)</p>
+      </div>
+      <div class="leaderboard-item-rank rank-default">#10</div>
+    </div>
+  </div>
+
+  <div id="balanceContent" class="tab-content">
+    <h2>Balance</h2>
+    <p>Check your balance and recent rewards here.</p>
+    <p id="currencyLine" style="margin-top:20px;font-size:16px;"></p>
+    <p id="cookieLine" style="font-size:16px;"></p>
+
+    <div style="background:#111;padding:10px;border-radius:8px;margin-bottom:20px;text-align:center;">
+      <div>💵 USDT: <span id="usdtBalance">0</span> (<span id="usdtUSD">~$0</span>)</div>
+      <div>₿ BTC: <span id="btcBalance">0</span> (<span id="btcUSD">~$0</span>)</div>
+      <div>💎 TON: <span id="tonBalance">0</span> (<span id="tonUSD">~$0</span>)</div>
+    </div>
+
+    <div style="background:#111;padding:10px;border-radius:8px;margin-bottom:20px;">
+      <p style="margin:0;font-size:14px;color:#ccc;line-height:1.4em;margin-bottom:10px;">
+        All withdrawals are automatic and happen once a week.<br><br>
+        Minimum balance for the action to proceed is 20$.
+      </p>
+      <div style="font-size:16px;margin-bottom:10px;">Next withdrawal in<br>2 days, 12 hours, 18 minutes</div>
+      <div style="background:#333;border-radius:4px;width:100%;height:10px;position:relative;margin-top:10px;">
+        <div style="background:#00f;height:100%;width:50%;border-radius:4px;"></div>
+      </div>
+    </div>
+
+    <div style="font-size:14px;color:#ccc;margin-bottom:20px;">
+      TON Wallet / Connected
+      <div style="background:#111;border-radius:8px;padding:10px;display:flex;align-items:center;margin-top:10px;">
+        <img src="wallet.jpg" alt="Wallet Icon" style="width:24px;height:24px;margin-right:10px;">
+        <div>Wallet</div>
+      </div>
+    </div>
+
+    <div style="text-align:center;font-size:14px;color:#ccc;margin-top:20px;">
+      <a href="#" style="color:#ccc;text-decoration:none;margin:0 5px;">Terms of service</a> • 
+      <a href="#" style="color:#ccc;text-decoration:none;margin:0 5px;">Privacy</a>
+    </div>
+  </div>
+
+  <div id="storeContent" class="tab-content">
+    <h2>Store</h2>
+    <p>Buy Cookies or Chocolate Cookies to distract the chonk and reveal tiles.</p>
+    <p>Normal Cookie (costs 25 Telegram Stars, but free for now)</p>
+    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick()">Buy Cookie</button>
+    <p>Chocolate Cookie (3 reveals, costs 60 Telegram Stars).
+    </p>
+    <button class="buy-choc-cookie-button" id="buyChocCookieBtn" onclick="buyChocolateCookie()" disabled>Buy Chocolate Cookie</button>
+    <p id="chocCookieInfo" style="margin-top:10px; color:#ff0;">
+      Invite 3 friends to unlock Chocolate Cookies!
+    </p>
+    <p id="storeCookieBalances" style="font-size:16px; margin-top:10px;">
+      Cookies: 0 | Choc: 0
+    </p>
+  </div>
+</div>
+<div class="bottom-nav">
+  <button id="bonusesTab" onclick="showTab('bonuses')">Bonuses</button>
+  <button id="fieldTab" class="active" onclick="showTab('field')">Field</button>
+  <button id="statsTab" onclick="showTab('stats')">Stats</button>
+  <button id="balanceTab" onclick="showTab('balance')">Balance</button>
+  <button id="storeTab" onclick="showTab('store')">Store</button>
+</div>
+<script>
+  const tg = window.Telegram.WebApp;
+  tg.expand();
+  tg.setBackgroundColor("#000000");
+  tg.MainButton.setText("Close");
+  tg.MainButton.show();
+  tg.onEvent('mainButtonClicked', () => {
+    tg.close();
+  });
+
+  const rows = 5;
+  const cols = 5;
+
+  const pastelGradients = [
+    "linear-gradient(135deg, #fbc2eb 0%, #a18cd1 100%)",
+    "linear-gradient(135deg, #fdcbf1 0%, #e6dee9 100%)",
+    "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
+    "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
+    "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)",
+    "linear-gradient(135deg, #fccb90 0%, #d57eeb 100%)",
+    "linear-gradient(135deg, #fddb92 0%, #d1fdff 100%)",
+    "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)"
+  ];
+
+  const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🦴","💎","📦","🎀","💕"];
+  const rewards = [
+    "0 BTC", "0 BTC", "0 BTC", "0 USDT",
+    "0.25 USDT", "0.5 USDT", 
+    "0.5 BTC", "1 BTC", "1 BTC", 
+    "2 BTC", "0.1 TON"
+  ];
+
+  let revealedRewards = [];
+  let cookiesOwned = 1; 
+  let chocolateReveals = 0;
+  let invitedFriends = 0;
+
+  const BTC_PRICE = 100000; 
+  const USDT_PRICE = 1;
+  const TON_PRICE = 6;
+
+  // Feeding logic
+  let totalFeeds = 0; 
+  const LEVEL_THRESHOLDS = [10, 25, 50]; 
+  const LEVEL_BONUSES = [0, 1, 1.5, 2]; 
+
+  function getChonkLevel() {
+    if (totalFeeds >= 50) return 3;
+    if (totalFeeds >= 25) return 2;
+    if (totalFeeds >= 10) return 1;
+    return 0;
+  }
+
+  function getNextThreshold(level) {
+    if (level === 0) return 10;
+    if (level === 1) return 25;
+    if (level === 2) return 50;
+    return 50;
+  }
+
+  function updateFeedingProgress() {
+    const level = getChonkLevel();
+    document.getElementById('totalFeeds').textContent = totalFeeds;
+    document.getElementById('chonkLevel').textContent = level;
+    document.getElementById('chonkBonus').textContent = LEVEL_BONUSES[level] + "%";
+
+    const nextLevelRewardEl = document.getElementById('nextLevelReward');
+    const feedingProgress = document.getElementById('feedingProgress');
+
+    const nextThreshold = getNextThreshold(level);
+    let currentBase = 0;
+    if (level === 1) currentBase = 10;
+    if (level === 2) currentBase = 25;
+    if (level === 3) currentBase = 50;
+
+    let required = nextThreshold - currentBase; 
+    let achieved = totalFeeds - currentBase;
+    if (achieved < 0) achieved = 0;
+    if (achieved > required) achieved = required;
+    let percent = (achieved / required) * 100;
+
+    if (level === 3) {
+      percent = 100;
+      nextLevelRewardEl.textContent = "Max level reached";
+    } else {
+      let nextBonus = LEVEL_BONUSES[level+1];
+      nextLevelRewardEl.textContent = nextBonus + "% at " + nextThreshold + " feeds";
+    }
+    feedingProgress.style.width = percent + "%";
+  }
+
+  function incrementFeeds(usingChocolate) {
+    totalFeeds += usingChocolate ? 3 : 1;
+    updateFeedingProgress();
+  }
+
+  function generateCluster() {
+    const cluster = [];
+    for (let r = 0; r < rows; r++) {
+      cluster[r] = [];
+      for (let c = 0; c < cols; c++) {
+        const gradient = pastelGradients[Math.floor(Math.random()*pastelGradients.length)];
+        const emoji = emojis[Math.floor(Math.random()*emojis.length)];
+        cluster[r][c] = { revealed: false, reward: null, emoji, gradient };
+      }
+    }
+    return cluster;
+  }
+
+  let allClusters = [];
+  for (let i = 0; i < 10; i++) {
+    allClusters.push(generateCluster());
+  }
+  let clusterStates = JSON.parse(JSON.stringify(allClusters));
+  let currentClusterIndex = 0;
+
+  function createHexGrid() {
+    const container = document.getElementById('hexGridContainer');
+    container.innerHTML = "";
+    const gridState = clusterStates[currentClusterIndex];
+    for (let r = 0; r < rows; r++) {
+      const rowDiv = document.createElement('div');
+      rowDiv.className = 'hex-row';
+      for (let c = 0; c < cols; c++) {
+        const tileData = gridState[r][c];
+        const hex = document.createElement('div');
+        hex.className = 'hex';
+        if (tileData.revealed) {
+          hex.classList.add('revealed');
+          hex.textContent = tileData.reward;
+          hex.style.background = "#007f5f";
+        } else {
+          hex.textContent = tileData.emoji;
+          hex.style.background = tileData.gradient;
+        }
+        hex.onclick = () => onHexClick(r, c, hex);
+        rowDiv.appendChild(hex);
+      }
+      container.appendChild(rowDiv);
+    }
+  }
+
+function onHexClick(row, col, element) {
+  const gridState = clusterStates[currentClusterIndex];
+  const tile = gridState[row][col];
+
+  // Only proceed if tile hasn't already been revealed
+  if (!tile.revealed) {
+    let usedChocolate = false;
+
+    // Check if user has cookies or chocolate reveals
+    if (cookiesOwned > 0) {
+      cookiesOwned -= 1;
+    } else if (chocolateReveals > 0) {
+      chocolateReveals -= 1;
+      usedChocolate = true;
+    } else {
+      alert("No cookies or chocolate reveals available! Buy some from the Store.");
+      return;
+    }
+
+    // Increment feeding system (1 feed for cookie, 3 for chocolate)
+    incrementFeeds(usedChocolate);
+
+    // Randomly pick a reward from the 'rewards' array
+    const randomIndex = Math.floor(Math.random() * rewards.length);
+    tile.reward = rewards[randomIndex];
+    tile.revealed = true;
+
+    // --- FLIP ANIMATION ---
+    // 1) Add 'flipping' class -> rotates the tile to 90deg
+    element.classList.add('flipping');
+
+    // 2) After 200ms (duration of flip), remove 'flipping' and add 'revealed'
+    setTimeout(() => {
+      element.classList.remove('flipping');
+      element.classList.add('revealed');
+      element.textContent = tile.reward; // display the actual reward text
+    }, 200);
+    // --- END FLIP ---
+
+    // Track revealed rewards and update all balances
+    revealedRewards.push(tile.reward);
+    updateBalances();
+  }
+}
+
+
+  function formatUSD(value) {
+    return value.toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+  }
+
+  function updateBalances() {
+    let totalBTC = 0;
+    let totalUSDT = 0;
+    let totalTON = 0;
+
+    for (let reward of revealedRewards) {
+      const parts = reward.split(" ");
+      const amount = parseFloat(parts[0]);
+      const currency = parts[1]?.toUpperCase();
+      if (!currency) continue;
+
+      if (currency === "BTC") {
+        totalBTC += amount;
+      } else if (currency === "USDT") {
+        totalUSDT += amount;
+      } else if (currency === "TON") {
+        totalTON += amount;
+      }
+    }
+
+    const btcUSD = totalBTC * BTC_PRICE;
+    const usdtUSD = totalUSDT * USDT_PRICE;
+    const tonUSD = totalTON * TON_PRICE;
+
+    const statsBalances = document.getElementById('statsBalances');
+    if (statsBalances) {
+      statsBalances.textContent =
+        `BTC: ${totalBTC} (~${formatUSD(btcUSD)}) | USDT: ${totalUSDT} (~${formatUSD(usdtUSD)}) | TON: ${totalTON} (~${formatUSD(tonUSD)})`;
+    }
+
+    const bonusesBalancesEl = document.getElementById('bonusesBalances');
+    if (bonusesBalancesEl) {
+      bonusesBalancesEl.textContent =
+        `BTC: ${totalBTC} (~${formatUSD(btcUSD)}) | USDT: ${totalUSDT} (~${formatUSD(usdtUSD)}) | TON: ${totalTON} (~${formatUSD(tonUSD)})`;
+    }
+
+    const currencyLine = document.getElementById('currencyLine');
+    if (currencyLine) {
+      currencyLine.textContent = 
+        `USDT(💵): ${totalUSDT} (~${formatUSD(usdtUSD)}) | BTC(₿): ${totalBTC} (~${formatUSD(btcUSD)}) | TON(💎): ${totalTON} (~${formatUSD(tonUSD)})`;
+    }
+
+    const cookieLine = document.getElementById('cookieLine');
+    if (cookieLine) {
+      cookieLine.textContent = `Cookies: ${cookiesOwned} | Choc: ${chocolateReveals}`;
+    }
+
+    const btcBalance = document.getElementById('btcBalance');
+    if (btcBalance) {
+      btcBalance.textContent = totalBTC;
+      document.getElementById('btcUSD').textContent = `~${formatUSD(btcUSD)}`;
+    }
+
+    const usdtBalance = document.getElementById('usdtBalance');
+    if (usdtBalance) {
+      usdtBalance.textContent = totalUSDT;
+      document.getElementById('usdtUSD').textContent = `~${formatUSD(usdtUSD)}`;
+    }
+
+    const tonBalance = document.getElementById('tonBalance');
+    if (tonBalance) {
+      tonBalance.textContent = totalTON;
+      document.getElementById('tonUSD').textContent = `~${formatUSD(tonUSD)}`;
+    }
+
+    const storeCookieBalances = document.getElementById('storeCookieBalances');
+    if (storeCookieBalances) {
+      storeCookieBalances.textContent = `Cookies: ${cookiesOwned} | Choc: ${chocolateReveals}`;
+    }
+
+    updateFeedingProgress();
+  }
+
+  function showTab(tab) {
+    document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(tab+'Tab').classList.add('active');
+
+    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+    document.getElementById(tab+'Content').classList.add('active');
+
+    if (tab === 'balance' || tab === 'stats' || tab === 'bonuses' || tab === 'store') {
+      updateBalances();
+    }
+  }
+
+  function loadRandomCluster() {
+    currentClusterIndex = Math.floor(Math.random() * clusterStates.length);
+    createHexGrid();
+    updateBalances();
+  }
+
+  function selectCluster() {
+    const clusterNumber = prompt("Enter cluster number (1-10):");
+    const num = parseInt(clusterNumber, 10);
+    if (!isNaN(num) && num >= 1 && num <= 10) {
+      currentClusterIndex = num - 1;
+      createHexGrid();
+      updateBalances();
+    } else {
+      alert("Invalid cluster number. Please enter a number between 1 and 10.");
+    }
+  }
+
+  function handleBuyCookieButtonClick() {
+    const buyCookieBtn = document.querySelector('.buy-cookie-button');
+    buyCookieBtn.classList.add('button-animate');
+    setTimeout(() => {
+      buyCookieBtn.classList.remove('button-animate');
+    }, 300);
+    buyCookie();
+    shoot();
+  }
+
+  function buyCookie() {
+    cookiesOwned += 1;
+    updateBalances();
+  }
+
+  function buyChocolateCookie() {
+    if (invitedFriends < 3) {
+      alert("You need to invite at least 3 friends first!");
+      return;
+    }
+    chocolateReveals += 3;
+    alert("You got a Chocolate Cookie, worth 3 reveals!");
+    updateBalances();
+    showConfetti();
+  }
+
+  function showConfetti() {
+    const confettiOverlay = document.getElementById('confettiOverlay');
+    confettiOverlay.style.display = 'block';
+    setTimeout(() => {
+      confettiOverlay.style.display = 'none';
+    }, 1000);
+  }
+
+  function inviteFriend() {
+    invitedFriends += 1;
+    document.getElementById('friendsInvitedCount').textContent = invitedFriends;
+    if (invitedFriends >= 3) {
+      document.getElementById('buyChocCookieBtn').disabled = false;
+      document.getElementById('chocCookieInfo').textContent = "You can now buy Chocolate Cookies!";
+      document.getElementById('chocCookieInfo').style.color = '#0f0';
+    }
+
+    if (invitedFriends % 10 === 0) {
+      cookiesOwned += 1;
+      alert("You got a free Cookie for inviting 10 friends!");
+      updateBalances();
+    }
+  }
+
+  const defaults = {
+  spread: 360,
+  ticks: 50,
+  gravity: 0,
+  decay: 0.94,
+  startVelocity: 30,
+  shapes: ["star"],
+  colors: ["FFE400", "FFBD00", "E89400", "FFCA6C", "FDFFB8"],
+};
+
+function shoot() {
+  confetti({
+    ...defaults,
+    particleCount: 40,
+    scalar: 1.2,
+    shapes: ["star"],
+  });
+
+  confetti({
+    ...defaults,
+    particleCount: 10,
+    scalar: 0.75,
+    shapes: ["circle"],
+  });
+}
+
+setTimeout(shoot, 0);
+setTimeout(shoot, 100);
+setTimeout(shoot, 200);
+
+  function closePopup() {
+    document.getElementById('onLoadPopup').style.display = 'none';
+  }
+
+  window.onload = () => {
+    createHexGrid();
+    updateFeedingProgress();
+  };
+</script>
+</body>
+</html>
