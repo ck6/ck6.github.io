@@ -945,7 +945,6 @@ function shoot() {
 // let tonWalletAddress = null; (already declared)
 
 
-
 // Create a connector
     const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
         manifestUrl: 'https://ck6.github.io/tonconnect-manifest.json',
@@ -954,16 +953,17 @@ function shoot() {
 
 
 
+   // 2. This function will open the wallet
     async function connectToWallet() {
+      try {
         const connectedWallet = await tonConnectUI.connectWallet();
-        // Do something with connectedWallet if needed
-        console.log(connectedWallet);
+        console.log("Connected wallet:", connectedWallet);
+        // Do something with the connected wallet if needed...
+      } catch (error) {
+        console.error("Error connecting to wallet:", error);
+      }
     }
 
-    // Call the function
-    connectToWallet().catch(error => {
-        console.error("Error connecting to wallet:", error);
-    });
 
 
 
