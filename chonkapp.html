@@ -426,9 +426,9 @@
 
     <div style="background:#111;padding:10px;border-radius:8px;margin-bottom:20px;">
       <div class="avatar-container">
-        <p id="player-top"></p>
+        <p id="player-avatar"></p>
         <div>
-          <h3 style="margin:0;font-size:16px;">Isabelle Keller</h3>
+          <h3 style="margin:0;font-size:16px;"> <p id="player-name"></p></h3>
           <p style="margin:5px 0 0;font-size:14px;color:#ccc;" id="statsBalances">...</p>
         </div>
       </div>
@@ -598,11 +598,13 @@
       const username = user.username;
       const profilephoto = user.photo_url;
 
-      document.getElementById("player-top").innerHTML = '<img src="' + profilephoto +'" alt="'+ username +'">';
+      document.getElementById("player-avatar").innerHTML = '<img src="' + profilephoto +'" alt="'+ username +'">';
+      document.getElementById("player-name").innerHTML = firstName + " " + lastName;
      }
 
      else{
-      document.getElementById("player-top").innerHTML = '<img src="ik.jpg" alt="Isabelle Keller">';
+      document.getElementById("player-avatar").innerHTML = '<img src="ik.jpg" alt="Isabelle Keller">';
+      document.getElementById("player-name").innerHTML = 'Isabelle Keller';
      }
 
 
