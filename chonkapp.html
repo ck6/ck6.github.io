@@ -409,7 +409,6 @@
 
   <div id="fieldContent" class="tab-content active">
     <h2><center>
-      <p id="sayhello"></p>
       Click a tile to reveal a reward!<br>
       Each reveal costs 1 Cookie or 1 Chocolate Reveal.</center>
     </h2>
@@ -427,7 +426,7 @@
 
     <div style="background:#111;padding:10px;border-radius:8px;margin-bottom:20px;">
       <div class="avatar-container">
-        <img src="ik.jpg" alt="Isabelle Keller">
+        <p id="player-top"></p>
         <div>
           <h3 style="margin:0;font-size:16px;">Isabelle Keller</h3>
           <p style="margin:5px 0 0;font-size:14px;color:#ccc;" id="statsBalances">...</p>
@@ -599,10 +598,12 @@
       const username = user.username;
       const profilephoto = user.photo_url;
 
-      document.getElementById("sayhello").innerHTML = firstName;
+      document.getElementById("player-top").innerHTML = '<img src="' + profilephoto +'" alt="'+ username +'">';
      }
 
-
+     else{
+      document.getElementById("player-top").innerHTML = '<img src="ik.jpg" alt="Isabelle Keller">';
+     }
 
 
   const rows = 5;
