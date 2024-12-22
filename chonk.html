@@ -456,11 +456,15 @@ document.getElementById("player-name").innerHTML = 'Isabelle Keller';
 const user = tg.initDataUnsafe?.user;
 if (user) {
   userId = user.id;
-        document.getElementById("player-avatar").innerHTML = '<img src="' + profilephoto +'" alt="'+ username +'">';
+  const firstName = user.first_name;
+  const lastName = user.last_name;
+  const username = user.username;
+  const profilephoto = user.photo_url;
+      document.getElementById("player-avatar").innerHTML = '<img src="' + profilephoto +'" alt="'+ username +'">';
       document.getElementById("player-name").innerHTML = firstName + " " + lastName;
 }
 
-
+userId = "demoUser123";
 /************************************************************
  * We'll track user state from the server:
  ************************************************************/
