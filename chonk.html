@@ -8,7 +8,7 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <!-- Particles for confetti -->
 <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
-<script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.umd.js"></script>
+<script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 
 
 
@@ -408,7 +408,7 @@
       TON Wallet / <span id="tonWalletStatus"> Not connected</span>
       <div style="background:#111;border-radius:8px;padding:10px;display:flex;align-items:center;margin-top:10px;">
         <img src="wallet.jpg" alt="Wallet Icon" style="width:24px;height:24px;margin-right:10px;">
-        <button id="connectTON">Connect Wallet</button><div></div>
+        <div id="ton-connect"></div><div></div>
       </div>
     </div>
 
@@ -947,28 +947,23 @@ function shoot() {
 
 window.alert("Ho");
 // Create a connector
-    const connector = new TonConnect.TonConnect({
-      manifestUrl: 'https://ck6.github.io/tonconnect-manifest.json'
+    const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+        manifestUrl: 'https://ck6.github.io/tonconnect-manifest.json',
+        buttonRootId: 'ton-connect'
     });
 
 window.alert("Hi");
 
-const connectBtn = document.getElementById('connectTON');
- 
+    async function connectToWallet() {
+        const connectedWallet = await tonConnectUI.connectWallet();
+        // Do something with connectedWallet if needed
+        console.log(connectedWallet);
+    }
 
-connectBtn.addEventListener('click', async () => {
-  try {
-    // This will ask the user to pick their TON wallet and connect
-    await connector.connect();
-    window.alert('Wallet connected successfully!');
-    
-    // Once connected, you can see the user’s wallet address
-    console.log(connector.account.address);
-  } catch (err) {
-    console.error('Failed to connect:', err);
-    window.alert('Failed to connect to the wallet.');
-  }
-});
+    // Call the function
+    connectToWallet().catch(error => {
+        console.error("Error connecting to wallet:", error);
+    });
 
 
 
