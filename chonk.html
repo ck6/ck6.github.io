@@ -298,7 +298,7 @@
 
 <!-- Top bar -->
 <div class="top-bar">
-  <h1>Cute Pastel Cluster</h1>
+  <h1></h1>
   <div class="cat-container">
     <img src="btc_cat.jpg" alt="Cute cat" />
   </div>
@@ -336,16 +336,16 @@
     <div class="hex-grid" id="hexGridContainer"></div>
   </div>
 
-  <!-- Stats tab -->
+ <!-- Stats Tab -->
   <div id="statsContent" class="tab-content">
     <h2>Stats</h2>
     <p>Your account info and top chonkers leaderboard:</p>
 
     <div style="background:#111;padding:10px;border-radius:8px;margin-bottom:20px;">
       <div class="avatar-container">
-        <img src="ik.jpg" alt="Isabelle Keller">
+        <p id="player-avatar"></p>
         <div>
-          <h3 style="margin:0;font-size:16px;">Isabelle Keller</h3>
+          <h3 style="margin:0;font-size:16px;"> <p id="player-name"></p></h3>
           <p style="margin:5px 0 0;font-size:14px;color:#ccc;" id="statsBalances">...</p>
         </div>
       </div>
@@ -441,20 +441,31 @@
  * Telegram Setup & Basic Data
  ************************************************************/
 const tg = window.Telegram.WebApp;
-tg.expand();
-tg.setBackgroundColor("#000000");
-tg.MainButton.setText("Close");
-tg.MainButton.show();
-tg.onEvent('mainButtonClicked', () => {
-  tg.close();
-});
+  tg.expand();
+  tg.setBackgroundColor("#000000");
+  tg.MainButton.setText("Close");
+  tg.MainButton.show();
+  tg.onEvent('mainButtonClicked', () => {
+    tg.close();
+  });
 
-let userId = "demoUser123"; // fallback if we don't get Telegram user ID
-const user = tg.initDataUnsafe?.user;
-if (user) {
-  userId = user.id;
-  document.getElementById("sayhello").textContent = user.first_name || "";
-}
+  const user = tg.initDataUnsafe.user;
+    if (user) {
+      const userId = user.id;
+      const firstName = user.first_name;
+      const lastName = user.last_name;
+      const username = user.username;
+      const profilephoto = user.photo_url;
+
+      document.getElementById("player-avatar").innerHTML = '<img src="' + profilephoto +'" alt="'+ username +'">';
+      document.getElementById("player-name").innerHTML = firstName + " " + lastName;
+     }
+
+     else{
+      const userId = '12334';
+      document.getElementById("player-avatar").innerHTML = '<img src="ik.jpg" alt="Isabelle Keller">';
+      document.getElementById("player-name").innerHTML = 'Isabelle Keller';
+     }
 
 /************************************************************
  * We'll track user state from the server:
