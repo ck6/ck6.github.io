@@ -441,31 +441,25 @@
  * Telegram Setup & Basic Data
  ************************************************************/
 const tg = window.Telegram.WebApp;
-  tg.expand();
-  tg.setBackgroundColor("#000000");
-  tg.MainButton.setText("Close");
-  tg.MainButton.show();
-  tg.onEvent('mainButtonClicked', () => {
-    tg.close();
-  });
+tg.expand();
+tg.setBackgroundColor("#000000");
+tg.MainButton.setText("Close");
+tg.MainButton.show();
+tg.onEvent('mainButtonClicked', () => {
+  tg.close();
+});
 
-  const user = tg.initDataUnsafe.user;
-    if (user) {
-      const userId = user.id;
-      const firstName = user.first_name;
-      const lastName = user.last_name;
-      const username = user.username;
-      const profilephoto = user.photo_url;
+let userId = "demoUser123"; // fallback if we don't get Telegram user ID
+document.getElementById("player-avatar").innerHTML = '<img src="ik.jpg" alt="Isabelle Keller">';
+document.getElementById("player-name").innerHTML = 'Isabelle Keller';
 
-      document.getElementById("player-avatar").innerHTML = '<img src="' + profilephoto +'" alt="'+ username +'">';
+const user = tg.initDataUnsafe?.user;
+if (user) {
+  userId = user.id;
+        document.getElementById("player-avatar").innerHTML = '<img src="' + profilephoto +'" alt="'+ username +'">';
       document.getElementById("player-name").innerHTML = firstName + " " + lastName;
-     }
+}
 
-     else{
-      const userId = '12334';
-      document.getElementById("player-avatar").innerHTML = '<img src="ik.jpg" alt="Isabelle Keller">';
-      document.getElementById("player-name").innerHTML = 'Isabelle Keller';
-     }
 
 /************************************************************
  * We'll track user state from the server:
