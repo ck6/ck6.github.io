@@ -945,14 +945,14 @@ function shoot() {
 // let tonWalletAddress = null; (already declared)
 
 
-window.alert("Ho");
+
 // Create a connector
     const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
         manifestUrl: 'https://ck6.github.io/tonconnect-manifest.json',
         buttonRootId: 'ton-connect'
     });
 
-window.alert("Hi");
+
 
     async function connectToWallet() {
         const connectedWallet = await tonConnectUI.connectWallet();
