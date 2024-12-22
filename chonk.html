@@ -11,6 +11,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 
 
+
 <style>
   :root {
     --bg-start: #2d1b64;
@@ -407,7 +408,7 @@
       TON Wallet / <span id="tonWalletStatus"> Not connected</span>
       <div style="background:#111;border-radius:8px;padding:10px;display:flex;align-items:center;margin-top:10px;">
         <img src="wallet.jpg" alt="Wallet Icon" style="width:24px;height:24px;margin-right:10px;">
-        <button id="connectTonWalletBtn">Connect Wallet</button><div></div>
+        <button id="connectTON">Connect Wallet</button><div></div>
       </div>
     </div>
 
@@ -941,51 +942,27 @@ function shoot() {
 
 // let tonWalletAddress = null; (already declared)
 
-// Create a TonConnect instance
-const tonConnect = new TonConnect.TonConnect({
-  // Optionally specify a manifestUrl if you have a tonconnect-manifest.json
-  // or pass an object with metadata for your site.
+
+// Create a connector
+const connector = new TonConnect({
+  manifestUrl: 'https://chonk.fly.dev/tonconnect-manifest.json'
 });
 
-async function connectTonWallet() {
-  // This triggers the user's wallet choice (Tonkeeper, etc.)
+const connectBtn = document.getElementById('connectTON');
+
+connectBtn.addEventListener('click', async () => {
   try {
-    // ask the user to choose a wallet (Tonkeeper, Tonhub, etc.)
-    await tonConnect.connectWallet();
-    // If successful, we can read the user's account address:
-    const account = tonConnect.wallet.account;
-    tonWalletAddress = account?.address || null;
-    updateTonWalletUI();
+    // This will ask the user to pick their TON wallet and connect
+    await connector.connect();
+    alert('Wallet connected successfully!');
+    
+    // Once connected, you can see the user’s wallet address
+    console.log(connector.account.address);
   } catch (err) {
-    console.error("TON wallet connect error:", err);
-    alert("Failed to connect wallet or user canceled.");
+    console.error('Failed to connect:', err);
+    alert('Failed to connect to the wallet.');
   }
-}
-
-
-
-
-// 1) At the top, define some variable:
-let tonWalletAddress = null;
-
-// 2) On page load or whenever the Balances tab is loaded, you might do:
-document.getElementById('connectTonWalletBtn').addEventListener('click', connectTonWallet);
-
-// 3) The connectTonWallet function is where we handle the wallet logic
-async function connectTonWallet() {
-  // We'll fill this in the next steps
-  console.log("Connect wallet clicked!");
-}
-
-// 4) Another function to update the UI once connected:
-function updateTonWalletUI() {
-  const walletStatusEl = document.getElementById('tonWalletStatus');
-  if (tonWalletAddress) {
-    walletStatusEl.textContent = "Connected: " + tonWalletAddress;
-  } else {
-    walletStatusEl.textContent = "Not connected";
-  }
-}
+});
 
 
 
