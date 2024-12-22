@@ -954,16 +954,17 @@ connectBtn.addEventListener('click', async () => {
   try {
     // This will ask the user to pick their TON wallet and connect
     await connector.connect();
-    alert('Wallet connected successfully!');
+    window.alert('Wallet connected successfully!');
     
     // Once connected, you can see the user’s wallet address
     console.log(connector.account.address);
   } catch (err) {
     console.error('Failed to connect:', err);
-    alert('Failed to connect to the wallet.');
+    window.alert('Failed to connect to the wallet.');
   }
 });
 
+window.alert("Hi");
 
 
 </script>
