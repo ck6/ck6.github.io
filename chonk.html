@@ -46,6 +46,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-bottom: 30px;
   }
 
   .top-bar h1 {
@@ -63,6 +64,7 @@
     overflow: hidden;
     z-index: 5; 
     pointer-events: none;
+
   }
 
   .cat-container img {
@@ -773,6 +775,10 @@ function updateBalances() {
   if (!userState) return;
   const cookiesOwned = userState.cookiesOwned || 0;
   const choc = userState.chocolateReveals || 0;
+  let totalBTC = 0;
+  let totalUSDT = 0;
+  let totalTON = 0;
+
   
   // Store tab
   document.getElementById('storeCookieBalances').textContent = 
@@ -784,16 +790,51 @@ function updateBalances() {
 
   // Example: if you want to display actual BTC/USDT/TON from userState, you can do so here.
   // For now, let's assume we don't have that data from the server. We'll keep them 0:
-  const totalBTC = 0, totalUSDT = 0, totalTON = 0;
+// Loop over all clusters the user has revealed
+  for (let cIndex in userState.revealedTiles) {
+    const tilesArray = userState.revealedTiles[cIndex];
+    for (let tile of tilesArray) {
+      // tile.reward is something like "0.25 USDT" or "1 BTC"
+      const [amountStr, currency] = tile.reward.split(" "); 
+      const amount = parseFloat(amountStr) || 0;
+
+      if (!currency) continue;
+
+      switch (currency.toUpperCase()) {
+        case "BTC":
+          totalBTC += amount;
+          break;
+        case "USDT":
+          totalUSDT += amount;
+          break;
+        case "TON":
+          totalTON += amount;
+          break;
+        default:
+          // If some unknown currency, skip or handle accordingly
+          break;
+      }
+    }
+  }
+
+  // Now update the UI elements
   document.getElementById('btcBalance').textContent = totalBTC;
-  document.getElementById('btcUSD').textContent = `~$0`;
+  document.getElementById('btcUSD').textContent = `~$${(totalBTC * 100000).toFixed(2)}`;
+
   document.getElementById('usdtBalance').textContent = totalUSDT;
-  document.getElementById('usdtUSD').textContent = `~$0`;
+  document.getElementById('usdtUSD').textContent = `~$${(totalUSDT * 1).toFixed(2)}`;
+
   document.getElementById('tonBalance').textContent = totalTON;
-  document.getElementById('tonUSD').textContent = `~$0`;
+  document.getElementById('tonUSD').textContent = `~$${(totalTON * 6).toFixed(2)}`;
+
+  // update stats tab too
   document.getElementById('statsBalances').textContent =
-    `BTC: ${totalBTC} (~$0) | USDT: ${totalUSDT} (~$0) | TON: ${totalTON} (~$0)`;
+    `BTC: ${totalBTC} (~$${(totalBTC*100000).toFixed(2)}) | `
+    + `USDT: ${totalUSDT} (~$${totalUSDT.toFixed(2)}) | `
+    + `TON: ${totalTON} (~$${(totalTON*6).toFixed(2)})`;
 }
+
+
 
 /************************************************************
  * 9) Feeding / Chonk Level (local display)
