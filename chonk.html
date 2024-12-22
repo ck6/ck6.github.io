@@ -657,6 +657,8 @@ async function onHexClick(row, col, element) {
       element.textContent = data.reward;
     }, 200);
 
+    if (data.reward != "0") {shoot();}
+
     updateBalances();
     updateFeedingProgress();
   } catch (err) {
@@ -696,7 +698,7 @@ function handleBuyCookieButtonClick() {
     buyCookieBtn.classList.remove('button-animate');
   }, 300);
   buyCookie();
-  shoot();
+  //shoot();
 }
 async function buyCookie() {
   try {
