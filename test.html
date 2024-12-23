@@ -94,6 +94,31 @@
   object-fit: cover; /* or contain, depending on desired cropping */
 }
 
+
+/* Absolutely position the button group at the bottom of the container */
+.cat-buttons {
+  position: absolute;
+  bottom: 0;            /* pins it to the bottom of the cat-container */
+  left: 50%;            /* start at the horizontal center */
+  transform: translateX(-50%);  /* truly center it */
+  display: flex;        /* layout for side-by-side buttons */
+  gap: 10px;            /* space between them */
+  padding: 10px;
+}
+
+/* Example button styling */
+.cat-buttons button {
+  background: rgba(0, 0, 0, 0.6); 
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.cat-buttons button:hover {
+  background: rgba(255,255,255,0.2);
+}
+
   .content {
     flex: 1;
     overflow: auto;
@@ -366,6 +391,14 @@
   <div id="fieldContent" class="tab-content active">
       <div class="cat-container">
     <img src="btc_chonk.jpg" alt="Cute cat" />
+    <div class="cat-buttons">
+    <button class="random-cluster-button" onclick="loadRandomCluster()">
+      Random Cluster
+    </button>
+    <button class="select-cluster-button" onclick="selectCluster()">
+      Select Cluster
+    </button>
+  </div>
   </div>
     <h2><center>
       <p id="sayhello"></p>
