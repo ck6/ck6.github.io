@@ -159,9 +159,10 @@
 
 /* The scrolling region */
 .field-scrollable {
-  flex: 1;                    /* This grows & shrinks to occupy leftover space */
-  overflow-y: auto;           /* Vertical scroll */
-  padding: 0 10px;            /* Example: some horizontal padding if you like */
+  flex: 1;
+  overflow-y: auto;       /* already set for vertical scrolling */
+  overflow-x: hidden;     /* NEW: hide horizontal overflow */
+  padding: 0 10px;
   box-sizing: border-box;
 }
 
