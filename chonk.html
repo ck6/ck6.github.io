@@ -542,7 +542,7 @@
 
 <div class="bottom-nav">
   <button id="bonusesTab" onclick="showTab('bonuses')">Bonuses</button>
-  <button id="fieldTab" class="active" onclick="showTab('field')">Field</button>
+  <button id="fieldTab" class="active" onclick="showTab('field')">Chonk</button>
   <button id="statsTab" onclick="showTab('stats')">Stats</button>
   <button id="balanceTab" onclick="showTab('balance')">Balance</button>
   <button id="storeTab" onclick="showTab('store')">Store</button>
@@ -718,7 +718,7 @@ async function onHexClick(row, col, element) {
 if (userState.cookiesOwned <= 0 && userState.chocolateReveals <= 0) {
   showNoCookiesPopup();
   return;
-}
+
 
   // Flip animation
   element.classList.add('flipping');
