@@ -134,14 +134,21 @@
 
   .tab-content {
     display: none; 
-    padding: var(--section-spacing) 0;
+    
     opacity: 0;
     transition: opacity var(--transition-duration) ease;
+    padding: 20px;
   }
   .tab-content.active {
     display: block;
     opacity: 1;
   }
+
+
+/* Specifically remove or reduce for the field tab padding: var(--section-spacing) 0;*/
+#fieldContent.tab-content {
+  padding: 0;
+}
 
   h2, h3 {
     font-size: var(--heading-font-size);
