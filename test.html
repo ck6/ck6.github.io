@@ -50,7 +50,7 @@
   .top-bar {
     background: rgba(0,0,0,0.3);
     position: relative;
-    padding: 0px;
+    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -173,7 +173,7 @@
     0% 75%,
     0% 25%
   );
-  margin: 0px; /* or 0 if you truly want no horizontal gap */
+  margin-right: 2px; /* or 0 if you truly want no horizontal gap */
   margin-bottom: 0;
     background: #444; /* // background: #ccc;  or your pastel gradient */
     display: flex;
@@ -346,7 +346,9 @@
 <!-- Top bar -->
 <div class="top-bar">
   <h1></h1>
-
+  <div class="cat-container">
+    <img src="btc_cat.jpg" alt="Cute cat" />
+  </div>
 </div>
 
 <div class="content">
@@ -369,9 +371,6 @@
 
   <!-- Field tab (active by default) -->
   <div id="fieldContent" class="tab-content active">
-        <div class="cat-container">
-      <img src="btc_cat.jpg" alt="Cute cat" />
-    </div>
     <h2><center>
       <p id="sayhello"></p>
       Click a tile to reveal a reward!<br>
