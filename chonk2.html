@@ -27,7 +27,6 @@
     --transition-duration: 0.3s;
     --tooltip-bg: rgba(0,0,0,0.8);
     --tooltip-color: #fff;
-    --hex-size: 80px;
   }
 
   body {
@@ -108,42 +107,26 @@
     margin: 10px 0;
   }
 
-.honeycomb-wrapper {
-  display: flex;
-  justify-content: center; /* horizontally center the .hex-grid */
-}
-
   /* Hex Grid */
-.hex-grid {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-top: 25px;
-
-}
-
+  .hex-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    --hex-size: 80px; 
+  }
 .hex-row {
   display: flex;
-  margin-top: calc(var(--hex-size) * -0.29);
+  margin-bottom: 0; /* or something very small, e.g. calc(var(--hex-size)*0.05) */
 }
-
-.hex-row:first-child {
-  margin-top: 0;
-}
-
-.hex-row:nth-child(even) {
+  .hex-row:nth-child(even) {
   margin-left: calc(var(--hex-size)/2);
-}
+  }
 
-/* Pull subsequent rows up so the lower hex corners meet the upper row’s hex corners.
-   You may need to tweak the 0.25 factor if the corners don’t line up perfectly. */
-.hex-row:not(:first-child) {
-  margin-top: calc(var(--hex-size) * -0.25);
-}
 
 .hex {
   width: var(--hex-size);
-  height: calc(var(--hex-size) * 1.1547);
+  height: calc(var(--hex-size)*1.1547);
+  margin: 2px; /* or 0 if you want them literally side-by-side */
   clip-path: polygon(
     50% 0%,
     100% 25%,
@@ -152,9 +135,7 @@
     0% 75%,
     0% 25%
   );
-  margin-right: 2px; /* or 0 if you truly want no horizontal gap */
-  margin-bottom: 0;
-    background: #444; /* // background: #ccc;  or your pastel gradient */
+    background: #444;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -165,7 +146,6 @@
     color: #333;
     font-weight: bold;
     transform-style: preserve-3d;
-    
   }
   .hex:hover {
     transform: scale(1.1);
@@ -359,9 +339,8 @@
       <button class="random-cluster-button" onclick="loadRandomCluster()">Random Cluster</button>
       <button class="select-cluster-button" onclick="selectCluster()">Select Cluster</button>
     </div>
-    <div class="honeycomb-wrapper">
     <div class="hex-grid" id="hexGridContainer"></div>
-  </div></div>
+  </div>
 
  <!-- Stats Tab -->
   <div id="statsContent" class="tab-content">
