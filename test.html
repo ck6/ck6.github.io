@@ -147,47 +147,59 @@
   }
 
 
-/* Specifically remove or reduce for the field tab padding: var(--section-spacing) 0;*/
+/* Make the Field tab fill all vertical space in the .content area */
 #fieldContent.tab-content {
-  display: flex;
-  flex-direction: column;
-  /* fill up parent’s vertical space (like .content) */
-  height: 100%;
-  /* prevent the entire tab from scrolling */
-  overflow: hidden;
-  padding: 0;
+  /* Remove display:none from inactive tabs in your real code. This is just to show the concept. */
+  display: flex;              /* Flex container */
+  flex-direction: column;     
+  height: 100%;               /* Ensure it can fill up the parent's height */
+  overflow: hidden;           /* Hide overflow so only the scrollable area scrolls */
+  padding: 0;                 /* You already had it, just reaffirming */
 }
 
-/* The center area is the only scrollable region */
-.tiles-scrollable {
-  flex: 1 1 auto;       /* occupy remaining vertical space */
-  overflow-y: auto;     /* enable vertical scroll */
-  padding: 0 10px;      /* optional horizontal padding */
+/* The scrolling region */
+.field-scrollable {
+  flex: 1;                    /* This grows & shrinks to occupy leftover space */
+  overflow-y: auto;           /* Vertical scroll */
+  padding: 0 10px;            /* Example: some horizontal padding if you like */
   box-sizing: border-box;
 }
 
-/* The cluster buttons container stays at the bottom */
+/* The pinned row of buttons at the bottom */
 .field-fixed-buttons {
-  flex: 0 0 auto;
-  display: flex;
-  justify-content: center;  /* center or space-evenly, up to you */
-  gap: 10px;
-  padding: 10px;
   background: rgba(0,0,0,0.3);
+  padding: 10px;
+  display: flex;
+  justify-content: center;    /* or space-evenly, if you prefer a different look */
+  gap: 10px;
+  /* “Sticky” is simpler if your container is 100% height. If you prefer absolute, that can work too. */
+  position: sticky; 
+  bottom: 0;
 }
 
-/* Example styling for the cluster buttons (you may already have this) */
+/* If you prefer to absolutely position the bottom row within #fieldContent, do:
+.field-fixed-buttons {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  ...
+}
+But be sure #fieldContent is position: relative and has a fixed height.
+*/
+
+/* Optionally style the two cluster buttons (you already have some classes) */
 .field-fixed-buttons button {
   background: #444;
   border: none;
   color: #fff;
-  padding: 10px 15px;
+  padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
 }
 .field-fixed-buttons button:hover {
   background: var(--accent-color);
 }
+
 
   h2, h3 {
     font-size: var(--heading-font-size);
@@ -453,28 +465,37 @@
 
   <!-- Field tab (active by default) -->
   <div id="fieldContent" class="tab-content active">
-      <div class="cat-container">
-    <img src="btc_chonk.jpg" alt="Cute cat" />
-    <div class="cat-buttons">
- 
-  </div>
-  </div>
-   <!-- Only this portion scrolls -->
-  <div class="tiles-scrollable">
-    <h5><center>
-      <p id="sayhello"></p>
-      Tap a tile to reveal a reward!</center>
-    </h5>
-    <div style="text-align:center;">
-
+  <!-- 1) This scrolls -->
+  <div class="field-scrollable">
+    <div class="cat-container">
+      <img src="btc_chonk.jpg" alt="Cute cat" />
+      <!-- If you have cat-buttons pinned inside the cat-container, keep them as is -->
+      <div class="cat-buttons">
+        <!-- cat-specific buttons if any -->
+      </div>
     </div>
+
+    <h5>
+      <center>
+        <p id="sayhello"></p>
+        Tap a tile to reveal a reward!
+      </center>
+    </h5>
+
     <div class="honeycomb-wrapper">
-    <div class="hex-grid" id="hexGridContainer"></div></div><br>
-    <div style="text-align:center;">
-      <div class="field-fixed-buttons">
-          <button class="random-cluster-button" onclick="loadRandomCluster()">Random Cluster</button>
-      <button class="select-cluster-button" onclick="selectCluster()">Select Cluster</button>
-   </div></div></div></div>
+      <div class="hex-grid" id="hexGridContainer"></div>
+      <br />
+      <!-- Removed the old cluster buttons from here -->
+    </div>
+  </div><!-- .field-scrollable -->
+
+  <!-- 2) Pin these two cluster buttons at the bottom of the Field tab -->
+  <div class="field-fixed-buttons">
+    <button class="random-cluster-button" onclick="loadRandomCluster()">Random Cluster</button>
+    <button class="select-cluster-button" onclick="selectCluster()">Select Cluster</button>
+  </div>
+</div>
+
 
  <!-- Stats Tab -->
   <div id="statsContent" class="tab-content">
