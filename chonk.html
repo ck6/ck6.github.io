@@ -381,6 +381,15 @@
 </head>
 
 <body>
+<!-- No Cookies Popup -->
+<div class="popup-overlay" id="noCookiesPopup" style="display: none;">
+  <div class="popup-content">
+    <h2>You have no cookies!</h2>
+    <p>Buy some from the Store to reveal tiles.</p>
+    <button onclick="goToStore()">Go to Store</button>
+  </div>
+</div>
+
 <!-- Popup on load -->
 <div class="popup-overlay" id="onLoadPopup">
   <div class="popup-content">
@@ -706,10 +715,10 @@ async function onHexClick(row, col, element) {
   if (!userState) return;
 
   // Check if user has cookie or choc reveal
-  if (userState.cookiesOwned <= 0 && userState.chocolateReveals <= 0) {
-    alert("No cookies or chocolate reveals available! Buy some from the Store.");
-    return;
-  }
+if (userState.cookiesOwned <= 0 && userState.chocolateReveals <= 0) {
+  showNoCookiesPopup();
+  return;
+}
 
   // Flip animation
   element.classList.add('flipping');
@@ -1061,6 +1070,18 @@ function shoot() {
       }
     }
 
+
+function showNoCookiesPopup() {
+  document.getElementById("noCookiesPopup").style.display = "flex";
+}
+
+function goToStore() {
+  // Hide the "no cookies" popup
+  document.getElementById("noCookiesPopup").style.display = "none";
+  
+  // Switch to the Store tab
+  showTab("store");
+}
 
 
 
