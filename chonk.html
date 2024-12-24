@@ -580,6 +580,8 @@ if (user) {
   const lastName = user.last_name;
   const username = user.username;
   const profilephoto = user.photo_url;
+  const startp = user.start_param;
+  if (startp) {window.alert(startp);}
       document.getElementById("player-avatar").innerHTML = '<img src="' + profilephoto +'" alt="'+ username +'">';
       document.getElementById("player-name").innerHTML = firstName + " " + lastName;
 }
