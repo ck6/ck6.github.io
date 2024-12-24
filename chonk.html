@@ -563,13 +563,13 @@ tg.onEvent('mainButtonClicked', () => {
   tg.close();
 });
 
-let userId = "12345688"; // fallback if we don't get Telegram user ID
+let userId = "x12345688"; // fallback if we don't get Telegram user ID
 document.getElementById("player-avatar").innerHTML = '<img src="ik.jpg" alt="Isabelle Keller">';
 document.getElementById("player-name").innerHTML = 'Isabelle Keller';
 
 const user = tg.initDataUnsafe?.user;
 if (user) {
-  userId = user.id;
+  userId = String(user.id);
   const firstName = user.first_name;
   const lastName = user.last_name;
   const username = user.username;
