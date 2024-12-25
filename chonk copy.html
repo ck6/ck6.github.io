@@ -550,7 +550,13 @@
 
 <script>
 
+/************************************************************
+ * Get Inviter ID
+ ************************************************************/
 
+const urlParams = new URLSearchParams(window.location.search);
+const inviterId = urlParams.get('inviterId');
+//window.alert(inviterId);
 /************************************************************
  * Telegram Setup & Basic Data
  ************************************************************/
@@ -574,6 +580,8 @@ if (user) {
   const lastName = user.last_name;
   const username = user.username;
   const profilephoto = user.photo_url;
+  const startp = user.start_param;
+  if (startp) {window.alert(startp);}
       document.getElementById("player-avatar").innerHTML = '<img src="' + profilephoto +'" alt="'+ username +'">';
       document.getElementById("player-name").innerHTML = firstName + " " + lastName;
 }
@@ -867,7 +875,8 @@ function inviteFriend() {
     alert("You got a free Cookie for inviting 10 friends!");
     updateBalances();
   }
-}
+
+
 
 /************************************************************
  * 7) Show/hide tabs
