@@ -822,9 +822,11 @@ async function handleBuyCookieButtonClick() {
     tg.openInvoice(data.invoiceLink, async (status) => {
       console.log("Invoice status:", status);
       if (status === "paid") {
+
+        await fetchUserState(); 
         console.log("User paid! Awarding a Cookie in DB...");
         // Now call your existing /api/buyCookie to finalize the purchase
-        await buyCookie();
+    
       }
     });
   } catch (err) {
