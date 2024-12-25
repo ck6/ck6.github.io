@@ -584,6 +584,7 @@ if (user) {
  ************************************************************/
 let userState = null; // { cookiesOwned, chocolateReveals, totalFeeds, revealedTiles, ... }
 let currentClusterIndex = 0;
+let currentClusterData = null;
 
 // For friend invites (local only)
 let invitedFriends = 0;
@@ -606,21 +607,9 @@ const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🦴","💎","�
 
 // We'll store "decorations" for 10 clusters × (5 rows × 5 cols)
 let clusterDecor = [];
-const rows = 5, cols = 5;
 
-// Generate random pastel background + emoji for each tile in 10 clusters
-for (let i = 0; i < 10; i++) {
-  const clusterArr = [];
-  for (let r = 0; r < rows; r++) {
-    clusterArr[r] = [];
-    for (let c = 0; c < cols; c++) {
-      const gradient = pastelGradients[Math.floor(Math.random()*pastelGradients.length)];
-      const emoji = emojis[Math.floor(Math.random()*emojis.length)];
-      clusterArr[r][c] = { gradient, emoji };
-    }
-  }
-  clusterDecor.push(clusterArr);
-}
+
+
 
 /************************************************************
  * On window load, let's fetch the user state and build the grid
@@ -632,8 +621,8 @@ window.onload = async () => {
   // Fetch the user state from the server
   await fetchUserState();
 
-  // Create the hex grid
-  createHexGrid();
+  // Get Cluster
+  await loadCluster(1);
 
   // Update feeding progress
   updateFeedingProgress();
@@ -666,43 +655,116 @@ async function fetchUserState() {
  *    - If tile is revealed, show the actual reward
  *    - If not revealed, show pastel + random emoji
  ************************************************************/
+function ensureDecorForCluster(clusterIndex, rows, cols) {
+  // If this cluster index hasn't been decorated yet, make an array
+  if (!clusterDecor[clusterIndex]) {
+    clusterDecor[clusterIndex] = [];
+  }
+  // For each row and col in the cluster, ensure we have a pastel+emoji object
+  for (let r = 0; r < rows; r++) {
+    if (!clusterDecor[clusterIndex][r]) {
+      clusterDecor[clusterIndex][r] = [];
+    }
+    for (let c = 0; c < cols; c++) {
+      if (!clusterDecor[clusterIndex][r][c]) {
+        const gradient = pastelGradients[Math.floor(Math.random() * pastelGradients.length)];
+        const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+        clusterDecor[clusterIndex][r][c] = { gradient, emoji };
+      }
+    }
+  }
+}
+
+
+async function fetchSingleCluster(index) {
+  try {
+    const res = await fetch(`https://chonk.fly.dev/api/clusters/${index}`);
+    const data = await res.json();
+    // data => { clusterIndex, tiles: [ [...], [...], ... ] } or { error: ... }
+    if (data.error) {
+      alert("Error fetching cluster: " + data.error);
+      return null;
+    }
+    return data;
+  } catch (err) {
+    console.error("Error in fetchSingleCluster:", err);
+    alert("Error fetching cluster index " + index);
+    return null;
+  }
+}
+
+// Then we can define a function to load a cluster doc into currentClusterData
+async function loadCluster(index) {
+  currentClusterIndex = index;
+  currentClusterData = await fetchSingleCluster(index);
+  if (currentClusterData) {
+    createHexGrid();
+  }
+  // else handle error
+}
+
+
+
 function createHexGrid() {
   const container = document.getElementById('hexGridContainer');
   container.innerHTML = "";
 
+  // If no user or no cluster data, stop
   if (!userState) return;
+  if (!currentClusterData || !currentClusterData.tiles) {
+    console.warn("No cluster data loaded!");
+    return;
+  }
 
-  // Get the array of revealed tiles for this cluster
+  // Build a map of per-user reveals (if you still want personal reveal logic)
   let revealedTiles = userState.revealedTiles?.[currentClusterIndex] || [];
-  // That might be an array of objects like { row, col, reward }
   const revealedMap = new Map();
   revealedTiles.forEach(obj => {
     const key = `${obj.row},${obj.col}`;
     revealedMap.set(key, obj.reward);
   });
 
+  // The server’s “tiles” array is the global source of truth
+  const tiles2D = currentClusterData.tiles; // e.g. 2D array of size rows×cols
+  const rows = tiles2D.length;
+  const cols = tiles2D[0].length;
+
+  // Ensure we have enough pastel decor for this dimension
+  ensureDecorForCluster(currentClusterIndex, rows, cols);
+
   for (let r = 0; r < rows; r++) {
     const rowDiv = document.createElement('div');
     rowDiv.className = 'hex-row';
+
     for (let c = 0; c < cols; c++) {
       const hex = document.createElement('div');
       hex.className = 'hex';
 
-      const key = `${r},${c}`;
-      if (revealedMap.has(key)) {
-        // It's revealed. Show the actual reward
+      // The server’s global tile state
+      const globalVal = tiles2D[r][c]; // "???" or "0.25 USDT" etc.
+      // The user’s personal reveal state
+      const userVal = revealedMap.get(`${r},${c}`);
+
+      if (globalVal !== "???") {
+        // The tile is globally revealed
         hex.classList.add('revealed');
-        hex.textContent = revealedMap.get(key); // e.g. "0.25 USDT"
+        hex.textContent = globalVal;
+      } else if (userVal) {
+        // The user doc says they've revealed it (edge case if server doc didn't update yet)
+        hex.classList.add('revealed');
+        hex.textContent = userVal;
       } else {
-        // Not revealed. Show pastel gradient + random emoji
+        // Not revealed => pastel background + random emoji
         const decor = clusterDecor[currentClusterIndex][r][c];
         hex.textContent = decor.emoji;
         hex.style.background = decor.gradient;
+        // On click, attempt to reveal
         hex.onclick = () => onHexClick(r, c, hex);
       }
 
       rowDiv.appendChild(hex);
     }
+
     container.appendChild(rowDiv);
   }
 }
@@ -762,7 +824,7 @@ if (userState.cookiesOwned <= 0 && userState.chocolateReveals <= 0) {
     }, 200);
 
     if (data.reward != "0") {shoot();}
-
+//await loadCluster(currentClusterIndex);
     updateBalances();
     updateFeedingProgress();
   } catch (err) {
@@ -776,16 +838,15 @@ if (userState.cookiesOwned <= 0 && userState.chocolateReveals <= 0) {
  * 4) Random or selected cluster
  ************************************************************/
 function loadRandomCluster() {
-  currentClusterIndex = Math.floor(Math.random() * 10);
-  createHexGrid();
+  const randIndex = Math.floor(Math.random() * 10);
+  loadCluster(randIndex);
   updateBalances();
 }
 function selectCluster() {
   const clusterNumber = prompt("Enter cluster number (1-10):");
   const num = parseInt(clusterNumber, 10);
   if (!isNaN(num) && num >= 1 && num <= 10) {
-    currentClusterIndex = num - 1;
-    createHexGrid();
+    loadCluster(num - 1);
     updateBalances();
   } else {
     alert("Invalid cluster number. Please enter a number between 1 and 10.");
