@@ -618,14 +618,19 @@ window.onload = async () => {
   // Show the welcome popup
   document.getElementById('onLoadPopup').style.display = 'flex';
 
-  // Start both requests in parallel
+  // 2) Fetch user state
   const userPromise = fetchUserState();
-  const clusterPromise = loadCluster(1);
 
-  // Wait for both
+  // 3) Choose a random cluster index from 0..9
+  const randomIndex = Math.floor(Math.random() * 10);
+
+  // 4) Start loading that cluster in parallel
+  const clusterPromise = loadCluster(randomIndex);
+
+  // 5) Wait for both
   await Promise.all([userPromise, clusterPromise]);
 
-  // Update feeding progress
+  // 6) Now both userState & cluster data are ready
   updateFeedingProgress();
 
   // Confetti for fun
