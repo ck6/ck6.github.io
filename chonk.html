@@ -749,10 +749,6 @@ function createHexGrid() {
         // The tile is globally revealed
         hex.classList.add('revealed');
         hex.textContent = globalVal;
-      } else if (userVal) {
-        // The user doc says they've revealed it (edge case if server doc didn't update yet)
-        hex.classList.add('revealed');
-        hex.textContent = userVal;
       } else {
         // Not revealed => pastel background + random emoji
         const decor = clusterDecor[currentClusterIndex][r][c];
