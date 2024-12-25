@@ -618,11 +618,12 @@ window.onload = async () => {
   // Show the welcome popup
   document.getElementById('onLoadPopup').style.display = 'flex';
 
-  // Fetch the user state from the server
-  await fetchUserState();
+  // Start both requests in parallel
+  const userPromise = fetchUserState();
+  const clusterPromise = loadCluster(1);
 
-  // Get Cluster
-  await loadCluster(1);
+  // Wait for both
+  await Promise.all([userPromise, clusterPromise]);
 
   // Update feeding progress
   updateFeedingProgress();
