@@ -299,11 +299,18 @@
 
 .random-cluster-button,
 .select-cluster-button {
-  /* just normal button styles */
-  margin: 5px;
-  display: inline-block;
-  z-index: 9999; 
-  /* no position: absolute */
+    display:inline-block;
+    background: #444;
+    border:none;
+    color:#fff;
+    padding: var(--button-padding);
+    cursor:pointer;
+    font-size:16px;
+    border-radius:4px;
+    margin:5px;
+    transition: background var(--transition-duration);
+    z-index: 9999;
+    position: relative; 
 }
 
 
