@@ -433,11 +433,11 @@
   <!-- Bonuses tab -->
   <div id="bonusesContent" class="tab-content">
     <h2>Bonuses</h2>
-    <p>Invite 3 friends to unlock chocolate cookies!<br><br>
-    For every 10 friends invited, you get 1 free Cookie!</p>
-    <button class="invite-friend-button" onclick="inviteFriend()">Invite Friend</button>
+    <p>Invite 3 frends to unlock chocolate cookies!<br><br>
+    For every 10 frends invited, you get 1 free Cookie!</p>
+    <button class="invite-friend-button" onclick="shareMiniApp()">Invite frends</button>
     <p>Friends Invited: <span id="friendsInvitedCount">0</span></p>
-
+    <br>
     <h3>Feeding the Chonk</h3>
     <p>Total Feeds: <span id="totalFeeds">0</span></p>
     <p>Chonk Level: <span id="chonkLevel">0</span> (Bonus: <span id="chonkBonus">0%</span> on all wins)</p>
@@ -662,7 +662,7 @@ window.onload = async () => {
   const userPromise = fetchUserState();
 
   // 3) Choose a random cluster index from 0..9
-  const randomIndex = Math.floor(Math.random() * 10);
+  const randomIndex = Math.floor(Math.random() * 30);
 
   // 4) Start loading that cluster in parallel
   const clusterPromise = loadCluster(randomIndex);
@@ -990,6 +990,33 @@ function inviteFriend() {
     updateBalances();
   }
 }
+
+function shareMiniApp() {
+  // 1) Construct your personal link
+  //    - If you have a Telegram Bot with a start param, do something like:
+  const personalLink = `https://t.me/LuckyChonkBot?start=${userId}`;
+
+  // 2) Open Telegram's share URL in a new tab.
+  //    - This is a standard approach to let the user pick a chat to send it to.
+  //    - You can also add a custom text or message if you want.
+  const encodedLink = encodeURIComponent(personalLink);
+  const encodedMessage = encodeURIComponent("Check out this BTC Hiding Chonk and get rich!");
+  const shareUrl = `https://t.me/share/url?url=${encodedLink}&text=${encodedMessage}`;
+
+
+  //TEMP
+    document.getElementById('friendsInvitedCount').textContent = invitedFriends;
+
+  if (invitedFriends >= 3) {
+    document.getElementById('buyChocCookieBtn').disabled = false;
+    document.getElementById('chocCookieInfo').textContent = "You can now buy Chocolate Cookies!";
+    document.getElementById('chocCookieInfo').style.color = '#0f0';
+  }
+
+  window.open(shareUrl, "_blank");
+}
+
+
 
 /************************************************************
  * 7) Show/hide tabs
