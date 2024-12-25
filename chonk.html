@@ -282,7 +282,6 @@
     border-radius: 4px;
   }
 
-  .random-cluster-button, .select-cluster-button,
   .buy-cookie-button, .buy-choc-cookie-button, .invite-friend-button {
     display:inline-block;
     background: #444;
@@ -296,6 +295,19 @@
     transition: background var(--transition-duration);
     z-index: 9999; /* higher than your cat-container’s z-index of 5 */
   }
+
+
+.random-cluster-button,
+.select-cluster-button {
+  /* just normal button styles */
+  margin: 5px;
+  display: inline-block;
+  z-index: 9999; 
+  /* no position: absolute */
+}
+
+
+
   .random-cluster-button:hover,
   .select-cluster-button:hover,
   .buy-cookie-button:hover,
