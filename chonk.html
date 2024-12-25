@@ -823,8 +823,9 @@ async function handleBuyCookieButtonClick() {
       console.log("Invoice status:", status);
       if (status === "paid") {
 
-        await fetchUserState(); 
-        console.log("User paid! Awarding a Cookie in DB...");
+        setTimeout(async () => {
+        await fetchUserState();
+        }, 200);
         // Now call your existing /api/buyCookie to finalize the purchase
     
       }
