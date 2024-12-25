@@ -294,6 +294,7 @@
     border-radius:4px;
     margin:5px;
     transition: background var(--transition-duration);
+    z-index: 9999; /* higher than your cat-container’s z-index of 5 */
   }
   .random-cluster-button:hover,
   .select-cluster-button:hover,
@@ -440,16 +441,19 @@
 
     </div>
 <div class="honeycomb-wrapper">
-  <!-- 1) A heading for the cluster number -->
- <h2 id="clusterHeading" style="text-align:center;">
-    Cluster #<span id="clusterNumber"></span>
-  </h2>
-  
+
   <!-- 2) Move the buttons above the grid -->
   <div style="text-align:center;">
     <button class="random-cluster-button" onclick="loadRandomCluster()">Random Cluster</button>
     <button class="select-cluster-button" onclick="selectCluster()">Select Cluster</button>
   </div>
+
+  <!-- 1) A heading for the cluster number -->
+ <h5 id="clusterHeading" style="text-align:center;">
+    Cluster #<span id="clusterNumber"></span>
+  </h5>
+  
+
 
   <!-- This little sub-heading and instructions can follow the buttons -->
   <h5>
