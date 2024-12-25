@@ -1084,6 +1084,10 @@ function updateBalances() {
   document.getElementById('cookieLine').textContent = 
     `Cookies: ${cookiesOwned} | Choc: ${choc}`;
 
+    // Update the cluster heading if we want to see it reflect changes immediately
+  document.getElementById('clusterCookies').textContent = cookiesOwned;
+  document.getElementById('clusterChocolate').textContent = choc;
+
   // Example: if you want to display actual BTC/USDT/TON from userState, you can do so here.
   // For now, let's assume we don't have that data from the server. We'll keep them 0:
 // Loop over all clusters the user has revealed
