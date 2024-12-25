@@ -475,9 +475,11 @@
   </div>
 
   <!-- 1) A heading for the cluster number -->
- <h5 id="clusterHeading" style="text-align:center;">
-    Cluster #<span id="clusterNumber"></span>
-  </h5>
+<h5 id="clusterHeading" style="text-align:center;">
+  Cluster #<span id="clusterNumber"></span> | 
+  Cookies: <span id="clusterCookies"></span> | 
+  Choc: <span id="clusterChocolate"></span>
+</h5>
   
 
 
@@ -755,6 +757,10 @@ async function loadCluster(index) {
   // Update the heading in the DOM to show "Cluster # + 1"
   document.getElementById('clusterNumber').textContent = currentClusterIndex + 1;
 
+  if (userState) {
+    document.getElementById('clusterCookies').textContent = userState.cookiesOwned || 0;
+    document.getElementById('clusterChocolate').textContent = userState.chocolateReveals || 0;
+  }
 
   currentClusterData = await fetchSingleCluster(index);
   if (currentClusterData) {
