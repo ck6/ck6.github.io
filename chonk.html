@@ -840,14 +840,14 @@ if (userState.cookiesOwned <= 0 && userState.chocolateReveals <= 0) {
  * 4) Random or selected cluster
  ************************************************************/
 function loadRandomCluster() {
-  const randIndex = Math.floor(Math.random() * 10);
+  const randIndex = Math.floor(Math.random() * 30);
   loadCluster(randIndex);
   updateBalances();
 }
 function selectCluster() {
   const clusterNumber = prompt("Enter cluster number (1-10):");
-  const num = parseInt(clusterNumber, 10);
-  if (!isNaN(num) && num >= 1 && num <= 10) {
+  const num = parseInt(clusterNumber, 30);
+  if (!isNaN(num) && num >= 1 && num <= 30) {
     loadCluster(num - 1);
     updateBalances();
   } else {
