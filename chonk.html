@@ -319,6 +319,7 @@
   .select-cluster-button:hover,
   .buy-cookie-button:hover,
   .buy-choc-cookie-button:hover,
+  .clipboard-button:hover,
   .invite-friend-button:hover {
     background: var(--accent-color);
   }
@@ -326,6 +327,11 @@
     background:#333;
     cursor:not-allowed;
   }
+
+  .clipboard-button {
+  padding: 8px;
+  font-size: 18px; /* bigger icon or adjust as you like */
+}
 
   /* Leaderboard styling (unchanged) */
   .leaderboard { margin-top: 20px; }
@@ -436,7 +442,8 @@
     <p>Invite 3 frends to unlock chocolate cookies!<br><br>
     For every 10 frends invited, you get 1 free Cookie!</p>
     <button class="invite-friend-button" onclick="shareMiniApp()">Invite frends</button>
-    <p>Friends Invited: <span id="friendsInvitedCount">0</span></p>
+   <button class="clipboard-button" onclick="copyLinkToClipboard()">📋</button>
+    <p>frends invited: <span id="friendsInvitedCount">0</span></p>
     <br>
     <h3>Feeding the Chonk</h3>
     <p>Total Feeds: <span id="totalFeeds">0</span></p>
@@ -1015,6 +1022,22 @@ function shareMiniApp() {
 
   window.open(shareUrl, "_blank");
 }
+
+function copyLinkToClipboard() {
+  // 1. Construct the same personal link you use for the share
+  const personalLink = `https://t.me/LuckyChonkBot?start=${userId}`;
+  
+  // 2. Copy to clipboard using the modern Clipboard API
+  navigator.clipboard.writeText(personalLink)
+    .then(() => {
+      alert("Link copied! You can now share it anywhere.");
+    })
+    .catch(err => {
+      console.error("Failed to copy link to clipboard:", err);
+      alert("Error copying the link. Please manually copy: " + personalLink);
+    });
+}
+
 
 
 
