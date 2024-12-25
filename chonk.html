@@ -557,9 +557,8 @@
  ************************************************************/
 const tg = window.Telegram.WebApp;
 tg.expand();
+//tg.WebApp.MainButton.hide();
 tg.setBackgroundColor("#000000");
-tg.MainButton.setText("Close");
-tg.MainButton.show();
 tg.onEvent('mainButtonClicked', () => {
   tg.close();
 });
