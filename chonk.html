@@ -875,6 +875,16 @@ function inviteFriend() {
     alert("You got a free Cookie for inviting 10 friends!");
     updateBalances();
   }
+
+  // Get invoice link from backend
+const { invoiceLink } = await useGetInvoiceLink();
+
+WebApp.openInvoice(invoiceLink, (status) => {
+  if (status === "paid") {
+    // Do your updates 
+  }
+});
+  
 }
 
 /************************************************************
