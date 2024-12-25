@@ -795,15 +795,44 @@ function selectCluster() {
 /************************************************************
  * 5) Buying cookies
  ************************************************************/
-function handleBuyCookieButtonClick() {
+
+async function handleBuyCookieButtonClick() {
   const buyCookieBtn = document.querySelector('.buy-cookie-button');
+  // Animate the button (existing logic)
   buyCookieBtn.classList.add('button-animate');
   setTimeout(() => {
     buyCookieBtn.classList.remove('button-animate');
   }, 300);
-  buyCookie();
-  //shoot();
+
+  try {
+    // 1) Request an invoice link from your backend
+    const response = await fetch('https://chonk.fly.dev/create-invoice', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+      // If needed, pass body here: e.g. body: JSON.stringify({ productType: 'cookie' })
+    });
+    const data = await response.json();
+
+    if (!data.invoiceLink) {
+      alert("Failed to get invoice link from server!");
+      return;
+    }
+
+    // 2) Open the invoice inside Telegram
+    tg.openInvoice(data.invoiceLink, async (status) => {
+      console.log("Invoice status:", status);
+      if (status === "paid") {
+        console.log("User paid! Awarding a Cookie in DB...");
+        // Now call your existing /api/buyCookie to finalize the purchase
+        await buyCookie();
+      }
+    });
+  } catch (err) {
+    console.error("Error creating or opening invoice:", err);
+    alert("Error: " + err.message);
+  }
 }
+
 async function buyCookie() {
   try {
     const res = await fetch('https://chonk.fly.dev/api/buyCookie', {
