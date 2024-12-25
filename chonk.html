@@ -847,7 +847,7 @@ function loadRandomCluster() {
 }
 function selectCluster() {
   const clusterNumber = prompt("Enter cluster number (1-30):");
-  const num = parseInt(clusterNumber, 30);
+  const num = parseInt(clusterNumber, 10);
   if (!isNaN(num) && num >= 1 && num <= 30) {
     loadCluster(num - 1);
     updateBalances();
