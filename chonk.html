@@ -181,6 +181,11 @@
   margin-top: 180px;
 }
 
+#clusterHeading {
+  position: relative; 
+  z-index: 9999; /* higher than your cat-container’s z-index of 5 */
+}
+
 .hex-grid {
   display: flex;
   flex-direction: column;
@@ -436,7 +441,7 @@
     </div>
 <div class="honeycomb-wrapper">
   <!-- 1) A heading for the cluster number -->
-  <h2 style="text-align:center;">
+ <h2 id="clusterHeading" style="text-align:center;">
     Cluster #<span id="clusterNumber"></span>
   </h2>
   
