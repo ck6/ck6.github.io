@@ -835,25 +835,7 @@ async function handleBuyCookieButtonClick() {
   }
 }
 
-async function buyCookie() {
-  try {
-    const res = await fetch('https://chonk.fly.dev/api/buyCookie', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId })
-    });
-    const data = await res.json();
-    if (data.error) {
-      alert(data.error);
-      return;
-    }
-    userState.cookiesOwned = data.cookiesOwned;
-    updateBalances();
-  } catch (err) {
-    console.error(err);
-    alert("Error buying cookie: " + err.message);
-  }
-}
+
 
 async function buyChocolateCookie() {
   if (invitedFriends < 3) {
