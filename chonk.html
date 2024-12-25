@@ -434,15 +434,27 @@
     <div style="text-align:center;">
 
     </div>
-    <div class="honeycomb-wrapper">
-          <h5><center>
+<div class="honeycomb-wrapper">
+  <!-- 1) A heading for the cluster number -->
+  <h2 style="text-align:center;">
+    Cluster #<span id="clusterNumber"></span>
+  </h2>
+  
+  <!-- 2) Move the buttons above the grid -->
+  <div style="text-align:center;">
+    <button class="random-cluster-button" onclick="loadRandomCluster()">Random Cluster</button>
+    <button class="select-cluster-button" onclick="selectCluster()">Select Cluster</button>
+  </div>
+
+  <!-- This little sub-heading and instructions can follow the buttons -->
+  <h5>
+    <center>
       <p id="sayhello"></p>
-      Tap a tile to reveal a reward!</center>
-    </h5>
+      Tap a tile to reveal a reward!
+    </center>
+  </h5>
     <div class="hex-grid" id="hexGridContainer"></div><br>
     <div style="text-align:center;">
-          <button class="random-cluster-button" onclick="loadRandomCluster()">Random Cluster</button>
-      <button class="select-cluster-button" onclick="selectCluster()">Select Cluster</button>
   </div></div></div>
 
  <!-- Stats Tab -->
@@ -702,6 +714,11 @@ async function fetchSingleCluster(index) {
 // Then we can define a function to load a cluster doc into currentClusterData
 async function loadCluster(index) {
   currentClusterIndex = index;
+
+  // Update the heading in the DOM to show "Cluster # + 1"
+  document.getElementById('clusterNumber').textContent = currentClusterIndex + 1;
+
+
   currentClusterData = await fetchSingleCluster(index);
   if (currentClusterData) {
     createHexGrid();
