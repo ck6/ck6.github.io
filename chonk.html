@@ -876,16 +876,7 @@ function inviteFriend() {
     updateBalances();
   }
 
-  // Get invoice link from backend
-const { invoiceLink } = await useGetInvoiceLink();
 
-WebApp.openInvoice(invoiceLink, (status) => {
-  if (status === "paid") {
-    // Do your updates 
-  }
-});
-  
-}
 
 /************************************************************
  * 7) Show/hide tabs
