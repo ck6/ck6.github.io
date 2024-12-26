@@ -1474,7 +1474,13 @@ function shoot() {
 
 
 /////TON WALLET
-//TON WALLET
+
+
+// Create a connector
+    const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+        manifestUrl: 'https://ck6.github.io/tonconnect-manifest.json',
+        buttonRootId: 'ton-connect'
+    });
 
 async function saveWalletAddress(tonWalletAddress) {
   // 1) Assume you have `userId` from Telegram’s `initDataUnsafe.user.id` or something similar
@@ -1483,7 +1489,7 @@ async function saveWalletAddress(tonWalletAddress) {
     return;
   }
 
-  alert(tonWalletAddress);
+  alert("tonWalletAddress");
 
   try {
     const res = await fetch('https://chonk.fly.dev/api/updateWallet', {
@@ -1511,13 +1517,6 @@ async function saveWalletAddress(tonWalletAddress) {
 
 
 
-// Create a connector
-    const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-        manifestUrl: 'https://ck6.github.io/tonconnect-manifest.json',
-        buttonRootId: 'ton-connect'
-    });
-
-
 
    // 2. This function will open the wallet
     async function connectToWallet() {
@@ -1527,9 +1526,14 @@ async function saveWalletAddress(tonWalletAddress) {
       };
         const connectedWallet = await tonConnectUI.connectWallet();
         console.log("Connected wallet:", connectedWallet);
-        alert(connectedWallet);
-        // Do something with the connected wallet if needed...
-        await saveWalletAddress(connectedWallet);
+      alert(`connectedWallet = ${JSON.stringify(connectedWallet)}`); // just to debug
+      if (!connectedWallet?.account?.address) {
+        alert("No address found in connectedWallet!");
+        return;
+      }
+
+      await saveWalletAddress(connectedWallet.account.address);
+
       } catch (error) {
         console.error("Error connecting to wallet:", error);
       }
