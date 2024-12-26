@@ -769,6 +769,7 @@ async function sendUserProfileToServer() {
   const username     = userObj.username || "";
   const photoUrl     = userObj.photo_url || "";
   const languageCode = userObj.language_code || "";
+  const invitedByID = tg.initDataUnsafe.start_param || null;
 
   // 3) POST them to your backend
   try {
@@ -781,7 +782,8 @@ async function sendUserProfileToServer() {
         lastName,
         username,
         photoUrl,
-        languageCode
+        languageCode,
+        invitedBy: invitedByID
       })
     });
     const data = await res.json();
