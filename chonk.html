@@ -831,7 +831,7 @@ async function fetchSingleCluster(index) {
   try {
     const res = await fetch(`https://chonk.fly.dev/api/clusters/${index}`);
     const data = await res.json();
-
+    alter("hi");
     // If the server returns { error: ... }, show an alert and stop
     if (data.error) {
       alert("Error fetching cluster: " + data.error);
