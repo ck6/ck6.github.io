@@ -1522,6 +1522,9 @@ async function saveWalletAddress(tonWalletAddress) {
    // 2. This function will open the wallet
     async function connectToWallet() {
       try {
+        tonConnectUI.uiOptions = {
+      twaReturnUrl: 'https://t.me/LuckyChonkBot'
+      };
         const connectedWallet = await tonConnectUI.connectWallet();
         console.log("Connected wallet:", connectedWallet);
         alert(connectedWallet);
