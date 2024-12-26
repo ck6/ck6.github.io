@@ -524,8 +524,8 @@
   <div id="bonusesContent" class="tab-content">
     <h2>Bonuses</h2>
     <button class="invite-friend-button" onclick="shareMiniApp()">Invite frends</button>
-   <button class="clipboard-button" onclick="copyLinkToClipboard()">📋</button>
-    <p>frends invited: <span id="friendsInvitedCount">0</span></p>
+   <button class="invite-friend-button" onclick="copyLinkToClipboard()">📋</button>
+    <p><b>frends invited: <span id="friendsInvitedCount">0</span></b></p>
     <br><p>Invite 3 frends to unlock 🍫 Chocolate Bars!<br><br>
     For every 10 frends invited, you get 1 free 🍫 Chocolate Bar!</p>
     <br>
@@ -740,7 +740,7 @@
     <!-- Store tab -->
   <div id="storeContent" class="tab-content">
     <h2>Store</h2>
-    <p>Buy Cookies or Chocolate Cookies to distract the chonk and reveal tiles.</p>
+    <p>Buy Cookies or Chocolate Cookies 🍫 to distract the chonk and reveal tiles.</p>
     <p>Normal Cookie, unveils 1 tile 1🌟</p>
     <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('cookie')">🍪 Buy Cookie</button>
     <br>
@@ -1417,7 +1417,7 @@ function shareMiniApp() {
 
 function copyLinkToClipboard() {
   // 1. Construct the same personal link you use for the share
-  const personalLink = `https://t.me/LuckyChonkBot?start=${userId}`;
+  const personalLink = `https://t.me/LuckyChonkBot?startapp=${userId}`;
   
   // 2. Copy to clipboard using the modern Clipboard API
   navigator.clipboard.writeText(personalLink)
