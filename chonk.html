@@ -1095,13 +1095,13 @@ function loadRandomCluster() {
   updateBalances();
 }
 function selectCluster() {
-  const clusterNumber = prompt("Enter cluster number (1-10,000):");
+  const clusterNumber = prompt("Enter cluster number (1-1,000,000):");
   const num = parseInt(clusterNumber, 10);
   if (!isNaN(num) && num >= 1 && num <= 1000000) {
     loadCluster(num - 1);
     updateBalances();
   } else {
-    alert("Invalid cluster number. Please enter a number between 1 and 10,000.");
+    alert("Invalid cluster number. Please enter a number between 1 and 1,000,000.");
   }
 }
 
