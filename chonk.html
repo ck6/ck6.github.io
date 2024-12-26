@@ -68,44 +68,18 @@
 
 
  .cat-container {
-  /* If you want the cat horizontally centered, keep these: */
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  
-  /* Let it expand to fill the viewport width on mobile */
-  width: 100vw;
-  max-width: 100vw;
-  
-  /* Remove the fixed height so it can grow/shrink */
-  height: auto;
-  
-  /* Keep overflow hidden if you like cropping, or remove if not needed */
-  overflow: hidden;
-  
-  z-index: 5;
-  pointer-events: none;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
 
 }
 
-
-.cat-container img {
-  /* Ensure the image is 100% wide within its container */
+.cat-container .cat-image {
   display: block;
   width: 100%;
   height: auto;
-  object-fit: cover; /* or contain, depending on desired cropping */
-  padding-bottom: 200px; 
-}
-
-.cat-image {
-  display: block;
-  width: 100%;     /* fill screen width */
-  max-width: 100vw; /* never exceed device width */
-  height: auto;    /* maintain aspect ratio */
   object-fit: cover;
-  margin: 0 auto;  /* if you want it centered on larger displays */
 }
 
 
@@ -476,10 +450,10 @@
 
   <!-- Field tab (active by default) -->
   <div id="fieldContent" class="tab-content active">
-      <!-- <div class="cat-container">-->
-    <img src="btc_chonk.jpg" alt="Chonk" class="chonk-image"/>
+      <div class="cat-container">
+    <img src="btc_chonk.jpg" alt="Chonk"/>
 
-  <!-- </div>-->
+   </div>
 
     <div style="text-align:center;">
 
