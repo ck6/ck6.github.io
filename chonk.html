@@ -580,8 +580,7 @@
     </div>
 
        <h3 style="font-size:16px;margin-bottom:10px;">Top 10 Chonkers</h3>
-    <!-- We'll list 10 players now -->
-    <!-- Isabelle Keller (#1) -->
+    
     <div class="leaderboard-item">
       <div class="leaderboard-item-avatar"><img src="ik.jpg"></div>
       <div class="leaderboard-item-info">
@@ -1532,8 +1531,8 @@ function updateBalances() {
 
   // update stats tab too
   document.getElementById('statsBalances').textContent =
-    `₿ BTC: ${totalBTC} (~$${(totalBTC*100000).toFixed(2)}) | `
-    + `💵 USDT: ${totalUSDT} (~$${totalUSDT.toFixed(2)}) | `
+    `₿ BTC: ${totalBTC} (~$${(totalBTC*100000).toFixed(2)}) <br> `
+    + `💵 USDT: ${totalUSDT} (~$${totalUSDT.toFixed(2)}) <br> `
     + `💎 TON: ${totalTON} (~$${(totalTON*6).toFixed(2)})`;
 }
 
