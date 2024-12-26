@@ -1481,13 +1481,13 @@ function shoot() {
         manifestUrl: 'https://ck6.github.io/tonconnect-manifest.json',
         buttonRootId: 'ton-connect'
     });
-
-//const currentWallet = tonConnectUI.wallet;
-//const currentWalletInfo = tonConnectUI.walletInfo;
-//const currentAccount = tonConnectUI.account;
-//const currentIsConnectedStatus = tonConnectUI.connected;
-//const currentState = tonConnectUI.singleWalletModalState;
-//alert('Current modal state:', currentState);
+const walletsList = await tonConnectUI.getWallets();
+const currentWallet = tonConnectUI.wallet;
+const currentWalletInfo = tonConnectUI.walletInfo;
+const currentAccount = tonConnectUI.account;
+const currentIsConnectedStatus = tonConnectUI.connected;
+const currentState = tonConnectUI.singleWalletModalState;
+alert('Current modal state:', currentState);
 //alert("hi");
 //alert(tonConnectUI.tonConnectUI.wallet);
 
