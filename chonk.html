@@ -658,6 +658,12 @@ if (user) {
   const lastName = user.last_name;
   const username = user.username;
   const profilephoto = user.photo_url;
+  // 3) Extract the value of a parameter (e.g., "foo")
+  const initDataUnsafe = Telegram.WebApp.initDataUnsafe;
+
+  // 3) The start param is here (if any was passed)
+  const startParam1 = initDataUnsafe.start_param;
+  alert(startParam1);
       document.getElementById("player-avatar").innerHTML = '<img src="' + profilephoto +'" alt="'+ username +'">';
       document.getElementById("player-name").innerHTML = firstName + " " + lastName;
 
@@ -730,14 +736,6 @@ window.onload = async () => {
 
   sendUserProfileToServer();
 
-const queryString = window.location.search;
-
-// 2) Create a URLSearchParams object
-const urlParams = new URLSearchParams(queryString);
-
-// 3) Extract the value of a parameter (e.g., "foo")
-const fooValue = urlParams.get('startapp'); // "bar"
-alert(fooValue);
 
 }
 
