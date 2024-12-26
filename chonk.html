@@ -1430,7 +1430,37 @@ function shoot() {
 /////TON WALLET
 //TON WALLET
 
-// let tonWalletAddress = null; (already declared)
+async function saveWalletAddress(tonWalletAddress) {
+  // 1) Assume you have `userId` from Telegram’s `initDataUnsafe.user.id` or something similar
+  if (!userId) {
+    console.error("User ID is not available. Cannot save wallet address.");
+    return;
+  }
+
+  try {
+    const res = await fetch('https://YOUR_DOMAIN/api/updateWallet', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        userId,           // your Telegram user ID
+        tonWalletAddress  // the address from TON Connect
+      })
+    });
+    const data = await res.json();
+
+    if (data.error) {
+      console.error("Error updating wallet:", data.error);
+      alert("Error updating wallet: " + data.error);
+      return;
+    }
+
+    console.log("Wallet updated successfully:", data);
+  } catch (err) {
+    console.error("Error calling updateWallet:", err);
+    alert("Error saving wallet address: " + err.message);
+  }
+}
+
 
 
 // Create a connector
@@ -1447,6 +1477,7 @@ function shoot() {
         const connectedWallet = await tonConnectUI.connectWallet();
         console.log("Connected wallet:", connectedWallet);
         // Do something with the connected wallet if needed...
+        await saveWalletAddress(connectedWallet);
       } catch (error) {
         console.error("Error connecting to wallet:", error);
       }
