@@ -831,17 +831,11 @@ async function fetchSingleCluster(index) {
   try {
     const res = await fetch(`https://chonk.fly.dev/api/clusters/${index}`);
     const data = await res.json();
-    alter("hi");
-    // If the server returns { error: ... }, show an alert and stop
+    // data => { clusterIndex, tiles: [ [...], [...], ... ] } or { error: ... }
     if (data.error) {
       alert("Error fetching cluster: " + data.error);
       return null;
     }
-
-    // Alert the data for quick debugging/confirmation
-    alert(`Fetched cluster data: \n\n${JSON.stringify(data, null, 2)}`);
-
-    // Return the data so the caller can use it
     return data;
   } catch (err) {
     console.error("Error in fetchSingleCluster:", err);
@@ -849,7 +843,6 @@ async function fetchSingleCluster(index) {
     return null;
   }
 }
-
 
 // Then we can define a function to load a cluster doc into currentClusterData
 async function loadCluster(index) {
