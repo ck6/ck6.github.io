@@ -699,8 +699,10 @@
   <!-- Balance tab -->
   <div id="balanceContent" class="tab-content">
     <h2>Balance</h2>
-    <p>Check your balance and rewards here.</p>
-    
+    <p>Check your balance and recent rewards here.</p>
+    <p id="currencyLine" style="margin-top:20px;font-size:16px;"></p>
+    <p id="cookieLine" style="font-size:16px;"></p>
+
     <div style="background:#111;padding:10px;border-radius:8px;margin-bottom:20px;text-align:center;">
       <div>💵 USDT: <span id="usdtBalance">0</span> (<span id="usdtUSD">~$0</span>)</div>
       <div>₿ BTC: <span id="btcBalance">0</span> (<span id="btcUSD">~$0</span>)</div>
@@ -743,11 +745,8 @@
     <p>Normal Cookie - unveils 1 tile</p>
     <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('cookie')">🍪 Buy Cookie</button> 1🌟
     <br><br>
-    Bunch of Cookies - unveils 2 tiles
-    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('bunch')">🍪🍪 Buy Bunch of Cookies</button> 2🌟
-    <br><br>
-    Jar of Cookies - unveils 10 tiles
-    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('jar')">🍪🍪 Buy Jar of Cookies</button> 15🌟
+    Jar of Cookies - unveils 2 tiles
+    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('jar')">🍪🍪 Buy Jar of Cookies</button> 2🌟
     <br><br>
     <p>Bomb - reveals an entire cluster!</p>
     <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('bomb')">
