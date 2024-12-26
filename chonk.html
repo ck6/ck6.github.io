@@ -1481,13 +1481,25 @@ function shoot() {
         manifestUrl: 'https://ck6.github.io/tonconnect-manifest.json',
         buttonRootId: 'ton-connect'
     });
-    
+
 if (tonConnectUI.connected) {
     const currentAccount = tonConnectUI.account;
     if (currentAccount) {
         alert('User wallet address:', currentAccount.address);
     }
 }
+
+// Listen for connection/disconnection events:
+tonConnectUI.onStatusChange((wallet) => {
+  if (wallet) {
+    // Connected
+    alert('Wallet connected!', wallet);
+    alert('Wallet address:', tonConnectUI.account?.address);
+  } else {
+    // Disconnected or no wallet
+    alert('No wallet connected.');
+  }
+});
 
 async function saveWalletAddress(tonWalletAddress) {
   // 1) Assume you have `userId` from Telegram’s `initDataUnsafe.user.id` or something similar
