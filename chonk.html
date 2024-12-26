@@ -1482,6 +1482,13 @@ function shoot() {
         buttonRootId: 'ton-connect'
     });
 
+tonConnectUI.uiOptions = {
+  actionsConfiguration: {
+    returnStrategy: 'back',       // or 'https://mycustomurl' if you have a custom scheme
+    skipRedirectToWallet: 'never' // ensures iOS doesn't block returning after sign
+  }
+};
+
 //if (tonConnectUI.connected) {
   //  const currentAccount = tonConnectUI.account;
     //if (currentAccount) {
@@ -1552,7 +1559,7 @@ async function saveWalletAddress(tonWalletAddress) {
 
 
 
-   // 2. This function will open the wallet
+   // NOT USED 2. This function will open the wallet
     async function connectToWallet() {
       try {
         tonConnectUI.uiOptions = {
