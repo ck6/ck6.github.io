@@ -1219,9 +1219,9 @@ async function buyProduct(productType, userId, cookiesToAdd = 0) {
  ************************************************************/
 function inviteFriend() {
   invitedFriends++;
-  document.getElementById('friendsInvitedCount').textContent = invitedFriends;
+  //document.getElementById('friendsInvitedCount').textContent = invitedFriends;
 
-  if (invitedFriends >= 3) {
+  if (invitedFriends >= 1) {
     document.getElementById('buyChocCookieBtn').disabled = false;
     document.getElementById('chocCookieInfo').textContent = "You can now buy Chocolate Cookies!";
     document.getElementById('chocCookieInfo').style.color = '#0f0';
@@ -1246,9 +1246,7 @@ function shareMiniApp() {
   const shareUrl = `https://t.me/share/url?url=${encodedLink}&text=${encodedMessage}`;
 
 
-  //TEMP
-    document.getElementById('friendsInvitedCount').textContent = invitedFriends;
-
+  
   if (invitedFriends >= 3) {
     document.getElementById('buyChocCookieBtn').disabled = false;
     document.getElementById('chocCookieInfo').textContent = "You can now buy Chocolate Cookies!";
@@ -1318,10 +1316,15 @@ function updateBalances() {
   const cookiesOwned = userState.cookiesOwned || 0;
   const choc = userState.chocolateReveals || 0;
   const bombs = userState.chocolateBombs || 0;
+  const friendsInvited = userState.friendsInvited || 0;
+
   let totalBTC = 0;
   let totalUSDT = 0;
   let totalTON = 0;
 
+
+  //Bonuses tab
+  document.getElementById('friendsInvitedCount').textContent = friendsInvited;
   
   // Store tab
   document.getElementById('storeCookieBalances').textContent =
