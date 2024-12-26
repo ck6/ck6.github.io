@@ -678,6 +678,8 @@ window.onload = async () => {
   //const userPromise = fetchUserState();
   await fetchUserState();
 
+  await loadCluster(randomIndex);
+
   // 5) Wait for both
   //await Promise.all([userPromise, clusterPromise]);
 
