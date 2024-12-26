@@ -1530,7 +1530,7 @@ function updateBalances() {
   document.getElementById('tonUSD').textContent = `~$${(totalTON * 6).toFixed(2)}`;
 
   // update stats tab too
-  document.getElementById('statsBalances').textContent =
+  document.getElementById('statsBalances').innerHTML =
     `₿ BTC: ${totalBTC} (~$${(totalBTC*100000).toFixed(2)}) <br> `
     + `💵 USDT: ${totalUSDT} (~$${totalUSDT.toFixed(2)}) <br> `
     + `💎 TON: ${totalTON} (~$${(totalTON*6).toFixed(2)})`;
