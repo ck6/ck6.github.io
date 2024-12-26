@@ -849,7 +849,7 @@ async function loadCluster(index) {
   currentClusterIndex = index;
 
   // Update the heading in the DOM to show "Cluster # + 1"
-  document.getElementById('clusterNumber').textContent = currentClusterIndex + 1;
+  document.getElementById('clusterNumber').textContent = (currentClusterIndex + 1).toLocaleString();
 
   if (userState) {
     document.getElementById('clusterCookies').textContent = userState.cookiesOwned || 0;
