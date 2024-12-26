@@ -1001,24 +1001,31 @@ async function useBombOnCurrentCluster() {
 }
 
 function flipAllNewlyRevealedTiles(newRewards) {
-  // e.g. newRewards = [{ row: 0, col:2, reward:'0.5 USDT'}, ...]
+  // 1) Clear old classes
+  newRewards.forEach(({ row, col }) => {
+    const tile = document.querySelector(`.hex[data-row="${row}"][data-col="${col}"]`);
+    if (!tile) return;
+    tile.classList.remove('flipping', 'revealed');
+    // tile.textContent = ''; // optional
+  });
+
+  // 2) Force reflow so the next .flipping addition is recognized as a new transition
+  document.body.offsetHeight;
+
+  // 3) Add 'flipping' class
   newRewards.forEach(({ row, col, reward }) => {
-    // 1) Find the DOM element
-    const hexSelector = `.hex[data-row="${row}"][data-col="${col}"]`;
-    const tile = document.querySelector(hexSelector);
-    if (!tile) return; // skip if not found
+    const tile = document.querySelector(`.hex[data-row="${row}"][data-col="${col}"]`);
+    if (!tile) return;
 
-    // 2) Add flipping class to animate
     tile.classList.add('flipping');
-
-    // 3) After the flip finishes, show reward
     setTimeout(() => {
       tile.classList.remove('flipping');
       tile.classList.add('revealed');
       tile.textContent = reward;
-    }, 200); // match your CSS animation timing
+    }, 200);
   });
 }
+
 
 
 
