@@ -1524,6 +1524,7 @@ async function saveWalletAddress(tonWalletAddress) {
       try {
         const connectedWallet = await tonConnectUI.connectWallet();
         console.log("Connected wallet:", connectedWallet);
+        alert(connectedWallet);
         // Do something with the connected wallet if needed...
         await saveWalletAddress(connectedWallet);
       } catch (error) {
