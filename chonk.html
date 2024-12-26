@@ -1493,7 +1493,7 @@ function shoot() {
 //}
 
 // Listen for connection/disconnection events:
-tonConnectUI.onStatusChange((wallet) => {
+tonConnectUI.onStatusChange( async (wallet) => {
   if (wallet) {
     // Connected
     //alert(`Wallet object:\n\n${JSON.stringify(wallet, null, 2)}`);
