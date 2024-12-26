@@ -297,20 +297,28 @@
   }
 
 
+.cluster-buttons {
+  position: fixed;
+  bottom: 60px; /* adjust this so it sits right above .bottom-nav */
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 9999; /* ensure it’s on top */
+  gap: 10px;     /* spacing between buttons if desired */
+}
+
 .random-cluster-button,
 .select-cluster-button {
-    display:inline-block;
-    background: #444;
-    border:none;
-    color:#fff;
-    padding: var(--button-padding);
-    cursor:pointer;
-    font-size:16px;
-    border-radius:4px;
-    margin:5px;
-    transition: background var(--transition-duration);
-    z-index: 9999;
-    position: relative; 
+  background: #444;
+  border: none;
+  color: #fff;
+  padding: var(--button-padding);
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+  margin: 0; /* let the gap handle spacing */
+  transition: background var(--transition-duration);
 }
 
 
@@ -468,11 +476,12 @@
     </div>
 <div class="honeycomb-wrapper">
 
-  <!-- 2) Move the buttons above the grid -->
+  <!-- 2) Move the buttons above the grid
   <div style="text-align:center;">
     <button class="random-cluster-button" onclick="loadRandomCluster()">Random Cluster</button>
     <button class="select-cluster-button" onclick="selectCluster()">Select Cluster</button>
   </div>
+  -->
 
   <!-- 1) A heading for the cluster number -->
 <h5 id="clusterHeading" style="text-align:center;">
@@ -587,6 +596,11 @@
       Cookies: 0 | Choc: 0
     </p>
   </div>
+</div>
+
+<div class="cluster-buttons">
+<button class="random-cluster-button" onclick="loadRandomCluster()">Random Cluster</button>
+<button class="select-cluster-button" onclick="selectCluster()">Select Cluster</button>
 </div>
 
 <div class="bottom-nav">
