@@ -580,26 +580,22 @@
     </div>
   </div>
 
-<!-- Store tab -->
-<div id="storeContent" class="tab-content">
-  <h2>Store</h2>
-  <p>All items add Cookies to your balance, except the Cat Toy, which unveils an entire cluster at once!</p>
-
-<!-- Single Cookie -->
-<p>🍪 Single Cookie (1 Star)</p>
-<button class="store-button" onclick="buySingleCookie()">Buy Cookie</button>
-
-<!-- Bunch of Cookies -->
-<p>Bunch of Cookies (45 Stars) - adds 2 Cookies</p>
-<button class="store-button" onclick="buyBunchOfCookies()">Buy Bunch of Cookies</button>
-
-<!-- Jar of Cookies -->
-<p>Jar of Cookies (60 Stars) - adds 3 Cookies</p>
-<button class="store-button" onclick="buyJarOfCookies()">Buy Jar of Cookies</button>
-
-<!-- Cat Toy -->
-<p>Cat Toy (999 Stars) - instantly unveils an entire cluster</p>
-<button class="store-button" onclick="buyCatToy()">Buy Cat Toy</button>
+    <!-- Store tab -->
+  <div id="storeContent" class="tab-content">
+    <h2>Store</h2>
+    <p>Buy Cookies or Chocolate Cookies to distract the chonk and reveal tiles.</p>
+    <p>Normal Cookie (costs 25 Telegram Stars, but free for now)</p>
+    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick()">🍪 Buy Cookie</button>
+    <p>Chocolate Cookie (3 reveals, costs 60 Telegram Stars).
+    </p>
+    <button class="buy-choc-cookie-button" id="buyChocCookieBtn" onclick="buyChocolateCookie()" disabled>Buy Chocolate Cookie</button>
+    <p id="chocCookieInfo" style="margin-top:10px; color:#ff0;">
+      Invite 3 friends to unlock Chocolate Cookies!
+    </p>
+    <p id="storeCookieBalances" style="font-size:16px; margin-top:10px;">
+      Cookies: 0 | Choc: 0
+    </p>
+  </div>
 
 
   <p id="storeCookieBalances" style="font-size:16px; margin-top:10px;">
