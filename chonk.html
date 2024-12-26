@@ -661,7 +661,7 @@ if (user) {
       document.getElementById("player-avatar").innerHTML = '<img src="' + profilephoto +'" alt="'+ username +'">';
       document.getElementById("player-name").innerHTML = firstName + " " + lastName;
 
-    //sendUserProfileToServer();
+    
 }
 
 
@@ -728,9 +728,8 @@ window.onload = async () => {
   setTimeout(shoot, 100);
   setTimeout(shoot, 200);
 
-
-
-
+  sendUserProfileToServer();
+}
 
 /************************************************************
  * 1) Fetch user state from /api/userState?userId=...
@@ -1485,7 +1484,7 @@ async function saveWalletAddress(tonWalletAddress) {
   }
 
   try {
-    const res = await fetch('https://YOUR_DOMAIN/api/updateWallet', {
+    const res = await fetch('https://chonk.fly.dev/api/updateWallet', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ 
