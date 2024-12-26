@@ -1485,7 +1485,10 @@ function shoot() {
 if (tonConnectUI.connected) {
     const currentAccount = tonConnectUI.account;
     if (currentAccount) {
-        alert('User wallet address:', currentAccount.address);
+            alert(`Wallet object:\n\n${JSON.stringify(wallet, null, 2)}`);
+
+    // You can also directly alert the address:
+    alert(`Wallet address: ${tonConnectUI.account?.address}`);
     }
 }
 
@@ -1493,8 +1496,10 @@ if (tonConnectUI.connected) {
 tonConnectUI.onStatusChange((wallet) => {
   if (wallet) {
     // Connected
-    alert('Wallet connected!', wallet);
-    alert('Wallet address:', tonConnectUI.account?.address);
+    alert(`Wallet object:\n\n${JSON.stringify(wallet, null, 2)}`);
+
+    // You can also directly alert the address:
+    alert(`Wallet address: ${tonConnectUI.account?.address}`);
   } else {
     // Disconnected or no wallet
     alert('No wallet connected.');
