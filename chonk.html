@@ -1483,6 +1483,8 @@ async function saveWalletAddress(tonWalletAddress) {
     return;
   }
 
+  alert(tonWalletAddress);
+
   try {
     const res = await fetch('https://chonk.fly.dev/api/updateWallet', {
       method: 'POST',
