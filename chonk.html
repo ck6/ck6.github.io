@@ -955,7 +955,7 @@ async function handleBuyCookieButtonClick() {
     const res = await fetch('https://chonk.fly.dev/create-invoice', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ revealType: 'choc', userID : userId })
+      body: JSON.stringify({ revealType: 'choc' })
     });
     const data = await res.json();
 
