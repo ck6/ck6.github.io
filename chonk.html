@@ -660,6 +660,8 @@ if (user) {
   const profilephoto = user.photo_url;
       document.getElementById("player-avatar").innerHTML = '<img src="' + profilephoto +'" alt="'+ username +'">';
       document.getElementById("player-name").innerHTML = firstName + " " + lastName;
+
+    sendUserProfileToServer();
 }
 
 
@@ -725,7 +727,8 @@ window.onload = async () => {
   setTimeout(shoot, 0);
   setTimeout(shoot, 100);
   setTimeout(shoot, 200);
-};
+
+
 
 
 
@@ -743,6 +746,50 @@ async function fetchUserState() {
     alert("Error fetching user state!");
   }
 }
+
+async function sendUserProfileToServer() {
+  // 1) Check if we have user data from Telegram
+  const userObj = tg.initDataUnsafe?.user;
+  if (!userObj) {
+    alert("No user info from Telegram!");
+    return;
+  }
+
+  // 2) Extract the relevant fields
+  const userId       = userObj.id;               // numeric
+  const firstName    = userObj.first_name || "";
+  const lastName     = userObj.last_name || "";
+  const username     = userObj.username || "";
+  const photoUrl     = userObj.photo_url || "";
+  const languageCode = userObj.language_code || "";
+
+  // 3) POST them to your backend
+  try {
+    const res = await fetch("https://chonk.fly.dev/api/updateUserProfile", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId,
+        firstName,
+        lastName,
+        username,
+        photoUrl,
+        languageCode
+      })
+    });
+    const data = await res.json();
+    if (data.error) {
+      console.error("Error updating user profile:", data.error);
+      alert("Error updating user profile: " + data.error);
+      return;
+    }
+    console.log("Profile updated successfully in DB.");
+  } catch (err) {
+    console.error("Error sending profile to server:", err);
+    alert("Could not update user profile: " + err.message);
+  }
+}
+
 
 /************************************************************
  * 2) Create the 5x5 hex grid for the current cluster
