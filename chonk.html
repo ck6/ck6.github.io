@@ -290,7 +290,7 @@
     border-radius: 4px;
   }
 
-  .buy-cookie-button, .buy-choc-cookie-button, .invite-friend-button {
+  .buy-cookie-button, .buy-choc-cookie-button {
     display:inline-block;
     background: #444;
     border:none;
@@ -298,6 +298,20 @@
     padding: var(--button-padding);
     cursor:pointer;
     font-size:16px;
+    border-radius:4px;
+    margin:5px;
+    transition: background var(--transition-duration);
+    z-index: 9999; /* higher than your cat-container’s z-index of 5 */
+  }
+
+  .invite-friend-button {
+    display:inline-block;
+    background: #444;
+    border:none;
+    color:#fff;
+    padding: var(--button-padding);
+    cursor:pointer;
+    font-size:20px;
     border-radius:4px;
     margin:5px;
     transition: background var(--transition-duration);
@@ -509,11 +523,12 @@
   <!-- Bonuses tab -->
   <div id="bonusesContent" class="tab-content">
     <h2>Bonuses</h2>
-    <p>Invite 3 frends to unlock chocolate cookies!<br><br>
-    For every 10 frends invited, you get 1 free Cookie!</p>
     <button class="invite-friend-button" onclick="shareMiniApp()">Invite frends</button>
    <button class="clipboard-button" onclick="copyLinkToClipboard()">📋</button>
     <p>frends invited: <span id="friendsInvitedCount">0</span></p>
+    <br><p>Invite 3 frends to unlock 🍫 Chocolate Bars!<br><br>
+    For every 10 frends invited, you get 1 free 🍫 Chocolate Bar!</p>
+    <br>
     <br>
     <h3>Feeding the Chonk</h3>
     <p>Total Feeds: <span id="totalFeeds">0</span></p>
