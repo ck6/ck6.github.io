@@ -1499,11 +1499,11 @@ tonConnectUI.onStatusChange( async (wallet) => {
     //alert(`Wallet object:\n\n${JSON.stringify(wallet, null, 2)}`);
 
     await saveWalletAddress(tonConnectUI.account?.address);
-    alert(tonConnectUI.account?.address);
+    ///THIS WORKS - alert(tonConnectUI.account?.address);
     // You can also directly alert the address:
     //alert(`Wallet address: ${tonConnectUI.account?.address}`);
   } else {
-    alert("no wallet");
+    //alert("no wallet");
     // Disconnected or no wallet
     //alert('No wallet connected.');
   }
