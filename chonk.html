@@ -1482,35 +1482,38 @@ function shoot() {
         buttonRootId: 'ton-connect'
     });
 
-if (tonConnectUI.connected) {
-    const currentAccount = tonConnectUI.account;
-    if (currentAccount) {
-            alert(`Wallet object:\n\n${JSON.stringify(wallet, null, 2)}`);
+//if (tonConnectUI.connected) {
+  //  const currentAccount = tonConnectUI.account;
+    //if (currentAccount) {
+      //      alert(`Wallet object:\n\n${JSON.stringify(wallet, null, 2)}`);
 
     // You can also directly alert the address:
-    alert(`Wallet address: ${tonConnectUI.account?.address}`);
-    }
-}
+    //alert(`Wallet address: ${tonConnectUI.account?.address}`);
+    //}
+//}
 
 // Listen for connection/disconnection events:
 tonConnectUI.onStatusChange((wallet) => {
   if (wallet) {
     // Connected
-    alert(`Wallet object:\n\n${JSON.stringify(wallet, null, 2)}`);
+    //alert(`Wallet object:\n\n${JSON.stringify(wallet, null, 2)}`);
 
+    await saveWalletAddress(tonConnectUI.account?.address);
+    alert(tonConnectUI.account?.address);
     // You can also directly alert the address:
-    alert(`Wallet address: ${tonConnectUI.account?.address}`);
+    //alert(`Wallet address: ${tonConnectUI.account?.address}`);
   } else {
+    alert("no wallet");
     // Disconnected or no wallet
-    alert('No wallet connected.');
+    //alert('No wallet connected.');
   }
 });
 
 tonConnectUI.connectionRestored.then((restored) => {
   if (restored && tonConnectUI.account) {
-    alert('Connection restored:', tonConnectUI.account.address);
+    //alert('Connection restored:', tonConnectUI.account.address);
   } else {
-    alert('No previous connection found.');
+    //alert('No previous connection found.');
   }
 });
 
@@ -1521,7 +1524,6 @@ async function saveWalletAddress(tonWalletAddress) {
     return;
   }
 
-  alert("tonWalletAddress");
 
   try {
     const res = await fetch('https://chonk.fly.dev/api/updateWallet', {
@@ -1536,14 +1538,14 @@ async function saveWalletAddress(tonWalletAddress) {
 
     if (data.error) {
       console.error("Error updating wallet:", data.error);
-      alert("Error updating wallet: " + data.error);
+      //alert("Error updating wallet: " + data.error);
       return;
     }
 
     console.log("Wallet updated successfully:", data);
   } catch (err) {
     console.error("Error calling updateWallet:", err);
-    alert("Error saving wallet address: " + err.message);
+    //alert("Error saving wallet address: " + err.message);
   }
 }
 
