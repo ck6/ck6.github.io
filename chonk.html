@@ -251,7 +251,7 @@
     transition: transform 0.2s ease;
   }
   .hex.revealed {
-    background: #007f5f; 
+    background: #2196F3; /* #007f5f; */
     color: #fff;
     font-size: 16px;
     transform: rotateY(0);
@@ -961,7 +961,7 @@ async function useBombOnCurrentCluster() {
       return;
     }
 
-    alert(data.message);
+    //alert(data.message);
 
     // Merge newly revealed tiles into userState
    if (!userState.revealedTiles[currentClusterIndex]) {
