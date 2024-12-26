@@ -952,12 +952,12 @@ async function handleBuyCookieButtonClick() {
 
   try {
     // 1) Request an invoice link from your backend
-    const response = await fetch('https://chonk.fly.dev/create-invoice', {
+    const res = await fetch('https://chonk.fly.dev/create-invoice', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' }
-      // If needed, pass body here: e.g. body: JSON.stringify({ productType: 'cookie' })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ revealType: 'cookie', userID : userId })
     });
-    const data = await response.json();
+    const data = await res.json();
 
     if (!data.invoiceLink) {
       alert("Failed to get invoice link from server!");
