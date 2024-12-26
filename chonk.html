@@ -1481,15 +1481,13 @@ function shoot() {
         manifestUrl: 'https://ck6.github.io/tonconnect-manifest.json',
         buttonRootId: 'ton-connect'
     });
-const walletsList = await tonConnectUI.getWallets();
-const currentWallet = tonConnectUI.wallet;
-const currentWalletInfo = tonConnectUI.walletInfo;
-const currentAccount = tonConnectUI.account;
-const currentIsConnectedStatus = tonConnectUI.connected;
-const currentState = tonConnectUI.singleWalletModalState;
-alert('Current modal state:', currentState);
-//alert("hi");
-//alert(tonConnectUI.tonConnectUI.wallet);
+    
+if (tonConnectUI.connected) {
+    const currentAccount = tonConnectUI.account;
+    if (currentAccount) {
+        alert('User wallet address:', currentAccount.address);
+    }
+}
 
 async function saveWalletAddress(tonWalletAddress) {
   // 1) Assume you have `userId` from Telegram’s `initDataUnsafe.user.id` or something similar
