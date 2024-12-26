@@ -107,6 +107,22 @@
   background: rgba(255,255,255,0.2);
 }
 
+.store-button {
+  background: #444;
+  border: none;
+  color: #fff;
+  padding: var(--button-padding);
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+  margin: 5px; /* or 0 if you'd rather control spacing differently */
+  transition: background var(--transition-duration);
+}
+
+.store-button:hover {
+  background: var(--accent-color);
+}
+
   .content {
     flex: 1;
     overflow: auto;
@@ -569,17 +585,22 @@
   <h2>Store</h2>
   <p>All items add Cookies to your balance, except the Cat Toy, which unveils an entire cluster at once!</p>
 
-  <<!-- Single Cookie (25 Stars -> +1 cookie) -->
-<button onclick="buyProduct('single-cookie', userId)">Buy Cookie</button>
+<!-- Single Cookie -->
+<p>🍪 Single Cookie (1 Star)</p>
+<button class="store-button" onclick="buySingleCookie()">Buy Cookie</button>
 
-<!-- Bunch of Cookies (45 Stars -> +2 cookies) -->
-<button onclick="buyProduct('bunch-of-cookies', userId)">Buy Bunch of Cookies</button>
+<!-- Bunch of Cookies -->
+<p>Bunch of Cookies (45 Stars) - adds 2 Cookies</p>
+<button class="store-button" onclick="buyBunchOfCookies()">Buy Bunch of Cookies</button>
 
-<!-- Jar of Cookies (60 Stars -> +3 cookies) -->
-<button onclick="buyProduct('jar-of-cookies', userId)">Buy Jar of Cookies</button>
+<!-- Jar of Cookies -->
+<p>Jar of Cookies (60 Stars) - adds 3 Cookies</p>
+<button class="store-button" onclick="buyJarOfCookies()">Buy Jar of Cookies</button>
 
-<!-- Cat Toy (999 Stars -> unveils entire cluster) -->
-<button onclick="buyProduct('cat-toy', userId)">Buy Cat Toy</button>
+<!-- Cat Toy -->
+<p>Cat Toy (999 Stars) - instantly unveils an entire cluster</p>
+<button class="store-button" onclick="buyCatToy()">Buy Cat Toy</button>
+
 
   <p id="storeCookieBalances" style="font-size:16px; margin-top:10px;">
     Cookies: 0
@@ -1097,16 +1118,35 @@ function copyLinkToClipboard() {
  * 7) Show/hide tabs
  ************************************************************/
 function showTab(tab) {
-  document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
-  document.getElementById(tab+'Tab').classList.add('active');
+  // First, remove active class from all bottom-nav buttons
+  document.querySelectorAll('.bottom-nav button')
+    .forEach(btn => btn.classList.remove('active'));
 
-  document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-  document.getElementById(tab+'Content').classList.add('active');
+  // Then, add active to the current tab’s button
+  document.getElementById(tab + 'Tab').classList.add('active');
 
-  if (tab === 'balance' || tab === 'stats' || tab === 'bonuses' || tab === 'store') {
+  // Hide all .tab-content, show only the requested one
+  document.querySelectorAll('.tab-content')
+    .forEach(content => content.classList.remove('active'));
+  document.getElementById(tab + 'Content').classList.add('active');
+
+  // Now show or hide the cluster-buttons
+  const clusterBtns = document.querySelector('.cluster-buttons');
+  if (clusterBtns) {
+    if (tab === 'field') {
+      clusterBtns.style.display = 'flex';
+    } else {
+      clusterBtns.style.display = 'none';
+    }
+  }
+
+  // If you want to refresh balances on certain tabs:
+  if (['balance', 'stats', 'bonuses', 'store'].includes(tab)) {
     updateBalances();
   }
 }
+
+
 
 /************************************************************
  * 8) Update Balances & Feeds display
