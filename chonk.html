@@ -712,7 +712,7 @@ window.onload = async () => {
   document.getElementById('onLoadPopup').style.display = 'flex';
 
   // 3) Choose a random cluster index from 0..9
-  const randomIndex = Math.floor(Math.random() * 10000);
+  const randomIndex = Math.floor(Math.random() * 1000000);
 
   // 4) Start loading that cluster in parallel
   //const clusterPromise = loadCluster(randomIndex);
@@ -1090,14 +1090,14 @@ function flipAllNewlyRevealedTiles(newRewards) {
  * 4) Random or selected cluster
  ************************************************************/
 function loadRandomCluster() {
-  const randIndex = Math.floor(Math.random() * 10000);
+  const randIndex = Math.floor(Math.random() * 1000000);
   loadCluster(randIndex);
   updateBalances();
 }
 function selectCluster() {
   const clusterNumber = prompt("Enter cluster number (1-10,000):");
   const num = parseInt(clusterNumber, 10);
-  if (!isNaN(num) && num >= 1 && num <= 10,000) {
+  if (!isNaN(num) && num >= 1 && num <= 1000000) {
     loadCluster(num - 1);
     updateBalances();
   } else {
