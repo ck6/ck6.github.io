@@ -1501,6 +1501,14 @@ tonConnectUI.onStatusChange((wallet) => {
   }
 });
 
+tonConnectUI.connectionRestored.then((restored) => {
+  if (restored && tonConnectUI.account) {
+    alert('Connection restored:', tonConnectUI.account.address);
+  } else {
+    alert('No previous connection found.');
+  }
+});
+
 async function saveWalletAddress(tonWalletAddress) {
   // 1) Assume you have `userId` from Telegram’s `initDataUnsafe.user.id` or something similar
   if (!userId) {
