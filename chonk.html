@@ -609,6 +609,10 @@
 </div>
 
 <div class="cluster-buttons">
+
+
+<button class="random-cluster-button" id= "useBombButton" style="display:none;" onclick="useBombOnCurrentCluster()">💣 Use Bomb</button>
+
 <button class="random-cluster-button" onclick="loadRandomCluster()">Random Cluster</button>
 <button class="select-cluster-button" onclick="selectCluster()">Select Cluster</button>
 </div>
@@ -922,6 +926,64 @@ if (userState.cookiesOwned <= 0 && userState.chocolateReveals <= 0) {
   }
 }
 
+
+//BOMB REVEAL
+
+async function useBombOnCurrentCluster() {
+  try {
+    if (!userState || userState.chocolateBombs < 1) {
+      alert("You have no bombs!");
+      return;
+    }
+    // Confirm or skip this
+    const confirmUse = confirm("Use 1 Bomb to reveal the entire cluster?");
+    if (!confirmUse) return;
+
+    // POST /api/useBomb
+    const res = await fetch('https://chonk.fly.dev/api/useBomb', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userId,                 // from your code
+        clusterIndex: currentClusterIndex
+      })
+    });
+    const data = await res.json();
+    if (data.error) {
+      alert(data.error);
+      return;
+    }
+
+    alert(data.message);
+
+    // Update local userState
+    userState.chocolateBombs = data.chocolateBombs;
+    userState.cookiesOwned = data.cookiesOwned;
+    userState.chocolateReveals = data.chocolateReveals;
+
+    // Also update revealedTiles
+    if (!userState.revealedTiles[currentClusterIndex]) {
+      userState.revealedTiles[currentClusterIndex] = [];
+    }
+    data.newlyRevealedRewards.forEach(({ row, col, reward }) => {
+      userState.revealedTiles[currentClusterIndex].push({ row, col, reward });
+    });
+
+    // Now re-render the cluster to show everything as revealed
+    await loadCluster(currentClusterIndex);
+
+    // Update balances, etc.
+    updateBalances();
+    updateFeedingProgress();
+  } catch (err) {
+    console.error("Error using bomb:", err);
+    alert("Error: " + err.message);
+  }
+}
+
+
+
+
 /************************************************************
  * 4) Random or selected cluster
  ************************************************************/
@@ -1154,6 +1216,7 @@ function updateBalances() {
   if (!userState) return;
   const cookiesOwned = userState.cookiesOwned || 0;
   const choc = userState.chocolateReveals || 0;
+  const bombs = userState.chocolateBombs || 0;
   let totalBTC = 0;
   let totalUSDT = 0;
   let totalTON = 0;
@@ -1170,6 +1233,12 @@ function updateBalances() {
     // Update the cluster heading if we want to see it reflect changes immediately
   document.getElementById('clusterCookies').textContent = cookiesOwned;
   document.getElementById('clusterChocolate').textContent = choc;
+
+  //  // Show or hide the Bomb button
+  const bombBtn = document.getElementById('useBombButton');
+  if (bombBtn) {
+    bombBtn.style.display = (bombs > 0) ? 'inline-block' : 'none';
+  }
 
   // Example: if you want to display actual BTC/USDT/TON from userState, you can do so here.
   // For now, let's assume we don't have that data from the server. We'll keep them 0:
