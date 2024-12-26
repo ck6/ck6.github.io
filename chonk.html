@@ -729,6 +729,16 @@ window.onload = async () => {
   setTimeout(shoot, 200);
 
   sendUserProfileToServer();
+
+const queryString = window.location.search;
+
+// 2) Create a URLSearchParams object
+const urlParams = new URLSearchParams(queryString);
+
+// 3) Extract the value of a parameter (e.g., "foo")
+const fooValue = urlParams.get('startapp'); // "bar"
+alert(fooValue);
+
 }
 
 /************************************************************
