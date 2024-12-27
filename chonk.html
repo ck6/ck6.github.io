@@ -499,39 +499,27 @@
 
 .store-items {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center; /* center all items */
+  flex-wrap: wrap; /* multiple rows */
+  justify-content: center;
   gap: 20px;
   margin-top: 20px;
 }
 
 .store-item {
-  position: relative;
-  width: 90%;          /* fill ~90% of the container */
-  max-width: 500px;    /* optional max for large screens */
+  width: 90%;           /* fill ~90% of container */
+  max-width: 500px;     /* optionally limit on large screens */
   background: rgba(255,255,255,0.1);
   border-radius: 12px;
-  padding: 12px;       /* less vertical padding => shorter card */
+  padding: 12px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  text-align: left;    /* left-align the text for a nice layout */
-}
-
-/* Gold-ish background for "special" items, if needed */
-.store-item.special {
-  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
-}
-
-/* Lock / disable style (grayscale + darker) */
-.store-item.locked {
-  filter: grayscale(1) brightness(0.7);
-  pointer-events: none;  /* no clicks inside locked item */
+  text-align: left;     /* left-align content */
 }
 
 .store-item-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 4px;   /* less space between title and description */
 }
 
 .store-item-header h4 {
@@ -556,14 +544,20 @@
 }
 
 .store-item p {
-  margin: 0 0 8px;  /* shorter spacing between paragraphs */
+  margin: 0 0 8px 0;     /* keep short spacing between paragraphs */
   color: #fff;
   font-size: 14px;
 }
 
-.store-lock-text {
-  font-weight: bold;
-  font-size: 14px;
+/* special = gold background */
+.store-item.special {
+  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+}
+
+/* locked but still appealing */
+.store-item.locked {
+  filter: grayscale(0.3) brightness(0.9);
+  /* pointer-events: auto;  // allow text highlight if you wish */
 }
 
 .buy-cookie-button,
@@ -578,13 +572,20 @@
   cursor: pointer;
   transition: background 0.2s ease;
   text-align: center;
-  margin-bottom: 4px; /* small spacing below button if needed */
+  margin-bottom: 4px;
 }
 
 .buy-cookie-button:hover,
 .buy-choc-cookie-button:hover {
   background: rgba(0,0,0,0.9);
 }
+
+.store-lock-text {
+  color: #fff;
+  font-size: 14px;
+  margin: 0;
+}
+
 
 
 
@@ -746,37 +747,37 @@
     <!-- Normal Cookie -->
     <div class="store-item">
       <div class="store-item-header">
-        <h4>Normal Cookie</h4>
+        <h4>🍪 Normal Cookie</h4>
         <div class="store-item-cost">
-          1 
+          1
           <img src="tgstar2.png" alt="Star" class="store-star">
         </div>
       </div>
       <p>Unveils 1 tile</p>
       <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('cookie')">
-        🍪 Buy Cookie
+        Buy
       </button>
     </div>
 
     <!-- Bunch of Cookies -->
     <div class="store-item">
       <div class="store-item-header">
-        <h4>Bunch of Cookies</h4>
+        <h4>🍪🍪 Bunch of Cookies</h4>
         <div class="store-item-cost">
-          2 
+          2
           <img src="tgstar2.png" alt="Star" class="store-star">
         </div>
       </div>
       <p>Unveils 2 tiles</p>
       <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('bunch')">
-        🍪🍪 Buy Bunch
+        Buy
       </button>
     </div>
 
     <!-- Jar of Cookies (special) -->
     <div class="store-item special">
       <div class="store-item-header">
-        <h4>Jar of Cookies</h4>
+        <h4>🍪🍪 Jar of Cookies</h4>
         <div class="store-item-cost">
           15
           <img src="tgstar2.png" alt="Star" class="store-star">
@@ -784,14 +785,14 @@
       </div>
       <p>Unveils 10 tiles</p>
       <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('jar')">
-        🍪🍪 Buy Jar
+        Buy
       </button>
     </div>
 
     <!-- Bomb -->
     <div class="store-item">
       <div class="store-item-header">
-        <h4>Bomb</h4>
+        <h4>💣 Bomb</h4>
         <div class="store-item-cost">
           5
           <img src="tgstar2.png" alt="Star" class="store-star">
@@ -799,14 +800,14 @@
       </div>
       <p>Reveals an entire cluster</p>
       <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('bomb')">
-        💣 Buy Bomb
+        Buy
       </button>
     </div>
 
     <!-- Chocolate Bar (locked) -->
     <div class="store-item locked">
       <div class="store-item-header">
-        <h4>Chocolate Bar</h4>
+        <h4>🍫 Chocolate Bar</h4>
         <div class="store-item-cost">
           2
           <img src="tgstar2.png" alt="Star" class="store-star">
@@ -817,23 +818,20 @@
               id="buyChocCookieBtn"
               onclick="buyChocolateCookie()"
               disabled>
-        🍫 Buy Chocolate
+        Buy
       </button>
-      <p class="store-lock-text">Invite 3 friends to unlock</p>
+      <p class="store-lock-text" style="font-weight: bold;">
+        Invite 3 friends to unlock
+      </p>
     </div>
   </div>
 
-  <!-- Existing text about unlocking, balances, etc. -->
+  <!-- Existing text, balances, etc. -->
   <p id="chocCookieInfo" style="margin-top:10px; color:#ff0;">
     Invite 3 friends to unlock Chocolate Bars!
   </p>
   <p id="storeCookieBalances" style="font-size:16px; margin-top:10px;">
     Cookies: 0 | Choc: 0
-  </p>
-</div>
-
-  <p id="storeCookieBalances" style="font-size:16px; margin-top:10px;">
-    
   </p>
 </div>
 
