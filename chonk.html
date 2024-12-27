@@ -698,7 +698,6 @@
   
 
 
-  <!-- This little sub-heading and instructions can follow the buttons -->
   <h5>
     <center>
       <p id="sayhello"></p>
@@ -709,48 +708,53 @@
     <div style="text-align:center;">
   </div></div></div>
 
- <!-- Stats Tab -->
-  <div id="statsContent" class="tab-content">
-    <h2>Stats</h2>
+<!-- Stats Tab -->
+<div id="statsContent" class="tab-content">
+  <h2>Stats</h2>
 
-<div class="boxy-card" style="margin-bottom:20px;">
-  <div class="avatar-container">
-    <p id="player-avatar"></p>
-    <div>
-      <h3 style="margin:0;font-size:16px;">
-        <p id="player-name"></p>
-      </h3>
-            <h3 id="playerProfit" 
-          style="font-size:16px; 
-                 font-weight:bold; 
-                 color:#ccc;">
+  <!-- First boxy-card for Avatar & Profit -->
+  <div class="boxy-card" style="margin-bottom:20px;">
+    <div class="avatar-container">
+      <p id="player-avatar"></p>
+      <div>
+        <h3 style="margin:0;font-size:16px;">
+          <p id="player-name"></p>
+        </h3>
+        <!-- Profit line -->
+        <h3 id="playerProfit" 
+            style="margin:0; font-size:16px; font-weight:bold; color:#fff;">
+          Profit: $0.00
+        </h3>
+      </div>
     </div>
   </div>
 
-<div class="coin-row">
-  <div class="coin-col">
-    <img src="usdt.png" alt="USDT" class="coin-icon" />
-    <div class="coin-amount">
-      <span id="usdtBalance">0</span><br/>
-      <small>(<span id="usdtUSD">~$0</span>)</small>
+  <!-- Second boxy-card for Coins -->
+  <div class="boxy-card" style="margin-bottom:20px;">
+    <div class="coin-row">
+      <div class="coin-col">
+        <img src="usdt.png" alt="USDT" class="coin-icon" />
+        <div class="coin-amount">
+          <span id="usdtBalance">0</span><br/>
+          <small>(<span id="usdtUSD">~$0</span>)</small>
+        </div>
+      </div>
+      <div class="coin-col">
+        <img src="btc.png" alt="BTC" class="coin-icon" />
+        <div class="coin-amount">
+          <span id="btcBalance">0</span><br/>
+          <small>(<span id="btcUSD">~$0</span>)</small>
+        </div>
+      </div>
+      <div class="coin-col">
+        <img src="ton.png" alt="TON" class="coin-icon" />
+        <div class="coin-amount">
+          <span id="tonBalance">0</span><br/>
+          <small>(<span id="tonUSD">~$0</span>)</small>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="coin-col">
-    <img src="btc.png" alt="BTC" class="coin-icon" />
-    <div class="coin-amount">
-      <span id="btcBalance">0</span><br/>
-      <small>(<span id="btcUSD">~$0</span>)</small>
-    </div>
-  </div>
-  <div class="coin-col">
-    <img src="ton.png" alt="TON" class="coin-icon" />
-    <div class="coin-amount">
-      <span id="tonBalance">0</span><br/>
-      <small>(<span id="tonUSD">~$0</span>)</small>
-    </div>
-  </div>
-</div>
-</div>
 
 <h3 style="font-size:16px;margin-bottom:10px;">Top Chonkers</h3>
 <div id="leaderboardContainer"></div>
@@ -760,7 +764,7 @@
 
   <!-- Balance tab -->
   <div id="balanceContent" class="tab-content">
-    <h2>Wallet</h2>
+    <h2>Balances</h2>
 
 <div class="boxy-card">
   <div class="coin-row">

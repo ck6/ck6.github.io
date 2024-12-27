@@ -807,7 +807,7 @@ function updateBalances() {
   // Update the “playerProfit” element
   const profitEl = document.getElementById('playerProfit');
   if (profitEl) {
-    profitEl.textContent = "Profit: $" + totalProfitUSD.toFixed(2);
+    profitEl.textContent = "Lifetime Profit: $" + totalProfitUSD.toFixed(2);
   }
   // Now update the UI elements
   document.getElementById('btcBalance').textContent = totalBTC.toFixed(2);
