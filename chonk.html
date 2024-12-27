@@ -766,7 +766,7 @@
           </div>
         </div>
         <p>Unveils 1 tile</p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('cookie')">
+        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'cookie')">
           Buy 🍪
         </button>
       </div>
@@ -781,7 +781,7 @@
           </div>
         </div>
         <p>Unveils 2 tiles</p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('bunch')">
+        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
           Buy 🍪🍪
         </button>
       </div>
@@ -796,7 +796,7 @@
           </div>
         </div>
         <p>Unveils 10 tiles</p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('jar')">
+        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'jar')">
           Buy 🫙
         </button>
       </div>
@@ -811,7 +811,7 @@
           </div>
         </div>
         <p>Reveals an entire cluster</p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('bomb')">
+        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bomb')">
           Buy 💣
         </button>
       </div>
@@ -1399,13 +1399,16 @@ async function resumeClusterOrPickNew() {
  * 5) Buying cookies
  ************************************************************/
 
-async function handleBuyCookieButtonClick(revealType) {
-  const buyCookieBtn = document.querySelector('.buy-cookie-button');
-  // Animate the button (existing logic)
-  buyCookieBtn.classList.add('button-animate');
+async function handleBuyCookieButtonClick(event, revealType) {
+  //const buyCookieBtn = document.querySelector('.buy-cookie-button');
+  const thisButton = event.currentTarget;
+
+  // Animate only this button
+  thisButton.classList.add('button-animate');
   setTimeout(() => {
-    buyCookieBtn.classList.remove('button-animate');
+    thisButton.classList.remove('button-animate');
   }, 300);
+
 
   try {
     // 1) Request an invoice link from your backend
