@@ -807,10 +807,10 @@ function updateBalances() {
   document.getElementById('tonUSD').textContent = `~$${(totalTON * 6).toFixed(2)}`;
 
   // update stats tab too
-  document.getElementById('statsBalances').innerHTML =
-    `₿ BTC: ${totalBTC.toFixed(2)} (~$${(totalBTC * 100000).toFixed(2)}) <br>`
-    + `💵 USDT: ${totalUSDT.toFixed(2)} (~$${(totalUSDT).toFixed(2)}) <br>`
-    + `💎 TON: ${totalTON.toFixed(2)} (~$${(totalTON * 6).toFixed(2)})`;
+  //document.getElementById('statsBalances').innerHTML =
+  //  `₿ BTC: ${totalBTC.toFixed(2)} (~$${(totalBTC * 100000).toFixed(2)}) <br>`
+  //  + `💵 USDT: ${totalUSDT.toFixed(2)} (~$${(totalUSDT).toFixed(2)}) <br>`
+  //  + `💎 TON: ${totalTON.toFixed(2)} (~$${(totalTON * 6).toFixed(2)})`;
 }
 
 
