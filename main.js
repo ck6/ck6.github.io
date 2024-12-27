@@ -12,8 +12,8 @@ tg.onEvent('mainButtonClicked', () => {
 });
 
 let userId = "x12345688"; // fallback if we don't get Telegram user ID
-document.getElementById("player-avatar").innerHTML = '<img src="ik.jpg" alt="Isabelle Keller">';
-document.getElementById("player-name").innerHTML = 'Isabelle Keller';
+document.getElementById("player-avatar").innerHTML = '<img src="ik.jpg" alt="IK">';
+document.getElementById("player-name").innerHTML = 'IK';
 
 const user = tg.initDataUnsafe?.user;
 if (user) {
