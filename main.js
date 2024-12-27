@@ -796,25 +796,39 @@ function updateBalances() {
     }
   }
 
+
+  // Already have totalBTC, totalUSDT, totalTON from the loop
+  const btcInUSD = totalBTC * 100000;  // adjust if your code uses a different BTC value
+  const usdtInUSD = totalUSDT;         // 1 USDT = $1
+  const tonInUSD = totalTON * 6;       // 1 TON = $6 (example)
+
+  const totalProfitUSD = btcInUSD + usdtInUSD + tonInUSD;
+
+  // Update the “playerProfit” element
+  const profitEl = document.getElementById('playerProfit');
+  if (profitEl) {
+    profitEl.textContent = "Profit: $" + totalProfitUSD.toFixed(2);
+  }
   // Now update the UI elements
   document.getElementById('btcBalance').textContent = totalBTC.toFixed(2);
-  document.getElementById('btcUSD').textContent = `~$${(totalBTC * 100000).toFixed(2)}`;
+  document.getElementById('btcUSD').textContent = `~$${btcInUSD.toFixed(2)}`;
 
   document.getElementById('usdtBalance').textContent = totalUSDT.toFixed(2);
   document.getElementById('usdtUSD').textContent = `~$${(totalUSDT).toFixed(2)}`;
 
   document.getElementById('tonBalance').textContent = totalTON.toFixed(2);
-  document.getElementById('tonUSD').textContent = `~$${(totalTON * 6).toFixed(2)}`;
+  document.getElementById('tonUSD').textContent = `~$${tonInUSD.toFixed(2)}`;
 
   // update wallet tab too
   document.getElementById('btcBalanceWallet').textContent = totalBTC.toFixed(2);
-  document.getElementById('btcUSDWallet').textContent = `~$${(totalBTC * 100000).toFixed(2)}`;
+  document.getElementById('btcUSDWallet').textContent = `~$${btcInUSD.toFixed(2)}`;
 
   document.getElementById('usdtBalanceWallet').textContent = totalUSDT.toFixed(2);
   document.getElementById('usdtUSDWallet').textContent = `~$${(totalUSDT).toFixed(2)}`;
 
   document.getElementById('tonBalanceWallet').textContent = totalTON.toFixed(2);
-  document.getElementById('tonUSDWallet').textContent = `~$${(totalTON * 6).toFixed(2)}`;
+  document.getElementById('tonUSDWallet').textContent = `~$${tonInUSD.toFixed(2)}`;
+
 
 
   //document.getElementById('statsBalances').innerHTML =
