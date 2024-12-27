@@ -650,24 +650,53 @@
 
 
 <div class="content">
-  <!-- Bonuses tab -->
-  <div id="bonusesContent" class="tab-content">
-    <h2>Bonuses</h2>
+<!-- Bonuses tab -->
+<div id="bonusesContent" class="tab-content">
+  <h2>Bonuses</h2>
+
+  <!-- 1) Boxy for Invite Buttons + Friends Invited -->
+  <div class="boxy-card">
+    <!-- Buttons -->
     <button class="invite-friend-button" onclick="shareMiniApp()">Invite frends</button>
-   <button class="invite-friend-button" onclick="copyLinkToClipboard()">📋</button>
+    <button class="invite-friend-button" onclick="copyLinkToClipboard()">📋</button>
+
+    <!-- Friends count -->
     <p><b>frends invited: <span id="friendsInvitedCount">0</span></b></p>
-    <br><p>Invite 3 frends to unlock 🍫 Chocolate Bars!<br><br>
-    For every 10 frends invited, you get 1 free 🍫 Chocolate Bar!</p>
-    <br>
-    <br>
+  </div>
+
+  <!-- 2) Boxy for "Invite 3 friends to unlock Chocolate Bars" + progress bar -->
+  <div class="boxy-card">
+    <p>Invite 3 friends to unlock <strong>🍫 Chocolate Bars</strong>!</p>
+    <p>For every 10 friends invited, you get 1 free 🍫 Chocolate Bar!</p>
+    
+    <!-- Example progress bar -->
+    <div style="background:#333; border-radius:4px; width:100%; height:10px; position:relative; margin-top:10px;">
+      <!-- This fill can represent how many friends have been invited out of 3 or 10 -->
+      <div id="chocUnlockProgress" style="
+          background:#05e84d; 
+          height:100%; 
+          width:0%;          /* default 0%, update in JS */
+          border-radius:4px;
+        ">
+      </div>
+    </div>
+  </div>
+
+  <!-- 3) Boxy for Feeding the Chonk -->
+  <div class="boxy-card">
     <h3>Feeding the Chonk</h3>
     <p>Total Feeds: <span id="totalFeeds">0</span></p>
-    <p>Chonk Level: <span id="chonkLevel">0</span> (Bonus: <span id="chonkBonus">0%</span> on all wins)</p>
+    <p>Chonk Level: <span id="chonkLevel">0</span>
+       (Bonus: <span id="chonkBonus">0%</span> on all wins)</p>
     <p>Next Level Reward: <span id="nextLevelReward">N/A</span></p>
+    
+    <!-- Reuse your feeding progress container -->
     <div class="feeding-progress-container">
       <div class="feeding-progress-fill" id="feedingProgress"></div>
     </div>
   </div>
+</div>
+
 
   <!-- Field tab (active by default) -->
   <div id="fieldContent" class="tab-content active">
