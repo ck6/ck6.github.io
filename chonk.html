@@ -592,6 +592,31 @@
   text-align: left;     /* or center, up to you */
 }
 
+.coin-row {
+  display: flex;
+  justify-content: center;  /* center horizontally, or use space-between, etc. */
+  gap: 20px;                /* space between columns */
+  margin-bottom: 20px;
+}
+
+.coin-col {
+  display: flex;
+  flex-direction: column;   /* icon above the text */
+  align-items: center;      /* center everything in this column */
+  text-align: center;
+}
+
+.coin-icon {
+  width: 48px;              /* adjust icon size as desired */
+  height: 48px;
+  margin-bottom: 5px;       /* space between icon and text */
+}
+
+.coin-amount {
+  font-size: 16px;          /* adjust as needed */
+}
+
+
 
 
 </style>
@@ -684,17 +709,43 @@
 
  <!-- Stats Tab -->
   <div id="statsContent" class="tab-content">
-    <h2>Stats</h2>
+<h2>Stats</h2>
 
-   <div class="boxy-card">
-      <div class="avatar-container">
-        <p id="player-avatar"></p>
-        <div>
-          <h3 style="margin:0;font-size:16px;"> <p id="player-name"></p></h3>
-          <p style="margin:5px 0 0;font-size:14px;color:#ccc;" id="statsBalances">...</p>
-        </div>
-      </div>
+<div class="boxy-card" style="margin-bottom:20px;">
+  <div class="avatar-container">
+    <p id="player-avatar"></p>
+    <div>
+      <h3 style="margin:0;font-size:16px;">
+        <p id="player-name"></p>
+      </h3>
+      <p style="margin:5px 0 0;font-size:14px;color:#ccc;" id="statsBalances">...</p>
     </div>
+  </div>
+</div>
+<div class="coin-row">
+  <div class="coin-col">
+    <img src="usdt.png" alt="USDT" class="coin-icon" />
+    <div class="coin-amount">
+      <span id="usdtBalance">0</span><br/>
+      <small>(<span id="usdtUSD">~$0</span>)</small>
+    </div>
+  </div>
+  <div class="coin-col">
+    <img src="btc.png" alt="BTC" class="coin-icon" />
+    <div class="coin-amount">
+      <span id="btcBalance">0</span><br/>
+      <small>(<span id="btcUSD">~$0</span>)</small>
+    </div>
+  </div>
+  <div class="coin-col">
+    <img src="ton.png" alt="TON" class="coin-icon" />
+    <div class="coin-amount">
+      <span id="tonBalance">0</span><br/>
+      <small>(<span id="tonUSD">~$0</span>)</small>
+    </div>
+  </div>
+</div>
+
 
 <h3 style="font-size:16px;margin-bottom:10px;">Top Chonkers</h3>
 <div id="leaderboardContainer"></div>
@@ -704,25 +755,33 @@
 
   <!-- Balance tab -->
   <div id="balanceContent" class="tab-content">
-    <h2>Balance</h2>
-    <div class="boxy-card">
-      <div>💵 USDT: <span id="usdtBalance">0</span> (<span id="usdtUSD">~$0</span>)</div>
-      <div>₿ BTC: <span id="btcBalance">0</span> (<span id="btcUSD">~$0</span>)</div>
-      <div>💎 TON: <span id="tonBalance">0</span> (<span id="tonUSD">~$0</span>)</div>
-
-     </div>
-
-
-     <div class="boxy-card">
-      <p style="margin:0;font-size:14px;color:#fff;line-height:1.4em;margin-bottom:10px;">
-        All withdrawals are automatic and happen once a week.<br><br>
-        Minimum balance for withdrawal is $20.
-      </p>
-       Next withdrawal on Monday at 16:00 GMT.
-      <div style="background:#333;border-radius:4px;width:100%;height:10px;position:relative;margin-top:10px;">
-        <div style="background:#05e84d;height:100%;width:50%;border-radius:4px;"></div>
+<h2>Wallet</h2>
+<div class="boxy-card">
+  <!-- Row of icons + balances -->
+  <div class="coin-row">
+    <div class="coin-col">
+      <img src="usdt.png" alt="USDT" class="coin-icon" />
+      <div class="coin-amount">
+        <span id="usdtBalance">0</span><br/>
+        <small>(<span id="usdtUSD">~$0</span>)</small>
       </div>
     </div>
+    <div class="coin-col">
+      <img src="btc.png" alt="BTC" class="coin-icon" />
+      <div class="coin-amount">
+        <span id="btcBalance">0</span><br/>
+        <small>(<span id="btcUSD">~$0</span>)</small>
+      </div>
+    </div>
+    <div class="coin-col">
+      <img src="ton.png" alt="TON" class="coin-icon" />
+      <div class="coin-amount">
+        <span id="tonBalance">0</span><br/>
+        <small>(<span id="tonUSD">~$0</span>)</small>
+      </div>
+    </div>
+  </div>
+</div>
 
 
       <div class="boxy-card">
