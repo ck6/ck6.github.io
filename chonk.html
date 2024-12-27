@@ -592,6 +592,37 @@
   text-align: left;     /* or center, up to you */
 }
 
+/* Put the invite buttons + friend count on a single horizontal row */
+.invite-row {
+  display: flex;
+  align-items: center;  /* vertically center content */
+  gap: 10px;            /* space between buttons */
+}
+
+/* This pushes the invite count to the far right if desired */
+.invite-count {
+  margin-left: auto;
+}
+
+/* Generic progress bar container + fill classes (if you don't already have them) */
+.progress-bar {
+  background: #333;
+  border-radius: 4px;
+  width: 100%;
+  height: 10px;
+  position: relative;
+  margin-top: 10px;
+}
+
+.progress-fill {
+  background: #05e84d;
+  height: 100%;
+  width: 0%;    /* default 0% until we update it via JS */
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+
 
 .coin-row {
   display: flex;
@@ -652,37 +683,40 @@
 <div class="content">
 <!-- Bonuses tab -->
 <div id="bonusesContent" class="tab-content">
+<!-- Bonuses tab -->
+<div id="bonusesContent" class="tab-content">
   <h2>Bonuses</h2>
 
-  <!-- 1) Boxy for Invite Buttons + Friends Invited -->
+  <!-- Box #1: Invite Buttons + Friends Invited -->
   <div class="boxy-card">
-    <!-- Buttons -->
-    <button class="invite-friend-button" onclick="shareMiniApp()">Invite frends</button>
-    <button class="invite-friend-button" onclick="copyLinkToClipboard()">📋</button>
-
-    <!-- Friends count -->
-    <p><b>frends invited: <span id="friendsInvitedCount">0</span></b></p>
-  </div>
-
-  <!-- 2) Boxy for "Invite 3 friends to unlock Chocolate Bars" + progress bar -->
-  <div class="boxy-card">
-    <p>Invite 3 friends to unlock <strong>🍫 Chocolate Bars</strong>!</p>
-    <p>For every 10 friends invited, you get 1 free 🍫 Chocolate Bar!</p>
-    
-    <!-- Example progress bar -->
-    <div style="background:#333; border-radius:4px; width:100%; height:10px; position:relative; margin-top:10px;">
-      <!-- This fill can represent how many friends have been invited out of 3 or 10 -->
-      <div id="chocUnlockProgress" style="
-          background:#05e84d; 
-          height:100%; 
-          width:0%;          /* default 0%, update in JS */
-          border-radius:4px;
-        ">
-      </div>
+    <!-- A row for buttons + count -->
+    <div class="invite-row">
+      <button class="invite-friend-button" onclick="shareMiniApp()">Invite friends</button>
+      <button class="invite-friend-button" onclick="copyLinkToClipboard()">📋</button>
+      <!-- This goes on the same row, pushed to the right -->
+      <span class="invite-count">
+        <b>Friends Invited: <span id="friendsInvitedCount">0</span></b>
+      </span>
     </div>
   </div>
 
-  <!-- 3) Boxy for Feeding the Chonk -->
+  <!-- Box #2: Chocolate Bar Unlock (3 invites) -->
+  <div class="boxy-card">
+    <p>Invite 3 friends to unlock <strong>🍫 Chocolate Bars</strong>!</p>
+    <div class="progress-bar">
+      <div id="chocUnlockProgress" class="progress-fill"></div>
+    </div>
+  </div>
+
+  <!-- Box #3: Jar of Cookies Unlock (10 invites) -->
+  <div class="boxy-card">
+    <p>Invite 10 friends to get a <strong>free Jar of Cookies</strong>!</p>
+    <div class="progress-bar">
+      <div id="jarUnlockProgress" class="progress-fill"></div>
+    </div>
+  </div>
+
+  <!-- Box #4: Feeding the Chonk -->
   <div class="boxy-card">
     <h3>Feeding the Chonk</h3>
     <p>Total Feeds: <span id="totalFeeds">0</span></p>
@@ -696,6 +730,7 @@
     </div>
   </div>
 </div>
+
 
 
   <!-- Field tab (active by default) -->
