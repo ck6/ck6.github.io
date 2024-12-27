@@ -17,14 +17,15 @@
 
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 
   :root {
     --bg-start: #2d1b64;
     --bg-end: #f8cdda;
     --text-color: #fff;
     --accent-color: #ff9a9e;
-    --font-family: 'Roboto', sans-serif;
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+             "Helvetica Neue", Arial, sans-serif;
     --heading-font-size: 20px;
     --heading-font-size2: 10px;
     --body-font-size: 16px;
@@ -36,7 +37,10 @@
     --tooltip-color: #fff;
       --num-cols: 5; /* how many columns of hexes in your honeycomb */
   /* Because of the half-hex offset, effectively ~5.5 columns wide
-     might be needed. Adjust to 5.5, 5.6, etc. as needed. */
+     might be needed. Adjust to 5.5, 5.6, etc. as needed. 
+--font-family: 'Roboto', sans-serif;
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+     */
   --hex-size: calc(100vw / 5.5);
   }
 
