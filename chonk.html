@@ -496,6 +496,62 @@
     background:#0f0; height:100%; width:0%;
     border-radius:4px; transition: width 0.3s ease;
   }
+
+.store-items {
+  display: flex;
+  flex-wrap: wrap;         /* allow wrapping on smaller screens */
+  justify-content: center; /* center all cards */
+  gap: 20px;               /* spacing between items */
+  margin-top: 20px;        /* some space above the cards */
+}
+
+.store-item {
+  background: rgba(255,255,255,0.1); /* subtle overlay */
+  padding: 15px;
+  border-radius: 8px;
+  width: 240px;           /* or whatever width fits your design */
+  text-align: center;
+  display: flex;
+  flex-direction: column; /* stack text, button, etc. */
+  justify-content: space-between;
+}
+
+.store-item h4 {
+  margin: 0 0 5px;
+  font-size: 18px; /* slightly larger heading */
+}
+
+.store-item p {
+  margin: 0 0 10px;
+  font-size: 14px;
+}
+
+.store-item-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+/* You can override button styling if desired */
+.store-item .buy-cookie-button, 
+.store-item .buy-choc-cookie-button {
+  font-size: 16px;
+  background-color: #444;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background var(--transition-duration);
+}
+
+.store-item .buy-cookie-button:hover,
+.store-item .buy-choc-cookie-button:hover {
+  background: var(--accent-color);
+}
+
+  
 </style>
 </head>
 
@@ -644,54 +700,101 @@
 
   <!-- Store tab -->
   <div id="storeContent" class="tab-content">
-  <h2>Store</h2>
-  <div style="font-size:17px;color:#FFFFFF margin-top:20px;">
-  <p>Buy Cookies or Chocolate Bars to distract the chonk and reveal tiles!</p><br>
-  <p>Normal Cookie - unveils 1 tile</p>
-<button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('cookie')">
-  🍪 Buy Cookie
-</button>
-1<img src="tgstar2.png" alt="Star" style="width:1.5em;height:1.5em;vertical-align:middle;">
 
-<br><br>
+    <h2>Store</h2>
+<!-- Wrapper for all store items -->
+  <div class="store-items">
+    <!-- Normal Cookie Card -->
+    <div class="store-item">
+      <h4>🍪 Normal Cookie</h4>
+      <p>Unveils 1 tile</p>
+      <div class="store-item-bottom">
+        <button class="buy-cookie-button"
+                onclick="handleBuyCookieButtonClick('cookie')">
+          Buy Cookie
+        </button>
+        <span>
+          1
+          <img src="tgstar2.png" alt="Star" style="width:1.5em;height:1.5em;vertical-align:middle;">
+        </span>
+      </div>
+    </div>
 
-Bunch of Cookies - unveils 2 tiles
-<button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('bunch')">
-  🍪🍪 Buy Bunch of Cookies
-</button>
-2<img src="tgstar2.png" alt="Star" style="width:1.5em;height:1.5em;vertical-align:middle;">
+    <!-- Bunch of Cookies -->
+    <div class="store-item">
+      <h4>🍪🍪 Bunch of Cookies</h4>
+      <p>Unveils 2 tiles</p>
+      <div class="store-item-bottom">
+        <button class="buy-cookie-button"
+                onclick="handleBuyCookieButtonClick('bunch')">
+          Buy Bunch
+        </button>
+        <span>
+          2
+          <img src="tgstar2.png" alt="Star" style="width:1.5em;height:1.5em;vertical-align:middle;">
+        </span>
+      </div>
+    </div>
 
-<br><br>
+    <!-- Jar of Cookies -->
+    <div class="store-item">
+      <h4>🍪🍪 Jar of Cookies</h4>
+      <p>Unveils 10 tiles</p>
+      <div class="store-item-bottom">
+        <button class="buy-cookie-button"
+                onclick="handleBuyCookieButtonClick('jar')">
+          Buy Jar
+        </button>
+        <span>
+          15
+          <img src="tgstar2.png" alt="Star" style="width:1.5em;height:1.5em;vertical-align:middle;">
+        </span>
+      </div>
+    </div>
 
-Jar of Cookies - unveils 10 tiles
-<button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('jar')">
-  🍪🍪 Buy Jar of Cookies
-</button>
-15<img src="tgstar2.png" alt="Star" style="width:1.5em;height:1.5em;vertical-align:middle;">
+    <!-- Bomb -->
+    <div class="store-item">
+      <h4>💣 Bomb</h4>
+      <p>Reveals an entire cluster</p>
+      <div class="store-item-bottom">
+        <button class="buy-cookie-button"
+                onclick="handleBuyCookieButtonClick('bomb')">
+          Buy Bomb
+        </button>
+        <span>
+          5
+          <img src="tgstar2.png" alt="Star" style="width:1.5em;height:1.5em;vertical-align:middle;">
+        </span>
+      </div>
+    </div>
 
-<br><br>
-
-<p>Bomb - reveals an entire cluster!</p>
-<button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('bomb')">
-  💣 Buy Bomb
-</button>
-5<img src="tgstar2.png" alt="Star" style="width:1.5em;height:1.5em;vertical-align:middle;">
-
-<br><br>
-
-<p>Chocolate Bar - unveils 3 tiles</p>
-<button class="buy-choc-cookie-button" id="buyChocCookieBtn" onclick="buyChocolateCookie()" disabled>
-  🍫 Buy Chocolate Bar
-</button>
-2<img src="tgstar2.png" alt="Star" style="width:1.5em;height:1.5em;vertical-align:middle;">
-
-    <p id="chocCookieInfo" style="margin-top:10px; color:#ff0;">
-      Invite 3 friends to unlock Chocolate Bars!
-    </p>
-    <br><p id="storeCookieBalances" style="font-size:16px; margin-top:10px;">
-      Cookies: 0 | Choc: 0
-    </p>
+    <!-- Chocolate Bar -->
+    <div class="store-item">
+      <h4>🍫 Chocolate Bar</h4>
+      <p>Unveils 3 tiles</p>
+      <div class="store-item-bottom">
+        <button class="buy-choc-cookie-button"
+                id="buyChocCookieBtn"
+                onclick="buyChocolateCookie()"
+                disabled>
+          Buy Chocolate
+        </button>
+        <span>
+          2
+          <img src="tgstar2.png" alt="Star" style="width:1.5em;height:1.5em;vertical-align:middle;">
+        </span>
+      </div>
+    </div>
   </div>
+
+  <!-- Existing text or info can remain below -->
+  <p id="chocCookieInfo" style="margin-top:10px; color:#ff0;">
+    Invite 3 friends to unlock Chocolate Bars!
+  </p>
+  <p id="storeCookieBalances" style="font-size:16px; margin-top:10px;">
+    Cookies: 0 | Choc: 0
+  </p>
+</div>
   </div>
 
 
