@@ -806,7 +806,17 @@ function updateBalances() {
   document.getElementById('tonBalance').textContent = totalTON.toFixed(2);
   document.getElementById('tonUSD').textContent = `~$${(totalTON * 6).toFixed(2)}`;
 
-  // update stats tab too
+  // update wallet tab too
+  document.getElementById('btcBalanceWallet').textContent = totalBTC.toFixed(2);
+  document.getElementById('btcUSDWallet').textContent = `~$${(totalBTC * 100000).toFixed(2)}`;
+
+  document.getElementById('usdtBalanceWallet').textContent = totalUSDT.toFixed(2);
+  document.getElementById('usdtUSDWallet').textContent = `~$${(totalUSDT).toFixed(2)}`;
+
+  document.getElementById('tonBalanceWallet').textContent = totalTON.toFixed(2);
+  document.getElementById('tonUSDWallet').textContent = `~$${(totalTON * 6).toFixed(2)}`;
+
+
   //document.getElementById('statsBalances').innerHTML =
   //  `₿ BTC: ${totalBTC.toFixed(2)} (~$${(totalBTC * 100000).toFixed(2)}) <br>`
   //  + `💵 USDT: ${totalUSDT.toFixed(2)} (~$${(totalUSDT).toFixed(2)}) <br>`
