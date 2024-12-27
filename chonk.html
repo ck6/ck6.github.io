@@ -780,14 +780,16 @@ window.onload = async () => {
 
   // 4) Start loading that cluster in parallel
   //const clusterPromise = loadCluster(randomIndex);
-  await loadCluster(randomIndex);
+  //await loadCluster(randomIndex);
 
   // 2) Fetch user state
   //const userPromise = fetchUserState();
   await fetchUserState();
 
-  await loadCluster(randomIndex);
-
+ // await loadCluster(randomIndex);
+  
+  await resumeClusterOrPickNew();
+  
   // 5) Wait for both
   //await Promise.all([userPromise, clusterPromise]);
 
@@ -1168,6 +1170,49 @@ function selectCluster() {
     alert("Invalid cluster number. Please enter a number between 1 and 1,000,000.");
   }
 }
+
+
+//LOAD LAST ACTIVE CLUSTER OR RANDOM NEW ONE
+
+async function resumeClusterOrPickNew() {
+  // 1) If userState doesn’t exist, or lastClusterIndex is null/undefined, just load random
+  if (!userState || userState.lastClusterIndex == null) {
+    loadRandomCluster();
+    return;
+  }
+
+  // 2) We have a lastClusterIndex, so check if it’s fully revealed
+  const clusterIndex = userState.lastClusterIndex;
+  const clusterData = await fetchSingleCluster(clusterIndex);
+  if (!clusterData || clusterData.error) {
+    // If we fail to fetch, just do random
+    loadRandomCluster();
+    return;
+  }
+
+  // 3) Check if clusterData.tiles contains any "???"
+  //    If none, it’s fully revealed => do random
+  let isFullyRevealed = true;
+  for (let rowArr of clusterData.tiles) {
+    for (let cell of rowArr) {
+      if (cell === "???") {
+        isFullyRevealed = false;
+        break;
+      }
+    }
+    if (!isFullyRevealed) break;
+  }
+
+  if (isFullyRevealed) {
+    // choose random
+    loadRandomCluster();
+  } else {
+    // resume user’s cluster
+    loadCluster(clusterIndex);
+  }
+}
+
+
 
 /************************************************************
  * 5) Buying cookies
@@ -1586,6 +1631,12 @@ tonConnectUI.onStatusChange( async (wallet) => {
   if (wallet) {
     // Connected
     //alert(`Wallet object:\n\n${JSON.stringify(wallet, null, 2)}`);
+
+    const walletStatusEl = document.getElementById("tonWalletStatus");
+    // 1) Change text
+    walletStatusEl.textContent = "Connected";
+    // 2) Change color to light green
+    walletStatusEl.style.color = "#0f0"; // or "lightgreen"
 
     await saveWalletAddress(tonConnectUI.account?.address);
     ///THIS WORKS - alert(tonConnectUI.account?.address);
