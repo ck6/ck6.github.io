@@ -294,9 +294,11 @@
     border-radius: 4px;
   }
 
+
+
   .buy-cookie-button, .buy-choc-cookie-button {
     display:inline-block;
-    background: #444;
+    background: linear-gradient(90deg, #f0c93a 0%, #edaf24 100%);
     border:none;
     color:#fff;
     padding: var(--button-padding);
@@ -307,6 +309,12 @@
     transition: background var(--transition-duration);
     z-index: 9999; /* higher than your cat-container’s z-index of 5 */
   }
+
+.buy-cookie-button:hover,
+.buy-choc-cookie-button:hover {
+  background: linear-gradient(90deg, #ffd700 0%, #ffc107 100%);
+ 
+}
 
   .invite-friend-button {
     display:inline-block;
@@ -353,8 +361,6 @@
 
   .random-cluster-button:hover,
   .select-cluster-button:hover,
-  .buy-cookie-button:hover,
-  .buy-choc-cookie-button:hover,
   .clipboard-button:hover,
   .invite-friend-button:hover {
     background: var(--accent-color);
