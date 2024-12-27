@@ -593,6 +593,30 @@
 }
 
 
+.coin-row {
+  display: flex;
+  justify-content: center;  /* center horizontally, or use space-between, etc. */
+  gap: 20px;                /* space between columns */
+  margin-bottom: 20px;
+}
+
+.coin-col {
+  display: flex;
+  flex-direction: column;   /* icon above the text */
+  align-items: center;      /* center everything in this column */
+  text-align: center;
+}
+
+.coin-icon {
+  width: 48px;              /* adjust icon size as desired */
+  height: 48px;
+  margin-bottom: 5px;       /* space between icon and text */
+}
+
+.coin-amount {
+  font-size: 16px;          /* adjust as needed */
+}
+
 
 </style>
 
@@ -696,9 +720,7 @@
       <p style="margin:5px 0 0;font-size:14px;color:#ccc;" id="statsBalances">...</p>
     </div>
   </div>
-</div>
 
-<!-- NEW: row of icons + balances -->
 <div class="coin-row">
   <div class="coin-col">
     <img src="usdt.png" alt="USDT" class="coin-icon" />
@@ -721,6 +743,7 @@
       <small>(<span id="tonUSD">~$0</span>)</small>
     </div>
   </div>
+</div>
 </div>
 
 <h3 style="font-size:16px;margin-bottom:10px;">Top Chonkers</h3>
