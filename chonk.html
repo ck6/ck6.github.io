@@ -587,10 +587,23 @@
 }
 
 
+.boxy-card {
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  margin-bottom: 20px;  /* space below each box */
+  color: #fff;          /* or #333 if you want dark text on a light background */
+  width: 90%;
+  max-width: 500px;     /* optional: limit on large screens */
+  margin-left: auto;
+  margin-right: auto;   /* center horizontally */
+  text-align: left;     /* or center, up to you */
+}
 
 
 
-  
+
 </style>
 </head>
 
@@ -702,19 +715,20 @@
   <div id="balanceContent" class="tab-content">
     <h2>Balance</h2>
     <p>Check your balance and recent rewards here.</p>
-    
-    <div style="background:#111;padding:10px;border-radius:8px;margin-bottom:20px;text-align:center;">
+    <div class="boxy-card">
       <div>💵 USDT: <span id="usdtBalance">0</span> (<span id="usdtUSD">~$0</span>)</div>
       <div>₿ BTC: <span id="btcBalance">0</span> (<span id="btcUSD">~$0</span>)</div>
       <div>💎 TON: <span id="tonBalance">0</span> (<span id="tonUSD">~$0</span>)</div>
-    </div>
 
-    <div style="background:#111;padding:10px;border-radius:8px;margin-bottom:20px;">
+     </div>
+
+
+     <div class="boxy-card">
       <p style="margin:0;font-size:14px;color:#ccc;line-height:1.4em;margin-bottom:10px;">
         All withdrawals are automatic and happen once a week.<br><br>
         Minimum balance for withdrawal is 20$.
       </p>
-      <div style="font-size:16px;margin-bottom:10px;">Next withdrawal on Sunday at 18:00 GMT.</div>
+       <div class="boxy-card">Next withdrawal on Sunday at 18:00 GMT.</div>
       <div style="background:#333;border-radius:4px;width:100%;height:10px;position:relative;margin-top:10px;">
         <div style="background:#00f;height:100%;width:50%;border-radius:4px;"></div>
       </div>
@@ -737,10 +751,11 @@
     </div>
   </div>
 
-  <!-- Store tab -->
+  <!-- Store tab <h2>Store</h2>-->
   <div id="storeContent" class="tab-content">
 
-<h2>Store</h2>
+     <div style="font-size:17px;color:#FFFFFF margin-top:20px;">
+    <p>Buy Cookies to distract the chonk and reveal tiles!</p><br>
 
   <div class="store-items">
 
