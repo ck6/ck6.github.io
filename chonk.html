@@ -1446,20 +1446,20 @@ function updateBalances() {
   }
 
   // Now update the UI elements
-  document.getElementById('btcBalance').textContent = totalBTC;
+  document.getElementById('btcBalance').textContent = totalBTC.toFixed(2);
   document.getElementById('btcUSD').textContent = `~$${(totalBTC * 100000).toFixed(2)}`;
 
-  document.getElementById('usdtBalance').textContent = totalUSDT;
-  document.getElementById('usdtUSD').textContent = `~$${(totalUSDT * 1).toFixed(2)}`;
+  document.getElementById('usdtBalance').textContent = totalUSDT.toFixed(2);
+  document.getElementById('usdtUSD').textContent = `~$${(totalUSDT).toFixed(2)}`;
 
-  document.getElementById('tonBalance').textContent = totalTON;
+  document.getElementById('tonBalance').textContent = totalTON.toFixed(2);
   document.getElementById('tonUSD').textContent = `~$${(totalTON * 6).toFixed(2)}`;
 
   // update stats tab too
   document.getElementById('statsBalances').innerHTML =
-    `₿ BTC: ${totalBTC} (~$${(totalBTC*100000).toFixed(2)}) <br> `
-    + `💵 USDT: ${totalUSDT} (~$${totalUSDT.toFixed(2)}) <br> `
-    + `💎 TON: ${totalTON} (~$${(totalTON*6).toFixed(2)})`;
+    `₿ BTC: ${totalBTC.toFixed(2)} (~$${(totalBTC * 100000).toFixed(2)}) <br>`
+    + `💵 USDT: ${totalUSDT.toFixed(2)} (~$${(totalUSDT).toFixed(2)}) <br>`
+    + `💎 TON: ${totalTON.toFixed(2)} (~$${(totalTON * 6).toFixed(2)})`;
 }
 
 
