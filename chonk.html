@@ -275,6 +275,7 @@
     justify-content: space-evenly;
     align-items: center;
     padding: 10px 0;
+    position: fixed; bottom: 0; left: 0; width: 100%;
   }
   .bottom-nav button {
     background: none;
@@ -747,40 +748,102 @@
     </div>
   </div>
 
-    <!-- Store tab -->
+<!-- Store tab <h2>Store</h2>-->
   <div id="storeContent" class="tab-content">
-    <h2>Store</h2>
+
      <div style="font-size:17px;color:#FFFFFF margin-top:20px;">
-    <p>Buy Cookies or Chocolate Bars to distract the chonk and reveal tiles!</p><br>
-    <p>Normal Cookie - unveils 1 tile</p>
-    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('cookie')">🍪 Buy Cookie</button> 1🌟
-    <br><br>
-    Bunch of Cookies - unveils 2 tiles
-    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('bunch')">🍪🍪 Buy Bunch of Cookies</button> 2🌟
-    <br><br>
-    Jar of Cookies - unveils 10 tiles
-    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('jar')">🍪🍪 Buy Jar of Cookies</button> 15🌟
-    <br><br>
-    <p>Bomb - reveals an entire cluster!</p>
-    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('bomb')">
-    💣 Buy Bomb
-    </button> 5🌟
-    <br><br>
-    <p>Chocolate Bar - unveils 3 tiles
-    </p>
-    <button class="buy-choc-cookie-button" id="buyChocCookieBtn" onclick="buyChocolateCookie()" disabled>🍫 Buy Chocolate Bar</button> 2🌟
-    <p id="chocCookieInfo" style="margin-top:10px; color:#ff0;">
-      Invite 3 friends to unlock Chocolate Bars!
-    </p>
-    <br><p id="storeCookieBalances" style="font-size:16px; margin-top:10px;">
-      Cookies: 0 | Choc: 0
-    </p>
-  </div>
+    <p>Buy Cookies to distract the chonk and reveal tiles!</p><br>
+
+  <div class="store-items">
+
+    <!-- Normal Cookie -->
+    <div class="store-item">
+      <div class="store-item-header">
+        <h4>🍪 Normal Cookie</h4>
+        <div class="store-item-cost">
+          1
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+      <p>Unveils 1 tile</p>
+      <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('cookie')">
+        Buy
+      </button>
+    </div>
+
+    <!-- Bunch of Cookies -->
+    <div class="store-item">
+      <div class="store-item-header">
+        <h4>🍪🍪 Bunch of Cookies</h4>
+        <div class="store-item-cost">
+          2
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+      <p>Unveils 2 tiles</p>
+      <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('bunch')">
+        Buy
+      </button>
+    </div>
+
+    <!-- Jar of Cookies (special) -->
+    <div class="store-item special">
+      <div class="store-item-header">
+        <h4>🍪🍪 Jar of Cookies</h4>
+        <div class="store-item-cost">
+          15
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+      <p>Unveils 10 tiles</p>
+      <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('jar')">
+        Buy
+      </button>
+    </div>
+
+    <!-- Bomb -->
+    <div class="store-item">
+      <div class="store-item-header">
+        <h4>💣 Bomb</h4>
+        <div class="store-item-cost">
+          5
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+      <p>Reveals an entire cluster</p>
+      <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick('bomb')">
+        Buy
+      </button>
+    </div>
+
+    <!-- Chocolate Bar (locked) -->
+    <div class="store-item locked">
+      <div class="store-item-header">
+        <h4>🍫 Chocolate Bar</h4>
+        <div class="store-item-cost">
+          2
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+      <p>Unveils 3 tiles</p>
+      <button class="buy-choc-cookie-button"
+              id="buyChocCookieBtn"
+              onclick="buyChocolateCookie()"
+              disabled>
+        Buy
+      </button>
+      <p class="store-lock-text" style="font-weight: bold;">
+        Invite 3 friends to unlock
+      </p>
+    </div>
   </div>
 
-
+  <!-- Existing text, balances, etc. -->
+  <p id="chocCookieInfo" style="margin-top:10px; color:#ff0;">
+    Invite 3 friends to unlock Chocolate Bars!
+  </p>
   <p id="storeCookieBalances" style="font-size:16px; margin-top:10px;">
-    
+    Cookies: 0 | Choc: 0
   </p>
 </div>
 
