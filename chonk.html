@@ -592,16 +592,16 @@
   text-align: left;     /* or center, up to you */
 }
 
-/* Put the invite buttons + friend count on a single horizontal row */
 .invite-row {
   display: flex;
-  align-items: center;  /* vertically center content */
-  gap: 10px;            /* space between buttons */
+  justify-content: center; /* center horizontally */
+  gap: 10px;               /* space between buttons */
+  margin-bottom: 10px;     /* space below the row */
 }
 
-/* This pushes the invite count to the far right if desired */
 .invite-count {
-  margin-left: auto;
+  text-align: center;      /* center the text under the buttons */
+  margin: 0;               /* remove default paragraph margin if you want it snug */
 }
 
 /* Generic progress bar container + fill classes (if you don't already have them) */
@@ -687,15 +687,15 @@
 
   <!-- Box #1: Invite Buttons + Friends Invited -->
   <div class="boxy-card">
-    <!-- A row for buttons + count -->
+    <!-- Row of buttons (centered) -->
     <div class="invite-row">
       <button class="invite-friend-button" onclick="shareMiniApp()">Invite friends</button>
       <button class="invite-friend-button" onclick="copyLinkToClipboard()">📋</button>
-      <!-- This goes on the same row, pushed to the right -->
-      <span class="invite-count">
-        <b>Friends Invited: <span id="friendsInvitedCount">0</span></b>
-      </span>
     </div>
+    <!-- Friend count underneath, also centered -->
+    <p class="invite-count">
+      <b>Friends Invited: <span id="friendsInvitedCount">0</span></b>
+    </p>
   </div>
 
   <!-- Box #2: Chocolate Bar Unlock (3 invites) -->
