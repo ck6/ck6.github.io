@@ -17,15 +17,12 @@
 
 
 <style>
-
-  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
-
   :root {
     --bg-start: #2d1b64;
     --bg-end: #f8cdda;
     --text-color: #fff;
     --accent-color: #ff9a9e;
-    --font-family: 'Open Sans', roboto;
+    --font-family: sans-serif;
     --heading-font-size: 20px;
     --heading-font-size2: 10px;
     --body-font-size: 16px;
@@ -298,30 +295,11 @@
   }
 
 
-.buy-cookie-button,
-.buy-choc-cookie-button {
-  width: 100%;
-  background: rgba(0,0,0,0.7);
-  border: none;
-  color: #fff;
-  border-radius: 6px;
-  padding: 10px 14px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-  text-align: center;
-  margin-bottom: 4px;
-}
-
-.buy-cookie-button:hover,
-.buy-choc-cookie-button:hover {
-  background: rgba(0,0,0,0.9);
-}
 
 
-  .buy-cookie-button, .buy-choc-cookie-button {
+  .invite-friend-button {
     display:inline-block;
-    background: linear-gradient(90deg, #f0c93a 0%, #edaf24 100%);
+    background: #444;
     border:none;
     color:#fff;
     padding: var(--button-padding);
@@ -332,7 +310,6 @@
     transition: background var(--transition-duration);
     z-index: 9999; /* higher than your cat-container’s z-index of 5 */
   }
-
 
 
 .cluster-buttons {
@@ -570,7 +547,25 @@
   /* pointer-events: auto;  // allow text highlight if you wish */
 }
 
+.buy-cookie-button,
+.buy-choc-cookie-button {
+  width: 100%;
+  background: rgba(0,0,0,0.7);
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  text-align: center;
+  margin-bottom: 4px;
+}
 
+.buy-cookie-button:hover,
+.buy-choc-cookie-button:hover {
+  background: rgba(0,0,0,0.9);
+}
 
 .store-lock-text {
   color: #fff;
