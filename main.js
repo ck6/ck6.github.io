@@ -743,7 +743,7 @@ function showTab(tab) {
 
 async function markStoreOpened() {
   try {
-    const res = await fetch("https://<YOUR_BACKEND>/api/markStoreOpened", {
+    const res = await fetch("https://chonk.fly.dev/api/markStoreOpened", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
