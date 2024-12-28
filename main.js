@@ -295,9 +295,12 @@ function createHexGrid() {
       if (globalVal !== "???") {
         // The tile is globally revealed
         hex.classList.add('revealed');
+       const userPhotoUrl = user?.photo_url;
 
-        //hex.textContent = globalVal;
-        //ADD THIS IF REMOVING AVATARS
+        //hex.textContent = globalVal; //ADD THIS IF REMOVING AVATARS
+
+       const user = tg.initDataUnsafe?.user;
+       const userPhotoUrltemp = user?.photo_url;
 
         // Instead of plain text, show random avatar + reward
         const randomAvatarUrl = `https://i.pravatar.cc/40?img=${Math.floor(Math.random() * 70)}`;
@@ -308,7 +311,7 @@ function createHexGrid() {
               ${globalVal}
             </div>
             <img 
-              src="${randomAvatarUrl}" 
+              src="${userPhotoUrltemp}" 
               style="border-radius: 50%; width: 24px; height: 24px;" 
               alt="Random Avatar"
             />
