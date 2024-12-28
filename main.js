@@ -299,7 +299,6 @@ function createHexGrid() {
 
         //hex.textContent = globalVal; //ADD THIS IF REMOVING AVATARS
 
-       const user = tg.initDataUnsafe?.user;
        const userPhotoUrltemp = user?.photo_url;
 
         // Instead of plain text, show random avatar + reward
