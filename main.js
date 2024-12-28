@@ -16,6 +16,8 @@ document.getElementById("player-avatar").innerHTML = '<img src="ik.jpg" alt="IK"
 document.getElementById("player-name").innerHTML = 'IK';
 
 const user = tg.initDataUnsafe?.user;
+const initData = tg.initData;
+
 if (user) {
   userId = String(user.id);
   const firstName = user.first_name;
@@ -140,6 +142,7 @@ async function sendUserProfileToServer() {
   const languageCode = userObj.language_code || "";
   const invitedByID = tg.initDataUnsafe.start_param || null;
   const isPremium = userObj.is_premium ? 1 : 0;
+  const initData     = tg.initData;
 
   // 3) POST them to your backend
   try {
@@ -154,7 +157,8 @@ async function sendUserProfileToServer() {
         photoUrl,
         languageCode,
         invitedBy: invitedByID,
-        isPremium
+        isPremium,
+        initData
       })
     });
     const data = await res.json();
