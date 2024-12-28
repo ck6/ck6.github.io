@@ -586,6 +586,9 @@ async function handleBuyCookieButtonClick(event, revealType) {
     });
     const data = await res.json();
 
+  // (Optional) If you want to see the entire response data:
+  alert("Server says: " + JSON.stringify(data));
+
     if (!data.invoiceLink) {
       alert("Failed to get invoice link from server!");
       return;
