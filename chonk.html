@@ -132,7 +132,7 @@
 }
 
 /* Our special Jar item with an image + content side-by-side */
-.jar-item {
+.item-with-image {
   display: flex;            /* horizontal layout */
   align-items: center;      /* vertically center them */
   gap: 10px;                /* space between image & text */
@@ -954,21 +954,27 @@
       </div>
 
       <!-- Normal Cookie -->
-      <div class="store-item">
-        <div class="store-item-header">
-          <h4>Normal Cookie</h4>
-          <div class="store-item-cost">
-            1
-            <img src="tgstar2.png" alt="Star" class="store-star">
-          </div>
-        </div>
-        <p>Unveils 1 tile</p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'cookie')">
-          Buy 🍪
-        </button>
-      </div>
+  <div class="store-item item-with-image">
+    <!-- Put the cookie image on the left -->
+    <img src="cookie.webp" alt="Normal Cookie" class="store-item-image" />
 
-<div class="store-item special jar-item">
+    <!-- Wrap the rest in a “content” div on the right -->
+    <div class="store-item-content">
+      <div class="store-item-header">
+        <h4>Normal Cookie</h4>
+        <div class="store-item-cost">
+          1
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+      <p>Unveils 1 tile</p>
+      <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'cookie')">
+        Buy 🍪
+      </button>
+    </div>
+  </div>
+
+<div class="store-item special item-with-image">
   <!-- Put the image on the left -->
   <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
 
