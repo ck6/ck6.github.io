@@ -63,7 +63,7 @@ const pastelGradients = [
   "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)"
 ];
 //const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🦴","💎","📦","🎀","💕"];
-const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🐭","💎","📦","🎀","💕", "🐹","🐥","🐣", "🐟"];
+const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🐭","💎","📦","🎀","💕", "🐹","🐥","🐣", "🐟", "🍣"];
 
 
 // We'll store "decorations" for 10 clusters × (5 rows × 5 cols)
@@ -747,6 +747,25 @@ function updateBalances() {
   document.getElementById('clusterCookies').textContent = cookiesOwned;
   document.getElementById('clusterChocolate').textContent = choc;
    document.getElementById('clusterBombs').textContent = bombs;
+
+
+   //UNLOCK BUY BUTTONS FOR SPECIAL ITEMS DEPENDENT ON INVITED FRIEND COUNT
+    const chocBtn = document.getElementById("buyChocCookieBtn");
+
+    // 2) If userState.friendsInvited < 3 => still locked
+    if (friendsInvited < 1) {
+      chocBtn.disabled = true;
+      chocBtn.textContent = "Locked 🍫"; // Or "Invite 3 friends first!"
+      // Also, you can set a .locked style:
+      chocBtn.classList.add("locked");
+    } else {
+      // Unlocked
+      chocBtn.disabled = false;
+      chocBtn.textContent = "Buy 🍫";
+      chocBtn.classList.remove("locked");
+    }
+  }
+
 
   //  // Show or hide the Bomb button
   const bombBtn = document.getElementById('useBombButton');
