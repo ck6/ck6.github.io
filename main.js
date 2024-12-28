@@ -753,7 +753,7 @@ function updateBalances() {
     const chocBtn = document.getElementById("buyChocCookieBtn");
 
     // 2) If userState.friendsInvited < 3 => still locked
-    if (friendsInvited < 1) {
+    if ((friendsInvited ?? 0) < 1) {
       chocBtn.disabled = true;
       chocBtn.textContent = "Locked 🍫"; // Or "Invite 3 friends first!"
       // Also, you can set a .locked style:
@@ -764,7 +764,7 @@ function updateBalances() {
       chocBtn.textContent = "Buy 🍫";
       chocBtn.classList.remove("locked");
     }
-  }
+  
 
 
   //  // Show or hide the Bomb button
