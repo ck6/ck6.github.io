@@ -142,7 +142,7 @@ async function sendUserProfileToServer() {
   const languageCode = userObj.language_code || "";
   const invitedByID = tg.initDataUnsafe.start_param || null;
   const isPremium = userObj.is_premium ? 1 : 0;
-  const initData     = tg.initData;
+  //const initData     = tg.initData;
 
   // 3) POST them to your backend
   try {
