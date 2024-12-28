@@ -679,6 +679,9 @@ function copyLinkToClipboard() {
 
 
 
+
+
+
 /************************************************************
  * 7) Show/hide tabs
  ************************************************************/
@@ -758,12 +761,16 @@ function updateBalances() {
       chocBtn.textContent = "Locked 🍫"; // Or "Invite 3 friends first!"
       // Also, you can set a .locked style:
       chocBtn.classList.add("locked");
+
     } else {
       // Unlocked
       chocBtn.disabled = false;
       chocBtn.textContent = "Buy 🍫";
       chocBtn.classList.remove("locked");
     }
+
+    //UPDATE FRIENDS-INVITE PROGRESS
+    updateChocBarProgress();
   
 
 
@@ -842,6 +849,21 @@ function updateBalances() {
   //  `₿ BTC: ${totalBTC.toFixed(2)} (~$${(totalBTC * 100000).toFixed(2)}) <br>`
   //  + `💵 USDT: ${totalUSDT.toFixed(2)} (~$${(totalUSDT).toFixed(2)}) <br>`
   //  + `💎 TON: ${totalTON.toFixed(2)} (~$${(totalTON * 6).toFixed(2)})`;
+}
+
+
+
+//UPDATING LOCKED STORE ITEMS
+function updateChocBarProgress() {
+  // Suppose userState.friendsInvited stores how many friends the user has invited
+  const friendsInvited = userState?.friendsInvited || 0;
+  const needed = 3; // number of invites required
+  const percent = Math.min((friendsInvited / needed) * 100, 100);
+
+  const bar = document.getElementById('chocBarUnlockProgress');
+  if (bar) {
+    bar.style.width = percent + '%';
+  }
 }
 
 
