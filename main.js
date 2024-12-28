@@ -158,7 +158,7 @@ async function sendUserProfileToServer() {
         languageCode,
         invitedBy: invitedByID,
         isPremium,
-        initData
+        initData: initData
       })
     });
     const data = await res.json();
