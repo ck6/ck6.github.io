@@ -784,15 +784,12 @@ function setupWelcomeCountdown() {
     const now = Date.now();
     const diff = expiresAtMs - now;
     if (diff <= 0) {
-      // expired
       countdownEl.textContent = "Expired";
-      // hide or disable the buy button
-      welcomeItem.style.opacity = "0.4";
-      const buyBtn = welcomeItem.querySelector("button");
-      if (buyBtn) buyBtn.disabled = true;
+      welcomeItem.style.display = "none";  // Hide the whole item
       clearInterval(intervalId);
       return;
     }
+
     // still time left => show h/m/s
     const totalSec = Math.floor(diff / 1000);
     const hours = Math.floor(totalSec / 3600);
