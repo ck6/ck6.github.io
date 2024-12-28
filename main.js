@@ -139,6 +139,7 @@ async function sendUserProfileToServer() {
   const photoUrl     = userObj.photo_url || "";
   const languageCode = userObj.language_code || "";
   const invitedByID = tg.initDataUnsafe.start_param || null;
+  const isPremium = userObj.is_premium ? 1 : 0;
 
   // 3) POST them to your backend
   try {
@@ -152,7 +153,8 @@ async function sendUserProfileToServer() {
         username,
         photoUrl,
         languageCode,
-        invitedBy: invitedByID
+        invitedBy: invitedByID,
+        isPremium
       })
     });
     const data = await res.json();
