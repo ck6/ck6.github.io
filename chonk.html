@@ -700,7 +700,7 @@
   <div class="boxy-card">
       <button class="invite-friend-button" onclick="shareMiniApp()">Invite frends</button>
       <button class="invite-friend-button" onclick="copyLinkToClipboard()">📋</button>
-       <p class="invite-count" style="padding-left: 10px;">>
+       <p class="invite-count" style="padding-left: 10px;">
         <b>frends invited: <span id="friendsInvitedCount">0</span></b>
       </p>
   </div>
@@ -711,7 +711,7 @@
 
   <!-- Box #2: Chocolate Bar Unlock (3 invites) -->
   <div class="boxy-card">
-    <p>Invite 3 friends to unlock <strong>🍫 Chocolate Bars</strong>!</p>
+    <p><strong>Invite 3 frends to unlock 🍫 Chocolate Bars</strong>!</p>
     <div class="progress-bar">
       <div id="chocUnlockProgress" class="progress-fill"></div>
     </div>
@@ -719,13 +719,21 @@
 
   <!-- Box #3: Jar of Cookies Unlock (10 invites) -->
   <div class="boxy-card">
-    <p>Invite 10 friends to get a <strong>free Jar of Cookies</strong>!</p>
+    <p>Invite 10 frends to get a <strong>free Jar of Cookies</strong>!</p>
     <div class="progress-bar">
       <div id="jarUnlockProgress" class="progress-fill"></div>
     </div>
   </div>
 
-  <!-- Box #4: Feeding the Chonk -->
+    <!-- Box #4: Are you following us?-->
+  <div class="boxy-card">
+    <p><strong>Follow the Chonk's Channel to get a free cookie 🍪</strong>!</p>
+    <div class="progress-bar">
+      <div id="jarUnlockProgress" class="progress-fill"></div>
+    </div>
+  </div>
+
+  <!-- Box #5: Feeding the Chonk -->
   <div class="boxy-card">
     <h3>Feeding the Chonk</h3>
     <p>Total Feeds: <span id="totalFeeds">0</span></p>
@@ -965,6 +973,22 @@
         </button>
       </div>
 
+       <!-- Bunch of Cookies -->
+      <div class="store-item">
+        <div class="store-item-header">
+          <h4>Chonk's Crown</h4>
+          <div class="store-item-cost">
+            99
+            <img src="tgstar2.png" alt="Star" class="store-star">
+          </div>
+        </div>
+        <p>Gives you 10% bonus on all rewards for 1 hour</p>
+        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
+          Buy 👑
+        </button>
+      </div>
+
+
       <!-- Chocolate Bar (locked) -->
       <div class="store-item locked">
         <div class="store-item-header">
@@ -979,7 +1003,7 @@
                 id="buyChocCookieBtn"
                 onclick="buyChocolateCookie()"
                 disabled>
-          Buy 🍫
+          Buy 🍩🍦🍰
         </button>
         <p class="store-lock-text" style="font-weight: bold;">
           Invite 3 friends to unlock
