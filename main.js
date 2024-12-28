@@ -340,6 +340,7 @@ if (userState.cookiesOwned <= 0 && userState.chocolateReveals <= 0) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        initData: tg.initData,
         userId,
         clusterIndex: currentClusterIndex,
         row, col
@@ -401,6 +402,7 @@ async function useBombOnCurrentCluster() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        initData: tg.initData,
         userId,                 // from your code
         clusterIndex: currentClusterIndex
       })
@@ -1029,6 +1031,7 @@ async function saveWalletAddress(tonWalletAddress) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ 
+        initData: tg.initData,
         userId,           // your Telegram user ID
         tonWalletAddress  // the address from TON Connect
       })
