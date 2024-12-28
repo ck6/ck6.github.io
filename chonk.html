@@ -1150,6 +1150,99 @@
   }
 }
 
+.dark-star-button {
+  position: relative;
+  display: inline-block;       /* so it can contain absolutely-positioned spans */
+  overflow: hidden;            /* hide star edges if they move outside */
+  padding: 12px 28px;
+  background: #333;            /* Dark background */
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+  user-select: none;           /* don’t let user highlight the stars */
+}
+
+.dark-star-button:hover {
+  transform: scale(1.05);
+}
+
+/* Common star styling */
+.dark-star-button .star {
+  position: absolute;
+  font-size: 16px;            /* size of star */
+  color: gold;                /* golden color */
+  opacity: 0;                 /* start invisible */
+  pointer-events: none;       /* clicks pass through */
+  animation: starTwinkle 3s infinite;
+}
+
+/* You can tweak each star’s top/left to spread them around the button. */
+/* Also vary the animation-delay for a random effect. */
+
+.dark-star-button .star1 {
+  top: 10%; left: 15%;
+  animation-delay: 0.2s;
+}
+.dark-star-button .star2 {
+  top: 40%; left: 8%;
+  animation-delay: 0.6s;
+}
+.dark-star-button .star3 {
+  top: 70%; left: 20%;
+  animation-delay: 1.0s;
+}
+.dark-star-button .star4 {
+  top: 20%; left: 70%;
+  animation-delay: 1.4s;
+}
+.dark-star-button .star5 {
+  top: 50%; left: 80%;
+  animation-delay: 1.8s;
+}
+.dark-star-button .star6 {
+  top: 80%; left: 60%;
+  animation-delay: 2.2s;
+}
+.dark-star-button .star7 {
+  top: 30%; left: 45%;
+  animation-delay: 0.8s;
+}
+.dark-star-button .star8 {
+  top: 60%; left: 55%;
+  animation-delay: 1.6s;
+}
+
+/* Keyframes for a twinkling + slight movement effect */
+@keyframes starTwinkle {
+  0% {
+    transform: scale(0.5) translate(0, 0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;               /* star fully appears */
+    transform: scale(1.2) translate(3px, -3px);
+  }
+  40% {
+    transform: scale(1) translate(0, 0);
+    opacity: 1;
+  }
+  60% {
+    transform: scale(1.2) translate(-3px, 2px);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(0.5) translate(0, 0);
+    opacity: 0;
+  }
+}
 
 </style>
 
@@ -1480,8 +1573,16 @@
         </div>
       </div>
       <p>Unveils 1 tile</p>
-      <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'cookie')">
+      <button class="buy-cookie-button dark-star-button" onclick="handleBuyCookieButtonClick(event, 'cookie')">
         Buy 🍪
+          <span class="star star1">★</span>
+          <span class="star star2">★</span>
+          <span class="star star3">★</span>
+          <span class="star star4">★</span>
+          <span class="star star5">★</span>
+          <span class="star star6">★</span>
+          <span class="star star7">★</span>
+          <span class="star star8">★</span>
       </button>
     </div>
   </div>
