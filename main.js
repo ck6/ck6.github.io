@@ -22,11 +22,12 @@ if (user) {
   const lastName = user.last_name;
   const username = user.username;
   const profilephoto = user.photo_url;
+  const isPremium = user.is_premium;
   // 3) Extract the value of a parameter (e.g., "foo")
-  const initDataUnsafe = Telegram.WebApp.initDataUnsafe;
+  //const initDataUnsafe = Telegram.WebApp.initDataUnsafe;
 
   // 3) The start param is here (if any was passed)
-  const startParam1 = initDataUnsafe.start_param;
+  const startParam1 = tg.initDataUnsafe.start_param;
   
       document.getElementById("player-avatar").innerHTML = '<img src="' + profilephoto +'" alt="'+ username +'">';
       document.getElementById("player-name").innerHTML = firstName + " " + lastName;
