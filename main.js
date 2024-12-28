@@ -115,15 +115,28 @@ window.onload = async () => {
  ************************************************************/
 async function fetchUserState() {
   try {
-    const res = await fetch(`https://chonk.fly.dev/api/userState?userId=${userId}`);
-    //const res = await fetch(`http://localhost:3000/api/userState?userId=${userId}`);
-    userState = await res.json();
+    // Encode initData for safe usage in query parameters
+    const encodedInitData = encodeURIComponent(tg.initData);
+
+    // Now call /api/userState with initData in the URL
+    const res = await fetch(`https://chonk.fly.dev/api/userState?initData=${encodedInitData}`);
+    const data = await res.json();
+
+    if (data.error) {
+      console.error("Error fetching user state:", data.error);
+      alert(data.error);
+      return;
+    }
+
+    // data is presumably the user doc
+    userState = data;
     updateBalances();
   } catch (err) {
-    console.error(err);
+    console.error("Error fetching user state:", err);
     alert("Error fetching user state!");
   }
 }
+
 
 async function sendUserProfileToServer() {
   // 1) Check if we have user data from Telegram
