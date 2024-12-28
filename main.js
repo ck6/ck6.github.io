@@ -582,13 +582,13 @@ async function handleBuyCookieButtonClick(event, revealType) {
     const res = await fetch('https://chonk.fly.dev/create-invoice', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ revealType: revealType })
+      body: JSON.stringify({ revealType: revealType,
+        userId: userId, })
     });
     const data = await res.json();
 
   // (Optional) If you want to see the entire response data:
-  
-  alert("Server says: " + JSON.stringify(data));
+  //alert("Server says: " + JSON.stringify(data));
 
     if (!data.invoiceLink) {
       alert("Failed to get invoice link from server!");
@@ -615,41 +615,6 @@ async function handleBuyCookieButtonClick(event, revealType) {
 
 
 
-
-
-async function buyProduct(productType, userId, cookiesToAdd = 0) {
-  try {
-    const response = await fetch('https://chonk.fly.dev/create-invoice', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-        productType, 
-        userId,
-        cookiesToAdd  // how many cookies to add if it’s a cookie product
-      })
-    });
-    const data = await response.json();
-
-    if (!data.invoiceLink) {
-      alert(`Failed to get invoice link for ${productType}!`);
-      return;
-    }
-
-    tg.openInvoice(data.invoiceLink, async (status) => {
-      if (status === 'paid') {
-        // On success, you can either:
-        //   1) Wait for the payment handler in your Bot code to update the DB, OR
-        //   2) Make an extra POST here to confirm the purchase.
-        // Typically, it's simpler to rely on the telegram 'successful_payment' logic.
-        alert('Payment completed! Check your cookies or cluster now.');
-      }
-    });
-
-  } catch (err) {
-    console.error('Error creating invoice:', err);
-    alert('Error creating invoice: ' + err.message);
-  }
-}
 
 
 
