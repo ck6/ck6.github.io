@@ -741,6 +741,8 @@ function showTab(tab) {
   document.querySelectorAll('.bottom-nav button')
     .forEach(btn => btn.classList.remove('active'));
 
+
+
   // Then, add active to the current tab’s button
   document.getElementById(tab + 'Tab').classList.add('active');
 
@@ -748,6 +750,8 @@ function showTab(tab) {
   document.querySelectorAll('.tab-content')
     .forEach(content => content.classList.remove('active'));
   document.getElementById(tab + 'Content').classList.add('active');
+
+  activeTab.scrollTop = 0;
 
   // Now show or hide the cluster-buttons
   const clusterBtns = document.querySelector('.cluster-buttons');
