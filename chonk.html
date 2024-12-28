@@ -1063,6 +1063,92 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.sparkle-button {
+  position: relative;          /* so pseudo-elements can be positioned inside */
+  overflow: hidden;            /* hide anything that goes outside the button edges */
+  display: inline-block;       /* ensure it can contain absolutely positioned children */
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #ffc107, #ff9800);
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+
+.sparkle-button:hover {
+  transform: scale(1.05);
+}
+
+/* We'll place 2 sparkles via pseudo-elements */
+.sparkle-button::before,
+.sparkle-button::after {
+  content: "★";                /* unicode star (you can use different shapes or an image) */
+  position: absolute;
+  font-size: 14px;
+  color: #fff5d0;              /* pale gold color for the star */
+  opacity: 0;                  /* start invisible */
+}
+
+/* One star (::before) moves from top-left to bottom-right */
+.sparkle-button::before {
+  top: 10%;
+  left: 5%;
+  animation: starMove1 2.5s infinite ease-in-out;
+}
+
+/* The other star (::after) moves from bottom-left to top-right */
+.sparkle-button::after {
+  bottom: 10%;
+  left: 15%;
+  animation: starMove2 2.5s infinite ease-in-out;
+}
+
+/* Keyframe 1: moves diagonally & fades in/out */
+@keyframes starMove1 {
+  0% {
+    transform: translate(0, 0) scale(0.5);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate(60px, 40px) scale(1);
+    opacity: 1;
+  }
+  75% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(80px, 60px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* Keyframe 2: similar idea, different direction or timing */
+@keyframes starMove2 {
+  0% {
+    transform: translate(0, 0) scale(0.5);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    transform: translate(40px, -40px) scale(1);
+    opacity: 1;
+  }
+  75% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(60px, -60px) scale(0.5);
+    opacity: 0;
+  }
+}
 
 
 </style>
@@ -1353,7 +1439,7 @@
         </div>
       </div>
       <p>Reveals an entire cluster</p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bomb')">
+        <button class="buy-cookie-button" sparkle-button onclick="handleBuyCookieButtonClick(event, 'bomb')">
           Buy 💣
         </button>
     </div>
