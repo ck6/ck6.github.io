@@ -716,7 +716,96 @@ function showTab(tab) {
   if (['balance', 'stats', 'bonuses', 'store'].includes(tab)) {
     updateBalances();
   }
+
+
+  //STORE LOGIC
+
+  if (tab === 'store') {
+    // If storeOpenedAt is null (meaning this user has never opened store)
+    if (!userState.store || !userState.store.storeOpenedAt) {
+      markStoreOpened().then(() => {
+        // after we mark the store opened, re-fetch or set up countdown
+        fetchUserState().then(() => {
+          setupWelcomeCountdown();
+        });
+      });
+    } else {
+      // Already opened store before => just do the normal refresh or countdown
+      fetchUserState().then(() => {
+        setupWelcomeCountdown();
+      });
+    }
+  }
+
+
 }
+
+
+async function markStoreOpened() {
+  try {
+    const res = await fetch("https://<YOUR_BACKEND>/api/markStoreOpened", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        initData: tg.initData
+      })
+    });
+    const data = await res.json();
+    if (data.error) {
+      console.warn("markStoreOpened error:", data.error);
+      return;
+    }
+    // data => { storeOpenedAt, welcomePackage: { expiresAt, purchased } }
+    // Optionally store it in userState manually:
+    if (!userState.store) userState.store = {};
+    userState.store.storeOpenedAt = data.storeOpenedAt;
+    userState.store.welcomePackage = data.welcomePackage;
+  } catch (err) {
+    console.error("Error calling /api/markStoreOpened:", err);
+  }
+}
+
+function setupWelcomeCountdown() {
+  const countdownEl = document.getElementById('welcomeCountdown');
+  const welcomeItem = document.getElementById('welcomePackageItem');
+
+  // 1) Check if userState.store.welcomePackage exists
+  if (!userState?.store?.welcomePackage?.expiresAt) {
+    // no expiration => hide countdown or do nothing
+    countdownEl.textContent = "";
+    return;
+  }
+
+  // 2) parse the expiresAt
+  const expiresAtMs = new Date(userState.store.welcomePackage.expiresAt).getTime();
+
+  // 3) define an update function
+  function update() {
+    const now = Date.now();
+    const diff = expiresAtMs - now;
+    if (diff <= 0) {
+      // expired
+      countdownEl.textContent = "Expired";
+      // hide or disable the buy button
+      welcomeItem.style.opacity = "0.4";
+      const buyBtn = welcomeItem.querySelector("button");
+      if (buyBtn) buyBtn.disabled = true;
+      clearInterval(intervalId);
+      return;
+    }
+    // still time left => show h/m/s
+    const totalSec = Math.floor(diff / 1000);
+    const hours = Math.floor(totalSec / 3600);
+    const minutes = Math.floor((totalSec % 3600) / 60);
+    const seconds = totalSec % 60;
+    countdownEl.textContent = `${hours}h ${minutes}m ${seconds}s left`;
+  }
+
+  // 4) start an interval to update every second
+  update();  // run once immediately
+  const intervalId = setInterval(update, 1000);
+}
+
 
 
 
