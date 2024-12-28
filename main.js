@@ -276,6 +276,9 @@ function createHexGrid() {
         // The tile is globally revealed
         hex.classList.add('revealed');
 
+        //hex.textContent = globalVal;
+        //ADD THIS IF REMOVING AVATARS
+
         // Instead of plain text, show random avatar + reward
         const randomAvatarUrl = `https://i.pravatar.cc/40?img=${Math.floor(Math.random() * 70)}`;
         // You can adjust width/height for a bigger or smaller avatar
