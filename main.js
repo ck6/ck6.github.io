@@ -611,31 +611,6 @@ async function handleBuyCookieButtonClick(event, revealType) {
 
 
 
-async function buyChocolateCookie() {
-  if (invitedFriends < 3) {
-    alert("You need to invite at least 3 friends first!");
-    return;
-  }
-  try {
-    const res = await fetch('https://chonk.fly.dev/api/buyChocolateCookie', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId })
-    });
-    const data = await res.json();
-    if (data.error) {
-      alert(data.error);
-      return;
-    }
-    userState.chocolateReveals = data.chocolateReveals;
-    showConfetti();
-    alert("You got a Chocolate Cookie, worth 3 reveals!");
-    updateBalances();
-  } catch (err) {
-    console.error(err);
-    alert("Error buying chocolate cookie: " + err.message);
-  }
-}
 
 
 async function buyProduct(productType, userId, cookiesToAdd = 0) {
