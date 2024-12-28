@@ -738,6 +738,175 @@
   }
 }
 
+.animated-gradient-candy {
+  background: linear-gradient(
+    135deg,
+    #ff9a9e,
+    #fbc2eb,
+    #a18cd1,
+    #fad0c4
+  );
+  background-size: 600% 600%;
+  animation: candyShift 6s ease infinite;
+}
+
+@keyframes candyShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-gradient-aurora {
+  background: linear-gradient(
+    135deg, 
+    #f093fb, 
+    #f5576c, 
+    #4facfe, 
+    #00f2fe
+  );
+  background-size: 400% 400%;
+  animation: auroraShift 8s ease infinite;
+}
+
+@keyframes auroraShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-gradient-sunset {
+  background: linear-gradient(
+    135deg,
+    #ff9966, 
+    #ff5e62, 
+    #ff9966
+  );
+  background-size: 200% 200%;
+  animation: sunsetShift 5s ease-in-out infinite;
+}
+
+@keyframes sunsetShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.animated-gradient-neon {
+  background: linear-gradient(
+    135deg,
+    #f6d365,
+    #fda085,
+    #ee0979,
+    #ff6a00
+  );
+  background-size: 600% 600%;
+  animation: neonShift 6s linear infinite;
+}
+
+@keyframes neonShift {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.animated-gradient-fairy {
+  background: linear-gradient(
+    135deg, 
+    #84fab0, 
+    #8fd3f4, 
+    #84fab0
+  );
+  background-size: 200% 200%;
+  animation: fairyShift 5s ease-in-out infinite;
+}
+
+@keyframes fairyShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.animated-gradient-bubblegum {
+  background: linear-gradient(
+    135deg, 
+    #ff6fd8,
+    #c782ff,
+    #ff6fd8
+  );
+  background-size: 200% 200%;
+  animation: bubblegumShift 5s ease-in-out infinite;
+}
+
+@keyframes bubblegumShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-gradient-citrus {
+  background: linear-gradient(
+    135deg, 
+    #f9d423, 
+    #ff4e50, 
+    #f9d423
+  );
+  background-size: 200% 200%;
+  animation: citrusShift 4s ease-in-out infinite;
+}
+
+@keyframes citrusShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
 
 </style>
 
@@ -979,7 +1148,6 @@
     </div>
   </div>
 
-    <!-- Store tab -->
 <!-- Store tab -->
 <div id="storeContent" class="tab-content">
 
@@ -1133,6 +1301,211 @@
 
              <!-- Magic Paw -->
   <div class="store-item special-galaxy item-with-image">
+    <!-- Put the cookie image on the left -->
+    <img src="paw.png" alt="Crown" class="store-item-image" />
+
+    <div class="store-item-content">
+      <div class="store-item-header">
+        <h4>Meowgical Paw</h4>
+        <div class="store-item-cost">
+          99
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+        <p>Gives you 2% bonus on all rewards forever</p>
+        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
+          Buy 🐾
+        </button>
+    </div>
+  </div>
+
+               <!-- Magic Yarn -->
+  <div class="store-item special-magical2 item-with-image">
+    <!-- Put the cookie image on the left -->
+    <img src="yarn.png" alt="Crown" class="store-item-image" />
+
+    <div class="store-item-content">
+      <div class="store-item-header">
+        <h4>Magic Yarn</h4>
+        <div class="store-item-cost">
+          99
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+        <p>Gives you 10% bonus on all rewards for 30 min</p>
+        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
+          Buy 🧶
+        </button>
+    </div>
+  </div>
+
+                 <!-- Sushi -->
+  <div class="store-item animated-gradient item-with-image">
+    <!-- Put the cookie image on the left -->
+    <img src="sushi.png" alt="Crown" class="store-item-image" />
+
+    <div class="store-item-content">
+      <div class="store-item-header">
+        <h4>Sushi</h4>
+        <div class="store-item-cost">
+          99
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+        <p>Gives you 1% bonus on all rewards forever</p>
+        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
+          Buy 🍣
+        </button>
+    </div>
+  </div>
+
+
+ <!-- ALL ITEMS AGAIN FOR TESTING STYLES -->
+
+        <!-- Bomb -->
+  <div class="store-item animated-gradient-candy item-with-image">
+    <!-- Put the cookie image on the left -->
+    <img src="bomb.png" alt="Bomb" class="store-item-image" />
+
+    <div class="store-item-content">
+      <div class="store-item-header">
+        <h4>Bomb</h4>
+        <div class="store-item-cost">
+          5
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+      <p>Reveals an entire cluster</p>
+        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bomb')">
+          Buy 💣
+        </button>
+    </div>
+  </div>
+
+
+      <!-- Normal Cookie -->
+  <div class="store-item item-with-image">
+    <!-- Put the cookie image on the left -->
+    <img src="cookie.webp" alt="Normal Cookie" class="store-item-image" />
+
+    <div class="store-item-content">
+      <div class="store-item-header">
+        <h4>Normal Cookie</h4>
+        <div class="store-item-cost">
+          1
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+      <p>Unveils 1 tile</p>
+      <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'cookie')">
+        Buy 🍪
+      </button>
+    </div>
+  </div>
+
+<div class="store-item animated-gradient-aurora item-with-image">
+  <!-- Put the image on the left -->
+  <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
+
+  <!-- Wrap the rest in a “content” div on the right -->
+  <div class="store-item-content">
+    <div class="store-item-header">
+      <h4>Jar of Cookies</h4>
+      <div class="store-item-cost">
+        15
+        <img src="tgstar2.png" alt="Star" class="store-star">
+      </div>
+    </div>
+    <p>Unveils 10 tiles</p>
+    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'jar')">
+      Buy 🫙
+    </button>
+  </div>
+</div>
+
+
+  <!-- Bunch of Cookies -->
+  <div class="store-item animated-gradient-sunset item-with-image">
+    <!-- Put the cookie image on the left -->
+    <img src="bunchcookies.png" alt="Bunch of Cookies" class="store-item-image" />
+
+    <div class="store-item-content">
+      <div class="store-item-header">
+        <h4>Bunch of Cookies</h4>
+        <div class="store-item-cost">
+          2
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+        <p>Unveils 2 tiles</p>
+        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
+          Buy 🍪🍪
+        </button>
+    </div>
+  </div>
+
+           <!-- Crown -->
+  <div class="store-item animated-gradient-neo item-with-image">
+    <!-- Put the cookie image on the left -->
+    <img src="crown.png" alt="Crown" class="store-item-image" />
+
+    <div class="store-item-content">
+      <div class="store-item-header">
+        <h4>Crown</h4>
+        <div class="store-item-cost">
+          99
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+        <p>Gives you 10% bonus on all rewards for 1 hour</p>
+        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
+          Buy 👑
+        </button>
+    </div>
+  </div>
+
+                   <!-- Donut of Destiny -->
+  <div class="store-item animated-gradient-fairy item-with-image">
+    <!-- Put the cookie image on the left -->
+    <img src="donutdestiny.png" alt="Crown" class="store-item-image" />
+
+    <div class="store-item-content">
+      <div class="store-item-header">
+        <h4>Donut of Destiny</h4>
+        <div class="store-item-cost">
+          99
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+        <p>Gives you 3% bonus on all rewards forever</p>
+        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
+          Buy 🍩 
+        </button>
+    </div>
+  </div>
+
+                    <!-- Ice Cream -->
+  <div class="store-item animated-gradient-bubblegum item-with-image">
+    <!-- Put the cookie image on the left -->
+    <img src="ice-cream.png" alt="Crown" class="store-item-image" />
+
+    <div class="store-item-content">
+      <div class="store-item-header">
+        <h4>Ice Cream</h4>
+        <div class="store-item-cost">
+          99
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+        <p>Gives you 2% bonus on all rewards forever</p>
+        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
+          Buy 🍦
+        </button>
+    </div>
+  </div>
+
+             <!-- Magic Paw -->
+  <div class="store-item animated-gradient-citrus item-with-image">
     <!-- Put the cookie image on the left -->
     <img src="paw.png" alt="Crown" class="store-item-image" />
 
