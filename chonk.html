@@ -715,6 +715,30 @@
   box-shadow: 0 0 8px #0fd850;
 }
 
+.animated-gradient {
+  /* Start with a gradient */
+  background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+  background-size: 400% 400%; /* bigger than normal so it can move */
+
+  /* Apply the animation: 'shiftGradient' is our custom name */
+  animation: shiftGradient 4s ease infinite;
+  /* 4s = duration, 'ease' = timing function, 'infinite' = loop forever */
+}
+
+/* Keyframes describing how the background-position changes */
+@keyframes shiftGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
 </style>
 
 </head>
@@ -1148,7 +1172,7 @@
   </div>
 
                  <!-- Sushi -->
-  <div class="store-item item-with-image">
+  <div class="store-item animated-gradient item-with-image">
     <!-- Put the cookie image on the left -->
     <img src="sushi.png" alt="Crown" class="store-item-image" />
 
