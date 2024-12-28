@@ -131,6 +131,31 @@
   background: var(--accent-color);
 }
 
+/* Our special Jar item with an image + content side-by-side */
+.jar-item {
+  display: flex;            /* horizontal layout */
+  align-items: center;      /* vertically center them */
+  gap: 10px;                /* space between image & text */
+}
+
+/* The image on the left */
+.store-item-image {
+  width: 60px;              /* or 80px, adjust as needed */
+  height: auto;             /* keep aspect ratio */
+  border-radius: 4px;       /* optional if you want rounding */
+  flex-shrink: 0;           /* don’t let the image shrink below 60px */
+}
+
+/* The text + button on the right take the remaining space */
+.store-item-content {
+  display: flex;
+  flex-direction: column;   /* stack the header & button vertically */
+  flex: 1;                  /* fill any leftover horizontal space */
+}
+
+/* Keep .store-item-header and .store-item-cost as is, or tweak margins if needed */
+
+
   .content {
     flex: 1;
     overflow: auto;
@@ -943,20 +968,25 @@
         </button>
       </div>
 
-      <!-- Jar of Cookies (special) -->
-      <div class="store-item special">
-        <div class="store-item-header">
-          <h4>Jar of Cookies</h4>
-          <div class="store-item-cost">
-            15
-            <img src="tgstar2.png" alt="Star" class="store-star">
-          </div>
-        </div>
-        <p>Unveils 10 tiles</p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'jar')">
-          Buy 🫙
-        </button>
+<div class="store-item special jar-item">
+  <!-- Put the image on the left -->
+  <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
+
+  <!-- Wrap the rest in a “content” div on the right -->
+  <div class="store-item-content">
+    <div class="store-item-header">
+      <h4>Jar of Cookies</h4>
+      <div class="store-item-cost">
+        15
+        <img src="tgstar2.png" alt="Star" class="store-star">
       </div>
+    </div>
+    <p>Unveils 10 tiles</p>
+    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'jar')">
+      Buy 🫙
+    </button>
+  </div>
+</div>
 
       <!-- Bunch of Cookies -->
       <div class="store-item">
