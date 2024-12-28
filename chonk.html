@@ -906,6 +906,77 @@
   }
 }
 
+.buy-cookie-button-lively {
+  /* Base gradient (like #1) */
+  background: linear-gradient(to right, #f093fb, #f5576c);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+
+  /* Subtle box shadow for depth */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+  /* Smooth scaling on hover & shadow changes */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  /* Continuous pulsing glow (like #2) */
+  animation: livelyPulse 2s infinite;
+}
+
+.buy-cookie-button-lively:hover {
+  /* Slightly enlarge & intensify the shadow on hover */
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes livelyPulse {
+  0% {
+    box-shadow: 0 0 8px rgba(240, 147, 251, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(245, 87, 108, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 8px rgba(240, 147, 251, 0.4);
+  }
+}
+
+.buy-cookie-button-rainbow {
+  background: linear-gradient(
+    45deg,
+    #ff0057,
+    #ff7b00,
+    #ffe400,
+    #00f9ff,
+    #00ff85,
+    #ff00f7
+  );
+  background-size: 600% 600%;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+
+  /* Animate the gradient movement */
+  animation: animatedRainbow 5s ease infinite;
+}
+
+@keyframes animatedRainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
 
 </style>
@@ -1177,6 +1248,26 @@
     </div>
   </div>
 
+        <!-- Bomb -->
+  <div class="store-item item-with-image">
+    <!-- Put the cookie image on the left -->
+    <img src="bomb.png" alt="Bomb" class="store-item-image" />
+
+    <div class="store-item-content">
+      <div class="store-item-header">
+        <h4>Bomb</h4>
+        <div class="store-item-cost">
+          5
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+      <p>Reveals an entire cluster</p>
+        <button class="buy-cookie-button-lively">
+          Buy 💣
+        </button>
+    </div>
+  </div>
+
 
       <!-- Normal Cookie -->
   <div class="store-item item-with-image">
@@ -1397,7 +1488,7 @@
         </div>
       </div>
       <p>Unveils 1 tile</p>
-      <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'cookie')">
+      <button class="buy-cookie-button-rainbow">
         Buy 🍪
       </button>
     </div>
