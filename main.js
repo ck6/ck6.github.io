@@ -839,6 +839,36 @@ function setupWelcomeCountdown() {
 }
 
 
+function updateStoreItemsUI() {
+  // 1) Donut check
+  const donutBtn = document.getElementById("buyDonutButton"); 
+  const hasDonut = userState?.bonuses?.permanentItems?.some(
+    (item) => item.name === 'DonutOfDestiny'
+  );
+
+  if (hasDonut && donutBtn) {
+    donutBtn.disabled = true;
+    donutBtn.textContent = "Owned";
+    // or add a .locked style, etc.
+  }
+
+  // 2) Crown check (NEW)
+  const crownBtn = document.getElementById("buyCrownButton");
+  // We consider 'active' if expiresAt is in the future
+  const now = Date.now();
+  const hasActiveCrown = userState?.bonuses?.temporaryItems?.some(
+    (item) => item.name === 'Crown' && new Date(item.expiresAt).getTime() > now
+  );
+
+  if (hasActiveCrown && crownBtn) {
+    crownBtn.disabled = true;
+    crownBtn.textContent = "Active";
+    // or textContent = "Crown Running"
+    // or show a countdown, etc.
+  }
+}
+
+
 
 
 
@@ -974,6 +1004,8 @@ function updateBalances() {
 
   document.getElementById('playerFeeds').textContent = `Total Feeds: ${userState.totalFeeds}`;
 
+
+  updateStoreItemsUI();
 
   //document.getElementById('statsBalances').innerHTML =
   //  `₿ BTC: ${totalBTC.toFixed(2)} (~$${(totalBTC * 100000).toFixed(2)}) <br>`
