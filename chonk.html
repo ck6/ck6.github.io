@@ -1326,6 +1326,53 @@ button {
 }
 
 
+/* Ensure the .welcome-package has position: relative
+   so the discount label can be placed absolutely inside it. */
+.store-item.welcome-package {
+  position: relative;
+}
+
+/* The discount label in the top-left corner, angled slightly */
+.store-item.welcome-package .discount-label {
+  position: absolute;
+  top: 8px;             /* near the top edge */
+  left: -10px;          /* push it slightly left so angled text fits */
+  transform: rotate(-15deg); /* slight tilt */
+  
+  background: #ff0000;  /* bright red or any color you like */
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* small shadow for pop */
+  letter-spacing: 1px;
+  z-index: 999;         /* ensures it sits on top of images/text below */
+}
+
+/* Ensure the Donut of Destiny item can contain the absolutely-positioned label */
+.store-item.donut-destiny {
+  position: relative;
+}
+
+/* The Founders label: top-left-ish, slightly above, a small angle, bright color. */
+.donut-destiny .founders-label {
+  position: absolute;
+  top: -10px;      /* moves it ~10px above the box’s top */
+  left: 12%;       /* left “12%” from the left edge for a nice offset */
+  transform: rotate(-5deg); /* slight tilt if you want that angled look */
+  
+  background: #e91e63;  /* a pink/red color, tweak as desired */
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* small shadow to pop */
+  letter-spacing: 0.5px;
+  z-index: 999;   /* ensures it’s on top of the item’s content */
+}
+
 
 </style>
 
@@ -1660,6 +1707,7 @@ button {
     <button class="buy-cookie-button sparkle-button" onclick="handleBuyCookieButtonClick(event, 'welcomePackage')">
       Buy 🎉
     </button>
+    <span class="discount-label">200% OFF!</span>
   </div>
 </div>
 
@@ -1797,7 +1845,7 @@ button {
   </div>
 
                    <!-- Donut of Destiny -->
-  <div class="store-item special-neon item-with-image">
+  <div class="store-item special-neon item-with-image donut-destiny">
     <!-- Put the cookie image on the left -->
     <img src="donutdestiny.png" alt="Crown" class="store-item-image" />
 
@@ -1814,6 +1862,7 @@ button {
           Buy 🍩 
         </button>
     </div>
+     <span class="founders-label">Limited Time for Founders</span>
   </div>
 
                     <!-- Ice Cream -->
