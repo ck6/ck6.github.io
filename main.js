@@ -847,58 +847,7 @@ function setupWelcomeCountdown() {
 
 
 function updateStoreItemsUI() {
-  // 1) Donut check
-  const donutBtn = document.getElementById("buyDonutButton"); 
-  const hasDonut = userState?.bonuses?.permanentItems?.some(
-    (item) => item.name === 'DonutOfDestiny'
-  );
-
-  if (hasDonut && donutBtn) {
-    donutBtn.disabled = true;
-    donutBtn.textContent = "Owned";
-    // or add a .locked style, etc.
-  }
-
-    // 1) Hide the Welcome Package once purchased:
-  const welcomePkgEl = document.getElementById("welcomePackageItem");
-  if (welcomePkgEl && userState?.store?.welcomePackage?.purchased) {
-    welcomePkgEl.style.display = "none";
-  }
-
-  // 2) Crown check (NEW)
-  const crownBtn = document.getElementById("buyCrownButton");
-  // We consider 'active' if expiresAt is in the future
-  const now = Date.now();
-  const hasActiveCrown = userState?.bonuses?.temporaryItems?.some(
-    (item) => item.name === 'Crown' && new Date(item.expiresAt).getTime() > now
-  );
-
-  if (hasActiveCrown && crownBtn) {
-    crownBtn.disabled = true;
-    crownBtn.textContent = "Active";
-    // or textContent = "Crown Running"
-    // or show a countdown, etc.
-  }
-
-
-  const friendsInvited = userState?.friendsInvited || 0;
-
-  // Grab references to our single Jar item and its child elements
-  const jarBuyBtn      = document.getElementById("jarBuyButton");
-  const jarLockOverlay = document.getElementById("jarLockOverlay");
-
-  if (!jarBuyBtn || !jarLockOverlay) return; // safeguard
-
-  if (friendsInvited < 3) {
-    // We want the Jar to appear locked:
-    jarBuyBtn.style.display      = "none";
-    jarLockOverlay.style.display = "block";
-    updateInviteProgress('jarProgressBar', 3);
-  } else {
-    // 3 or more friends => unlocked:
-    jarBuyBtn.style.display      = "block";
-    jarLockOverlay.style.display = "none";
-  }
+  return;
 }
 
 
