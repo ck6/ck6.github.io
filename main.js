@@ -604,7 +604,15 @@ async function resumeClusterOrPickNew() {
 async function handleBuyCookieButtonClick(event, revealType) {
   //const buyCookieBtn = document.querySelector('.buy-cookie-button');
   const thisButton = event.currentTarget;
+  thisButton.disabled = true;
+  // do your normal code here ...
+  
+  // after or before you start the fetch
+  setTimeout(() => {
+    thisButton.disabled = false;
+  }, 3000); // 3 seconds
 
+  
   // Animate only this button
   thisButton.classList.add('button-animate');
   setTimeout(() => {
