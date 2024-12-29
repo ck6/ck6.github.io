@@ -749,13 +749,14 @@ function showTab(tab) {
   }
 
 
-  if (tab === 'bonuses') {
 
-    //CHECHK IF THEY FOLLOW OUR CHANNEL
-     // if (!userState.followsChannel || !userState.channelCookieAwarded) {
-    //checkChannelJoin(); 
-    //}
+  if (tab === 'bonuses') {
+    // If the user has NOT been awarded the channel cookie yet, auto-check
+    if (!userState.channelCookieAwarded) {
+      checkChannelJoin();
+    }
   }
+}
 
 
 
@@ -904,7 +905,7 @@ function updateStoreItemsUI() {
 
 
 
-}
+
 
 
 
