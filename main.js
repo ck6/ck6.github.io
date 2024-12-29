@@ -918,20 +918,20 @@ function updateBalances() {
 
 
    //UNLOCK BUY BUTTONS FOR SPECIAL ITEMS DEPENDENT ON INVITED FRIEND COUNT
-    const chocBtn = document.getElementById("buyChocCookieBtn");
+    //const chocBtn = document.getElementById("buyChocCookieBtn");
 
     // 2) If userState.friendsInvited < 3 => still locked
     if ((friendsInvited ?? 0) < 1) {
-      chocBtn.disabled = true;
-      chocBtn.textContent = "Locked 🍫"; // Or "Invite 3 friends first!"
+      //chocBtn.disabled = true;
+      //chocBtn.textContent = "Locked 🍫"; // Or "Invite 3 friends first!"
       // Also, you can set a .locked style:
-      chocBtn.classList.add("locked");
+      //chocBtn.classList.add("locked");
 
     } else {
       // Unlocked
-      chocBtn.disabled = false;
-      chocBtn.textContent = "Buy 🍫";
-      chocBtn.classList.remove("locked");
+      //chocBtn.disabled = false;
+      //chocBtn.textContent = "Buy 🍫";
+      //chocBtn.classList.remove("locked");
     }
 
     //UPDATE FRIENDS-INVITE PROGRESS
