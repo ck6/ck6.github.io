@@ -612,7 +612,7 @@ async function handleBuyCookieButtonClick(event, revealType) {
     thisButton.disabled = false;
   }, 3000); // 3 seconds
 
-  
+
   // Animate only this button
   thisButton.classList.add('button-animate');
   setTimeout(() => {
@@ -1010,7 +1010,13 @@ function updateBalances() {
   document.getElementById('tonBalanceWallet').textContent = totalTON.toFixed(2);
   document.getElementById('tonUSDWallet').textContent = `~$${tonInUSD.toFixed(2)}`;
 
-  document.getElementById('playerFeeds').textContent = `Total Feeds: ${userState.totalFeeds}`;
+
+  const totalBonusRate = calculateTotalBonusFromUserState();
+  const bonusPercent = (totalBonusRate * 100).toFixed(1);
+  document.getElementById("playerFeeds").textContent =
+  `Total Feeds: ${userState.totalFeeds} (Bonus: +${bonusPercent}%)`;
+
+
 
 
   updateStoreItemsUI();
@@ -1046,6 +1052,28 @@ function updateInviteProgress(barId, needed) {
   bar.style.width = pct + '%';
 }
 
+
+
+function calculateTotalBonusFromUserState() {
+  let total = 0;
+
+  // Sum permanent
+  const perm = userState.bonuses?.permanentItems || [];
+  for (const item of perm) {
+    total += (item.rate || 0);
+  }
+
+  // Filter & sum temporary
+  const tmp = userState.bonuses?.temporaryItems || [];
+  const now = Date.now();
+  for (const item of tmp) {
+    if (new Date(item.expiresAt).getTime() > now) {
+      total += (item.rate || 0);
+    }
+  }
+
+  return total; // e.g. 0.15 => 15%
+}
 
 
 
