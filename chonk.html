@@ -1275,17 +1275,28 @@
     opacity: 0;
   }
 }
-
 .store-item.locked {
   position: relative;
+  /* Start in the dim state */
   filter: grayscale(0.5) brightness(0.8);
-  transition: filter 0.3s ease;
+  /* Apply the “lockedGlow” animation indefinitely */
+  animation: lockedGlow 2.5s infinite alternate ease-in-out;
 }
 
-.store-item.locked:hover {
-  filter: grayscale(0.5) brightness(1) drop-shadow(0 0 6px rgba(255, 215, 0, 0.4));
+/* Keyframes controlling the glow cycle */
+@keyframes lockedGlow {
+  /* At 0%, we’re in the “dim” state (like the initial filter) */
+  0% {
+    filter: grayscale(0.5) brightness(0.8);
+  }
+  /* At 100%, we have the “bright glow” state (like the :hover one) */
+  100% {
+    filter: grayscale(0.5) brightness(1)
+            drop-shadow(0 0 6px rgba(255, 215, 0, 0.4));
+  }
 }
 
+/* The “🔒 LOCKED” overlay */
 .store-item.locked::before {
   content: "🔒 LOCKED";
   position: absolute;
@@ -1303,9 +1314,11 @@
   pointer-events: none;
 }
 
+/* Disable pointer events for everything inside the locked item */
 .store-item.locked button {
   pointer-events: none; /* prevent clicks on the buy button */
 }
+
 
 
 </style>
