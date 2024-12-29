@@ -1173,7 +1173,7 @@ async function checkChannelJoin() {
         alert(`You joined the channel! Enjoy +1 cookie (total = ${data.cookiesOwned})`);
       }
       userState.followsChannel = true;
-      userState.channelCookieAwarded = data.alreadyAwarded || true; 
+      userState.channelCookieAwarded = data.alreadyAwarded; 
       userState.cookiesOwned = data.cookiesOwned;
     } else {
       alert("You are not a member of our channel yet!");
