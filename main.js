@@ -633,6 +633,17 @@ async function handleBuyCookieButtonClick(event, revealType) {
   // (Optional) If you want to see the entire response data:
   //alert("Server says: " + JSON.stringify(data));
 
+    if (!res.ok) {
+    // That means the server responded with e.g. 400 or 403
+    // Instead of "Failed to get invoice link", show data.error if present
+    if (data?.error) {
+      alert("Error from server: " + data.error);
+    } else {
+      alert("Unknown error from server. Status: " + res.status);
+    }
+    return;
+  }
+
     if (!data.invoiceLink) {
       alert("Failed to get invoice link from server!");
       return;
