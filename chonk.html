@@ -1275,28 +1275,27 @@
     opacity: 0;
   }
 }
+
 .store-item.locked {
   position: relative;
-  /* Start in the dim state */
-  filter: grayscale(0.5) brightness(0.8);
-  /* Apply the “lockedGlow” animation indefinitely */
+  /* Start slightly dimmer */
+  filter: brightness(0.8);
   animation: lockedGlow 2.5s infinite alternate ease-in-out;
 }
 
-/* Keyframes controlling the glow cycle */
+/* Keyframe animation: from dim to bright glow */
 @keyframes lockedGlow {
-  /* At 0%, we’re in the “dim” state (like the initial filter) */
   0% {
-    filter: grayscale(0.5) brightness(0.8);
+    /* Dim state */
+    filter: brightness(0.8);
   }
-  /* At 100%, we have the “bright glow” state (like the :hover one) */
   100% {
-    filter: grayscale(0.5) brightness(1)
-            drop-shadow(0 0 6px rgba(255, 215, 0, 0.4));
+    /* Bright glow */
+    filter: brightness(1) drop-shadow(0 0 6px rgba(255, 215, 0, 0.4));
   }
 }
 
-/* The “🔒 LOCKED” overlay */
+/* "LOCKED" overlay in the center */
 .store-item.locked::before {
   content: "🔒 LOCKED";
   position: absolute;
@@ -1306,7 +1305,7 @@
   color: #fff;
   font-weight: bold;
   font-size: 18px;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   padding: 6px 12px;
   border-radius: 8px;
   letter-spacing: 1px;
@@ -1314,9 +1313,10 @@
   pointer-events: none;
 }
 
-/* Disable pointer events for everything inside the locked item */
-.store-item.locked button {
-  pointer-events: none; /* prevent clicks on the buy button */
+/* Prevent interactions with the locked item’s content */
+.store-item.locked button,
+.store-item.locked * {
+  pointer-events: none;
 }
 
 
