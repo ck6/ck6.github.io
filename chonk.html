@@ -1278,35 +1278,34 @@
 
 .store-item.locked {
   position: relative;
-  /* always dim + partial grayscale plus a permanent golden glow */
-  filter: grayscale(0.3) brightness(1)
-          drop-shadow(0 0 6px rgba(255, 215, 0, 0.5));
-  overflow: hidden;
+  filter: grayscale(0.5) brightness(0.8);
   transition: filter 0.3s ease;
 }
 
-/* Diagonal “LOCKED” banner across the item */
-.store-item.locked::before {
-  content: "LOCKED";
-  position: absolute;
-  top: 10px;
-  right: -40px;
-  transform: rotate(45deg);
-  background: rgba(255, 215, 0, 0.2); /* a faint gold overlay */
-  color: #ffd700;                     /* gold text */
-  font-weight: bold;
-  padding: 4px 8px;
-  letter-spacing: 1px;
-  box-shadow: 0 0 6px rgba(255,215,0,0.6);
-  pointer-events: none;               /* user can’t click the banner */
+.store-item.locked:hover {
+  filter: grayscale(0.5) brightness(1) drop-shadow(0 0 6px rgba(255, 215, 0, 0.4));
 }
 
-/* Optionally disable all clicks inside the locked item */
-.store-item.locked button,
-.store-item.locked * {
+.store-item.locked::before {
+  content: "🔒 LOCKED";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  background: rgba(0,0,0,0.6);
+  padding: 6px 12px;
+  border-radius: 8px;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px #000;
   pointer-events: none;
 }
 
+.store-item.locked button {
+  pointer-events: none; /* prevent clicks on the buy button */
+}
 
 
 </style>
