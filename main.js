@@ -674,23 +674,8 @@ async function handleBuyCookieButtonClick(event, revealType) {
 
 
 /************************************************************
- * 6) Inviting friends (local logic)
+ * 6) Inviting friends
  ************************************************************/
-function inviteFriend() {
-  invitedFriends++;
-  //document.getElementById('friendsInvitedCount').textContent = invitedFriends;
-
-  if (invitedFriends >= 1) {
-    document.getElementById('buyChocCookieBtn').disabled = false;
-    document.getElementById('chocCookieInfo').textContent = "You can now buy Chocolate Cookies!";
-    document.getElementById('chocCookieInfo').style.color = '#0f0';
-  }
-  if (invitedFriends % 10 === 0) {
-    userState.cookiesOwned++;
-    alert("You got a free Cookie for inviting 10 friends!");
-    updateBalances();
-  }
-}
 
 function shareMiniApp() {
   // 1) Construct your personal link
@@ -703,14 +688,6 @@ function shareMiniApp() {
   const encodedLink = encodeURIComponent(personalLink);
   const encodedMessage = encodeURIComponent("Check out this BTC Hiding Chonk and change your life forever!");
   const shareUrl = `https://t.me/share/url?url=${encodedLink}&text=${encodedMessage}`;
-
-
-  
-  if (invitedFriends >= 3) {
-    document.getElementById('buyChocCookieBtn').disabled = false;
-    document.getElementById('chocCookieInfo').textContent = "You can now buy Chocolate Cookies!";
-    document.getElementById('chocCookieInfo').style.color = '#0f0';
-  }
 
   window.open(shareUrl, "_blank");
 }

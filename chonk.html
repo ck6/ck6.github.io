@@ -206,7 +206,7 @@ button {
   display: none;   
   opacity: 0;
   transition: opacity var(--transition-duration) ease;
-  padding: 115px 20px 20px;
+  padding: 110px 20px 20px;
 }
 
 /* But for the field tab with the cat image, override that padding */
@@ -1717,10 +1717,7 @@ button {
   </div>
 
 <div class="store-item special item-with-image">
-  <!-- Put the image on the left -->
   <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
-
-  <!-- Wrap the rest in a “content” div on the right -->
   <div class="store-item-content">
     <div class="store-item-header">
       <h4>Jar of Cookies</h4>
@@ -1736,7 +1733,7 @@ button {
   </div>
 </div>
 
-     <!-- Bomb -->
+     <!-- Bomb <button class="buy-cookie-button-lively">-->
   <div class="store-item item-with-image">
     <!-- Put the cookie image on the left -->
     <img src="bomb.png" alt="Bomb" class="store-item-image" />
@@ -1857,25 +1854,7 @@ button {
     </div>
   </div>
 
-  <!-- Bunch of Cookies -->
-  <div class="store-item special-magical item-with-image">
-    <!-- Put the cookie image on the left -->
-    <img src="bunchcookies.png" alt="Bunch of Cookies" class="store-item-image" />
 
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Bunch of Cookies</h4>
-        <div class="store-item-cost">
-          45
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-        <p>Unveils 2 tiles</p>
-        <button class="buy-cookie-button" disabled onclick="handleBuyCookieButtonClick(event, 'bunch')">
-          Locked 🔒 
-        </button>
-    </div>
-  </div>
 
                <!-- Magic Yarn -->
   <div class="store-item special-magical2 item-with-image">
@@ -1941,126 +1920,10 @@ button {
   </div>
 
 
-      <!-- Normal Cookie -->
-  <div class="store-item item-with-image">
-    <!-- Put the cookie image on the left -->
-    <img src="cookie.webp" alt="Normal Cookie" class="store-item-image" />
-
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Normal Cookie</h4>
-        <div class="store-item-cost">
-          1
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-      <p>Unveils 1 tile</p>
-      <button class="buy-cookie-button-rainbow">
-        Buy 🍪
-      </button>
-    </div>
-  </div>
-
-<div class="store-item animated-gradient-aurora item-with-image">
-  <!-- Put the image on the left -->
-  <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
-
-  <!-- Wrap the rest in a “content” div on the right -->
-  <div class="store-item-content">
-    <div class="store-item-header">
-      <h4>Jar of Cookies</h4>
-      <div class="store-item-cost">
-        15
-        <img src="tgstar2.png" alt="Star" class="store-star">
-      </div>
-    </div>
-    <p>Unveils 10 tiles</p>
-    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'jar')">
-      Buy 🫙
-    </button>
-  </div>
-</div>
 
 
-  <!-- Bunch of Cookies -->
-  <div class="store-item animated-gradient-sunset item-with-image">
-    <!-- Put the cookie image on the left -->
-    <img src="bunchcookies.png" alt="Bunch of Cookies" class="store-item-image" />
 
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Bunch of Cookies</h4>
-        <div class="store-item-cost">
-          2
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-        <p>Unveils 2 tiles</p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
-          Buy 🍪🍪
-        </button>
-    </div>
-  </div>
 
-           <!-- Crown -->
-  <div class="store-item animated-gradient-neo item-with-image">
-    <!-- Put the cookie image on the left -->
-    <img src="crown.png" alt="Crown" class="store-item-image" />
-
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Crown</h4>
-        <div class="store-item-cost">
-          99
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-        <p>Gives you 10% bonus on all rewards for 1 hour</p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
-          Buy 👑
-        </button>
-    </div>
-  </div>
-
-                   <!-- Donut of Destiny -->
-  <div class="store-item animated-gradient-fairy item-with-image">
-    <!-- Put the cookie image on the left -->
-    <img src="donutdestiny.png" alt="Crown" class="store-item-image" />
-
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Donut of Destiny</h4>
-        <div class="store-item-cost">
-          99
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-        <p>Gives you 3% bonus on all rewards forever</p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
-          Buy 🍩 
-        </button>
-    </div>
-  </div>
-
-                    <!-- Ice Cream -->
-  <div class="store-item animated-gradient-bubblegum item-with-image">
-    <!-- Put the cookie image on the left -->
-    <img src="ice-cream.png" alt="Crown" class="store-item-image" />
-
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Ice Cream</h4>
-        <div class="store-item-cost">
-          99
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-        <p>Gives you 2% bonus on all rewards forever</p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
-          Buy 🍦
-        </button>
-    </div>
-  </div>
 
              <!-- Magic Paw -->
   <div class="store-item animated-gradient-citrus item-with-image">
@@ -2121,14 +1984,6 @@ button {
         </button>
     </div>
   </div>
-
-  <button class="btn-candy">Buy Now</button>
-<button class="btn-lollipop">Get Bonus</button>
-<button class="btn-sunny">Unlock</button>
-  <button class="btn-watermelon">Buy Now</button>
-<button class="btn-berry">Get Bonus</button>
-<button class="btn-mint">Unlock</button>
-<button class="btn-citrus">Unlock</button>
 
 
 <!-- Bunch of Cookies -->
