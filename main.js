@@ -131,6 +131,7 @@ async function fetchUserState() {
     // data is presumably the user doc
     userState = data;
     updateBalances();
+    showBonuses();
   } catch (err) {
     console.error("Error fetching user state:", err);
     alert("Error fetching user state!");
@@ -185,6 +186,40 @@ async function sendUserProfileToServer() {
     console.error("Error sending profile to server:", err);
     alert("Could not update user profile: " + err.message);
   }
+}
+
+
+///SHOW BONUSES
+
+function showBonuses() {
+  const permListEl = document.getElementById('permanentBonuses');
+  const tempListEl = document.getElementById('temporaryBonuses');
+  
+  // Clear old contents
+  permListEl.innerHTML = '';
+  tempListEl.innerHTML = '';
+  
+  const permanent = userState?.bonuses?.permanentItems || [];
+  const temporary = userState?.bonuses?.temporaryItems || [];
+  
+  // Show each permanent item
+  permanent.forEach(item => {
+    const li = document.createElement('li');
+    const pct = (item.rate * 100).toFixed(2);
+    li.textContent = `${item.name} (+${pct}%) forever`;
+    permListEl.appendChild(li);
+  });
+  
+  // Show each temporary item
+  temporary.forEach(item => {
+    const li = document.createElement('li');
+    const pct = (item.rate * 100).toFixed(2);
+    // maybe compute how many minutes left
+    const msLeft = new Date(item.expiresAt) - Date.now();
+    const minsLeft = Math.max(Math.floor(msLeft / 60000), 0);
+    li.textContent = `${item.name} (+${pct}%) ~${minsLeft} min left`;
+    tempListEl.appendChild(li);
+  });
 }
 
 
@@ -802,6 +837,8 @@ function setupWelcomeCountdown() {
   update();  // run once immediately
   const intervalId = setInterval(update, 1000);
 }
+
+
 
 
 
