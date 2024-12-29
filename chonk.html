@@ -1387,7 +1387,7 @@
   <div class="boxy-card">
     <p>Invite 10 frends to unlock <strong>donut of destiny</strong>!</p>
     <div class="progress-bar">
-      <div id="chocUnlockProgres4" class="progress-fill"></div>
+      <div id="chocUnlockProgress4" class="progress-fill"></div>
     </div>
   </div>
 
@@ -1402,8 +1402,7 @@
     <!-- Box #4: Are you following us?-->
   <div class="boxy-card">
     <p>Follow our channel to get <strong>a free cookie 🍪</strong></p>
-    <div class="progress-bar">
-    </div>
+
   </div>
 
   <!-- Box #5: Feeding the Chonk -->
@@ -1636,7 +1635,7 @@
           <span class="star star5">★</span>
           <span class="star star6">★</span>
           <span class="star star7">★</span>
-          <span class="star star8">★</span>
+          <!--<span class="star star8">★</span>-->
       </button>
     </div>
   </div>
@@ -1798,6 +1797,26 @@
         <p>Gives you 2% bonus on all rewards forever</p>
         <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
           Buy 🐾
+        </button>
+    </div>
+  </div>
+
+  <!-- Bunch of Cookies -->
+  <div class="store-item special-magical item-with-image">
+    <!-- Put the cookie image on the left -->
+    <img src="bunchcookies.png" alt="Bunch of Cookies" class="store-item-image" />
+
+    <div class="store-item-content">
+      <div class="store-item-header">
+        <h4>Bunch of Cookies</h4>
+        <div class="store-item-cost">
+          45
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+        <p>Unveils 2 tiles</p>
+        <button class="buy-cookie-button" disabled onclick="handleBuyCookieButtonClick(event, 'bunch')">
+          Locked 🔒 
         </button>
     </div>
   </div>
