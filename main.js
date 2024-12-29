@@ -761,6 +761,16 @@ function showTab(tab) {
   }
 
 
+  if (tab === 'bonuses') {
+
+    //CHECHK IF THEY FOLLOW OUR CHANNEL
+      if (!userState.followsChannel || !userState.channelCookieAwarded) {
+    checkChannelJoin(); 
+    }
+  }
+
+
+
   //STORE LOGIC
 
   if (tab === 'store') {
@@ -1079,6 +1089,53 @@ function calculateTotalBonusFromUserState() {
 
 
 /************************************************************
+ * Check if user is following our channel
+ ************************************************************/
+
+async function checkChannelJoin() {
+  try {
+    const res = await fetch("https://yourdomain.com/api/checkChannelMembership", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        initData: tg.initData,
+        userId: userId // from tg.initDataUnsafe.user.id
+      })
+    });
+    const data = await res.json();
+
+    if (data.error) {
+      console.error("checkChannelMembership error:", data.error);
+      alert("Error checking membership: " + data.error);
+      return;
+    }
+
+    // data => { isMember, cookiesOwned, alreadyAwarded }
+    if (data.isMember) {
+      if (!data.alreadyAwarded) {
+        // They just got the cookie now
+        alert(`You joined the channel! Enjoy +1 cookie (total = ${data.cookiesOwned})`);
+      }
+      userState.followsChannel = true;
+      userState.channelCookieAwarded = data.alreadyAwarded || true; 
+      userState.cookiesOwned = data.cookiesOwned;
+    } else {
+      alert("You are not a member of our channel yet!");
+      userState.followsChannel = false;
+    }
+
+    // Optionally update any UI (like "followsChannel" or cookie count display)
+    updateBonusesUI();
+
+  } catch (err) {
+    console.error("Request failed:", err);
+    alert("Request failed: " + err.message);
+  }
+}
+
+
+
+/************************************************************
  * 9) Feeding / Chonk Level (local display)
  ************************************************************/
 const LEVEL_THRESHOLDS = [10, 25, 50];
@@ -1264,27 +1321,6 @@ async function saveWalletAddress(tonWalletAddress) {
 
 
 
-
-   // NOT USED 2. This function will open the wallet
-    async function connectToWallet() {
-      try {
-        tonConnectUI.uiOptions = {
-      twaReturnUrl: 'https://t.me/LuckyChonkBot'
-      };
-        const connectedWallet = await tonConnectUI.connectWallet();
-        console.log("Connected wallet:", connectedWallet);
-      alert(`connectedWallet = ${JSON.stringify(connectedWallet)}`); // just to debug
-      if (!connectedWallet?.account?.address) {
-        alert("No address found in connectedWallet!");
-        return;
-      }
-
-      await saveWalletAddress(connectedWallet.account.address);
-
-      } catch (error) {
-        console.error("Error connecting to wallet:", error);
-      }
-    }
 
 
 function showNoCookiesPopup() {
