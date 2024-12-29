@@ -856,8 +856,15 @@ function updateBalances() {
     }
 
     //UPDATE FRIENDS-INVITE PROGRESS
-    updateChocBarProgress();
-  
+    //updateChocBarProgress();
+
+  updateInviteProgress('chocUnlockProgress', 3);
+  updateInviteProgress('chocUnlockProgress2', 3);
+  updateInviteProgress('chocUnlockProgress3', 3);
+  updateInviteProgress('chocUnlockProgress4', 10);
+  updateInviteProgress('jarUnlockProgress', 5);
+
+
 
 
   //  // Show or hide the Bomb button
@@ -940,7 +947,8 @@ function updateBalances() {
 
 
 //UPDATING LOCKED STORE ITEMS
-function updateChocBarProgress() {
+
+function updateChocBarProgress() { //NOT IN USE CURRENTLY
   // Suppose userState.friendsInvited stores how many friends the user has invited
   const friendsInvited = userState?.friendsInvited || 0;
   const needed = 3; // number of invites required
@@ -951,6 +959,18 @@ function updateChocBarProgress() {
     bar.style.width = percent + '%';
   }
 }
+
+function updateInviteProgress(barId, needed) {
+  const friendsInvited = userState?.friendsInvited || 0;
+  const bar = document.getElementById(barId);
+  if (!bar) return;
+
+  const pct = Math.min((friendsInvited / needed) * 100, 100);
+  bar.style.width = pct + '%';
+}
+
+
+
 
 
 /************************************************************
