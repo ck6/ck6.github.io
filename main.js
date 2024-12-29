@@ -878,6 +878,32 @@ function updateStoreItemsUI() {
     // or textContent = "Crown Running"
     // or show a countdown, etc.
   }
+
+
+  const friendsInvited = userState?.friendsInvited || 0;
+
+  // Grab references to our single Jar item and its child elements
+  const jarBuyBtn      = document.getElementById("jarBuyButton");
+  const jarLockOverlay = document.getElementById("jarLockOverlay");
+
+  if (!jarBuyBtn || !jarLockOverlay) return; // safeguard
+
+  if (friendsInvited < 3) {
+    // We want the Jar to appear locked:
+    jarBuyBtn.style.display      = "none";
+    jarLockOverlay.style.display = "block";
+    updateInviteProgress('jarProgressBar', 3);
+  } else {
+    // 3 or more friends => unlocked:
+    jarBuyBtn.style.display      = "block";
+    jarLockOverlay.style.display = "none";
+  }
+}
+
+
+
+
+
 }
 
 
