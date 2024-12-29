@@ -881,6 +881,12 @@ function updateStoreItemsUI() {
     // or add a .locked style, etc.
   }
 
+    // 1) Hide the Welcome Package once purchased:
+  const welcomePkgEl = document.getElementById("welcomePackageItem");
+  if (welcomePkgEl && userState?.store?.welcomePackage?.purchased) {
+    welcomePkgEl.style.display = "none";
+  }
+
   // 2) Crown check (NEW)
   const crownBtn = document.getElementById("buyCrownButton");
   // We consider 'active' if expiresAt is in the future
