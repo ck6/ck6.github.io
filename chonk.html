@@ -1486,6 +1486,7 @@ button {
       <p>Follow our channel to get <strong>a free cookie</strong></p>
     </div>
       <div id="channelRewardStatus"></div>
+  <button id="checkFollowButton" onclick="checkChannelJoin()">Check</button>
     <img src="cookie.webp" 
          alt="Cookie" 
          style="width: 40px; height: auto; margin-left: 8px;" />
@@ -1779,48 +1780,6 @@ button {
     </button>
   </div>
 </div>
-
-
-
-<!-- Single Jar item -->
-<div class="store-item special item-with-image" id="jarItem">
-  <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
-  <div class="store-item-content">
-    <div class="store-item-header">
-      <h4>Jar of Cookies</h4>
-      <div class="store-item-cost">
-        60
-        <img src="tgstar2.png" alt="Star" class="store-star">
-      </div>
-    </div>
-    <p>Unveils 3? 10 tiles</p>
-
-    <!-- Unlocked state (Buy button) -->
-    <button 
-      class="buy-cookie-button" 
-      id="jarBuyButton"
-      onclick="handleBuyCookieButtonClick(event, 'jar')"
-    >
-      Buy 🫙
-    </button>
-
-    <!-- Locked state (overlay or separate block) -->
-    <div id="jarLockOverlay" style="display: none; margin-top: 8px;">
-      <button class="buy-cookie-button" style="margin-bottom: 8px;">
-        Locked 🔒
-      </button>
-      <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
-        Invite 3 friends to unlock
-      </p>
-      <div class="progress-bar" style="margin-top: 0;">
-        <div id="jarProgressBar" class="progress-fill"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
 
 
         <!-- Bomb -->
