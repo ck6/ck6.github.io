@@ -1320,6 +1320,40 @@
 }
 
 
+.store-item.locked {
+  position: relative;
+  /* If you're using an animation, include it here, e.g.:
+     animation: lockedGlow 2.5s infinite alternate ease-in-out;
+     filter: brightness(0.8);
+  */
+}
+
+.store-item.locked::before {
+  content: "🔒 LOCKED";
+  position: absolute;
+  /* Place it in the top-left corner... */
+  top: 8px;
+  left: -10px;  /* shift it a bit left so the angled text fits */
+  /* Slight angle: negative angle tilts it a bit clockwise */
+  transform: rotate(-15deg);
+
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 6px 12px;
+  border-radius: 8px;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px #000;
+  pointer-events: none; /* user can’t click the label */
+  z-index: 999; /* ensures it appears on top of other elements */
+}
+
+/* If you want to disable clicks inside the locked item: */
+.store-item.locked * {
+  pointer-events: none;
+}
+
 
 </style>
 
