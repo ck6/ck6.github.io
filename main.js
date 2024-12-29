@@ -134,7 +134,7 @@ async function fetchUserState() {
     showBonuses();
   } catch (err) {
     console.error("Error fetching user state:", err);
-    alert("Error fetching user state!", err);
+    alert("Error fetching user statex!", err);
   }
 }
 
