@@ -1945,25 +1945,6 @@ button {
     </div>
   </div>
 
-               <!-- Magic Yarn -->
-  <div class="store-item special-magical2 item-with-image">
-    <!-- Put the cookie image on the left -->
-    <img src="yarn.png" alt="Crown" class="store-item-image" />
-
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Magic Yarn</h4>
-        <div class="store-item-cost">
-          99
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-        <p>Gives you 10% bonus on all rewards for 30 min</p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
-          Buy 🧶
-        </button>
-    </div>
-  </div>
 
                  <!-- Sushi -->
   <div class="store-item animated-gradient item-with-image">
@@ -1986,33 +1967,6 @@ button {
   </div>
 
 
-<!-- Bunch of Cookies -->
-  <div class="store-item locked special-magical item-with-image">
-    <!-- Put the cookie image on the left -->
-    <img src="bunchcookies.png" alt="Bunch of Cookies" class="store-item-image" />
-
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Bunch of Cookies</h4>
-        <div class="store-item-cost">
-          45
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-        <p>Unveils 2 tiles</p>
-      <button class="buy-cookie-button" style="margin-bottom: 8px;">
-        Buy 🔒
-      </button>
-<div style="margin-top: 0;">
-  <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
-    Invite 3 friends to unlock
-  </p>
-  <div class="progress-bar" style="margin-top: 0;">
-    <div id="chocBarUnlockProgress" class="progress-fill"></div>
-  </div>
-</div>
-</div>
-</div>
 
 <div class="store-item special item-with-image">
   <!-- Put the image on the left -->
@@ -2044,41 +1998,9 @@ button {
 
 
 
-      <!-- Chocolate Bar (locked) class="buy-choc-cookie-button" -->
-      <div class="store-item locked">
-        <div class="store-item-header">
-          <h4>🍩 Chocolate Bar</h4>
-          <div class="store-item-cost">
-            2
-            <img src="tgstar2.png" alt="Star" class="store-star">
-          </div>
-        </div>
-        <p>Unveils 3 tiles</p>
-        <button class="buy-cookie-button"
-                id="buyChocCookieBtn"
-                style="margin-bottom: 8px;"
-                onclick="handleBuyCookieButtonClick(event, 'choc')"
-                >
-          Buy 🍩
-        </button>
-
-        <div style="margin-top: 0;">
-  <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
-    Invite 3 friends to unlock
-    </p>
-    <div class="progress-bar" style="margin-top: 0;">
-      <div id="chocBarUnlockProgress2" class="progress-fill"></div>
-    </div>
-  </div>
-      </div>
-
-
     </div>
 
     <!-- Existing text, balances, etc. -->
-    <p id="chocCookieInfo" style="margin-top:10px; color:#ff0;">
-      Invite 3 friends to unlock Chocolate Bars!
-    </p>
     <p id="storeCookieBalances" style="font-size:16px; margin-top:10px;">
       Cookies: 0 | Choc: 0
     </p>
@@ -2107,7 +2029,7 @@ button {
 <div class="bottom-nav">
   <button id="bonusesTab" onclick="showTab('bonuses')">🌟 Bonuses</button>
   <button id="storeTab" onclick="showTab('store')">🍪 Store</button>
-  <button id="fieldTab" class="active" onclick="showTab('field')">💰😺 Chonk</button>
+  <button id="fieldTab" class="active" onclick="showTab('field')">💰😺 Tiles</button>
   <button id="statsTab" onclick="showTab('stats')">👑 Stats</button>
   <button id="balanceTab" onclick="showTab('balance')">💎 Wallet</button>
 
