@@ -1370,13 +1370,22 @@
 
 
 
-  <!-- Box #2: Chocolate Bar Unlock (3 invites) 🍫 Chocolate Bars-->
-  <div class="boxy-card">
-    <p>Invite 3 frends to unlock <strong>a bunch of cookies</strong>!</p>
-    <div class="progress-bar">
-      <div id="chocUnlockProgress2" class="progress-fill"></div>
+  <!-- Invite 3 friends to unlock a bunch of cookies  -->
+  <div class="boxy-card" style="display: flex; align-items: center; justify-content: space-between;">
+    <!-- Left side: text & progress bar -->
+    <div>
+      <p>Invite 3 frends to unlock <strong>a bunch of cookies</strong>!</p>
+      <div class="progress-bar">
+        <div id="chocUnlockProgress2" class="progress-fill"></div>
+      </div>
     </div>
+    <img src="bunchcookies.png" 
+         alt="Bunch of Cookies" 
+         style="width: 40px; height: auto; margin-left: 8px;" />
   </div>
+
+
+
 
   <!-- Invite 10 friends to unlock a jar of cookies (with small jar icon) -->
   <div class="boxy-card" style="display: flex; align-items: center; justify-content: space-between;">
@@ -1387,34 +1396,52 @@
         <div id="chocUnlockProgress3" class="progress-fill"></div>
       </div>
     </div>
-
-    <!-- Right side: small jar image -->
     <img src="cookie_jar.png" 
          alt="Small Jar" 
          style="width: 40px; height: auto; margin-left: 8px;" />
   </div>
 
-    <!-- Box #2: Chocolate Bar Unlock (3 invites) 🍫 Chocolate Bars-->
-  <div class="boxy-card">
-    <p>Invite 10 frends to unlock <strong>donut of destiny</strong>!</p>
-    <div class="progress-bar">
-      <div id="chocUnlockProgress4" class="progress-fill"></div>
+
+  <!-- Invite 10 friends to unlock a donut of destiny -->
+  <div class="boxy-card" style="display: flex; align-items: center; justify-content: space-between;">
+    <!-- Left side: text & progress bar -->
+    <div>
+      <p>Invite 10 frends to unlock <strong>a donut of destiny</strong></p>
+      <div class="progress-bar">
+        <div id="chocUnlockProgress4" class="progress-fill"></div>
+      </div>
     </div>
+    <img src="donutdestiny.png" 
+         alt="Donut of Destiny" 
+         style="width: 40px; height: auto; margin-left: 8px;" />
   </div>
 
-  <!-- Box #3: Jar of Cookies Unlock (10 invites) -->
-  <div class="boxy-card">
-    <p>Invite 5 frends to get a <strong>free cookie</strong>!</p>
-    <div class="progress-bar">
-      <div id="jarUnlockProgress" class="progress-fill"></div>
+    <!-- Invite 5 friends to get a free cookie -->
+  <div class="boxy-card" style="display: flex; align-items: center; justify-content: space-between;">
+    <div>
+      <p>Invite 5 frends to get a <strong>free cookie</strong></p>
+      <div class="progress-bar">
+        <div id="jarUnlockProgress" class="progress-fill"></div>
+      </div>
     </div>
+    <img src="cookie.webp" 
+         alt="Cookie" 
+         style="width: 40px; height: auto; margin-left: 8px;" />
   </div>
 
-    <!-- Box #4: Are you following us?-->
-  <div class="boxy-card">
-    <p>Follow our channel to get <strong>a free cookie 🍪</strong></p>
 
+      <!-- Are you following our channel?-->
+  <div class="boxy-card" style="display: flex; align-items: center; justify-content: space-between;">
+    <div>
+      <p>Follow our channel to get <strong>a free cookie 🍪</strong></p>
+    </div>
+    <img src="cookie.webp" 
+         alt="Cookie" 
+         style="width: 40px; height: auto; margin-left: 8px;" />
   </div>
+
+
+
 
   <!-- Box #5: Feeding the Chonk -->
   <div class="boxy-card">
@@ -2128,14 +2155,16 @@
       </div>
     </div>
     <p>Unveils 3? 10 tiles</p>
-          <button class="buy-cookie-button">
+          <button class="buy-cookie-button" style="margin-bottom: 8px;">
         Locked 🔒
       </button>
-    <p class="store-lock-text" style="font-weight: bold;">
-          Invite 10 friends to unlock
-        </p>
-          <div class="progress-bar" style="margin-top: 5px;">
-    <div id="chocBarUnlockProgress1" class="progress-fill"></div>
+  <div style="margin-top: 0;">
+    <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
+      Invite 3 friends to unlock
+    </p>
+    <div class="progress-bar" style="margin-top: 0;">
+      <div id="chocBarUnlockProgress1" class="progress-fill"></div>
+    </div>
   </div>
   </div>
 </div>
@@ -2154,18 +2183,23 @@
         <p>Unveils 3 tiles</p>
         <button class="buy-cookie-button"
                 id="buyChocCookieBtn"
+                style="margin-bottom: 8px;"
                 onclick="handleBuyCookieButtonClick(event, 'choc')"
                 >
           Buy 🍩
         </button>
 
-        <p class="store-lock-text" style="font-weight: bold;">
-          Invite 3 friends to unlock
-        </p>
-          <div class="progress-bar" style="margin-top: 5px;">
-    <div id="chocBarUnlockProgress" class="progress-fill"></div>
+        <div style="margin-top: 0;">
+  <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
+    Invite 3 friends to unlock
+    </p>
+    <div class="progress-bar" style="margin-top: 0;">
+      <div id="chocBarUnlockProgress2" class="progress-fill"></div>
+    </div>
   </div>
       </div>
+
+
     </div>
 
     <!-- Existing text, balances, etc. -->
