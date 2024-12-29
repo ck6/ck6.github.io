@@ -130,7 +130,7 @@ async function fetchUserState() {
 
     // data is presumably the user doc
     userState = data;
-    //updateBalances();
+    updateBalances();
     //showBonuses();
   } catch (err) {
     console.error("Error fetching user state:", err);
