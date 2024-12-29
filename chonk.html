@@ -1276,6 +1276,29 @@
   }
 }
 
+
+.store-item.locked {
+  position: relative;
+  filter: grayscale(0.4) brightness(0.8);
+}
+
+.store-item.locked::before {
+  content: "🔒";
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  font-size: 20px;
+  animation: lockedSpin 2s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes lockedSpin {
+  0%   { transform: rotate(0deg) scale(1);   }
+  50%  { transform: rotate(180deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+
 </style>
 
 </head>
