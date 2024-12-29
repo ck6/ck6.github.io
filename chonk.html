@@ -1319,6 +1319,40 @@
   pointer-events: none;
 }
 
+.store-item.locked {
+  position: relative;
+  /* If you have an animation (like dim/glow), include here:
+     animation: lockedGlow 2.5s infinite alternate ease-in-out;
+     filter: brightness(0.8);
+  */
+}
+
+/* Label at the top center, partially above the item */
+.store-item.locked::before {
+  content: "🔒 LOCKED";
+  position: absolute;
+  /* Negative top moves it above the item’s top edge */
+  top: -12px; 
+  /* Center horizontally */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 6px 12px;
+  border-radius: 8px;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px #000;
+  pointer-events: none;  /* user can't click the label */
+  z-index: 999;          /* ensure it appears above images/text inside */
+}
+
+/* Example if you want to disable all clicks inside locked item: */
+.store-item.locked * {
+  pointer-events: none;
+}
 
 
 </style>
