@@ -1276,26 +1276,35 @@
   }
 }
 
-
 .store-item.locked {
   position: relative;
-  filter: grayscale(0.4) brightness(0.8);
+  filter: grayscale(0.5) brightness(0.8);
+  transition: filter 0.3s ease;
+}
+
+.store-item.locked:hover {
+  filter: grayscale(0.5) brightness(1) drop-shadow(0 0 6px rgba(255, 215, 0, 0.4));
 }
 
 .store-item.locked::before {
-  content: "🔒";
+  content: "🔒 LOCKED";
   position: absolute;
-  bottom: 8px;
-  right: 8px;
-  font-size: 20px;
-  animation: lockedSpin 2s linear infinite;
-  opacity: 0.8;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  background: rgba(0,0,0,0.6);
+  padding: 6px 12px;
+  border-radius: 8px;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px #000;
+  pointer-events: none;
 }
 
-@keyframes lockedSpin {
-  0%   { transform: rotate(0deg) scale(1);   }
-  50%  { transform: rotate(180deg) scale(1.2); }
-  100% { transform: rotate(360deg) scale(1); }
+.store-item.locked button {
+  pointer-events: none; /* prevent clicks on the buy button */
 }
 
 
