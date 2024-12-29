@@ -1239,10 +1239,13 @@
   top: 80%; left: 60%;
   animation-delay: 2.2s;
 }
+
 .dark-star-button .star7 {
-  top: 30%; left: 45%;
+  top: -20%; /* negative so it's above the button entirely 30*/
+  left: 120%; /* move it way to the right so it's off the text 45 */
   animation-delay: 0.8s;
 }
+
 .dark-star-button .star8 {
   top: 60%; left: 55%;
   animation-delay: 1.6s;
@@ -1375,12 +1378,20 @@
     </div>
   </div>
 
-    <!-- Box #2: Chocolate Bar Unlock (3 invites) 🍫 Chocolate Bars-->
-  <div class="boxy-card">
-    <p>Invite 10 frends to unlock <strong>a jar of cookies</strong>!</p>
-    <div class="progress-bar">
-      <div id="chocUnlockProgress3" class="progress-fill"></div>
+  <!-- Invite 10 friends to unlock a jar of cookies (with small jar icon) -->
+  <div class="boxy-card" style="display: flex; align-items: center; justify-content: space-between;">
+    <!-- Left side: text & progress bar -->
+    <div>
+      <p>Invite 10 frends to unlock <strong>a jar of cookies</strong>!</p>
+      <div class="progress-bar">
+        <div id="chocUnlockProgress3" class="progress-fill"></div>
+      </div>
     </div>
+
+    <!-- Right side: small jar image -->
+    <img src="cookie_jar.png" 
+         alt="Small Jar" 
+         style="width: 40px; height: auto; margin-left: 8px;" />
   </div>
 
     <!-- Box #2: Chocolate Bar Unlock (3 invites) 🍫 Chocolate Bars-->
@@ -2088,9 +2099,9 @@
           <img src="tgstar2.png" alt="Star" class="store-star">
         </div>
       </div>
-        <p>Unveils 2 tiles</p><br><br>
+        <p>Unveils 2 tiles</p>
       <button class="buy-cookie-button">
-        Locked
+        Buy 🔒
       </button>
         <p class="store-lock-text" style="font-weight: bold;">
           Invite 3 friends to unlock
@@ -2116,7 +2127,7 @@
     </div>
     <p>Unveils 3? 10 tiles</p>
           <button class="buy-cookie-button">
-        Locked
+        Locked 🔒
       </button>
     <p class="store-lock-text" style="font-weight: bold;">
           Invite 10 friends to unlock
