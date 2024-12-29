@@ -764,9 +764,9 @@ function showTab(tab) {
   if (tab === 'bonuses') {
 
     //CHECHK IF THEY FOLLOW OUR CHANNEL
-      if (!userState.followsChannel || !userState.channelCookieAwarded) {
-    checkChannelJoin(); 
-    }
+     // if (!userState.followsChannel || !userState.channelCookieAwarded) {
+    //checkChannelJoin(); 
+    //}
   }
 
 
@@ -1041,12 +1041,12 @@ function updateBalances() {
 //BONUS TAB UI
 function updateBonusesUI() {
   const container = document.getElementById('channelRewardRow');
-  if (!container) return; // safety check
+  if (!container) return;
 
   container.innerHTML = ""; // clear old content
 
-  // If the user already got their channel cookie, show a checkmark or “Awarded” text
   if (userState.channelCookieAwarded) {
+    // Already got the cookie => show green check
     container.innerHTML = `
       <h3>Follow Channel Bonus</h3>
       <p style="color: #0f0;">
@@ -1056,29 +1056,40 @@ function updateBonusesUI() {
     return;
   }
 
-  // Otherwise, user has NOT been awarded the cookie
-  // Possibly also check if (!userState.followsChannel) => show "Join" link
-
-  // 1) Show a link to your channel in case they haven’t joined yet
-  // 2) Provide a button to call checkChannelJoin() to re-check membership
-
+  // Not yet awarded => show your channel link + optional bot link + "Check" button
   container.innerHTML = `
     <h3>Follow Channel Bonus</h3>
     <p>Join our channel to get a free cookie!</p>
+
     <div style="margin: 8px 0;">
+      <!-- Link to your channel -->
       <a href="https://t.me/luckychonk" target="_blank"
          style="text-decoration:none; color:#2196F3; font-weight:bold;"
        >
         👉 Join Channel
       </a>
     </div>
+
+    <!-- Optionally also link the bot if you want them to open the bot, 
+         e.g. "https://t.me/YourBotUsername" -->
+    <div style="margin: 8px 0;">
+      <a href="https://t.me/YourBotUsername" target="_blank"
+         style="text-decoration:none; color:#2196F3; font-weight:bold;"
+       >
+        🤖 Open Bot
+      </a>
+    </div>
+
+    <!-- The "Check" button that triggers checkChannelJoin() -->
     <button onclick="checkChannelJoin()"
-            style="background:#444; color:#fff; border:none; padding:8px 16px; border-radius:4px;"
+            style="background:#444; color:#fff; border:none; 
+                   padding:8px 16px; border-radius:4px;"
     >
       Check Now
     </button>
   `;
 }
+
 
 
 
