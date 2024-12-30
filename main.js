@@ -878,6 +878,26 @@ function updateStoreItemsUI() {
     // or textContent = "Crown Running"
     // or show a countdown, etc.
   }
+
+  // 1) Grab the locked/unlocked Jar elements
+  const jarLockedEl = document.getElementById('jarLockedItem');
+  const jarUnlockedEl = document.getElementById('jarUnlockedItem');
+
+  // 2) Get how many friends invited
+  const friendsInvited = userState?.friendsInvited || 0;
+
+  // 3) If friendsInvited >= 3, show unlocked; otherwise show locked
+  if (friendsInvited >= 3) {
+    jarLockedEl.style.display = 'none';
+    jarUnlockedEl.style.display = 'block';
+  } else {
+    jarLockedEl.style.display = 'block';
+    jarUnlockedEl.style.display = 'none';
+  }
+
+
+
+  
 }
 
 
