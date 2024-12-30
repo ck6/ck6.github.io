@@ -889,11 +889,11 @@ function updateStoreItemsUI() {
   if (friendsInvited >= 3) {
     alert("enough friends");
     jarLockedEl.style.display = 'none';
-    jarUnlockedEl.style.display = 'block';
+    //jarUnlockedEl.style.display = 'block';
   } else {
     alert("not enough friends");
     jarLockedEl.style.display = 'block';
-    jarUnlockedEl.style.display = 'none';
+    //jarUnlockedEl.style.display = 'none';
   }
 
 
