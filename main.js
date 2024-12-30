@@ -897,7 +897,7 @@ function updateStoreItemsUI() {
 
 
 
-  
+
 }
 
 
@@ -961,7 +961,8 @@ function updateBalances() {
   updateInviteProgress('chocUnlockProgress2', 3);
   updateInviteProgress('chocUnlockProgress3', 3);
   updateInviteProgress('chocUnlockProgress4', 10);
-  updateInviteProgress('jarUnlockProgress', 5);
+  updateInviteProgress('jarUnlockProgressStore', 5);
+  updateInviteProgress('jarUnlockProgress', 3);
 
 
 
