@@ -961,7 +961,7 @@ function updateBalances() {
   updateInviteProgress('chocUnlockProgress2', 3);
   updateInviteProgress('chocUnlockProgress3', 3);
   updateInviteProgress('chocUnlockProgress4', 10);
-  updateInviteProgress('jarUnlockProgressStore', 5);
+  //updateInviteProgress('jarUnlockProgressStore', 3);
   updateInviteProgress('jarUnlockProgress', 3);
 
 
