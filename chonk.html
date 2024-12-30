@@ -1764,12 +1764,7 @@ button {
     </div>
   </div>
 
-
-
-
-
-<!-- Jar of Cookies (LOCKED) -->
-<div id="jarLockedItem" class="store-item special item-with-image">
+<div class="store-item special item-with-image">
   <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
   <div class="store-item-content">
     <div class="store-item-header">
@@ -1779,40 +1774,7 @@ button {
         <img src="tgstar2.png" alt="Star" class="store-star">
       </div>
     </div>
-
-    <p>Unveils 10 tiles</p>
-    
-    <!-- The locked state UI -->
-    <button class="buy-cookie-button" style="margin-bottom: 8px;">
-      Locked 🔒
-    </button>
-
-    <div style="margin-top: 0;">
-      <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
-        Invite 3 friends to unlock
-      </p>
-      <div class="progress-bar" style="margin-top: 0;">
-        <div id="jarUnlockProgressStore" class="progress-fill"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Jar of Cookies (UNLOCKED) -->
-<div id="jarUnlockedItem" class="store-item special item-with-image" style="display: none;">
-  <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
-  <div class="store-item-content">
-    <div class="store-item-header">
-      <h4>Jar of Cookies</h4>
-      <div class="store-item-cost">
-        60
-        <img src="tgstar2.png" alt="Star" class="store-star">
-      </div>
-    </div>
-
-    <p>Unveils 10 tiles</p>
-    
-    <!-- The normal buy button -->
+    <p>Unveils 3? 10 tiles</p>
     <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'jar')">
       Buy 🫙
     </button>
@@ -1820,13 +1782,8 @@ button {
 </div>
 
 
-
-
-
-
-
         <!-- Bomb -->
-  <div class="store-item animated-gradient-candy item-with-image" style="display: none;">
+  <div class="store-item animated-gradient-candy item-with-image">
     <!-- Put the cookie image on the left -->
     <img src="bomb.png" alt="Bomb" class="store-item-image" />
 
@@ -1929,7 +1886,7 @@ button {
   </div>
 
              <!-- Magic Paw -->
-  <div class="store-item special-galaxy item-with-image" style="display: none;">
+  <div class="store-item special-galaxy item-with-image">
     <!-- Put the cookie image on the left -->
     <img src="paw.png" alt="Crown" class="store-item-image" />
 
@@ -1951,7 +1908,7 @@ button {
 
 
                <!-- Magic Yarn -->
-  <div class="store-item special-magical2 item-with-image" style="display: none;">
+  <div class="store-item special-magical2 item-with-image">
     <!-- Put the cookie image on the left -->
     <img src="yarn.png" alt="Crown" class="store-item-image" />
 
@@ -2017,6 +1974,37 @@ button {
     </div>
   </div>
 
+
+
+
+
+<div class="store-item special item-with-image">
+  <!-- Put the image on the left -->
+  <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
+
+  <!-- Wrap the rest in a “content” div on the right -->
+  <div class="store-item-content">
+    <div class="store-item-header">
+      <h4>Jar of Cookies</h4>
+      <div class="store-item-cost">
+        60
+        <img src="tgstar2.png" alt="Star" class="store-star">
+      </div>
+    </div>
+    <p>Unveils 3? 10 tiles</p>
+          <button class="buy-cookie-button" style="margin-bottom: 8px;">
+        Locked 🔒
+      </button>
+  <div style="margin-top: 0;">
+    <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
+      Invite 3 friends to unlock
+    </p>
+    <div class="progress-bar" style="margin-top: 0;">
+      <div id="jarUnlockProgressStore2" class="progress-fill"></div>
+    </div>
+  </div>
+  </div>
+</div>
 
 
 

@@ -275,7 +275,7 @@ async function loadCluster(index) {
 
   if (userState) {
     document.getElementById('clusterCookies').textContent = userState.cookiesOwned || 0;
-    document.getElementById('clusterChocolate').textContent = userState.chocolateReveals || 0;
+    //document.getElementById('clusterChocolate').textContent = userState.chocolateReveals || 0;
   }
 
   currentClusterData = await fetchSingleCluster(index);
@@ -933,7 +933,7 @@ function updateBalances() {
 
     // Update the cluster heading if we want to see it reflect changes immediately
   document.getElementById('clusterCookies').textContent = cookiesOwned;
-  document.getElementById('clusterChocolate').textContent = choc;
+  //document.getElementById('clusterChocolate').textContent = choc;
    document.getElementById('clusterBombs').textContent = bombs;
 
 
