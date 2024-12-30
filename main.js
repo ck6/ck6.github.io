@@ -892,8 +892,8 @@ function updateStoreItemsUI() {
     //jarUnlockedEl.style.display = 'block';
   } else {
     alert("not enough friends");
-    jarLockedEl.style.display = 'block';
-    //jarUnlockedEl.style.display = 'none';
+    //jarLockedEl.style.display = 'block';
+    jarUnlockedEl.style.display = 'none';
   }
 
 
