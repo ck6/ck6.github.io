@@ -337,20 +337,19 @@ function createHexGrid() {
        const userPhotoUrltemp = user?.photo_url;
 
         // Instead of plain text, show random avatar + reward
-        const randomAvatarUrl = `https://i.pravatar.cc/40?img=${Math.floor(Math.random() * 70)}`;
+        //const randomAvatarUrl = `https://i.pravatar.cc/40?img=${Math.floor(Math.random() * 70)}`;
         // You can adjust width/height for a bigger or smaller avatar
         const tileHTML = `
           <div style="display: flex; flex-direction: column; align-items: center;">
             <div class="rewardText" style="font-size: 16px; margin-bottom: 5px;">
               ${globalVal}
             </div>
-            <img 
-              src="${userPhotoUrltemp}" 
-              style="border-radius: 50%; width: 24px; height: 24px;" 
-              alt="Random Avatar"
-            />
           </div>
         `;
+        //            <img 
+        //      src="${userPhotoUrltemp}" 
+        //      style="border-radius: 50%; width: 24px; height: 24px;" 
+        //      alt="Random Avatar"/>
         hex.innerHTML = tileHTML;
       } else {
         // Not revealed => pastel background + random emoji
