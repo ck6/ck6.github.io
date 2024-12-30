@@ -887,7 +887,7 @@ function updateStoreItemsUI() {
 
   // 3) If friendsInvited >= 3, show unlocked; otherwise show locked
   if (friendsInvited >= 3) {
-    jarLockedEl.style.display = 'none';
+    //jarLockedEl.style.display = 'none';
     //jarUnlockedEl.style.display = 'block';
   } else {
     //jarLockedEl.style.display = 'block';
