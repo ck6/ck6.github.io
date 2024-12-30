@@ -1452,6 +1452,21 @@ button {
   </div>
 
 
+    <!-- Invite 10 friends to unlock a donut of destiny -->
+  <div class="boxy-card" style="display: flex; align-items: center; justify-content: space-between;">
+    <!-- Left side: text & progress bar -->
+    <div>
+      <p>Invite 10 frends to unlock <strong>meowgical paw</strong></p>
+      <div class="progress-bar">
+        <div id="chocUnlockProgress4" class="progress-fill"></div>
+      </div>
+    </div>
+    <img src="paw.png" 
+         alt="Donut of Destiny" 
+         style="width: 40px; height: auto; margin-left: 8px;" />
+  </div>
+
+
   <!-- Invite 10 friends to unlock a donut of destiny -->
   <div class="boxy-card" style="display: flex; align-items: center; justify-content: space-between;">
     <!-- Left side: text & progress bar -->
@@ -1702,13 +1717,13 @@ button {
     </div>
     <p id="welcomeCountdown"></p>
     <!-- Description: total of 15 unveils -->
-    <p>Includes a Jar of Cookies and an x<br>for a total of 20 or 25? unveils!</p>
+    <p>Includes<strong> 25 unveils and the Chonk's exclusive ring for a 1.5% lifetime bonus</strong> on all rewards!</p>
     <!-- Buy button (adjust the onclick revealType to match your logic) -->
     <button class="buy-cookie-button sparkle-button" onclick="handleBuyCookieButtonClick(event, 'welcomePackage')">
       Buy 🎉
     </button>
       </div>
-      <span class="founders-label">Limited Time Discount</span>
+      <span class="founders-label">300% Discount</span>
 </div>
 
 
@@ -1826,59 +1841,6 @@ button {
   </div>
 
 
-<!-- Jar of Cookies (LOCKED) -->
-<div id="jarLockedItem" class="store-item special item-with-image">
-  <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
-  <div class="store-item-content">
-    <div class="store-item-header">
-      <h4>Jar of Cookies</h4>
-      <div class="store-item-cost">
-        60
-        <img src="tgstar2.png" alt="Star" class="store-star">
-      </div>
-    </div>
-
-    <p>Unveils 10 tiles</p>
-    
-    <!-- The locked state UI -->
-    <button class="buy-cookie-button" style="margin-bottom: 8px;">
-      Locked 🔒
-    </button>
-
-    <div style="margin-top: 0;">
-      <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
-        Invite 3 friends to unlock
-      </p>
-      <div class="progress-bar" style="margin-top: 0;">
-        <div id="jarUnlockProgressStore" class="progress-fill"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Jar of Cookies (UNLOCKED) -->
-<div id="jarUnlockedItem" class="store-item special item-with-image">
-  <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
-  <div class="store-item-content">
-    <div class="store-item-header">
-      <h4>Jar of Cookies</h4>
-      <div class="store-item-cost">
-        60
-        <img src="tgstar2.png" alt="Star" class="store-star">
-      </div>
-    </div>
-
-    <p>Unveils 10 tiles</p>
-    
-    <!-- The normal buy button -->
-    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'jar')">
-      Buy 🫙
-    </button>
-  </div>
-</div>
-
-
-
 
         <!-- Bomb -->
   <div class="store-item animated-gradient-candy item-with-image">
@@ -1901,7 +1863,7 @@ button {
   </div>
 
 
-
+<!-- Jar of Cookies (UNLOCKED) -->
 <div id="jarUnlockedItem2" class="store-item special item-with-image">
   <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
   <div class="store-item-content">
@@ -1920,7 +1882,7 @@ button {
 </div>
 
 
-
+<!-- Jar of Cookies (LOCKED) -->
   <div id="jarLockedItem2" class="store-item special item-with-image">
   <!-- Put the image on the left -->
   <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
@@ -2062,11 +2024,11 @@ button {
     <div class="store-item-header">
       <h4>Stack of Cookies</h4>
       <div class="store-item-cost">
-        199
+        499
         <img src="tgstar2.png" alt="Star" class="store-star">
       </div>
     </div>
-    <p>Unveils 10 tiles</p>
+    <p>Unveils 25 tiles</p>
     <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'jar')">
       Buy 🫙
     </button>
@@ -2079,13 +2041,14 @@ button {
     <div class="store-item-header">
       <h4>Treasure of Cookies</h4>
       <div class="store-item-cost">
-        450
+        1450
         <img src="tgstar2.png" alt="Star" class="store-star">
       </div>
     </div>
-    <p>Unveils 25 tiles</p>
+    <p>Unveils 80 tiles</p>
     <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'jar')">
       Buy 🫙
+      💰
     </button>
   </div>
 </div>
