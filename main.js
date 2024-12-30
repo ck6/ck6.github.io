@@ -879,7 +879,7 @@ function updateStoreItemsUI() {
   }
 
   // 1) Grab the locked/unlocked Jar elements
-  const jarLockedEl = document.getElementById('jarLockedItem');
+  const jarLockedEl = document.getElementById('jarLockedItem2');
   const jarUnlockedEl = document.getElementById('jarUnlockedItem');
 
   // 2) Get how many friends invited
