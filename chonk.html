@@ -137,6 +137,7 @@ button {
 /* Our special Jar item with an image + content side-by-side */
 .item-with-image {
   display: flex;            /* horizontal layout */
+  flex-wrap: nowrap;
   align-items: center;      /* vertically center them */
   gap: 10px;                /* space between image & text */
 }
@@ -1797,6 +1798,8 @@ button {
     </div>
   </div>
 </div>
+
+
 
 <!-- Jar of Cookies (UNLOCKED) -->
 <div id="jarUnlockedItem" class="store-item special item-with-image" style="display: none;">
