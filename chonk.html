@@ -1744,7 +1744,7 @@ button {
           <img src="tgstar2.png" alt="Star" class="store-star">
         </div>
       </div>
-      <p>Unveils 1 tile</p>
+      <p><strong>Unveils 1 tile</strong></p>
       <button class="buy-cookie-button dark-star-button" onclick="handleBuyCookieButtonClick(event, 'cookie')">
         Buy 🍪
           <span class="star star1">★</span>
@@ -1768,13 +1768,34 @@ button {
       <div class="store-item-header">
         <h4>Sushi</h4>
         <div class="store-item-cost">
+          45
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+        <p>Unveils <strong>2 tiles</strong></p>
+        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
+          Buy 🍣
+        </button>
+    </div>
+  </div>
+
+
+   <!-- Donut of Destiny -->
+  <div class="store-item animated-gradient-candy item-with-image donut-destiny">
+    <!-- Put the cookie image on the left -->
+    <img src="donutdestiny.png" alt="Crown" class="store-item-image" />
+
+    <div class="store-item-content">
+      <div class="store-item-header">
+        <h4>Donut</h4>
+        <div class="store-item-cost">
           60
           <img src="tgstar2.png" alt="Star" class="store-star">
         </div>
       </div>
         <p>Unveils 3 tiles</p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
-          Buy 🍣
+        <button class="buy-cookie-button" id= "buyDonutButton" onclick="handleBuyCookieButtonClick(event, 'donutOfDestiny')">
+          Buy 🍩 
         </button>
     </div>
   </div>
@@ -1799,68 +1820,6 @@ button {
     </div>
   </div>
 
-                   <!-- Sushi -->
-  <div class="store-item animated-gradient item-with-image">
-    <!-- Put the cookie image on the left -->
-    <img src="sushi.png" alt="Crown" class="store-item-image" />
-
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Sushi</h4>
-        <div class="store-item-cost">
-          99
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-        <p>Gives you 1% bonus on all rewards forever</p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
-          Buy 🍣
-        </button>
-    </div>
-  </div>
-
-
-           <!-- Magic Paw -->
-  <div class="store-item special-galaxy item-with-image">
-    <!-- Put the cookie image on the left -->
-    <img src="paw.png" alt="Crown" class="store-item-image" />
-
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Meowgical Paw</h4>
-        <div class="store-item-cost">
-          60
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-        <p>Unveils <strong>3 tiles</strong></p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
-          Buy 🐾
-        </button>
-    </div>
-  </div>
-
-
-
-        <!-- Bomb -->
-  <div class="store-item animated-gradient-candy item-with-image">
-    <!-- Put the cookie image on the left -->
-    <img src="bomb.png" alt="Bomb" class="store-item-image" />
-
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Bomb</h4>
-        <div class="store-item-cost">
-          5
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-      <p>Reveals an entire cluster</p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bomb')">
-          Buy 💣
-        </button>
-    </div>
-  </div>
 
 
 <!-- Jar of Cookies (UNLOCKED) -->
@@ -1912,6 +1871,25 @@ button {
 </div>
 
 
+        <!-- Bomb -->
+  <div class="store-item animated-gradient-candy item-with-image">
+    <!-- Put the cookie image on the left -->
+    <img src="bomb.png" alt="Bomb" class="store-item-image" />
+
+    <div class="store-item-content">
+      <div class="store-item-header">
+        <h4>Bomb</h4>
+        <div class="store-item-cost">
+          999
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+      <p>Reveals an entire cluster</p>
+        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bomb')">
+          Buy 💣
+        </button>
+    </div>
+  </div>
 
      <!-- Bomb <button class="buy-cookie-button-lively">-->
   <div class="store-item item-with-image">
@@ -1974,6 +1952,48 @@ button {
         </button>
     </div>
      <span class="founders-label">Limited Time for Founders</span>
+  </div>
+
+
+                   <!-- Sushi -->
+  <div class="store-item animated-gradient item-with-image">
+    <!-- Put the cookie image on the left -->
+    <img src="sushi.png" alt="Crown" class="store-item-image" />
+
+    <div class="store-item-content">
+      <div class="store-item-header">
+        <h4>Sushi</h4>
+        <div class="store-item-cost">
+          99
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+        <p>Gives you 1% bonus on all rewards forever</p>
+        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
+          Buy 🍣
+        </button>
+    </div>
+  </div>
+
+
+           <!-- Magic Paw -->
+  <div class="store-item special-galaxy item-with-image">
+    <!-- Put the cookie image on the left -->
+    <img src="paw.png" alt="Crown" class="store-item-image" />
+
+    <div class="store-item-content">
+      <div class="store-item-header">
+        <h4>Meowgical Paw</h4>
+        <div class="store-item-cost">
+          60
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+        <p>Unveils <strong>3 tiles</strong></p>
+        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
+          Buy 🐾
+        </button>
+    </div>
   </div>
 
                     <!-- Ice Cream -->
