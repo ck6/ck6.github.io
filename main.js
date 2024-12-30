@@ -880,16 +880,18 @@ function updateStoreItemsUI() {
 
   // 1) Grab the locked/unlocked Jar elements
   const jarLockedEl = document.getElementById('jarLockedItem2');
-  const jarUnlockedEl = document.getElementById('jarUnlockedItem');
+  const jarUnlockedEl = document.getElementById('jarUnlockedItem2');
 
   // 2) Get how many friends invited
   const friendsInvited = userState?.friendsInvited || 0;
 
   // 3) If friendsInvited >= 3, show unlocked; otherwise show locked
   if (friendsInvited >= 3) {
+    alert("enough friends");
     jarLockedEl.style.display = 'none';
     jarUnlockedEl.style.display = 'block';
   } else {
+    alert("not enough friends");
     jarLockedEl.style.display = 'block';
     jarUnlockedEl.style.display = 'none';
   }
