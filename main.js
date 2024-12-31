@@ -793,7 +793,12 @@ function showTab(tab) {
       if (statusEl) {
         statusEl.textContent = "✅";
         statusEl.style.color = "#4CAF50";
+
       }
+
+        // Hide the cookie
+      const cookieImg = document.getElementById("channelCookieImage");
+      if (cookieImg) cookieImg.style.display = "none";
     }
   }
 
@@ -1189,6 +1194,10 @@ async function checkChannelJoin() {
       // Show a green check
       statusEl.textContent = "✅";
       statusEl.style.color = "#4CAF50";
+
+      // Hide the cookie image
+      const cookieImg = document.getElementById("channelCookieImage");
+      if (cookieImg) cookieImg.style.display = "none";
 
     } else {
       // Not following
