@@ -84,7 +84,7 @@ const pastelGradients = [
   "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)"
 ];
 //const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🦴","💎","📦","🎀","💕"];
-const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🐭","💎","📦","🎀","💕", "🐹","🐥","🐣", "🐟", "🍣"];
+const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🐭","💎","📦","💕", "🐹","🐥","🐣", "🐟", "🍣"];
 
 
 // We'll store "decorations" for 10 clusters × (5 rows × 5 cols)
@@ -222,7 +222,8 @@ function showBonuses() {
   
   const permanent = userState?.bonuses?.permanentItems || [];
   const temporary = userState?.bonuses?.temporaryItems || [];
-  
+  const ephemeral = userState?.bonuses?.ephemeralItems || [];  // <-- add this
+
   // Show each permanent item
   permanent.forEach(item => {
     const li = document.createElement('li');
@@ -231,17 +232,30 @@ function showBonuses() {
     permListEl.appendChild(li);
   });
   
-  // Show each temporary item
+  // Show each temporary (time-limited) item
   temporary.forEach(item => {
     const li = document.createElement('li');
     const pct = (item.rate * 100).toFixed(2);
+
     // maybe compute how many minutes left
     const msLeft = new Date(item.expiresAt) - Date.now();
     const minsLeft = Math.max(Math.floor(msLeft / 60000), 0);
+
     li.textContent = `${item.name} (+${pct}%) ~${minsLeft} min left`;
     tempListEl.appendChild(li);
   });
+
+  // Show each ephemeral (reveal-limited) item
+  ephemeral.forEach(item => {
+    const li = document.createElement('li');
+    const pct = (item.rate * 100).toFixed(2);
+
+    // item.revealsLeft tells us how many reveals remain for this bonus
+    li.textContent = `${item.name} (+${pct}%) for next ${item.revealsLeft} reveals`;
+    tempListEl.appendChild(li);
+  });
 }
+
 
 
 /************************************************************
