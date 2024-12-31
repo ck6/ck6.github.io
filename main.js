@@ -181,7 +181,7 @@ async function sendUserProfileToServer() {
 
   // 3) POST them to your backend
   try {
-    const res = await fetch("${BASE_API_URL}/api/updateUserProfile", {
+    const res = await fetch(`${BASE_API_URL}/api/updateUserProfile`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
