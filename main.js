@@ -1204,39 +1204,55 @@ async function checkChannelJoin() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         initData: tg.initData,
-        userId: userId // from tg.initDataUnsafe.user.id
+        userId: userId
       })
     });
     const data = await res.json();
-
     if (data.error) {
       console.error("checkChannelMembership error:", data.error);
       alert("Error checking membership: " + data.error);
       return;
     }
 
-    // data => { isMember, cookiesOwned, alreadyAwarded }
+    // Grab the channelRewardStatus <div>
+    const channelRewardStatusEl = document.getElementById("channelRewardStatus");
+
     if (data.isMember) {
+      // If user just got the cookie, show an alert
       if (!data.alreadyAwarded) {
-        // They just got the cookie now
         alert(`You joined the channel! Enjoy +1 cookie (total = ${data.cookiesOwned})`);
       }
       userState.followsChannel = true;
       userState.channelCookieAwarded = data.alreadyAwarded; 
       userState.cookiesOwned = data.cookiesOwned;
+
+      // Update the icon/status text to a green check
+      channelRewardStatusEl.innerHTML = `
+        <span style="color: #4CAF50; font-weight: bold;">
+          ✅ Following!
+        </span>
+      `;
     } else {
-      alert("You are not a member of our channel yet!");
       userState.followsChannel = false;
+      alert("You are not a member of our channel yet!");
+
+      // Update the icon/status to a red cross
+      channelRewardStatusEl.innerHTML = `
+        <span style="color: #f44336; font-weight: bold;">
+          ❌ Not following
+        </span>
+      `;
     }
 
-    // Optionally update any UI (like "followsChannel" or cookie count display)
-    updateBonusesUI();
+    // Possibly also update userState cookies display
+    updateBalances();
 
   } catch (err) {
     console.error("Request failed:", err);
     alert("Request failed: " + err.message);
   }
 }
+
 
 
 
