@@ -1779,25 +1779,6 @@ button {
     </div>
   </div>
 
-           <!-- Candy -->
-  <div class="store-item item-with-image">
-    <!-- Put the cookie image on the left -->
-    <img src="pop.png" alt="Crown" class="store-item-image" />
-
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Candy</h4>
-        <div class="store-item-cost">
-          45
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-        <p>Unveils 2 tiles</p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
-          Buy 🍬🍭
-        </button>
-    </div>
-  </div>
 
          <!-- Candy -->
   <div class="store-item animated-gradient item-with-image">
@@ -1840,25 +1821,65 @@ button {
     </div>
   </div>
 
-     <!-- Donut -->
-  <div class="store-item item-with-image donut-destiny">
-    <!-- Put the cookie image on the left -->
-    <img src="donutdestiny.png" alt="Crown" class="store-item-image" />
+  <!-- Candy(LOCKED) -->
+  <div id="jarLockedItem2" class="animated-gradient-candy item-with-image">
+  <!-- Put the image on the left -->
+  <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
 
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Donut</h4>
-        <div class="store-item-cost">
-          60
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
+  <!-- Wrap the rest in a “content” div on the right -->
+  <div class="store-item-content">
+    <div class="store-item-header">
+      <h4>Donut</h4>
+      <div class="store-item-cost">
+        60
+        <img src="tgstar2.png" alt="Star" class="store-star">
       </div>
-        <p>Unveils 3 tiles</p>
-        <button class="buy-cookie-button" id= "buyDonutButton" onclick="handleBuyCookieButtonClick(event, 'donutOfDestiny')">
-          Buy 🍩 
-        </button>
+    </div>
+    <p>Unveils 3 tiles</p>
+          <button class="buy-cookie-button" style="margin-bottom: 8px;">
+        Locked 🔒
+      </button>
+  <div style="margin-top: 0;">
+    <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
+      Invite 5 friends to unlock
+    </p>
+    <div class="progress-bar" style="margin-top: 0;">
+      <div id="jarUnlockProgressStore6" class="progress-fill" style="width:75%"></div>
     </div>
   </div>
+  </div>
+</div>
+
+
+<!-- Donut (LOCKED) -->
+  <div id="jarLockedItem2" class="animated-gradient-candy item-with-image">
+  <!-- Put the image on the left -->
+  <img src="donutdestiny.png" alt="Jar of Cookies" class="store-item-image" />
+
+  <!-- Wrap the rest in a “content” div on the right -->
+  <div class="store-item-content">
+    <div class="store-item-header">
+      <h4>Donut</h4>
+      <div class="store-item-cost">
+        60
+        <img src="tgstar2.png" alt="Star" class="store-star">
+      </div>
+    </div>
+    <p>Unveils 3 tiles</p>
+          <button class="buy-cookie-button" style="margin-bottom: 8px;">
+        Locked 🔒
+      </button>
+  <div style="margin-top: 0;">
+    <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
+      Invite 5 friends to unlock
+    </p>
+    <div class="progress-bar" style="margin-top: 0;">
+      <div id="jarUnlockProgressStore6" class="progress-fill" style="width:75%"></div>
+    </div>
+  </div>
+  </div>
+</div>
+
 
 
 
@@ -1885,7 +1906,7 @@ button {
 
 
       <!-- Meowgical Paw -->
-  <div class="store-item item-with-image">
+  <div class="store-item animated-gradient-candy item-with-image">
     <!-- Put the cookie image on the left -->
     <img src="paw.png" alt="Normal Cookie" class="store-item-image" />
 
@@ -1899,12 +1920,13 @@ button {
       <p><strong>Gives you 3% on all rewards forever</strong></p>
         <div style="margin-top: 0;">
     <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
-      Invite 15 friends to receive!
+      Invite 15 friends to receive
     </p>
     <div class="progress-bar" style="margin-top: 0;">
       <div id="jarUnlockProgressStore3" class="progress-fill" style="width:75%"></div>
     </div>
     </div>
+  </div>
   </div>
 
 
@@ -2043,7 +2065,7 @@ button {
       <div class="store-item-header">
         <h4>Crown</h4>
         <div class="store-item-cost">
-          99
+          199
           <img src="tgstar2.png" alt="Star" class="store-star">
         </div>
       </div>
