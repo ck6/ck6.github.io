@@ -784,11 +784,17 @@ function showTab(tab) {
 
 
   if (tab === 'bonuses') {
-
-    //CHECHK IF THEY FOLLOW OUR CHANNEL
-     // if (!userState.followsChannel || !userState.channelCookieAwarded) {
-    //checkChannelJoin(); 
-    //}
+    // If the user has NOT already gotten the cookie, auto-check
+    if (!userState?.channelCookieAwarded) {
+      checkChannelJoin(); 
+    } else {
+      // Already claimed => show a green check
+      const statusEl = document.getElementById("channelRewardStatus");
+      if (statusEl) {
+        statusEl.textContent = "✅";
+        statusEl.style.color = "#4CAF50";
+      }
+    }
   }
 
 
@@ -1087,58 +1093,13 @@ function updateBalances() {
 }
 
 
-//BONUS TAB UI
-function updateBonusesUI() {
-  const container = document.getElementById('channelRewardRow');
-  if (!container) return;
 
-  container.innerHTML = ""; // clear old content
 
-  if (userState.channelCookieAwarded) {
-    // Already got the cookie => show green check
-    container.innerHTML = `
-      <h3>Follow Channel Bonus</h3>
-      <p style="color: #0f0;">
-        ✅ You have already been awarded the Follow Channel cookie!
-      </p>
-    `;
-    return;
-  }
-
-  // Not yet awarded => show your channel link + optional bot link + "Check" button
-  container.innerHTML = `
-    <h3>Follow Channel Bonus</h3>
-    <p>Join our channel to get a free cookie!</p>
-
-    <div style="margin: 8px 0;">
-      <!-- Link to your channel -->
-      <a href="https://t.me/luckychonk" target="_blank"
-         style="text-decoration:none; color:#2196F3; font-weight:bold;"
-       >
-        👉 Join Channel
-      </a>
-    </div>
-
-    <!-- Optionally also link the bot if you want them to open the bot, 
-         e.g. "https://t.me/YourBotUsername" -->
-    <div style="margin: 8px 0;">
-      <a href="https://t.me/YourBotUsername" target="_blank"
-         style="text-decoration:none; color:#2196F3; font-weight:bold;"
-       >
-        🤖 Open Bot
-      </a>
-    </div>
-
-    <!-- The "Check" button that triggers checkChannelJoin() -->
-    <button onclick="checkChannelJoin()"
-            style="background:#444; color:#fff; border:none; 
-                   padding:8px 16px; border-radius:4px;"
-    >
-      Check Now
-    </button>
-  `;
+function openChannelLink() {
+  // Replace with your actual Telegram channel link
+  const channelUrl = "https://t.me/LuckyChonk";
+  window.open(channelUrl, "_blank");
 }
-
 
 
 
@@ -1210,46 +1171,38 @@ async function checkChannelJoin() {
     const data = await res.json();
     if (data.error) {
       console.error("checkChannelMembership error:", data.error);
-      alert("Error checking membership: " + data.error);
       return;
     }
 
-    // Grab the channelRewardStatus <div>
-    const channelRewardStatusEl = document.getElementById("channelRewardStatus");
+    // We will update the channelRewardStatus here
+    const statusEl = document.getElementById("channelRewardStatus");
 
     if (data.isMember) {
-      // If user just got the cookie, show an alert
-      if (!data.alreadyAwarded) {
-        alert(`You joined the channel! Enjoy +1 cookie (total = ${data.cookiesOwned})`);
-      }
-      userState.followsChannel = true;
+      // If user just got the cookie, maybe do confetti or a small toast
+      // e.g. if (!data.alreadyAwarded) shoot();
+
+      // Update local userState
+      userState.followsChannel       = true;
       userState.channelCookieAwarded = data.alreadyAwarded; 
-      userState.cookiesOwned = data.cookiesOwned;
+      userState.cookiesOwned         = data.cookiesOwned;
 
-      // Update the icon/status text to a green check
-      channelRewardStatusEl.innerHTML = `
-        <span style="color: #4CAF50; font-weight: bold;">
-          ✅ Following!
-        </span>
-      `;
+      // Show a green check
+      statusEl.textContent = "✅";
+      statusEl.style.color = "#4CAF50";
+
     } else {
+      // Not following
       userState.followsChannel = false;
-      alert("You are not a member of our channel yet!");
 
-      // Update the icon/status to a red cross
-      channelRewardStatusEl.innerHTML = `
-        <span style="color: #f44336; font-weight: bold;">
-          ❌ Not following
-        </span>
-      `;
+      // Show a red cross
+      statusEl.textContent = "❌";
+      statusEl.style.color = "#f44336";
     }
 
-    // Possibly also update userState cookies display
+    // Update local cookie count etc.
     updateBalances();
-
   } catch (err) {
     console.error("Request failed:", err);
-    alert("Request failed: " + err.message);
   }
 }
 

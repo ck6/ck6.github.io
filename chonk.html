@@ -1508,6 +1508,32 @@ button {
   </div>
 
 
+ <!-- Are you following our channel?-->
+<div class="boxy-card" id="channelRewardCard"
+     style="display: flex; align-items: center; justify-content: space-between;">
+  <!-- Left side: Cookie icon + label -->
+  <div style="display: flex; align-items: center;">
+    <img src="cookie.webp" alt="Cookie"
+         style="width: 40px; height: auto; margin-right: 8px;" />
+    <p style="margin: 0;">
+      <strong>Channel Cookie</strong>
+    </p>
+  </div>
+
+  <!-- Middle: The check or cross icon -->
+  <div id="channelRewardStatus" style="font-size: 24px; margin-right: 8px;">
+    <!-- Will be set by JS: "✅" or "❌" -->
+  </div>
+
+  <!-- Right side: Button to open the channel link -->
+  <button class="invite-friend-button" 
+          onclick="openChannelLink()" 
+          style="font-size:18px;">
+    📣
+  </button>
+</div>
+
+
 
 
   <!-- Box #5: Feeding the Chonk -->
@@ -1824,7 +1850,7 @@ button {
   <!-- Candy(LOCKED) -->
   <div id="jarLockedItem2" class="animated-gradient-candy item-with-image">
   <!-- Put the image on the left -->
-  <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
+  <img src="pop.png" alt="Jar of Cookies" class="store-item-image" />
 
   <!-- Wrap the rest in a “content” div on the right -->
   <div class="store-item-content">
