@@ -959,11 +959,11 @@ function updateBalances() {
   
   // Store tab
   document.getElementById('storeCookieBalances').textContent =
-  `Cookies: ${cookiesOwned} | Choc: ${choc} | Bombs: ${bombs}`;
+  `Cookies: ${cookiesOwned} | Bombs: ${bombs}`;
 
   // Balance tab
   //document.getElementById('cookieLine').textContent = 
-    `Cookies: ${cookiesOwned} | Choc: ${choc}`;
+   // `Cookies: ${cookiesOwned} | Choc: ${choc}`;
 
     // Update the cluster heading if we want to see it reflect changes immediately
   document.getElementById('clusterCookies').textContent = cookiesOwned;
