@@ -1508,36 +1508,30 @@ button {
   </div>
 
 
-<!-- Channel Cookie Bonus -->
+ <!-- Are you following our channel?-->
 <div class="boxy-card" id="channelRewardCard"
-     style="
-       display: flex; 
-       align-items: center; 
-       gap: 10px; 
-       justify-content: flex-start;
-     ">
-  <!-- Button: opens channel link -->
-  <button class="invite-friend-button" onclick="openChannelLink()" 
-          style="font-size: 18px;">
+     style="display: flex; align-items: center; justify-content: space-between;">
+  <!-- Left side: Cookie icon + label -->
+
+  <!-- Middle: The check or cross icon -->
+  <div id="channelRewardStatus" style="font-size: 24px; margin-right: 8px;">
+    <!-- Will be set by JS: "✅" or "❌" -->
+  </div>
+
+  <!-- Right side: Button to open the channel link -->
+  <button class="invite-friend-button" 
+          onclick="openChannelLink()" 
+          style="font-size:18px;">
     📣
   </button>
 
-  <!-- Text label -->
-  <p style="margin: 0; font-weight: bold;">
-    Channel Cookie
-  </p>
-
-  <!-- Checkmark or X (set by JS) -->
-  <div id="channelRewardStatus" style="font-size: 24px;">
-    <!-- "✅" or "❌" goes here -->
+  <div style="display: flex; align-items: center;">
+    <img src="cookie.webp" alt="Cookie"
+         style="width: 40px; height: auto; margin-right: 8px;" />
+    <p style="margin: 0;">
+      <strong>Follow our channel to get <strong>a free cookie</strong>
+    </p>
   </div>
-
-  <!-- Cookie image -->
-  <img src="cookie.webp" 
-       alt="Cookie" 
-       style="width: 40px; height: auto;" />
-</div>
-
 
 
 </div>
