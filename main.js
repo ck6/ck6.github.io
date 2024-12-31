@@ -37,6 +37,7 @@ if (user) {
     
 }
 
+const apiURL = "https://chonk.fly.dev"; //https://chonk-1.services.fluffychonk.com/
 
 /************************************************************
  * We'll track user state from the server:
@@ -119,7 +120,7 @@ async function fetchUserState() {
     const encodedInitData = encodeURIComponent(tg.initData);
 
     // Now call /api/userState with initData in the URL
-    const res = await fetch(`https://chonk.fly.dev/api/userState?initData=${encodedInitData}`);
+    const res = await fetch(`${apiURL}/api/userState?initData=${encodedInitData}`);
     const data = await res.json();
 
     if (data.error) {
@@ -160,7 +161,7 @@ async function sendUserProfileToServer() {
 
   // 3) POST them to your backend
   try {
-    const res = await fetch("https://chonk.fly.dev/api/updateUserProfile", {
+    const res = await fetch("${apiURL}/api/updateUserProfile", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -251,7 +252,7 @@ function ensureDecorForCluster(clusterIndex, rows, cols) {
 
 async function fetchSingleCluster(index) {
   try {
-    const res = await fetch(`https://chonk.fly.dev/api/clusters/${index}`);
+    const res = await fetch(`${apiURL}/api/clusters/${index}`);
     const data = await res.json();
     // data => { clusterIndex, tiles: [ [...], [...], ... ] } or { error: ... }
     if (data.error) {
@@ -385,7 +386,7 @@ if (userState.cookiesOwned <= 0 && userState.chocolateReveals <= 0) {
 
   // Send request to server
   try {
-    const res = await fetch('https://chonk.fly.dev/api/revealTile', {
+    const res = await fetch('${apiURL}/api/revealTile', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -447,7 +448,7 @@ async function useBombOnCurrentCluster() {
     if (!confirmUse) return;
 
     // POST /api/useBomb
-    const res = await fetch('https://chonk.fly.dev/api/useBomb', {
+    const res = await fetch('${apiURL}/api/useBomb', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -621,7 +622,7 @@ async function handleBuyCookieButtonClick(event, revealType) {
 
   try {
     // 1) Request an invoice link from your backend
-    const res = await fetch('https://chonk.fly.dev/create-invoice', {
+    const res = await fetch('${apiURL}/api/create-invoice', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ revealType: revealType,
@@ -783,7 +784,7 @@ function showTab(tab) {
 
 async function markStoreOpened() {
   try {
-    const res = await fetch("https://chonk.fly.dev/api/markStoreOpened", {
+    const res = await fetch("${apiURL}/api/markStoreOpened", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -1164,7 +1165,7 @@ function calculateTotalBonusFromUserState() {
 
 async function checkChannelJoin() {
   try {
-    const res = await fetch("https://chonk.fly.dev/api/checkChannelMembership", {
+    const res = await fetch("${apiURL}/api/checkChannelMembership", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -1365,7 +1366,7 @@ async function saveWalletAddress(tonWalletAddress) {
 
 
   try {
-    const res = await fetch('https://chonk.fly.dev/api/updateWallet', {
+    const res = await fetch('${apiURL}/api/updateWallet', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ 
@@ -1410,7 +1411,7 @@ function goToStore() {
 async function fetchLeaderboard() {
   try {
     // 1) Fetch data from /api/leaderboard
-    const res = await fetch('https://chonk.fly.dev/api/leaderboard');
+    const res = await fetch('${apiURL}/api/leaderboard');
     const data = await res.json();  // data = [ { firstName, profilePhotoUrl, totalProfit }, ... ]
 
     // 2) Grab the container
