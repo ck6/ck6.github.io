@@ -9,7 +9,7 @@ switch (true) {
   case hostname.includes("localhost"):
     BASE_API_URL = "http://localhost:3000";
     break;
-  case hostname.includes("chonk-1.experiments.fluffychonk.com"):
+  case hostname.includes("experiments.services.fluffychonk.com"):
     BASE_API_URL = "https://chonk-1.services.fluffychonk.com";
     break;
   case hostname.includes("ck6.github.io"):
@@ -406,7 +406,7 @@ if (userState.cookiesOwned <= 0 && userState.chocolateReveals <= 0) {
 
   // Send request to server
   try {
-    const res = await fetch(`${BASE_API_URL}/api/revealTile'`, {
+    const res = await fetch(`${BASE_API_URL}/api/revealTile`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
