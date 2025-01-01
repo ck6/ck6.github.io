@@ -1033,11 +1033,20 @@ function updateBalances() {
 
     //UPDATE FRIENDS-INVITE PROGRESS
 
-
+    //STORE TAB
     updateInviteProgress('bunchofcookiesLockedProgress', 3);
     updateInviteProgress('candyLockedProgress', 5);
     updateInviteProgress('donutLockedProgress', 10);
     updateInviteProgress('pawLockedProgress', 12);
+
+    //BONUSES TAB
+
+    updateInviteProgress('bunchofcookiesBonusesProgress', 3);
+    updateInviteProgress('candyBonusesProgress', 5);
+    updateInviteProgress('donutBonusesProgress', 10);
+    updateInviteProgress('pawBonusesProgress', 12);
+    updateInviteProgress('freeCookieProgress', 5);
+    
 
 
 
