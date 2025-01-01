@@ -1261,7 +1261,7 @@ async function checkChannelJoin() {
  * 9) Feeding / Chonk Level (local display)
  ************************************************************/
 const LEVEL_THRESHOLDS = [10, 25, 50];
-const LEVEL_BONUSES = [0, 1, 1.5, 2];
+const LEVEL_BONUSES = [0, 0.25, 0.4, 0.5];
 
 function getChonkLevel(feeds) {
   if (feeds >= 50) return 3;
