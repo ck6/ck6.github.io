@@ -569,18 +569,18 @@ function flipAllNewlyRevealedTiles(newRewards) {
  * 4) Random or selected cluster
  ************************************************************/
 function loadRandomCluster() {
-  const randIndex = Math.floor(Math.random() * 1000000);
+  const randIndex = Math.floor(Math.random() * 1818181);
   loadCluster(randIndex);
   updateBalances();
 }
 function selectCluster() {
-  const clusterNumber = prompt("Enter cluster number (1-1,000,000):");
+  const clusterNumber = prompt("Enter cluster number (1-1,818,181):");
   const num = parseInt(clusterNumber, 10);
-  if (!isNaN(num) && num >= 1 && num <= 1000000) {
+  if (!isNaN(num) && num >= 1 && num <= 1818181) {
     loadCluster(num - 1);
     updateBalances();
   } else {
-    alert("Invalid cluster number. Please enter a number between 1 and 1,000,000.");
+    alert("Invalid cluster number. Please enter a number between 1 and 1,818,181.");
   }
 }
 
