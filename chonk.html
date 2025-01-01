@@ -1914,6 +1914,37 @@ button {
 
 
 
+<!-- Jar of Cookies (LOCKED) -->
+  <div id="jarLockedItem2" class="store-item special item-with-image">
+  <!-- Put the image on the left -->
+  <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
+
+  <!-- Wrap the rest in a “content” div on the right -->
+  <div class="store-item-content">
+    <div class="store-item-header">
+      <h4>Jar of Cookies</h4>
+      <div class="store-item-cost">
+        60
+        <img src="tgstar2.png" alt="Star" class="store-star">
+      </div>
+    </div>
+    <p>Unveils 10 tiles</p>
+          <button class="buy-cookie-button" style="margin-bottom: 8px;">
+        Locked 🔒
+      </button>
+  <div style="margin-top: 0;">
+    <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
+      Invite 5 frends to unlock
+    </p>
+    <div class="progress-bar" style="margin-top: 0;">
+      <div id="jarUnlockProgressStore3" class="progress-fill" style="width:75%"></div>
+    </div>
+  </div>
+  </div>
+</div>
+
+
+
 <!-- CANDY (LOCKED, using pop.png) -->
 <div id="donutLockedPop" class="store-item animated-gradient-candy item-with-image">
   <img src="pop.png" alt="Locked Donut" class="store-item-image" />
@@ -2070,7 +2101,7 @@ button {
         <div class="store-item-cost">
         </div>
       </div>
-      <p><strong>Gives you 3% on all rewards forever</strong></p>
+      <p><strong>3% lifetime bonus on all rewards!</strong></p>
         <div style="margin-top: 0;">
     <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
       Invite 10 friends to receive
@@ -2080,8 +2111,27 @@ button {
     </div>
     </div>
   </div>
+   <span class="founders-label">Limited Time</span>
   </div>
 
+
+<!-- Jar of Cookies (UNLOCKED) -->
+<div id="jarUnlockedItem23" class="store-item animated-gradient item-with-image">
+  <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
+  <div class="store-item-content">
+    <div class="store-item-header">
+      <h4>Jar of Cookies</h4>
+      <div class="store-item-cost">
+        200
+        <img src="tgstar2.png" alt="Star" class="store-star">
+      </div>
+    </div>
+    <p>Unveils 10 tiles</p>
+    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'jar')">
+      Buy 🫙
+    </button>
+  </div>
+</div>
 
 <!-- Jar of Cookies (UNLOCKED) -->
 <div id="jarUnlockedItem2" class="store-item animated-gradient item-with-image">
