@@ -127,7 +127,7 @@ window.onload = async () => {
   setTimeout(shoot, 200);
 
   sendUserProfileToServer();
-
+  logUserEvent('game_opened');
 
 }
 
@@ -1316,8 +1316,28 @@ function updateFeedingProgress() {
   feedingProgress.style.width = percent + "%";
 }
 
+
 /************************************************************
- * 10) Popup & Confetti
+ * 10) ANALYTICS
+ ************************************************************/
+async function logUserEvent(eventName) {
+  try {
+    const res = await fetch(`${BASE_API_URL}/api/logUserEvent`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        initData: tg.initData, // important for server validation
+        eventName
+      })
+    });
+    // No particular response needed — but you could check res.json() if desired
+  } catch (err) {
+    console.error("Error logging user event:", err);
+  }
+}
+
+/************************************************************
+ * 11) Popup & Confetti
  ************************************************************/
 function closePopup() {
   document.getElementById('onLoadPopup').style.display = 'none';
