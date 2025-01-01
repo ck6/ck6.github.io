@@ -824,13 +824,12 @@ function showTab(tab) {
     }
   }
 
+
   // Force the scroller to the top:
-  requestAnimationFrame(() => {
-    const contentEl = document.querySelector('.content');
-    if (contentEl) {
-      contentEl.scrollTop = 0;
-    }
-  });
+  const contentEl = document.querySelector('.content');
+  if (contentEl) {
+    contentEl.scrollTop = 0;
+  }
 
 }
 
