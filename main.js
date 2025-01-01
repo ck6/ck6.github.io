@@ -892,16 +892,16 @@ function setupWelcomeCountdown() {
 
 function updateStoreItemsUI() {
   // 1) Donut check
-  const donutBtn = document.getElementById("buyDonutButton"); 
-  const hasDonut = userState?.bonuses?.permanentItems?.some(
-    (item) => item.name === 'DonutOfDestiny'
-  );
+  //const donutBtn = document.getElementById("buyDonutButton"); 
+  //const hasDonut = userState?.bonuses?.permanentItems?.some(
+  //  (item) => item.name === 'DonutOfDestiny'
+  //);
 
-  if (hasDonut && donutBtn) {
-    donutBtn.disabled = true;
-    donutBtn.textContent = "Owned";
+  //if (hasDonut && donutBtn) {
+  //  donutBtn.disabled = true;
+  //  donutBtn.textContent = "Owned";
     // or add a .locked style, etc.
-  }
+  //}
 
     // 1) Hide the Welcome Package once purchased:
   const welcomePkgEl = document.getElementById("welcomePackageItem");
@@ -909,35 +909,67 @@ function updateStoreItemsUI() {
     welcomePkgEl.style.display = "none";
   }
 
-  // 2) Crown check (NEW)
-  const crownBtn = document.getElementById("buyCrownButton");
+  // 2) Crown check
+  //const crownBtn = document.getElementById("buyCrownButton");
   // We consider 'active' if expiresAt is in the future
-  const now = Date.now();
-  const hasActiveCrown = userState?.bonuses?.temporaryItems?.some(
-    (item) => item.name === 'Crown' && new Date(item.expiresAt).getTime() > now
-  );
+  //const now = Date.now();
+  //const hasActiveCrown = userState?.bonuses?.temporaryItems?.some(
+  //  (item) => item.name === 'Crown' && new Date(item.expiresAt).getTime() > now
+  //);
 
-  if (hasActiveCrown && crownBtn) {
-    crownBtn.disabled = true;
-    crownBtn.textContent = "Active";
+  //if (hasActiveCrown && crownBtn) {
+  //  crownBtn.disabled = true;
+  //  crownBtn.textContent = "Active";
     // or textContent = "Crown Running"
     // or show a countdown, etc.
-  }
+  //}
 
-  // 1) Grab the locked/unlocked Jar elements
-  const jarLockedEl = document.getElementById('jarLockedItem2');
-  const jarUnlockedEl = document.getElementById('jarUnlockedItem2');
+  // 1) Grab the locked/unlocked store elements
+  const bunchofcookiesLockedEl = document.getElementById('bunchofcookiesLocked');
+  const bunchofcookiesUnlockedEl = document.getElementById('bunchofcookiesUnlocked');
+
+  const candyLockedEl = document.getElementById('candyLocked');
+  const candyUnlockedEl = document.getElementById('candyUnlocked');
+
+  const donutLockedEl = document.getElementById('donutLocked');
+  const donutUnlockedEl = document.getElementById('donutUnlocked');
+
+
 
   // 2) Get how many friends invited
   const friendsInvited = userState?.friendsInvited || 0;
 
   // 3) If friendsInvited >= 3, show unlocked; otherwise show locked
   if (friendsInvited >= 3) {
-    //jarLockedEl.style.display = 'none';
-    //jarUnlockedEl.style.display = 'block';
+    
+    bunchofcookiesLockedEl.style.display = 'none';
+
+
   } else {
-    //jarLockedEl.style.display = 'block';
-    jarUnlockedEl.style.display = 'none';
+    
+    bunchofcookiesUnlockedEl.style.display = 'none';
+
+  }
+
+  
+  if (friendsInvited >= 5) {
+    
+    candyLockedEl.style.display = 'none';
+
+  } else {
+    
+    candyUnlockedEl.style.display = 'none';
+
+  }
+
+  
+  if (friendsInvited >= 10) {
+    
+    donutLockedEl.style.display = 'none';
+
+  } else {
+    
+    donutUnlockedEl.style.display = 'none';
   }
 
 
@@ -1000,14 +1032,12 @@ function updateBalances() {
     }
 
     //UPDATE FRIENDS-INVITE PROGRESS
-    //updateChocBarProgress();
 
-  updateInviteProgress('chocUnlockProgress', 3);
-  updateInviteProgress('chocUnlockProgress2', 3);
-  updateInviteProgress('chocUnlockProgress3', 3);
-  updateInviteProgress('chocUnlockProgress4', 10);
-  updateInviteProgress('jarUnlockProgressStore3', 3);
-  updateInviteProgress('jarUnlockProgress', 3);
+
+    updateInviteProgress('bunchofcookiesLockedProgress', 3);
+    updateInviteProgress('candyLockedProgress', 5);
+    updateInviteProgress('donutLockedProgress', 10);
+    updateInviteProgress('pawLockedProgress', 12);
 
 
 

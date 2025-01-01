@@ -1852,9 +1852,6 @@ Popup on load
 
 
 
-
- 
-
       <!-- Normal Cookie -->
   <div class="store-item item-with-image">
     <!-- Put the cookie image on the left -->
@@ -1884,8 +1881,8 @@ Popup on load
   </div>
 
 
-  <!-- Bunch of Cookies (LOCKED, using pop.png) -->
-<div id="donutLockedPop" class="store-item animated-gradient-candy item-with-image">
+  <!-- Bunch of Cookies LOCKED -->
+<div id="bunchofcookiesLocked" class="store-item animated-gradient-candy item-with-image">
   <img src="cookiesnew.png" alt="Locked Donut" class="store-item-image" />
   <div class="store-item-content">
     <div class="store-item-header">
@@ -1895,7 +1892,7 @@ Popup on load
         <img src="tgstar2.png" alt="Star" class="store-star">
       </div>
     </div>
-    <p>Unveils 2 tiles</p>
+    <p>Unveils <strong>2 tiles</strong></p>
     <button class="buy-cookie-button" style="margin-bottom: 8px;">
       Locked 🔒
     </button>
@@ -1904,194 +1901,14 @@ Popup on load
         Invite 3 friends to unlock
       </p>
       <div class="progress-bar" style="margin-top: 0;">
-        <div id="jarUnlockProgressStore6" class="progress-fill" style="width:75%"></div>
+        <div id="bunchofcookiesLockedProgress" class="progress-fill" style="width:75%"></div>
       </div>
     </div>
   </div> 
 </div> 
 
-
-
-<!-- Jar of Cookies (LOCKED) -->
-  <div id="jarLockedItem2" class="store-item special item-with-image" style="display:none;>
-  <!-- Put the image on the left -->
-  <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
-
-  <!-- Wrap the rest in a “content” div on the right -->
-  <div class="store-item-content">
-    <div class="store-item-header">
-      <h4>Jar of Cookies</h4>
-      <div class="store-item-cost">
-        60
-        <img src="tgstar2.png" alt="Star" class="store-star">
-      </div>
-    </div>
-    <p>Unveils 3 tiles</p>
-          <button class="buy-cookie-button" style="margin-bottom: 8px;">
-        Locked 🔒
-      </button>
-  <div style="margin-top: 0;">
-    <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
-      Invite 5 frends to unlock
-    </p>
-    <div class="progress-bar" style="margin-top: 0;">
-      <div id="jarUnlockProgressStore3" class="progress-fill" style="width:75%"></div>
-    </div>
-  </div>
-  </div>
-</div>
-
-<!-- CANDY (LOCKED, using pop.png) -->
-<div id="donutLockedPop" class="store-item animated-gradient-candy item-with-image">
-  <img src="pop.png" alt="Locked Donut" class="store-item-image" />
-  <div class="store-item-content">
-    <div class="store-item-header">
-      <h4>Candy</h4>
-      <div class="store-item-cost">
-        60
-        <img src="tgstar2.png" alt="Star" class="store-star">
-      </div>
-    </div>
-    <p>Unveils 3 tiles</p>
-    <button class="buy-cookie-button" style="margin-bottom: 8px;">
-      Locked 🔒
-    </button>
-    <div style="margin-top: 0;">
-      <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
-        Invite 5 friends to unlock
-      </p>
-      <div class="progress-bar" style="margin-top: 0;">
-        <div id="jarUnlockProgressStore6" class="progress-fill" style="width:75%"></div>
-      </div>
-    </div>
-  </div> 
-</div> 
-
-<!-- CANDY (LOCKED, using pop.png) -->
-<div id="donutLockedPop" class="store-item animated-gradient-candy item-with-image" style="display:none;>
-  <img src="pop.png" alt="Locked Donut" class="store-item-image" />
-  <div class="store-item-content">
-    <div class="store-item-header">
-      <h4>Candy</h4>
-      <div class="store-item-cost">
-        60
-        <img src="tgstar2.png" alt="Star" class="store-star">
-      </div>
-    </div>
-    <p>Unveils 3 tiles</p>
-    <button class="buy-cookie-button" style="margin-bottom: 8px;">
-      Locked 🔒
-    </button>
-    <div style="margin-top: 0;">
-      <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
-        Invite 5 friends to unlock
-      </p>
-      <div class="progress-bar" style="margin-top: 0;">
-        <div id="jarUnlockProgressStore6" class="progress-fill" style="width:75%"></div>
-      </div>
-    </div>
-  </div> 
-</div> 
-
-
-
-         <!-- Candy -->
-  <div class="store-item animated-gradient item-with-image" style="display:none;">
-    <!-- Put the cookie image on the left -->
-    <img src="pop.png" alt="Crown" class="store-item-image" />
-
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Candy</h4>
-        <div class="store-item-cost">
-          45
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-        <p>Unveils 2 tiles</p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
-          Buy 🍬🍭
-        </button>
-    </div>
-  </div>
-
-
-   <!-- Donut -->
-  <div class="store-item animated-gradient-candy item-with-image donut-destiny" style="display:none;>
-    <!-- Put the cookie image on the left -->
-    <img src="donutdestiny.png" alt="Crown" class="store-item-image" />
-
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Donut</h4>
-        <div class="store-item-cost">
-          60
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-        <p>Unveils 3 tiles</p>
-        <button class="buy-cookie-button" id= "buyDonutButton" onclick="handleBuyCookieButtonClick(event, 'donutOfDestiny')">
-          Buy 🍩 
-        </button>
-    </div>
-  </div>
-
-              <!-- Sushi -->
-  <div class="store-item animated-gradient item-with-image" style="display:none;>
-    <!-- Put the cookie image on the left -->
-    <img src="sushi.png" alt="Crown" class="store-item-image" />
-
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Sushi</h4>
-        <div class="store-item-cost">
-          45
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-        <p>Unveils <strong>2 tiles</strong></p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
-          Buy 🍣
-        </button>
-    </div>
-  </div>
-
-
-
-
-
-<!-- Donut (LOCKED, using donutdestiny.png) -->
-<div id="donutLockedDestiny" class="store-item animated-gradient-candy item-with-image">
-  <img src="donutdestiny.png" alt="Locked Donut" class="store-item-image" />
-  <div class="store-item-content">
-    <div class="store-item-header">
-      <h4>Donut</h4>
-      <div class="store-item-cost">
-        99
-        <img src="tgstar2.png" alt="Star" class="store-star">
-      </div>
-    </div>
-    <p>Unveils 5 tiles</p>
-    <button class="buy-cookie-button" style="margin-bottom: 8px;">
-      Locked 🔒
-    </button>
-    <div style="margin-top: 0;">
-      <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
-        Invite 10 friends to unlock
-      </p>
-      <div class="progress-bar" style="margin-top: 0;">
-        <div id="jarUnlockProgressStore6" class="progress-fill" style="width:75%"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-  <!-- Bunch of Cookies -->
-  <div class="store-item special-magical item-with-image" style="display:none;>
+  <!-- Bunch of Cookies UNLOCKED -->
+  <div id="bunchofcookiesUnlocked" class="store-item special-magical item-with-image">
     <!-- Put the cookie image on the left -->
     <img src="cookiesnew.png" alt="Bunch of Cookies" class="store-item-image" />
 
@@ -2111,9 +1928,104 @@ Popup on load
   </div>
 
 
+<!-- CANDY LOCKED -->
+<div id="candyLocked" class="store-item animated-gradient-candy item-with-image">
+  <img src="pop.png" alt="Locked Donut" class="store-item-image" />
+  <div class="store-item-content">
+    <div class="store-item-header">
+      <h4>Candy</h4>
+      <div class="store-item-cost">
+        60
+        <img src="tgstar2.png" alt="Star" class="store-star">
+      </div>
+    </div>
+    <p>Unveils <strong>3 tiles</strong></p>
+    <button class="buy-cookie-button" style="margin-bottom: 8px;">
+      Locked 🔒
+    </button>
+    <div style="margin-top: 0;">
+      <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
+        Invite 5 friends to unlock
+      </p>
+      <div class="progress-bar" style="margin-top: 0;">
+        <div id="candyLockedProgress" class="progress-fill" style="width:75%"></div>
+      </div>
+    </div>
+  </div> 
+</div> 
+
+         <!-- CANDY UNLOCKED -->
+  <div id="candyUnlocked" class="store-item animated-gradient item-with-image">
+    <!-- Put the cookie image on the left -->
+    <img src="pop.png" alt="Crown" class="store-item-image" />
+
+    <div class="store-item-content">
+      <div class="store-item-header">
+        <h4>Candy</h4>
+        <div class="store-item-cost">
+          45
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+        <p>Unveils <strong>3 tiles</strong></p>
+        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'candy')">
+          Buy 🍬🍭
+        </button>
+    </div>
+  </div>
+
+
+
+  <!-- Donut LOCKED -->
+<div id="donutLocked" class="store-item animated-gradient-candy item-with-image">
+  <img src="donutdestiny.png" alt="Locked Donut" class="store-item-image" />
+  <div class="store-item-content">
+    <div class="store-item-header">
+      <h4>Donut</h4>
+      <div class="store-item-cost">
+        99
+        <img src="tgstar2.png" alt="Star" class="store-star">
+      </div>
+    </div>
+    <p>Unveils <strong>5 tiles</strong></p>
+    <button class="buy-cookie-button" style="margin-bottom: 8px;">
+      Locked 🔒
+    </button>
+    <div style="margin-top: 0;">
+      <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
+        Invite 10 friends to unlock
+      </p>
+      <div class="progress-bar" style="margin-top: 0;">
+        <div id="donutLockedProgress" class="progress-fill" style="width:75%"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+   <!-- Donut UNLOCKED -->
+  <div id="donutUnlocked" class="store-item animated-gradient-candy item-with-image donut-destiny">
+    <img src="donutdestiny.png" alt="Donut" class="store-item-image" />
+
+    <div class="store-item-content">
+      <div class="store-item-header">
+        <h4>Donut</h4>
+        <div class="store-item-cost">
+          99
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+        <p>Unveils 3 tiles</p>
+        <button class="buy-cookie-button" id= "buyDonutButton" onclick="handleBuyCookieButtonClick(event, 'donut')">
+          Buy 🍩 
+        </button>
+    </div>
+  </div>
+
+
 
       <!-- Meowgical Paw -->
-  <div class="store-item special-magical item-with-image">
+  <div id="pawStore" class="store-item special-magical item-with-image">
     <!-- Put the cookie image on the left -->
     <img src="paw.png" alt="Normal Cookie" class="store-item-image" />
 
@@ -2123,13 +2035,13 @@ Popup on load
         <div class="store-item-cost">
         </div>
       </div>
-      <p><strong>3% lifetime bonus on all rewards!</strong></p>
+      <p><strong>3% lifetime bonus</strong> on all rewards!</p>
         <div style="margin-top: 0;">
     <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
-      Invite 10 friends to receive
+      Invite 12 friends to receive
     </p>
     <div class="progress-bar" style="margin-top: 0;">
-      <div id="jarUnlockProgressStore3" class="progress-fill" style="width:75%"></div>
+      <div id="pawLockedProgress" class="progress-fill" style="width:75%"></div>
     </div>
     </div>
   </div>
@@ -2139,7 +2051,7 @@ Popup on load
 
 
 <!-- Jar of Cookies (UNLOCKED) -->
-<div id="jarUnlockedItem23" class="store-item special item-with-image">
+<div id="jarofcookiesUnlocked" class="store-item special item-with-image">
   <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
   <div class="store-item-content">
     <div class="store-item-header">
@@ -2149,25 +2061,7 @@ Popup on load
         <img src="tgstar2.png" alt="Star" class="store-star">
       </div>
     </div>
-    <p>Unveils 10 tiles</p>
-    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'jar')">
-      Buy 🫙
-    </button>
-  </div>
-</div>
-
-<!-- Jar of Cookies (UNLOCKED) -->
-<div id="jarUnlockedItem2" class="store-item animated-gradient item-with-image" style="display:none;>
-  <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
-  <div class="store-item-content">
-    <div class="store-item-header">
-      <h4>Jar of Cookies</h4>
-      <div class="store-item-cost">
-        200
-        <img src="tgstar2.png" alt="Star" class="store-star">
-      </div>
-    </div>
-    <p>Unveils 10 tiles</p>
+    <p>Unveils <strong>10 tiles</strong></p>
     <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'jar')">
       Buy 🫙
     </button>
@@ -2175,37 +2069,8 @@ Popup on load
 </div>
 
 
-<!-- Jar of Cookies (LOCKED) -->
-  <div id="jarLockedItem2" class="store-item special item-with-image" style="display:none;>
-  <!-- Put the image on the left -->
-  <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
-
-  <!-- Wrap the rest in a “content” div on the right -->
-  <div class="store-item-content">
-    <div class="store-item-header">
-      <h4>Jar of Cookies</h4>
-      <div class="store-item-cost">
-        199
-        <img src="tgstar2.png" alt="Star" class="store-star">
-      </div>
-    </div>
-    <p>Unveils 10 tiles</p>
-          <button class="buy-cookie-button" style="margin-bottom: 8px;">
-        Locked 🔒
-      </button>
-  <div style="margin-top: 0;">
-    <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
-      Invite 12 friends to unlock
-    </p>
-    <div class="progress-bar" style="margin-top: 0;">
-      <div id="jarUnlockProgressStore3" class="progress-fill" style="width:75%"></div>
-    </div>
-  </div>
-  </div>
-</div>
-
-
-<div id="jarUnlockedItem5" class="store-item special item-with-image">
+<!-- Stack of Cookies (UNLOCKED) -->
+<div id="stackofcookiesUnlocked" class="store-item special item-with-image">
   <img src="stack.png" alt="Jar of Cookies" class="store-item-image" />
   <div class="store-item-content">
     <div class="store-item-header">
@@ -2215,13 +2080,15 @@ Popup on load
         <img src="tgstar2.png" alt="Star" class="store-star">
       </div>
     </div>
-    <p>Unveils 25 tiles</p>
-    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'jar')">
+    <p>Unveils <strong>25 tiles</strong></p>
+    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'stack')">
       Buy 🍪
     </button>
   </div>
 </div>
 
+
+<!-- Treasure of Cookies (UNLOCKED) -->
 <div id="jarUnlockedItem6" class="store-item special item-with-image">
   <img src="chest.png" alt="Jar of Cookies" class="store-item-image" />
   <div class="store-item-content">
@@ -2232,33 +2099,13 @@ Popup on load
         <img src="tgstar2.png" alt="Star" class="store-star">
       </div>
     </div>
-    <p>Unveils 80 tiles</p>
-    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'jar')">
+    <p>Unveils <strong>80 tiles</strong></p>
+    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'treasure')">
       Buy 💰
     </button>
   </div>
 </div>
 
-
-        <!-- Bomb -->
-  <div class="store-item animated-gradient-candy item-with-image" style="display:none;>
-    <!-- Put the cookie image on the left -->
-    <img src="bomb.png" alt="Bomb" class="store-item-image" />
-
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Bomb</h4>
-        <div class="store-item-cost">
-          999
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-      <p>Reveals an entire cluster</p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bomb')">
-          Buy 💣
-        </button>
-    </div>
-  </div>
 
      <!-- Bomb <button class="buy-cookie-button-lively">-->
   <div class="store-item item-with-image">
@@ -2281,110 +2128,6 @@ Popup on load
   </div>
 
 
-
-           <!-- Crown -->
-  <div class="store-item special-purple item-with-image" style="display:none;>
-    <!-- Put the cookie image on the left -->
-    <img src="crown.png" alt="Crown" class="store-item-image" />
-
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Crown</h4>
-        <div class="store-item-cost">
-          199
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-        <p>Gives you 10% bonus on all rewards for 30 min</p>
-        <button class="buy-cookie-button" id= "buyCrownButton" onclick="handleBuyCookieButtonClick(event, 'crown')">
-          Buy 👑
-        </button>
-    </div>
-     <!--<span class="founders-label">Limited Time</span>-->
-  </div>
-
-                   <!-- Donut of Destiny -->
-  <div class="store-item special-neon item-with-image donut-destiny" style="display:none;>
-    <!-- Put the cookie image on the left -->
-    <img src="donutdestiny.png" alt="Crown" class="store-item-image" />
-
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Donut of Destiny</h4>
-        <div class="store-item-cost">
-          499
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-        <p>Gives you 3% bonus on all rewards forever</p>
-        <button class="buy-cookie-button" id= "buyDonutButton" onclick="handleBuyCookieButtonClick(event, 'donutOfDestiny')">
-          Buy 🍩 
-        </button>
-    </div>
-     <span class="founders-label">Limited Time for Founders</span>
-  </div>
-
-
-
-           <!-- Magic Paw -->
-  <div class="store-item special-galaxy item-with-image" style="display:none;">
-    <!-- Put the cookie image on the left -->
-    <img src="paw.png" alt="Crown" class="store-item-image" />
-
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Meowgical Paw</h4>
-        <div class="store-item-cost">
-          60
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-        <p>Unveils <strong>3 tiles</strong></p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
-          Buy 🐾
-        </button>
-    </div>
-  </div>
-
-                    <!-- Ice Cream -->
-  <div class="store-item special-gold item-with-image" style="display:none;">
-    <!-- Put the cookie image on the left -->
-    <img src="ice-cream.png" alt="Crown" class="store-item-image" />
-
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Ice Cream</h4>
-        <div class="store-item-cost">
-          99
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-        <p>Gives you 2% bonus on all rewards forever</p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'crown')">
-          Buy 🍦
-        </button>
-    </div>
-  </div>
-
-             <!-- Magic Paw -->
-  <div class="store-item animated-gradient-citrus item-with-image" style="display:none;>
-    <!-- Put the cookie image on the left -->
-    <img src="paw.png" alt="Crown" class="store-item-image" />
-
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Meowgical Paw</h4>
-        <div class="store-item-cost">
-          599
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-        <p>Gives you 2% bonus on all rewards forever</p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
-          Buy 🐾
-        </button>
-    </div>
-  </div>
 
 
 
@@ -2423,9 +2166,10 @@ Popup on load
     </div>
 
     <!-- Existing text, balances, etc. -->
+    <strong>
     <p id="storeCookieBalances" style="font-size:16px; margin-top:10px;">
       Cookies: 
-    </p>
+    </p></strong>
   </div>
 
 </div>
