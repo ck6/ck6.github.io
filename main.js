@@ -1260,20 +1260,20 @@ async function checkChannelJoin() {
 /************************************************************
  * 9) Feeding / Chonk Level (local display)
  ************************************************************/
-const LEVEL_THRESHOLDS = [10, 25, 50];
+const LEVEL_THRESHOLDS = [10, 50, 90];
 const LEVEL_BONUSES = [0, 0.25, 0.4, 0.5];
 
 function getChonkLevel(feeds) {
-  if (feeds >= 50) return 3;
-  if (feeds >= 25) return 2;
+  if (feeds >= 90) return 3;
+  if (feeds >= 50) return 2;
   if (feeds >= 10) return 1;
   return 0;
 }
 function getNextThreshold(level) {
   if (level === 0) return 10;
-  if (level === 1) return 25;
-  if (level === 2) return 50;
-  return 50;
+  if (level === 1) return 50;
+  if (level === 2) return 90;
+  return 90;
 }
 function updateFeedingProgress() {
   if (!userState) return;
@@ -1290,8 +1290,8 @@ function updateFeedingProgress() {
   const nextThreshold = getNextThreshold(level);
   let currentBase = 0;
   if (level === 1) currentBase = 10;
-  if (level === 2) currentBase = 25;
-  if (level === 3) currentBase = 50;
+  if (level === 2) currentBase = 50;
+  if (level === 3) currentBase = 90;
 
   let required = nextThreshold - currentBase;
   let achieved = totalFeeds - currentBase;
