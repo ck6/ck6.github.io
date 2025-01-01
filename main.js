@@ -763,11 +763,6 @@ function showTab(tab) {
     .forEach(content => content.classList.remove('active'));
   document.getElementById(tab + 'Content').classList.add('active');
 
-  // Force the scroller to the top:
-  const contentEl = document.querySelector('.content');
-  if (contentEl) {
-    contentEl.scrollTop = 0;
-  }
 
   // Now show or hide the cluster-buttons
   const clusterBtns = document.querySelector('.cluster-buttons');
@@ -829,6 +824,13 @@ function showTab(tab) {
     }
   }
 
+  // Force the scroller to the top:
+  requestAnimationFrame(() => {
+    const contentEl = document.querySelector('.content');
+    if (contentEl) {
+      contentEl.scrollTop = 0;
+    }
+  });
 
 }
 
