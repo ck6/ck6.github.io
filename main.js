@@ -822,6 +822,8 @@ function showTab(tab) {
         setupWelcomeCountdown();
       });
     }
+
+    logStoreOpened();
   }
 
 
@@ -1333,6 +1335,21 @@ async function logUserEvent(eventName) {
     // No particular response needed — but you could check res.json() if desired
   } catch (err) {
     console.error("Error logging user event:", err);
+  }
+}
+
+async function logStoreOpened() {
+  try {
+    await fetch(`${BASE_API_URL}/api/logConversionEvent`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        initData: tg.initData,
+        eventName: 'store_opened'
+      })
+    });
+  } catch (err) {
+    console.error('logStoreOpened error:', err);
   }
 }
 
