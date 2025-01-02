@@ -651,7 +651,7 @@ button {
   margin-left: auto;
   margin-right: auto;   /* center horizontally */
   text-align: left;     /* or center, up to you */
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   display: flex;
          /* so text and the progress bar can go onto a new line if needed */
   align-items: center;
@@ -664,6 +664,12 @@ button {
   height: auto;
   margin-left: 8px;
   flex-shrink: 0;        /* don’t shrink the image below 40px */
+}
+
+@media (max-width: 400px) {
+  .boxy-card {
+    flex-wrap: wrap; /* wrap only on very narrow screens */
+  }
 }
 
 
@@ -1515,11 +1521,23 @@ button {
 </div>-->
 
 <div class="popup-overlay" id="onLoadPopup">
-  <div class="popup-content">
+  <div class="popup-content" style="text-align: center;">
     <h2>Find the chonk's hidden treasure!</h2>
-    <p><h2>5x1 BTC<br><br>and a total of<br><br>500K TON<br>14.5M USDT</h2></p>
-    <br><img src="btcchest.png" alt="Free Cookie" style="width: 150px; height: auto; margin-bottom: 10px;" />
-    <button onclick="closePopup()" style="font-size: 20px; padding: 14px 24px;">Go!</button>
+
+    <!-- Use a <p> or <h3> instead of nested <p><h2> -->
+    <p style="font-size: 18px; line-height: 1.5;">
+      5x1 BTC<br><br>and a total of<br><br>600K TON<br>14.5M USDT
+    </p>
+
+    <!-- The image on its own line -->
+    <img src="btcchest.png" 
+         alt="Treasure Chest" 
+         style="width:150px; height:auto; margin-bottom:10px; display:block; margin:0 auto;" />
+
+    <!-- The button beneath the image -->
+    <button onclick="closePopup()" style="font-size:20px; padding:14px 24px;">
+      Go!
+    </button>
   </div>
 </div>
 
