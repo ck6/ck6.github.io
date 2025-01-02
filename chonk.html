@@ -651,26 +651,8 @@ button {
   margin-left: auto;
   margin-right: auto;   /* center horizontally */
   text-align: left;     /* or center, up to you */
-  flex-wrap: nowrap;
-  display: flex;
-         /* so text and the progress bar can go onto a new line if needed */
-  align-items: center;
-  justify-content: space-between;
 }
 
-/* Keep your image at a fixed size; let the .boxy-card flex wrap around it */
-.boxy-card img {
-  width: 40px;
-  height: auto;
-  margin-left: 8px;
-  flex-shrink: 0;        /* don’t shrink the image below 40px */
-}
-
-@media (max-width: 400px) {
-  .boxy-card {
-    flex-wrap: wrap; /* wrap only on very narrow screens */
-  }
-}
 
 
 .invite-row {
@@ -1526,7 +1508,7 @@ button {
 
     <!-- Use a <p> or <h3> instead of nested <p><h2> -->
     <p style="font-size: 18px; line-height: 1.5;">
-      5x1 BTC<br><br>and a total of<br><br>600K TON<br>14.5M USDT
+      <strong>5x1 BTC<br><br>and a total of<br><br>600K TON<br>14.5M USDT</strong>
     </p>
 
     <!-- The image on its own line -->
