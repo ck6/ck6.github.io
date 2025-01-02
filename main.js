@@ -458,6 +458,10 @@ if (userState.cookiesOwned <= 0 && userState.chocolateReveals <= 0) {
     }, 200);
 
     if (data.reward != "0") {shoot();}
+
+      if (data.zeroStreakBonusGranted) {
+      showFreeCookiePopup();  // see function below
+    }
 //await loadCluster(currentClusterIndex);
     updateBalances();
     updateFeedingProgress();
@@ -1394,6 +1398,22 @@ function shoot() {
     shapes: ["circle"],
   });
 }
+
+
+//BONUS LOGIC
+
+function showFreeCookiePopup() {
+  // Display the popup overlay
+  document.getElementById("freeCookiePopup").style.display = "flex";
+
+  // Fire confetti
+  shoot();  // this is your existing confetti function
+}
+
+function closeFreeCookiePopup() {
+  document.getElementById("freeCookiePopup").style.display = "none";
+}
+
 
 
 /////TON WALLET
