@@ -1408,7 +1408,9 @@ function showFreeCookiePopup() {
   document.getElementById("freeCookiePopup").style.display = "flex";
 
   // Fire confetti
-  shoot();  // this is your existing confetti function
+  setTimeout(shoot, 0);
+  setTimeout(shoot, 100);
+  setTimeout(shoot, 200);
 }
 
 function closeFreeCookiePopup() {

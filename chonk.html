@@ -651,7 +651,17 @@ button {
   margin-left: auto;
   margin-right: auto;   /* center horizontally */
   text-align: left;     /* or center, up to you */
+  flex-wrap: wrap;
 }
+
+/* Keep your image at a fixed size; let the .boxy-card flex wrap around it */
+.boxy-card img {
+  width: 40px;
+  height: auto;
+  margin-left: 8px;
+  flex-shrink: 0;        /* don’t shrink the image below 40px */
+}
+
 
 .invite-row {
   display: flex;
@@ -1438,6 +1448,7 @@ button {
   height: 10px;
   position: relative;
   margin-top: 10px;
+  box-sizing: border-box;
 }
 
 </style>
@@ -1502,7 +1513,8 @@ button {
 <div class="popup-overlay" id="onLoadPopup">
   <div class="popup-content">
     <h2>Find the chonk's hidden treasure!</h2>
-    <p><h2>5x1 BTC<br><br>and a total of<br><br>578K TON<br>14.5M USDT</h2></p>
+    <p><h2>5x1 BTC<br><br>and a total of<br><br>500K TON<br>14.5M USDT</h2></p>
+    <img src="btcchest.jpg" alt="Free Cookie" style="width: 150px; height: auto; margin-bottom: 10px;" />
     <button onclick="closePopup()" style="font-size: 20px; padding: 14px 24px;">Go!</button>
   </div>
 </div>
