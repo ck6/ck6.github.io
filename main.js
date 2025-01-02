@@ -1275,53 +1275,81 @@ async function checkChannelJoin() {
 /************************************************************
  * 9) Feeding / Chonk Level (local display)
  ************************************************************/
-const LEVEL_THRESHOLDS = [10, 50, 90];
-const LEVEL_BONUSES = [0, 0.25, 0.4, 0.5];
+const LEVEL_THRESHOLDS = [10, 50, 99, 200, 500, 600, 700];
+const LEVEL_BONUSES = [0.0, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45];
 
 function getChonkLevel(feeds) {
-  if (feeds >= 90) return 3;
-  if (feeds >= 50) return 2;
-  if (feeds >= 10) return 1;
-  return 0;
+  let level = 0; // default
+  for (let i = 0; i < LEVEL_THRESHOLDS.length; i++) {
+    if (feeds >= LEVEL_THRESHOLDS[i]) {
+      // each threshold we cross increases level by 1
+      level = i + 1;
+    } else {
+      break; // stop once we fail to cross a threshold
+    }
+  }
+  return level;
 }
+
 function getNextThreshold(level) {
-  if (level === 0) return 10;
-  if (level === 1) return 50;
-  if (level === 2) return 90;
-  return 90;
+  // If level=7 => we already surpassed the 700 feeds milestone
+  if (level >= LEVEL_THRESHOLDS.length) {
+    return null;
+  }
+  return LEVEL_THRESHOLDS[level]; 
 }
+
 function updateFeedingProgress() {
   if (!userState) return;
+
   const totalFeeds = userState.totalFeeds || 0;
   const level = getChonkLevel(totalFeeds);
 
   document.getElementById('totalFeeds').textContent = totalFeeds;
   document.getElementById('chonkLevel').textContent = level;
-  document.getElementById('chonkBonus').textContent = LEVEL_BONUSES[level] + "%";
 
-  const nextLevelRewardEl = document.getElementById('nextLevelReward');
+  // Current bonus
+  const currentBonusDecimal = LEVEL_BONUSES[level] || 0.0; // e.g. 0.15 => "0.15%"
+  const currentBonusPct = (currentBonusDecimal).toFixed(2) + "%";
+  document.getElementById('chonkBonus').textContent = currentBonusPct;
+
+  // Next threshold & progress
+  const nextThresholdRewardEl = document.getElementById('nextLevelReward');
   const feedingProgress = document.getElementById('feedingProgress');
-
   const nextThreshold = getNextThreshold(level);
-  let currentBase = 0;
-  if (level === 1) currentBase = 10;
-  if (level === 2) currentBase = 50;
-  if (level === 3) currentBase = 90;
 
-  let required = nextThreshold - currentBase;
-  let achieved = totalFeeds - currentBase;
-  if (achieved < 0) achieved = 0;
-  if (achieved > required) achieved = required;
-  let percent = (achieved / required) * 100;
-
-  if (level === 3) {
-    percent = 100;
-    nextLevelRewardEl.textContent = "Max level reached";
-  } else {
-    const nextBonus = LEVEL_BONUSES[level+1];
-    nextLevelRewardEl.textContent = nextBonus + "% at " + nextThreshold + " feeds";
+  if (nextThreshold === null) {
+    // Already at max level (level=7)
+    feedingProgress.style.width = "100%";
+    nextThresholdRewardEl.textContent = "Max level reached";
+    return;
   }
+
+  // Current “base” threshold is the one we last crossed 
+  // (or zero if none).
+  let currentBase = 0;
+  if (level > 0) {
+    currentBase = LEVEL_THRESHOLDS[level - 1];
+  }
+
+  const required = nextThreshold - currentBase;    // how many feeds from one threshold to the next
+  let achieved = totalFeeds - currentBase;         // how many we’ve gotten past currentBase
+  if (achieved < 0) achieved = 0;
+  if (achieved > required) achieved = required;    // clamp
+  
+  const percent = (achieved / required) * 100;
   feedingProgress.style.width = percent + "%";
+
+  // Next level’s bonus 
+  const nextLevel = level + 1;
+  if (nextLevel >= LEVEL_BONUSES.length) {
+    // e.g. nextLevel=8, but we only have 0..7
+    nextThresholdRewardEl.textContent = "Max level reached";
+  } else {
+    const nextBonusDecimal = LEVEL_BONUSES[nextLevel];
+    const nextBonusPct = (nextBonusDecimal).toFixed(2) + "%";
+    nextThresholdRewardEl.textContent = nextBonusPct + " at " + nextThreshold + " feeds";
+  }
 }
 
 
