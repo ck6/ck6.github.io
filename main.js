@@ -523,6 +523,7 @@ async function useBombOnCurrentCluster() {
       userState.revealedTiles[currentClusterIndex].push({ row, col, reward });
     });
 
+    shoot();
     // Now re-render the cluster to show everything as revealed
     await loadCluster(currentClusterIndex);
     //OTHERWISE WE CAN'T SEE THE FLIP
