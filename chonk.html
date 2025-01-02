@@ -652,6 +652,10 @@ button {
   margin-right: auto;   /* center horizontally */
   text-align: left;     /* or center, up to you */
   flex-wrap: wrap;
+  display: flex;
+         /* so text and the progress bar can go onto a new line if needed */
+  align-items: center;
+  justify-content: space-between;
 }
 
 /* Keep your image at a fixed size; let the .boxy-card flex wrap around it */
