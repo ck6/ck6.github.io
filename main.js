@@ -725,7 +725,7 @@ function shareMiniApp() {
   //    - This is a standard approach to let the user pick a chat to send it to.
   //    - You can also add a custom text or message if you want.
   const encodedLink = encodeURIComponent(personalLink);
-  const encodedMessage = encodeURIComponent("Check out this BTC Hiding Chonk and change your life forever!");
+  const encodedMessage = encodeURIComponent("Check out this Lucky BTC Chonk, find 5 BTC, 600K TON, 14.5M USDT and change your life forever!");
   const shareUrl = `https://t.me/share/url?url=${encodedLink}&text=${encodedMessage}`;
 
   window.open(shareUrl, "_blank");
@@ -1452,7 +1452,7 @@ function closeFreeCookiePopup() {
 
 // Create a connector
     const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-        manifestUrl: 'https://ck6.github.io/tonconnect-manifest.json',
+        manifestUrl: 'https://experiments.services.fluffychonk.com/chonk/tonconnect-manifest.json',
         buttonRootId: 'ton-connect'
     });
 
