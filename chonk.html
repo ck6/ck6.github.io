@@ -1838,7 +1838,21 @@ button {
 <!-- Store tab -->
 <div id="storeContent" class="tab-content">
 
-  <h2>Store</h2>
+  <div style="
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  margin-bottom: 10px;
+">
+  <!-- Left side: "Store" heading -->
+  <h2 style="margin:0;">Store</h2>
+
+  <!-- Right side: cookies + bombs -->
+  <div id="storeCookieBalances" style="font-size: 16px;">
+    🍪 0 | 💣 0
+  </div>
+</div>
+
   <div style="font-size:17px;color:#FFFFFF margin-top:10px;">
     <p>Buy sweets to distract the chonk and reveal tiles!</p>
 
@@ -2155,11 +2169,7 @@ button {
 
     </div>
 
-    <!-- Existing text, balances, etc. -->
-    <strong><br>
-    <p id="storeCookieBalances" style="font-size:16px; margin-top:10px;">
-      Cookies: 
-    </p></strong>
+
   </div>
 
 </div>

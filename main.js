@@ -1015,8 +1015,9 @@ function updateBalances() {
   document.getElementById('friendsInvitedCount').textContent = friendsInvited;
   
   // Store tab
-  document.getElementById('storeCookieBalances').textContent =
-  `Cookies: ${cookiesOwned} | Bombs: ${bombs}`;
+  document.getElementById('storeCookieBalances').textContent = 
+  `🍪 ${cookiesOwned} | 💣 ${bombs}`;
+
 
   // Balance tab
   //document.getElementById('cookieLine').textContent = 
