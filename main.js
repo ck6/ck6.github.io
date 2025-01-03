@@ -607,18 +607,18 @@ function flipAllNewlyRevealedTiles(newRewards) {
  * 4) Random or selected cluster
  ************************************************************/
 function loadRandomCluster() {
-  const randIndex = Math.floor(Math.random() * 2_380_953); //1818181 
+  const randIndex = Math.floor(Math.random() * 1818181); //1818181 //2_380_953
   loadCluster(randIndex);
   updateBalances();
 }
 function selectCluster() {
-  const clusterNumber = prompt("Enter cluster number (1-2,380,953):");
+  const clusterNumber = prompt("Enter cluster number (1-1,818,181):");
   const num = parseInt(clusterNumber, 10);
-  if (!isNaN(num) && num >= 1 && num <= 2_380_953) {
+  if (!isNaN(num) && num >= 1 && num <= 1818181) {
     loadCluster(num - 1);
     updateBalances();
   } else {
-    alert("Invalid cluster number. Please enter a number between 1 and 2,380,953.");
+    alert("Invalid cluster number. Please enter a number between 1 and 1,818,181.");
   }
 }
 
@@ -1105,34 +1105,10 @@ function updateBalances() {
     bombBtn.style.display = (bombs > 0) ? 'inline-block' : 'none';
   }
 
-  // Example: if you want to display actual BTC/USDT/TON from userState, you can do so here.
-  // For now, let's assume we don't have that data from the server. We'll keep them 0:
-// Loop over all clusters the user has revealed
-  for (let cIndex in userState.revealedTiles) {
-    const tilesArray = userState.revealedTiles[cIndex];
-    for (let tile of tilesArray) {
-      // tile.reward is something like "0.25 USDT" or "1 BTC"
-      const [amountStr, currency] = tile.reward.split(" "); 
-      const amount = parseFloat(amountStr) || 0;
 
-      if (!currency) continue;
-
-      switch (currency.toUpperCase()) {
-        case "BTC":
-          totalBTC += amount;
-          break;
-        case "USDT":
-          totalUSDT += amount;
-          break;
-        case "TON":
-          totalTON += amount;
-          break;
-        default:
-          // If some unknown currency, skip or handle accordingly
-          break;
-      }
-    }
-  }
+  const totalBTC  = userState.totalBTC  || 0;
+  const totalUSDT = userState.totalUSDT || 0;
+  const totalTON  = userState.totalTON  || 0;
 
 
   // Already have totalBTC, totalUSDT, totalTON from the loop
