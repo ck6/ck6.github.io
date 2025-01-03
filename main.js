@@ -560,7 +560,7 @@ async function useBombOnCurrentCluster() {
     if (data.clusterCompletedReward) {
     showClusterCompletePopup(data.clusterCompletedReward);
     }
-    
+
     // Now re-render the cluster to show everything as revealed
     await loadCluster(currentClusterIndex);
     //OTHERWISE WE CAN'T SEE THE FLIP
@@ -607,18 +607,18 @@ function flipAllNewlyRevealedTiles(newRewards) {
  * 4) Random or selected cluster
  ************************************************************/
 function loadRandomCluster() {
-  const randIndex = Math.floor(Math.random() * 1818181);
+  const randIndex = Math.floor(Math.random() * 2_380_953); //1818181 
   loadCluster(randIndex);
   updateBalances();
 }
 function selectCluster() {
-  const clusterNumber = prompt("Enter cluster number (1-1,818,181):");
+  const clusterNumber = prompt("Enter cluster number (1-2,380,953):");
   const num = parseInt(clusterNumber, 10);
-  if (!isNaN(num) && num >= 1 && num <= 1818181) {
+  if (!isNaN(num) && num >= 1 && num <= 2_380_953) {
     loadCluster(num - 1);
     updateBalances();
   } else {
-    alert("Invalid cluster number. Please enter a number between 1 and 1,818,181.");
+    alert("Invalid cluster number. Please enter a number between 1 and 2,380,953.");
   }
 }
 
