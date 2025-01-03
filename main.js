@@ -462,7 +462,13 @@ if (userState.cookiesOwned <= 0 && userState.chocolateReveals <= 0) {
       if (data.zeroStreakBonusGranted) {
       showFreeCookiePopup();  // see function below
     }
-//await loadCluster(currentClusterIndex);
+
+    if (data.clusterCompletedReward) {
+    // Show the new popup
+    showClusterCompletePopup(data.clusterCompletedReward);
+    }
+    //await loadCluster(currentClusterIndex);
+
     updateBalances();
     updateFeedingProgress();
   } catch (err) {
@@ -471,6 +477,28 @@ if (userState.cookiesOwned <= 0 && userState.chocolateReveals <= 0) {
     element.classList.remove('flipping');
   }
 }
+
+
+function showClusterCompletePopup(bonusText) {
+  const overlay = document.getElementById("clusterCompletePopup");
+  const rewardEl = document.getElementById("clusterRewardText");
+  if (overlay && rewardEl) {
+    rewardEl.textContent = bonusText; // e.g. "2 Cookies" or "0.25 TON"
+    overlay.style.display = "flex";   // show popup
+  }
+  // Confetti if you want
+  setTimeout(shoot, 0);
+  setTimeout(shoot, 100);
+  setTimeout(shoot, 200);
+}
+
+function closeClusterCompletePopup() {
+  const overlay = document.getElementById("clusterCompletePopup");
+  if (overlay) {
+    overlay.style.display = "none";
+  }
+}
+
 
 
 //BOMB REVEAL
@@ -528,6 +556,11 @@ async function useBombOnCurrentCluster() {
     });
 
     shoot();
+
+    if (data.clusterCompletedReward) {
+    showClusterCompletePopup(data.clusterCompletedReward);
+    }
+    
     // Now re-render the cluster to show everything as revealed
     await loadCluster(currentClusterIndex);
     //OTHERWISE WE CAN'T SEE THE FLIP
@@ -579,13 +612,13 @@ function loadRandomCluster() {
   updateBalances();
 }
 function selectCluster() {
-  const clusterNumber = prompt("Enter cluster number (1-2,818,181):");
+  const clusterNumber = prompt("Enter cluster number (1-1,818,181):");
   const num = parseInt(clusterNumber, 10);
-  if (!isNaN(num) && num >= 1 && num <= 2818181) {
+  if (!isNaN(num) && num >= 1 && num <= 1818181) {
     loadCluster(num - 1);
     updateBalances();
   } else {
-    alert("Invalid cluster number. Please enter a number between 1 and 2,818,181.");
+    alert("Invalid cluster number. Please enter a number between 1 and 1,818,181.");
   }
 }
 

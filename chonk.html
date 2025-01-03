@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0", maximum-scale=1.0, user-scalable=no"/>
 <meta property="og:title" content="Lucky BTC Chonk" />
-<meta property="og:description" content="I've hidden 5 BTC, 100K TON and lots of USDT. Can you find them and change your life forever?" />
+<meta property="og:description" content="I've hidden 5 BTC, 600K TON and 14.5M USDT. Can you find them and change your life forever?" />
 <meta property="og:image" content="btc_chonk.jpg" />
 
 <title>Lucky BTC Chonk</title>
@@ -339,9 +339,6 @@ button {
     justify-content: space-evenly;
     align-items: center;
     padding: 10px 0;
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
-    padding-bottom: env(safe-area-inset-bottom);
   
   }
   .bottom-nav button {
@@ -1473,6 +1470,18 @@ button {
   </div>
 </div>
 
+<!-- Cluster Complete Popup -->
+<div class="popup-overlay" id="clusterCompletePopup" style="display: none;">
+  <div class="popup-content">
+    <h2>Cluster Completed!</h2>
+    <p id="clusterCompleteMessage">
+      You just finished this cluster and got <span id="clusterRewardText"></span>!
+    </p>
+    <button onclick="closeClusterCompletePopup()">Woohoo!</button>
+  </div>
+</div>
+
+
 
 <!-- Big Intro Popup 
 <div class="popup-overlay" id="onLoadPopup" style="display: flex;">
@@ -1512,7 +1521,7 @@ button {
 
     <!-- Use a <p> or <h3> instead of nested <p><h2> -->
     <p style="font-size: 18px; line-height: 1.5;">
-      <strong>5x1 BTC<br>100K TON<br><br>and a total of<br>14.5M USDT</strong>
+      <strong>5x1 BTC<br><br>and a total of<br><br>600K TON<br>14.5M USDT</strong>
     </p>
     <br>
     <!-- The image on its own line -->
