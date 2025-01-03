@@ -1454,9 +1454,6 @@ function closeFreeCookiePopup() {
     const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
         manifestUrl: 'https://experiments.services.fluffychonk.com/chonk/tonconnect-manifest.json',
         buttonRootId: 'ton-connect'
-        uiPreferences: {
-        theme: 'system', // or 'light' or 'system'
-        }
     });
 
 tonConnectUI.uiOptions = {
