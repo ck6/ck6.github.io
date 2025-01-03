@@ -579,13 +579,13 @@ function loadRandomCluster() {
   updateBalances();
 }
 function selectCluster() {
-  const clusterNumber = prompt("Enter cluster number (1-1,818,181):");
+  const clusterNumber = prompt("Enter cluster number (1-2,818,181):");
   const num = parseInt(clusterNumber, 10);
-  if (!isNaN(num) && num >= 1 && num <= 1818181) {
+  if (!isNaN(num) && num >= 1 && num <= 2818181) {
     loadCluster(num - 1);
     updateBalances();
   } else {
-    alert("Invalid cluster number. Please enter a number between 1 and 1,818,181.");
+    alert("Invalid cluster number. Please enter a number between 1 and 2,818,181.");
   }
 }
 
@@ -1454,6 +1454,9 @@ function closeFreeCookiePopup() {
     const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
         manifestUrl: 'https://experiments.services.fluffychonk.com/chonk/tonconnect-manifest.json',
         buttonRootId: 'ton-connect'
+        uiPreferences: {
+        theme: 'system', // or 'light' or 'system'
+        }
     });
 
 tonConnectUI.uiOptions = {
