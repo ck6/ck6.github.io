@@ -482,9 +482,11 @@ if (userState.cookiesOwned <= 0 && userState.chocolateReveals <= 0) {
 function showClusterCompletePopup(bonusText) {
   const overlay = document.getElementById("clusterCompletePopup");
   const rewardEl = document.getElementById("clusterRewardText");
+  const rewardImageEl = document.innerHTML("clusterRewardImage");
   if (overlay && rewardEl) {
     rewardEl.textContent = bonusText; // e.g. "2 Cookies" or "0.25 TON"
     overlay.style.display = "flex";   // show popup
+    rewardImageEl = '<img src="cookie.webp" alt="Free Cookie" style="width: 150px; height: auto; margin-bottom: 10px;" />';
   }
   // Confetti if you want
   setTimeout(shoot, 0);
