@@ -479,14 +479,27 @@ if (userState.cookiesOwned <= 0 && userState.chocolateReveals <= 0) {
 }
 
 
+
 function showClusterCompletePopup(bonusText) {
   const overlay = document.getElementById("clusterCompletePopup");
   const rewardEl = document.getElementById("clusterRewardText");
   const rewardImageEl = document.getElementById("clusterRewardImage");
+
+
+  const rewardImages = {
+  COOKIES: "cookie.webp",
+  TON: "ton.png",
+  USDT: "usdt.png"
+  };
+
+  const rewardType = getRewardType(bonusText)?.toUpperCase();
+  const imageUrl = rewardImages[rewardType] || "crown.png"; // fallback
+
+
   if (overlay && rewardEl) {
     rewardEl.textContent = bonusText; // e.g. "2 Cookies" or "0.25 TON"
     overlay.style.display = "flex";   // show popup
-    rewardImageEl.innerHTML = '<img src="cookie.webp" alt="Free Cookie" style="width: 150px; height: auto; margin-bottom: 10px;" />';
+    document.getElementById("clusterRewardImage").src = imageUrl;
   }
   // Confetti if you want
   setTimeout(shoot, 0);
@@ -500,6 +513,19 @@ function closeClusterCompletePopup() {
     overlay.style.display = "none";
   }
 }
+
+function getRewardType(rewardString) {
+  if (!rewardString) return null;
+  
+  // e.g. "2 Cookies" => ["2","Cookies"]
+  //      "0.25 TON" => ["0.25","TON"]
+  //      "1.50 USDT" => ["1.50","USDT"]
+  const parts = rewardString.trim().split(" ");
+  
+  // The last word should be "Cookies", "TON", "USDT", etc.
+  return parts[parts.length - 1]; 
+}
+
 
 
 
