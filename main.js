@@ -1039,9 +1039,9 @@ function updateBalances() {
   const bombs = userState.chocolateBombs || 0;
   const friendsInvited = userState.friendsInvited || 0;
 
-  let totalBTC = 0;
-  let totalUSDT = 0;
-  let totalTON = 0;
+  const totalBTC  = userState.totalBTC  || 0;
+  const totalUSDT = userState.totalUSDT || 0;
+  const totalTON  = userState.totalTON  || 0;
 
 
   //Bonuses tab
@@ -1097,7 +1097,7 @@ function updateBalances() {
     
 
 
-    alert("hi");
+
 
   //  // Show or hide the Bomb button
   const bombBtn = document.getElementById('useBombButton');
@@ -1106,9 +1106,6 @@ function updateBalances() {
   }
 
 
-  const totalBTC  = userState.totalBTC  || 0;
-  const totalUSDT = userState.totalUSDT || 0;
-  const totalTON  = userState.totalTON  || 0;
 
 
   // Already have totalBTC, totalUSDT, totalTON from the loop
