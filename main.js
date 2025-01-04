@@ -499,7 +499,7 @@ function showClusterCompletePopup(bonusText) {
   if (overlay && rewardEl) {
     rewardEl.textContent = bonusText; // e.g. "2 Cookies" or "0.25 TON"
     overlay.style.display = "flex";   // show popup
-    document.getElementById("clusterRewardImage").src = imageUrl;
+    rewardImageEl.src = imageUrl;
   }
   // Confetti if you want
   setTimeout(shoot, 0);
