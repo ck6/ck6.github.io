@@ -1097,7 +1097,7 @@ function updateBalances() {
     
 
 
-
+    alert("hi");
 
   //  // Show or hide the Bomb button
   const bombBtn = document.getElementById('useBombButton');
