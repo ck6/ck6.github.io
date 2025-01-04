@@ -512,6 +512,11 @@ function closeClusterCompletePopup() {
   if (overlay) {
     overlay.style.display = "none";
   }
+
+  const randIndex = Math.floor(Math.random() * 1818181); //1818181 //2_380_953
+  loadCluster(randIndex);
+  updateBalances();
+
 }
 
 function getRewardType(rewardString) {
