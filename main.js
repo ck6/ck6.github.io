@@ -409,6 +409,10 @@ function createHexGrid() {
 async function onHexClick(row, col, element) {
   if (!userState) return;
 
+  if (element.classList.contains('revealed')) {
+    return;
+  }
+
   // Check if user has cookie or choc reveal
 if (userState.cookiesOwned <= 0 && userState.chocolateReveals <= 0) {
   showNoCookiesPopup();
