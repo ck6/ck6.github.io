@@ -12,11 +12,8 @@ switch (true) {
   case hostname.includes("experiments.services.fluffychonk.com"):
     BASE_API_URL = "https://chonk-1.services.fluffychonk.com";
     break;
-  case hostname.includes("ck6.github.io"):
-    BASE_API_URL = "https://chonk.fly.dev";
-    break;
   default:
-    BASE_API_URL = "https://chonk.fly.dev"; // fallback
+    BASE_API_URL = "https://chonk-1.services.fluffychonk.com"; // fallback
 }
 
 
