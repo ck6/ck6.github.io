@@ -517,7 +517,7 @@ function closeClusterCompletePopup() {
     overlay.style.display = "none";
   }
 
-  const randIndex = Math.floor(Math.random() * 1818181); //1818181 //2_380_953
+  const randIndex = Math.floor(Math.random() * 3333334); //1818181 //2_380_953
   loadCluster(randIndex);
   updateBalances();
 
@@ -644,18 +644,18 @@ function flipAllNewlyRevealedTiles(newRewards) {
  * 4) Random or selected cluster
  ************************************************************/
 function loadRandomCluster() {
-  const randIndex = Math.floor(Math.random() * 1818181); //1818181 //2_380_953
+  const randIndex = Math.floor(Math.random() * 3333334); //1818181 //2_380_953
   loadCluster(randIndex);
   updateBalances();
 }
 function selectCluster() {
-  const clusterNumber = prompt("Enter cluster number (1-1,818,181):");
+  const clusterNumber = prompt("Enter cluster number (1-3,333,334):");
   const num = parseInt(clusterNumber, 10);
-  if (!isNaN(num) && num >= 1 && num <= 1818181) {
+  if (!isNaN(num) && num >= 1 && num <= 3333334) {
     loadCluster(num - 1);
     updateBalances();
   } else {
-    alert("Invalid cluster number. Please enter a number between 1 and 1,818,181.");
+    alert("Invalid cluster number. Please enter a number between 1 and 3,333,334.");
   }
 }
 
@@ -795,7 +795,7 @@ function shareMiniApp() {
   //    - This is a standard approach to let the user pick a chat to send it to.
   //    - You can also add a custom text or message if you want.
   const encodedLink = encodeURIComponent(personalLink);
-  const encodedMessage = encodeURIComponent("Check out the Lucky Chonk, find 5 BTC, 600K TON, lots of USDT, and change your life!");
+  const encodedMessage = encodeURIComponent("Check out the Lucky Chonk, find 5 BTC, 100K TON, lots of USDT, and change your life!");
   const shareUrl = `https://t.me/share/url?url=${encodedLink}&text=${encodedMessage}`;
 
   window.open(shareUrl, "_blank");
