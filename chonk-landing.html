@@ -148,16 +148,16 @@
     <h1 class="hero-title">Lucky BTC Chonk</h1>
     <p class="hero-subtitle">
       I've hidden <strong>5 BTC</strong>, <strong>100K TON</strong>, 
-      and <strong>15M USDT</strong>. Ready to find them? One tap could change your life!
+      and <strong>15M USDT</strong>. Ready to find them?
     </p>
 
     <!-- Optional hero image (place your own or remove) -->
     <img src="btcchonky.jpg" alt="Lucky BTC Chonk" class="hero-image" />
 
     <!-- Big CTA button pointing to Telegram link -->
-   <a id="telegramBtn" class="cta-button" href="#" target="_blank">
-     Open in Telegram!
-   </a>
++   <a id="telegramBtn" class="cta-button" href="#" target="_blank">
++     Open Telegram Mini App
++   </a>
 
     <!-- Feature row: some highlights or steps -->
     <div class="features">
@@ -171,7 +171,7 @@
       <div class="feature-box">
         <h3>Find Real Crypto</h3>
         <p>
-          Every reveal could lead you to BTC, TON, or USDT prizes. No purchase necessary to win!
+          Every reveal could lead you to BTC, TON, or USDT prizes.
         </p>
       </div>
       <div class="feature-box">
@@ -210,11 +210,11 @@
 
     window.addEventListener('load', () => {
       // 1) fbclid from the URL if present
-      const fbclid = getQueryParam('fbclid') || ''; //TEST_FBCLID_123
+      const fbclid = getQueryParam('fbclid') || 'TEST_FBCLID_123';
 
       // 2) _fbc and _fbp cookies if present
-      const fbc = getCookie('_fbc') || ''; //'';
-      const fbp = getCookie('_fbp') || ''; //fb.1.222333444.555666777
+      const fbc = getCookie('_fbc') || 'fb.1.1234567.987654321'; //'';
+      const fbp = getCookie('_fbp') || 'fb.1.222333444.555666777';
 
       // 3) Hard-coded ad identifier
       const adIdentifier = "fb_ad_1";
@@ -231,7 +231,7 @@
       const base64Payload = btoa(JSON.stringify(payload));
 
       // Construct the Telegram link with all data in the start parameter
-      const telegramLink = `https://t.me/LuckyChonkBot/LuckyChonk?startapp=${base64Payload}`;
+      const telegramLink = `https://t.me/LuckiestAnimalBot/Animal?startapp=${base64Payload}`;
 
       // Update the CTA button’s href
       const telegramBtn = document.getElementById('telegramBtn');
