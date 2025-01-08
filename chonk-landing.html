@@ -219,11 +219,11 @@
 
     window.addEventListener('load', () => {
       // 1) fbclid from the URL if present
-      const fbclid = getQueryParam('fbclid') || 'TEST_FBCLID_123';
+      const fbclid = getQueryParam('fbclid') || '';
 
       // 2) _fbc and _fbp cookies if present
-      const fbc = getCookie('_fbc') || 'fb.1.1234567.987654321'; //'';
-      const fbp = getCookie('_fbp') || 'fb.1.222333444.555666777';
+      const fbc = getCookie('_fbc') || ''; // fb.1.222333444.555666777
+      const fbp = getCookie('_fbp') || '';
 
       // 3) Hard-coded ad identifier
       const adIdentifier = "fb_ad_1";
