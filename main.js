@@ -1012,6 +1012,10 @@ function updateStoreItemsUI() {
   const bunchofcookiesLockedEl = document.getElementById('bunchofcookiesLocked');
   const bunchofcookiesUnlockedEl = document.getElementById('bunchofcookiesUnlocked');
 
+  const secretTreasureLockedEl   = document.getElementById('secretTreasureLocked');
+  const secretTreasureUnlockedEl = document.getElementById('secretTreasureUnlocked');
+
+
   const candyLockedEl = document.getElementById('candyLocked');
   const candyUnlockedEl = document.getElementById('candyUnlocked');
 
@@ -1033,6 +1037,12 @@ function updateStoreItemsUI() {
     
     bunchofcookiesUnlockedEl.style.display = 'none';
 
+  }
+
+  if (friendsInvited >= 3) {
+  secretTreasureLockedEl.style.display   = 'none';
+  } else {
+  secretTreasureUnlockedEl.style.display = 'none';
   }
 
   
@@ -1123,6 +1133,7 @@ function updateBalances() {
     updateInviteProgress('candyLockedProgress', 5);
     updateInviteProgress('donutLockedProgress', 10);
     updateInviteProgress('pawLockedProgress', 12);
+    updateInviteProgress('secretTreasureLockedProgress', 3);
 
     //BONUSES TAB
 

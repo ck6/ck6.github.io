@@ -1978,6 +1978,51 @@ button {
     </div>
   </div>
 
+  <!-- Secret Treasure LOCKED -->
+<div id="secretTreasureLocked" class="store-item animated-gradient-candy item-with-image locked">
+  <img src="secret-chest.png" alt="Locked Secret Treasure" class="store-item-image" />
+  <div class="store-item-content">
+    <div class="store-item-header">
+      <h4>Secret Treasure</h4>
+      <div class="store-item-cost">
+        0
+        <img src="tgstar2.png" alt="Star" class="store-star">
+      </div>
+    </div>
+    <p><strong>A mysterious chest containing special rewards...</strong></p>
+    <button class="buy-cookie-button" style="margin-bottom: 8px;">
+      Locked 🔒
+    </button>
+    <div style="margin-top: 0;">
+      <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
+        Invite 3 friends to unlock
+      </p>
+      <div class="progress-bar" style="margin-top: 0;">
+        <div id="secretTreasureLockedProgress" class="progress-fill" style="width:0%;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Secret Treasure UNLOCKED -->
+<div id="secretTreasureUnlocked" class="store-item animated-gradient-candy item-with-image">
+  <img src="secret-chest.png" alt="Secret Treasure" class="store-item-image" />
+  <div class="store-item-content">
+    <div class="store-item-header">
+      <h4>Secret Treasure</h4>
+      <div class="store-item-cost">
+        0
+        <img src="tgstar2.png" alt="Star" class="store-star">
+      </div>
+    </div>
+    <p><strong>Open this mysterious chest to claim hidden rewards!</strong></p>
+    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'secretTreasure')">
+      Buy ✨
+    </button>
+  </div>
+</div>
+
+
 
   <!-- Bunch of Cookies LOCKED -->
 <div id="bunchofcookiesLocked" class="store-item animated-gradient-candy item-with-image">
