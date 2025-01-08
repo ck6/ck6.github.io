@@ -155,10 +155,9 @@
     <img src="btcchonky.jpg" alt="Lucky BTC Chonk" class="hero-image" />
 
     <!-- Big CTA button pointing to Telegram link -->
-    <a class="cta-button" href="#"
-       onclick="window.open('https://t.me/your-telegram-bot?start=123','_blank');">
-      Open Telegram Mini App
-    </a>
++   <a id="telegramBtn" class="cta-button" href="#" target="_blank">
++     Open Telegram Mini App
++   </a>
 
     <!-- Feature row: some highlights or steps -->
     <div class="features">
@@ -195,5 +194,53 @@
     <a href="https://experiments.services.fluffychonk.com/chonk/privacy.html" 
        target="_blank" rel="noopener noreferrer">Privacy</a>
   </footer>
+
+  <script>
+    // Helper function to read query parameters (e.g. fbclid)
+    function getQueryParam(param) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(param);
+    }
+
+    // Helper function to read a cookie value by name
+    function getCookie(name) {
+      const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+      return match ? decodeURIComponent(match[2]) : null;
+    }
+
+    window.addEventListener('load', () => {
+      // 1) fbclid from the URL if present
+      const fbclid = getQueryParam('fbclid') || '';
+
+      // 2) _fbc and _fbp cookies if present
+      const fbc = getCookie('_fbc') || '';
+      const fbp = getCookie('_fbp') || '';
+
+      // 3) Hard-coded ad identifier
+      const adIdentifier = "fb_ad_1";
+
+      // Put the data into a payload object
+      const payload = {
+        adIdentifier,
+        fbclid,
+        fbc,
+        fbp
+      };
+
+      // OPTIONAL: Encode as JSON -> base64
+      const base64Payload = btoa(JSON.stringify(payload));
+
+      // Construct the Telegram link with all data in the start parameter
+      const telegramLink = `https://t.me/LuckiestAnimalBot/Animal?startapp=${base64Payload}`;
+
+      // Update the CTA button’s href
+      const telegramBtn = document.getElementById('telegramBtn');
+      if (telegramBtn) {
+        telegramBtn.href = telegramLink;
+      }
+    });
+  </script>
+
+
 </body>
 </html>
