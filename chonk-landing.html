@@ -86,6 +86,14 @@
       transform: scale(1.05);
     }
 
+    /* "No purchase" text */
+    .no-purchase-text {
+      font-size: 0.8rem;
+      color: #fff;
+      opacity: 0.8;
+      margin-bottom: 30px;
+    }
+
     /* Small feature row for bullet points or disclaimers */
     .features {
       display: flex;
@@ -155,9 +163,10 @@
     <img src="btcchonky.jpg" alt="Lucky BTC Chonk" class="hero-image" />
 
     <!-- Big CTA button pointing to Telegram link -->
-+   <a id="telegramBtn" class="cta-button" href="#" target="_blank">
-+     Open Telegram Mini App
-+   </a>
+  <a id="telegramBtn" class="cta-button" href="#" target="_blank">
+     Open in Telegram
+   </a>
+<br><br><strong>One tap could change your life!</strong>
 
     <!-- Feature row: some highlights or steps -->
     <div class="features">
@@ -165,13 +174,13 @@
         <h3>Easy to Start</h3>
         <p>
           Just open the mini app and start revealing tiles for a chance at
-          hidden treasure.
+          hidden treasure.<br><br><strong>No purchase necessary to win!</strong>
         </p>
       </div>
       <div class="feature-box">
         <h3>Find Real Crypto</h3>
         <p>
-          Every reveal could lead you to BTC, TON, or USDT prizes.
+          Every reveal could lead you to BTC, TON, or USDT prizes. 
         </p>
       </div>
       <div class="feature-box">
@@ -231,7 +240,7 @@
       const base64Payload = btoa(JSON.stringify(payload));
 
       // Construct the Telegram link with all data in the start parameter
-      const telegramLink = `https://t.me/LuckiestAnimalBot/Animal?startapp=${base64Payload}`;
+      const telegramLink = `https://t.me/LuckyChonkBot/LuckyChonk?startapp=${base64Payload}`;
 
       // Update the CTA button’s href
       const telegramBtn = document.getElementById('telegramBtn');
