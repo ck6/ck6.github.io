@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>Pokémon-Inspired Card Game</title>
+
+  <!-- Telegram WebApp JS (optional, if you want to run in Telegram) -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    :root {
+      --bg-start: #2d1b64;
+      --bg-end: #f8cdda;
+      --text-color: #fff;
+      --accent-color: #ff9a9e;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                    "Helvetica Neue", Arial, sans-serif;
+      --heading-font-size: 20px;
+      --body-font-size: 16px;
+      --button-padding: 10px 20px;
+      --transition-duration: 0.3s;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-family);
+      background: linear-gradient(to bottom, var(--bg-start), var(--bg-end));
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .content {
+      flex: 1;
+      overflow: auto;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    h2, h3 {
+      font-size: var(--heading-font-size);
+      margin: 10px 0;
+      text-align: center;
+    }
+    p {
+      font-size: var(--body-font-size);
+      margin: 10px;
+    }
+    button {
+      padding: var(--button-padding);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background var(--transition-duration);
+    }
+    button:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* Bottom Nav */
+    .bottom-nav {
+      background: rgba(0,0,0,0.3);
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 5px 0;
+    }
+    .bottom-nav button {
+      background: none;
+      color: #fff;
+      flex: 1;
+      text-align: center;
+    }
+    .bottom-nav button.active,
+    .bottom-nav button:hover {
+      background: rgba(255,255,255,0.2);
+      border-radius: 4px;
+    }
+
+    /* Tab Content */
+    .tab-content {
+      display: none;
+      padding: 20px;
+    }
+    .tab-content.active {
+      display: block;
+    }
+
+    /* COLLECTION TAB - a grid of cards */
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .card {
+      width: 120px;
+      height: 170px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+    }
+    .card .card-name {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .card .card-rarity {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .card .card-level {
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+    /* A "shiny" effect for rare cards */
+    .card.legendary {
+      background: linear-gradient(45deg, #ffe600, #ff6a00);
+      color: #000;
+    }
+    .card.rare {
+      background: linear-gradient(45deg, #2ecc71, #27ae60);
+    }
+
+    /* STORE TAB */
+    .store-items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+    .store-item {
+      width: 90%;
+      max-width: 400px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      text-align: left;
+      color: #fff;
+    }
+    .store-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .store-item-header h4 {
+      margin: 0;
+      font-size: 18px;
+    }
+    .store-item-cost {
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .store-item button {
+      display: block;
+      width: 100%;
+      margin-top: 8px;
+      background: rgba(0,0,0,0.6);
+    }
+
+    /* MOCK BATTLE (Explore Tab) */
+    .battle-container {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .battle-log {
+      background: rgba(0,0,0,0.2);
+      border-radius: 8px;
+      padding: 10px;
+      max-height: 200px;
+      overflow-y: auto;
+      margin: 0 10px;
+    }
+
+    /* Stats tab - just some placeholder boxes */
+    .stats-info {
+      margin: 20px auto;
+      max-width: 300px;
+      text-align: center;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    /* Bonuses tab - placeholders */
+    .bonus-card {
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 10px;
+      margin: 10px auto;
+      max-width: 350px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    
+    <!-- Explore Tab -->
+    <div id="exploreContent" class="tab-content active">
+      <h2>Explore / Battle</h2>
+      <div class="battle-container">
+        <button onclick="mockBattle()">⚔️ Battle!</button>
+      </div>
+      <div class="battle-log" id="battleLog">
+        <p>Waiting for battle...</p>
+      </div>
+    </div>
+    
+    <!-- Collection Tab -->
+    <div id="collectionContent" class="tab-content">
+      <h2>My Cards</h2>
+      <div class="card-grid" id="cardGrid">
+        <!-- Cards will appear here via JS -->
+      </div>
+    </div>
+
+    <!-- Store Tab -->
+    <div id="storeContent" class="tab-content">
+      <h2>Store</h2>
+      <p style="text-align:center;">
+        Buy card packs or special items to strengthen your deck.
+      </p>
+      <div class="store-items">
+        <div class="store-item">
+          <div class="store-item-header">
+            <h4>Normal Card Pack</h4>
+            <div class="store-item-cost">20 coins</div>
+          </div>
+          <p>Contains 3 random cards (common to rare).</p>
+          <button onclick="mockBuy('Normal Pack')">Buy</button>
+        </div>
+
+        <div class="store-item">
+          <div class="store-item-header">
+            <h4>Premium Card Pack</h4>
+            <div class="store-item-cost">50 coins</div>
+          </div>
+          <p>Contains 5 random cards with higher chance of Rare/Legendary.</p>
+          <button onclick="mockBuy('Premium Pack')">Buy</button>
+        </div>
+
+        <div class="store-item">
+          <div class="store-item-header">
+            <h4>XP Potion</h4>
+            <div class="store-item-cost">15 coins</div>
+          </div>
+          <p>Gives +20 XP to a card of your choice.</p>
+          <button onclick="mockBuy('XP Potion')">Buy</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Tab -->
+    <div id="statsContent" class="tab-content">
+      <h2>Stats</h2>
+      <div class="stats-info">
+        <p><strong>Player Name:</strong> <span id="playerName">Ash Ketchum</span></p>
+        <p><strong>Total Battles:</strong> <span id="playerBattles">10</span></p>
+        <p><strong>Wins:</strong> <span id="playerWins">7</span></p>
+      </div>
+      <div class="stats-info">
+        <p><strong>Coins:</strong> <span id="playerCoins">100</span></p>
+        <p><strong>Rare Cards:</strong> <span id="playerRareCount">2</span></p>
+        <p><strong>Legendary Cards:</strong> <span id="playerLegendaryCount">0</span></p>
+      </div>
+    </div>
+    
+    <!-- Bonuses Tab -->
+    <div id="bonusesContent" class="tab-content">
+      <h2>Bonuses & Invites</h2>
+      <div class="bonus-card">
+        <p>Invite 3 friends to unlock a <strong>Special Card Pack</strong>.</p>
+        <button onclick="alert('Invite link copied!')">Invite Friends</button>
+      </div>
+      <div class="bonus-card">
+        <p>Follow our channel for a free Rare card!</p>
+        <button onclick="alert('Channel link opened!')">Follow Channel</button>
+      </div>
+      <div class="bonus-card">
+        <p>Join our weekly tournaments for bonus coins!</p>
+        <button onclick="alert('Tournament details!')">Learn More</button>
+      </div>
+    </div>
+
+  </div> <!-- .content -->
+
+  <!-- Bottom Nav -->
+  <div class="bottom-nav">
+    <button id="exploreTab" class="active" onclick="showTab('explore')">🏞 Explore</button>
+    <button id="collectionTab" onclick="showTab('collection')">🃏 Collection</button>
+    <button id="storeTab" onclick="showTab('store')">🛒 Store</button>
+    <button id="statsTab" onclick="showTab('stats')">📈 Stats</button>
+    <button id="bonusesTab" onclick="showTab('bonuses')">🎁 Bonuses</button>
+  </div>
+
+  <script>
+    // If you're in the actual Telegram environment:
+    const tg = window.Telegram?.WebApp;
+    if(tg){
+      tg.expand();
+      tg.setBackgroundColor("#000000");
+    }
+
+    // Simple mock data
+    let userState = {
+      coins: 100,
+      battles: 10,
+      wins: 7,
+      cards: [
+        { id: 1, name: "Flame Fox", rarity: "Rare", level: 3 },
+        { id: 2, name: "Bubble Blob", rarity: "Common", level: 1 },
+        { id: 3, name: "Leaf Lizard", rarity: "Common", level: 2 },
+        { id: 4, name: "Sky Dragon", rarity: "Legendary", level: 1 }
+      ]
+    };
+
+    // Tab switching
+    function showTab(tab) {
+      document.querySelectorAll('.bottom-nav button')
+        .forEach(btn => btn.classList.remove('active'));
+      document.getElementById(tab + 'Tab').classList.add('active');
+
+      document.querySelectorAll('.tab-content')
+        .forEach(content => content.classList.remove('active'));
+      document.getElementById(tab + 'Content').classList.add('active');
+    }
+
+    // Populate the "My Cards" collection from userState
+    function renderCards() {
+      const grid = document.getElementById("cardGrid");
+      grid.innerHTML = ""; // clear
+      userState.cards.forEach(card => {
+        const cardEl = document.createElement('div');
+        cardEl.className = "card";
+        if (card.rarity.toLowerCase() === "rare") {
+          cardEl.classList.add("rare");
+        }
+        if (card.rarity.toLowerCase() === "legendary") {
+          cardEl.classList.add("legendary");
+        }
+
+        cardEl.innerHTML = `
+          <div class="card-name">${card.name}</div>
+          <div class="card-rarity">Rarity: ${card.rarity}</div>
+          <div class="card-level">Lv. ${card.level}</div>
+        `;
+        grid.appendChild(cardEl);
+      });
+    }
+
+    // Simple mock function to buy items
+    function mockBuy(itemName) {
+      alert(`You purchased: ${itemName} (demo only)`);
+      // For demonstration, just remove some coins
+      userState.coins -= 20;
+      document.getElementById("playerCoins").textContent = userState.coins;
+    }
+
+    // Simple mock battle
+    function mockBattle() {
+      const log = document.getElementById("battleLog");
+      const outcome = Math.random() < 0.5 ? "WIN" : "LOSS";
+      userState.battles += 1;
+      if (outcome === "WIN") {
+        userState.wins += 1;
+      }
+      log.innerHTML = `<p>You fought bravely... Result: <strong>${outcome}</strong>!</p>` + log.innerHTML;
+      document.getElementById("playerBattles").textContent = userState.battles;
+      document.getElementById("playerWins").textContent = userState.wins;
+    }
+
+    // On load
+    window.onload = () => {
+      renderCards();
+      document.getElementById("playerCoins").textContent = userState.coins;
+    };
+  </script>
+
+</body>
+</html>
