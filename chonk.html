@@ -1474,6 +1474,7 @@ button {
     <h2>You have no cookies!</h2>
     <p>Buy some from the Store to reveal tiles.</p>
     <button onclick="goToStore()" style="font-size: 20px; padding: 14px 24px;">Go to Store</button>
+    <button onclick="goToBonuses()" style="font-size: 20px; padding: 14px 24px;">Go to Store</button>
   </div>
 </div>
 
@@ -1576,6 +1577,56 @@ button {
   </div>
 
 
+
+
+    <!-- Invite 3 friends to get a free cookie -->
+  <div class="boxy-card" style="display: flex; align-items: center; justify-content: space-between;">
+    <div>
+      <p>Invite 3 frends to get a <strong>free cookie</strong></p>
+      <div class="progress-bar-bonuses">
+        <div id="freeCookieProgress" class="progress-fill"></div>
+      </div>
+    </div>
+    <img src="cookie.webp" 
+         alt="Cookie" 
+         style="width: 40px; height: auto; margin-left: 8px;" />
+  </div>
+
+
+
+ <!-- Are you following our channel?-->
+<div class="boxy-card" id="channelRewardCard"
+     style="
+       display: flex; 
+       align-items: center; 
+       gap: 10px; 
+       justify-content: flex-start;
+     ">
+
+    <!-- Text label -->
+  <p style="margin: 0; font-weight: bold;">
+    Follow our channel to get <strong>a free cookie</strong>
+  </p>
+
+    <!-- Button: opens channel link -->
+  <button class="invite-friend-button" onclick="openChannelLink()" 
+          style="font-size: 18px;">
+    📣
+  </button>
+
+    <!-- Middle: The check or cross icon -->
+  <div id="channelRewardStatus" style="font-size: 24px; margin-right: 8px;">
+    <!-- Will be set by JS: "✅" or "❌" -->
+  </div>
+
+    <!-- Cookie image -->
+  <img id="channelCookieImage" src="cookie.webp" 
+       alt="Cookie" 
+       style="width: 40px; height: auto;">
+
+</div>
+
+
   <!-- Secret Treasure Invite Card -->
 <div class="boxy-card" style="display: flex; align-items: center; justify-content: space-between;">
   <!-- Left side: text & progress bar -->
@@ -1670,53 +1721,6 @@ button {
 
 
 
-
-    <!-- Invite 5 friends to get a free cookie -->
-  <div class="boxy-card" style="display: flex; align-items: center; justify-content: space-between;">
-    <div>
-      <p>Invite 5 frends to get a <strong>free cookie</strong></p>
-      <div class="progress-bar-bonuses">
-        <div id="freeCookieProgress" class="progress-fill"></div>
-      </div>
-    </div>
-    <img src="cookie.webp" 
-         alt="Cookie" 
-         style="width: 40px; height: auto; margin-left: 8px;" />
-  </div>
-
-
-
- <!-- Are you following our channel?-->
-<div class="boxy-card" id="channelRewardCard"
-     style="
-       display: flex; 
-       align-items: center; 
-       gap: 10px; 
-       justify-content: flex-start;
-     ">
-
-    <!-- Text label -->
-  <p style="margin: 0; font-weight: bold;">
-    Follow our channel to get <strong>a free cookie</strong>
-  </p>
-
-    <!-- Button: opens channel link -->
-  <button class="invite-friend-button" onclick="openChannelLink()" 
-          style="font-size: 18px;">
-    📣
-  </button>
-
-    <!-- Middle: The check or cross icon -->
-  <div id="channelRewardStatus" style="font-size: 24px; margin-right: 8px;">
-    <!-- Will be set by JS: "✅" or "❌" -->
-  </div>
-
-    <!-- Cookie image -->
-  <img id="channelCookieImage" src="cookie.webp" 
-       alt="Cookie" 
-       style="width: 40px; height: auto;">
-
-</div>
 
 
 

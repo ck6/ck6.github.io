@@ -1141,7 +1141,7 @@ function updateBalances() {
     updateInviteProgress('candyBonusesProgress', 5);
     updateInviteProgress('donutBonusesProgress', 10);
     updateInviteProgress('pawBonusesProgress', 12);
-    updateInviteProgress('freeCookieProgress', 5);
+    updateInviteProgress('freeCookieProgress', 3);
     updateInviteProgress('secretTreasureProgress', 3);
     
 
@@ -1606,6 +1606,14 @@ function goToStore() {
   
   // Switch to the Store tab
   showTab("store");
+}
+
+function goToBonuses() {
+  // Hide the "no cookies" popup
+  document.getElementById("noCookiesPopup").style.display = "none";
+  
+  // Switch to the Store tab
+  showTab("bonuses");
 }
 
 
