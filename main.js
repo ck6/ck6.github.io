@@ -505,13 +505,13 @@ function showClusterCompletePopup(rewardObj) {
   rarityEl.textContent = rarity;
 
   // 3) Color-code the rarity
-  let color = "green"; // default for Common
+  let color = "#00ff00"; // a bright green for Common
   if (rarity === "Rare") {
-    color = "purple";
+    color = "#c084fc"; // a light purple
   } else if (rarity === "Legendary") {
-    color = "orange";
+    color = "#ffa500"; // a standard orange
   }
-  //rarityEl.style.color = color;
+  rarityEl.style.color = color;
 
   // 4) Pick an image based on rarity (or any logic you prefer)
   let imageUrl = "cookie.webp";  // default image for Common
