@@ -598,14 +598,7 @@ async function useBombOnCurrentCluster() {
    });
 
    // Flip them all in the DOM
-   //flipAllNewlyRevealedTiles(data.newlyRevealedRewards);
-
-     newlyRevealed.forEach((tileObj, i) => {
-    // tileObj => { row, col, reward }
-    setTimeout(() => {
-      flipTile(tileObj.row, tileObj.col, tileObj.reward, i);
-    }, i * 150); // flip each tile 150ms after the previous
-  });
+   flipAllNewlyRevealedTiles(data.newlyRevealedRewards);
 
     // Update local userState
     userState.chocolateBombs = data.chocolateBombs;
@@ -620,9 +613,10 @@ async function useBombOnCurrentCluster() {
       userState.revealedTiles[currentClusterIndex].push({ row, col, reward });
     });
 
-    setTimeout(shoot, 0);
-    setTimeout(shoot, 100);
-    setTimeout(shoot, 200);
+    
+  setTimeout(shoot, 0);
+  setTimeout(shoot, 100);
+  setTimeout(shoot, 200);
 
     if (data.clusterCompletedReward) {
     showClusterCompletePopup(data.clusterCompletedReward);
