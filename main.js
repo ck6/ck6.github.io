@@ -614,12 +614,12 @@ async function useBombOnCurrentCluster() {
     });
 
     
-  setTimeout(shoot, 0);
-  setTimeout(shoot, 100);
-  setTimeout(shoot, 200);
+    setTimeout(shoot, 0);
+    setTimeout(shoot, 100);
+    setTimeout(shoot, 200);
 
     if (data.clusterCompletedReward) {
-    showClusterCompletePopup(data.clusterCompletedReward);
+    //showClusterCompletePopup(data.clusterCompletedReward);
     }
 
     // Now re-render the cluster to show everything as revealed
