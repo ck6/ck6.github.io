@@ -511,14 +511,14 @@ function showClusterCompletePopup(rewardObj) {
   } else if (rarity === "Legendary") {
     color = "orange";
   }
-  rarityEl.style.color = color;
+  //rarityEl.style.color = color;
 
   // 4) Pick an image based on rarity (or any logic you prefer)
   let imageUrl = "cookie.webp";  // default image for Common
   if (rarity === "Rare") {
-    imageUrl = "rare_reward.png";
+    imageUrl = "cookie.webp";
   } else if (rarity === "Legendary") {
-    imageUrl = "legendary_reward.png";
+    imageUrl = "cookie.webp";
   }
   imageEl.src = imageUrl;
 
