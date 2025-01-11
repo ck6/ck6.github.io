@@ -1490,17 +1490,25 @@ button {
   </div>
 </div>
 
-<!-- Cluster Complete Popup 150-->
+
+<!-- Cluster Completed Popup -->
 <div class="popup-overlay" id="clusterCompletePopup" style="display: none;">
   <div class="popup-content">
     <h2>Cluster Completed!</h2>
-     <img id="clusterRewardImage" src="" alt="" style="width: 100px; height: auto; margin-bottom: 10px;" />
+    <img id="clusterRewardImage" src="" alt="" style="width: 100px; height: auto; margin-bottom: 10px;" />
     <p id="clusterCompleteMessage">
-      You just finished this cluster and got <span id="clusterRewardText"></span>!
+      You just finished this cluster and got 
+      <span id="clusterRewardText"></span>!
+      <br>
+      <strong>Rarity:</strong> 
+      <span id="clusterRewardRarity"></span>
     </p>
-    <button onclick="closeClusterCompletePopup()" style="margin-top: 20px; font-size:16px;">Woohoo!</button>
+    <button onclick="closeClusterCompletePopup()" style="margin-top: 20px; font-size:16px;">
+      Woohoo!
+    </button>
   </div>
 </div>
+
 
 
 

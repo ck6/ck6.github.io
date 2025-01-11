@@ -484,32 +484,53 @@ if (userState.cookiesOwned <= 0 && userState.chocolateReveals <= 0) {
 
 
 
-function showClusterCompletePopup(bonusText) {
-  const overlay = document.getElementById("clusterCompletePopup");
-  const rewardEl = document.getElementById("clusterRewardText");
-  const rewardImageEl = document.getElementById("clusterRewardImage");
+function showClusterCompletePopup(rewardObj) {
+  // rewardObj might look like: { text: "2 Cookies", rarity: "Rare" }
 
+  const overlay    = document.getElementById("clusterCompletePopup");
+  const textEl     = document.getElementById("clusterRewardText");
+  const rarityEl   = document.getElementById("clusterRewardRarity");
+  const imageEl    = document.getElementById("clusterRewardImage"); // <img> in the popup
 
-  const rewardImages = {
-  COOKIES: "cookie.webp",
-  TON: "ton.png",
-  USDT: "usdt.png"
-  };
-
-  const rewardType = getRewardType(bonusText)?.toUpperCase();
-  const imageUrl = rewardImages[rewardType] || "crown.png"; // fallback
-
-
-  if (overlay && rewardEl) {
-    rewardEl.textContent = bonusText; // e.g. "2 Cookies" or "0.25 TON"
-    overlay.style.display = "flex";   // show popup
-    rewardImageEl.src = imageUrl;
+  if (!rewardObj) {
+    overlay.style.display = "none";
+    return;
   }
-  // Confetti if you want
+
+  // 1) Reward text (e.g. "2 Cookies")
+  textEl.textContent = rewardObj.text;
+
+  // 2) Rarity label
+  const rarity = rewardObj.rarity || "Common";
+  rarityEl.textContent = rarity;
+
+  // 3) Color-code the rarity
+  let color = "green"; // default for Common
+  if (rarity === "Rare") {
+    color = "purple";
+  } else if (rarity === "Legendary") {
+    color = "orange";
+  }
+  rarityEl.style.color = color;
+
+  // 4) Pick an image based on rarity (or any logic you prefer)
+  let imageUrl = "cookie.webp";  // default image for Common
+  if (rarity === "Rare") {
+    imageUrl = "rare_reward.png";
+  } else if (rarity === "Legendary") {
+    imageUrl = "legendary_reward.png";
+  }
+  imageEl.src = imageUrl;
+
+  // 5) Show the popup
+  overlay.style.display = "flex";
+
+  // Optional confetti or animation
   setTimeout(shoot, 0);
   setTimeout(shoot, 100);
   setTimeout(shoot, 200);
 }
+
 
 function closeClusterCompletePopup() {
   const overlay = document.getElementById("clusterCompletePopup");
