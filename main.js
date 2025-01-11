@@ -598,7 +598,14 @@ async function useBombOnCurrentCluster() {
    });
 
    // Flip them all in the DOM
-   flipAllNewlyRevealedTiles(data.newlyRevealedRewards);
+   //flipAllNewlyRevealedTiles(data.newlyRevealedRewards);
+
+     newlyRevealed.forEach((tileObj, i) => {
+    // tileObj => { row, col, reward }
+    setTimeout(() => {
+      flipTile(tileObj.row, tileObj.col, tileObj.reward, i);
+    }, i * 150); // flip each tile 150ms after the previous
+  });
 
     // Update local userState
     userState.chocolateBombs = data.chocolateBombs;
@@ -613,14 +620,16 @@ async function useBombOnCurrentCluster() {
       userState.revealedTiles[currentClusterIndex].push({ row, col, reward });
     });
 
-    shoot();
+    setTimeout(shoot, 0);
+    setTimeout(shoot, 100);
+    setTimeout(shoot, 200);
 
     if (data.clusterCompletedReward) {
     showClusterCompletePopup(data.clusterCompletedReward);
     }
 
     // Now re-render the cluster to show everything as revealed
-    await loadCluster(currentClusterIndex);
+    //await loadCluster(currentClusterIndex);
     //OTHERWISE WE CAN'T SEE THE FLIP
 
     // Update balances, etc.
@@ -657,6 +666,25 @@ function flipAllNewlyRevealedTiles(newRewards) {
     }, 200);
   });
 }
+
+function flipTile(row, col, reward, index) {
+  // 1) Find the tile element in the DOM
+  const tileSelector = `.hex-grid .hex-row .hex[data-row="${row}"][data-col="${col}"]`;
+  const tileEl = document.querySelector(tileSelector);
+  if (!tileEl) return;
+
+  // 2) Add the "flipping" class
+  tileEl.classList.add('flipping');
+
+  // 3) After ~200ms, remove 'flipping' and add 'revealed'
+  setTimeout(() => {
+    tileEl.classList.remove('flipping');
+    tileEl.classList.add('revealed');
+    // Show final reward text
+    tileEl.textContent = reward;
+  }, 200); // match your CSS .hex.flipping { transition: 0.2s }
+}
+
 
 
 
