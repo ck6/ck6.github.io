@@ -745,7 +745,7 @@ async function useChonkBomb() {
                 ${data.totalTON.toFixed(2)} TON,
                 ${data.totalUSDT.toFixed(2)} USDT
       </p>
-      <p>Total new tiles: ${totalTiles}</p>
+      <p>Total revealed tiles: ${totalTiles}</p>
     `;
 
     // 3) Switch from “loading” to “results”
@@ -758,6 +758,8 @@ async function useChonkBomb() {
 
     // 5) Optional confetti
     shoot();
+
+    updateChonkBombUI();
     
   } catch (err) {
     console.error("useChonkBomb error:", err);
@@ -1289,9 +1291,9 @@ function updateStoreItemsUI() {
 function updateChonkBombUI() {
   const container = document.getElementById('chonkBombContainer');
   if (userState.chonkBombs && userState.chonkBombs > 0) {
-    //container.style.display = "block";
+    container.style.display = "block";
   } else {
-    //container.style.display = "none";
+    container.style.display = "none";
   }
 }
 
