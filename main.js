@@ -598,7 +598,7 @@ async function useBombOnCurrentCluster() {
    });
 
    // Flip them all in the DOM
-   flipAllNewlyRevealedTiles(data.newlyRevealedRewards);
+   //flipAllNewlyRevealedTiles(data.newlyRevealedRewards);
 
     // Update local userState
     userState.chocolateBombs = data.chocolateBombs;
@@ -606,12 +606,12 @@ async function useBombOnCurrentCluster() {
     userState.chocolateReveals = data.chocolateReveals;
 
     // Also update revealedTiles
-    if (!userState.revealedTiles[currentClusterIndex]) {
-      userState.revealedTiles[currentClusterIndex] = [];
-    }
-    data.newlyRevealedRewards.forEach(({ row, col, reward }) => {
-      userState.revealedTiles[currentClusterIndex].push({ row, col, reward });
-    });
+    //if (!userState.revealedTiles[currentClusterIndex]) {
+    //  userState.revealedTiles[currentClusterIndex] = [];
+    //}
+    //data.newlyRevealedRewards.forEach(({ row, col, reward }) => {
+    //  userState.revealedTiles[currentClusterIndex].push({ row, col, reward });
+    //});
 
     
     setTimeout(shoot, 0);
@@ -619,11 +619,11 @@ async function useBombOnCurrentCluster() {
     setTimeout(shoot, 200);
 
     if (data.clusterCompletedReward) {
-    //showClusterCompletePopup(data.clusterCompletedReward);
+    showClusterCompletePopup(data.clusterCompletedReward);
     }
 
     // Now re-render the cluster to show everything as revealed
-    //await loadCluster(currentClusterIndex);
+    await loadCluster(currentClusterIndex);
     //OTHERWISE WE CAN'T SEE THE FLIP
 
     // Update balances, etc.
