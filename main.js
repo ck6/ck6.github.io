@@ -83,6 +83,13 @@ const pastelGradients = [
   "linear-gradient(135deg, #fddb92 0%, #d1fdff 100%)",
   "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)"
 ];
+
+const neonGradients = [
+  "linear-gradient(135deg, #001f3f 0%, #0076fc 100%)",
+  "linear-gradient(135deg, #00c3ff, #0061ff)",
+  "linear-gradient(135deg, #39ff14, #00ff85)",
+];
+
 //const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🦴","💎","📦","🎀","💕"];
 //const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🐭","💎","📦","💕", "🐹","🐥","🐣", "🐟", "🍣"];
 const emojis = [
@@ -403,7 +410,10 @@ function createHexGrid() {
         // Not revealed => pastel background + random emoji
         const decor = clusterDecor[currentClusterIndex][r][c];
         hex.textContent = decor.emoji;
-        hex.style.background = decor.gradient;
+        const { gradient, emoji } = clusterDecor[currentClusterIndex][r][c];
+        hex.textContent = emoji;
+        hex.style.background = neonGradients[Math.floor(Math.random() * neonGradients.length)];
+
         // On click, attempt to reveal
         hex.onclick = () => onHexClick(r, c, hex);
       }
