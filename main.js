@@ -1234,12 +1234,12 @@ function updateStoreItemsUI() {
   // 3) If friendsInvited >= 3, show unlocked; otherwise show locked
   if (friendsInvited >= 3) {
     
-    bunchofcookiesLockedEl.style.display = 'none';
+    //bunchofcookiesLockedEl.style.display = 'none';
 
 
   } else {
     
-    bunchofcookiesUnlockedEl.style.display = 'none';
+    //bunchofcookiesUnlockedEl.style.display = 'none';
 
   }
 
@@ -1250,8 +1250,11 @@ function updateStoreItemsUI() {
   }
 
   
-  candyLockedEl.style.display = 'none';      // always hide the locked version
-  candyUnlockedEl.style.display = 'flex';    // always show
+  //candyLockedEl.style.display = 'none';      // always hide the locked version
+  //candyUnlockedEl.style.display = 'flex';    // always show
+
+  bunchofcookiesLockedEl.style.display = 'none';
+  bunchofcookiesUnlockedEl.style.display = 'none';
 
   
   if (friendsInvited >= 10) {
