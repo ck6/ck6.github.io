@@ -1182,8 +1182,10 @@ function updateStoreItemsUI() {
 
 
   if (userState.store?.secretTreasureOpened) {
-    document.getElementById('secretTreasureUnlocked').style.display = 'none';
+  if (secretTreasureUnlockedEl) {
+    secretTreasureUnlockedEl.style.display = 'none';
   }
+}
 
 
 
