@@ -706,6 +706,96 @@ async function useBombOnCurrentCluster() {
   }
 }
 
+async function useChonkBomb() {
+  if (!userState || (userState.chonkBombs ?? 0) < 1) {
+    alert("No Chonk-Bombs available!");
+    return;
+  }
+
+  const confirmUse = confirm("Use 1 Chonk-Bomb to reveal 10 partial clusters at once?");
+  if (!confirmUse) return;
+
+  try {
+    const res = await fetch(`${BASE_API_URL}/api/useChonkBomb`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        initData: tg.initData
+      })
+    });
+    const data = await res.json();
+    if (data.error) {
+      alert(data.error);
+      return;
+    }
+
+    // data => { newlyRevealedRewards, totalBTC, totalTON, totalUSDT, message, ... }
+
+    // Show a fancy popup summarizing the results, or just alert:
+    console.log("ChonkBomb results =>", data);
+    alert(
+      data.message
+      + `\nFound: ${data.totalBTC.toFixed(4)} BTC, ${data.totalTON.toFixed(2)} TON, ${data.totalUSDT.toFixed(2)} USDT`
+      + `\nTiles revealed: ${data.newlyRevealedRewards.length}`
+    );
+
+    if (data?.newlyRevealedRewards) {
+  showChonkBombRewardsPopup(data.newlyRevealedRewards);
+  }
+
+
+    // Update local userState
+    userState.chonkBombs   = data.chonkBombs;
+    userState.totalFeeds   = data.totalFeeds;
+    // If you want to update total BTC, etc.:
+    // userState.totalBTC  += data.totalBTC;
+    // userState.totalTON  += data.totalTON;
+    // userState.totalUSDT += data.totalUSDT;
+
+    // If you want to do a fresh /api/userState after:
+    await fetchUserState();
+
+    // Optionally confetti
+    shoot();
+  } catch (err) {
+    console.error("useChonkBomb error:", err);
+    alert("Error: " + err.message);
+  }
+}
+
+
+
+function showChonkBombRewardsPopup(data) {
+  // data => { newlyRevealedRewards: [...], totalBTC, totalUSDT, totalTON, cookiesOwned, ... }
+
+  // Build a nice HTML summary, e.g. show the total BTC, TON, USDT found, plus partial details?
+  const summary = `
+    <p>You revealed 10 clusters!</p>
+    <p>Found: 
+      ${data.totalBTC.toFixed(4)} BTC, 
+      ${data.totalTON.toFixed(2)} TON, 
+      ${data.totalUSDT.toFixed(2)} USDT
+    </p>
+    <p>Total new tiles: ${data.newlyRevealedRewards.length}</p>
+  `;
+
+  // Or show a table if you want to list each cluster’s tiles:
+  // ...
+  
+  // Then show a popup overlay
+  const overlay = document.getElementById('chonkBombPopup');
+  document.getElementById('chonkBombPopupBody').innerHTML = summary;
+  overlay.style.display = 'flex';
+
+  // Optionally confetti
+  shoot();
+}
+
+function closeChonkBombPopup() {
+  document.getElementById('chonkBombPopup').style.display = 'none';
+}
+
+
 function flipAllNewlyRevealedTiles(newRewards) {
   // 1) Clear old classes
   newRewards.forEach(({ row, col }) => {
@@ -1160,15 +1250,8 @@ function updateStoreItemsUI() {
   }
 
   
-  if (friendsInvited >= 5) {
-    
-    candyLockedEl.style.display = 'none';
-
-  } else {
-    
-    candyUnlockedEl.style.display = 'none';
-
-  }
+  candyLockedEl.style.display = 'none';      // always hide the locked version
+  candyUnlockedEl.style.display = 'flex';    // always show
 
   
   if (friendsInvited >= 10) {
@@ -1192,6 +1275,14 @@ function updateStoreItemsUI() {
 }
 
 
+function updateChonkBombUI() {
+  const container = document.getElementById('chonkBombContainer');
+  if (userState.chonkBombs && userState.chonkBombs > 0) {
+    container.style.display = "block";
+  } else {
+    container.style.display = "none";
+  }
+}
 
 
 
@@ -1273,6 +1364,8 @@ function updateBalances() {
   if (bombBtn) {
     bombBtn.style.display = (bombs > 0) ? 'inline-block' : 'none';
   }
+
+  updateChonkBombUI();
 
 
 

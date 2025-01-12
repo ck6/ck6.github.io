@@ -1515,6 +1515,16 @@ button {
   </div>
 </div>
 
+<!-- Chonk Bomb -->
+<div class="popup-overlay" id="chonkBombPopup" style="display:none;">
+  <div class="popup-content">
+    <h2>Chonk-Bomb Results</h2>
+    <div id="chonkBombPopupBody"></div>
+    <button onclick="closeChonkBombPopup()">Close</button>
+  </div>
+</div>
+
+
 
 <!-- Secret Treasure Popup -->
 <div class="popup-overlay" id="secretTreasurePopup" style="display: none;">
@@ -1699,7 +1709,7 @@ button {
 <div class="boxy-card" style="display: flex; align-items: center; justify-content: space-between;">
   <!-- Left side: text & progress bar -->
   <div>
-    <p>Invite 3 frends to unlock <strong>Secret Treasure</strong></p>
+    <p>Invite 3 frends to get <strong>Secret Treasure</strong></p>
     <div class="progress-bar-bonuses">
       <div id="secretTreasureProgress" class="progress-fill"></div>
     </div>
@@ -2376,7 +2386,25 @@ button {
   </div>
 </div>
 
+     <!-- Bomb <button class="buy-cookie-button-lively">-->
+  <div class="store-item item-with-image">
+    <!-- Put the cookie image on the left -->
+    <img src="bomb.png" alt="Bomb" class="store-item-image" />
 
+    <div class="store-item-content">
+      <div class="store-item-header">
+        <h4>Chonk Bomb</h4>
+        <div class="store-item-cost">
+          5490
+          <img src="tgstar2.png" alt="Star" class="store-star">
+        </div>
+      </div>
+      <p><strong>Reveals an entire cluster</strong></p>
+        <button class="buy-cookie-button sparkle-button" onclick="handleBuyCookieButtonClick(event, 'chonkBomb')">
+          Buy 💣💥💥
+        </button>
+    </div>
+  </div>
 
 
 
@@ -2402,6 +2430,19 @@ button {
 </div>
 
 </div>
+
+
+
+<div id="chonkBombContainer" style="text-align:center; margin: 10px 0; display:none;">
+  <button
+    id="chonkBombButton"
+    style="background: #b71c1c; color: #fff; padding: 12px 20px; font-size: 16px; border-radius: 6px; cursor: pointer;"
+    onclick="useChonkBomb()"
+  >
+    💣 Use Chonk-Bomb (Reveals 10 clusters)
+  </button>
+</div>
+
 
 <div class="cluster-buttons">
 
