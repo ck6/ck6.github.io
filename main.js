@@ -1043,29 +1043,27 @@ function showTab(tab) {
   document.getElementById(tab + 'Content').classList.add('active');
 
 
+
+  
+
   // Now show or hide the cluster-buttons
   const clusterBtns = document.querySelector('.cluster-buttons');
+  const chonkBombContainer = document.getElementById('chonkBombContainer');
+
   if (clusterBtns) {
     if (tab === 'field') {
       clusterBtns.style.display = 'flex';
+
+      if (userState.chonkBombs && userState.chonkBombs > 0) {
+        chonkBombContainer.style.display = "block";
+      }
+
     } else {
       clusterBtns.style.display = 'none';
-    }
-  }
-
-  const chonkBombContainer = document.getElementById('chonkBombContainer');
-  if (chonkBombContainer) {
-    if (tab === 'field') {
-      // Only show if userState.chonkBombs > 0, or you can just always show
-      if (userState?.chonkBombs > 0) {
-        chonkBombContainer.style.display = 'block';
-      } else {
-        chonkBombContainer.style.display = 'none';
-      }
-    } else {
       chonkBombContainer.style.display = 'none';
     }
   }
+
 
   if (tab === 'stats') {
     fetchLeaderboard();  // load or refresh the top chonkers
@@ -1295,9 +1293,9 @@ function updateStoreItemsUI() {
 function updateChonkBombUI() {
   const container = document.getElementById('chonkBombContainer');
   if (userState.chonkBombs && userState.chonkBombs > 0) {
-    container.style.display = "block";
+    //container.style.display = "block";
   } else {
-    container.style.display = "none";
+    //container.style.display = "none";
   }
 }
 
