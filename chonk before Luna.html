@@ -47,7 +47,7 @@
     font-family: var(--font-family);
     font-size: var(--body-font-size);
     line-height: var(--line-height);
-    background: linear-gradient(135deg, #ff0099 0%, #9d00ff 100%);
+    background: linear-gradient(to bottom, var(--bg-start), var(--bg-end));
     color: var(--text-color);
     display: flex;
     flex-direction: column;
@@ -304,7 +304,7 @@ button {
   );
   margin-right: 2px; /* or 0 if you truly want no horizontal gap */
   margin-bottom: 0;
-    background: #ff0080; /* shocking pink */ /* // background: #ccc;  or your pastel gradient  background: linear-gradient(135deg, #ff0099 0%, #fb00ff 100%);*/
+    background: #444; /* // background: #ccc;  or your pastel gradient */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -317,11 +317,8 @@ button {
     transform-style: preserve-3d;
 
   }
-
-
   .hex:hover {
-    box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
-    transform: scale(1.05);
+    transform: scale(1.0);
   }
   /* Flip animation classes */
   .hex.flipping {
