@@ -16,58 +16,239 @@
 
 <style>
 
-/* =======================================
-   1) Root Variables & Global
-   ======================================= */
+/* ======== ROOT VARIABLES ======== */
 :root {
-  /* Dark navy → near-black */
-  --bg-start: #0a0f5e;
-  --bg-end: #020111;
+  /* Dark navy → subtle navy background gradient */
+  --bg-start: #141e30;
+  --bg-end: #243b55;
 
-  /* Text & accent colors */
-  --text-color: #f5f5f5;
-  --accent-color: #b8860b; /* gold */
+  /* White text, neon aqua accent */
+  --text-color: #fff;
+  --accent-color: #00f9ff;
 
-  /* Font / Sizing */
-  --font-family: "Montserrat", sans-serif;
-  --body-font-size: 16px;
+  /* Font & sizing vars */
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
   --heading-font-size: 20px;
+  --heading-font-size2: 10px;
+  --body-font-size: 16px;
+  --line-height: 1.5;
+  --section-spacing: 20px;
   --button-padding: 10px 20px;
-
-  /* Other */
-  --hex-size: calc(100vw / 5.5);
   --transition-duration: 0.3s;
+  --tooltip-bg: rgba(0,0,0,0.8);
+  --tooltip-color: #fff;
+  --hex-size: calc(100vw / 5.5);
 }
 
-/* Basic reset & layout */
+/* ======== BODY / GLOBAL ======== */
 body {
   margin: 0;
-  padding: 0;
   font-family: var(--font-family);
   font-size: var(--body-font-size);
-  background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+  line-height: var(--line-height);
+
+  /* Darker neon-friendly gradient */
+  background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
   color: var(--text-color);
+
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100vh; 
   overflow: hidden;
 }
 
+button {
+  touch-action: manipulation;
+}
+
+.top-bar {
+  background: rgba(0,0,0,0.3);
+  position: relative;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 0px;
+}
+
+.top-bar h1 {
+  font-size: var(--heading-font-size);
+  margin: 0;
+  z-index: 2;
+}
+
+/* ======== CAT CONTAINER (IMAGE) ======== */
+.cat-container {
+  width: 100%;
+  max-width: 600px; 
+  margin: 0 auto;   
+  padding-top: 0px;
+}
+
+.cat-container img {
+  display: block;
+  width: 100%;  
+  height: auto; 
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+/* Buttons at bottom of cat-container */
+.cat-buttons {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+}
+
+.cat-buttons button {
+  background: rgba(0, 0, 0, 0.6); 
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cat-buttons button:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* ======== STORE BUTTON ======== */
+.store-button {
+  background: #444;
+  border: none;
+  color: #fff;
+  padding: var(--button-padding);
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+  margin: 5px; 
+  transition: background var(--transition-duration);
+}
+.store-button:hover {
+  background: var(--accent-color);
+}
+
+/* ======== ITEM-WITH-IMAGE LAYOUT ======== */
+.item-with-image {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.store-item-image {
+  width: 60px;
+  height: auto;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.store-item-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* ======== LOCKED STORE ITEMS ======== */
+.store-item.locked {
+  position: relative;
+  filter: grayscale(0.5) brightness(0.8);
+  transition: filter 0.3s ease;
+}
+.store-item.locked:hover {
+  filter: grayscale(0.5) brightness(1) drop-shadow(0 0 6px rgba(255, 215, 0, 0.4));
+}
+.store-item.locked::before {
+  content: "🔒 LOCKED";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  background: rgba(0,0,0,0.6);
+  padding: 6px 12px;
+  border-radius: 8px;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px #000;
+  pointer-events: none;
+}
+.store-item.locked button {
+  pointer-events: none; 
+}
+
+/* ======== CONTENT / TABS ======== */
 .content {
   flex: 1;
   overflow: auto;
+  box-sizing: border-box;
   position: relative;
 }
 
-/* =======================================
-   2) Hex Grid
-   ======================================= */
+.tab-content {
+  display: none;
+  opacity: 0;
+  transition: opacity var(--transition-duration) ease;
+  padding: 110px 20px 20px;
+}
+.tab-content.active {
+  display: block;
+  opacity: 1;
+}
+/* Field tab override */
+#fieldContent.tab-content {
+  padding: 0;
+}
+
+h2, h3 {
+  font-size: var(--heading-font-size);
+  margin-bottom: var(--section-spacing);
+  margin-top: 0;
+}
+
+h4 {
+  font-size: var(--heading-font-size);
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+h5 {
+  font-size: var(--heading2-font-size);
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+p {
+  margin: 10px 0;
+}
+
+/* ======== HONEYCOMB WRAPPER & HEX GRID ======== */
+.honeycomb-wrapper {
+  width: 100vw;
+  max-width: 100vw;
+  overflow-x: hidden;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+
+#clusterHeading {
+  position: relative; 
+  z-index: 9000;
+}
+
 .hex-grid {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   max-width: 100vw;
   margin-top: 25px;
+  margin-botton: 0px;
 }
 
 .hex-row {
@@ -78,7 +259,7 @@ body {
   margin-top: 0;
 }
 .hex-row:nth-child(even) {
-  margin-left: calc(var(--hex-size) / 2);
+  margin-left: calc(var(--hex-size)/2);
 }
 .hex-row:not(:first-child) {
   margin-top: calc(var(--hex-size) * -0.25);
@@ -88,60 +269,54 @@ body {
   width: var(--hex-size);
   height: calc(var(--hex-size) * 1.1547);
   clip-path: polygon(
-    50% 0%, 
-    100% 25%, 
-    100% 75%, 
-    50% 100%, 
-    0% 75%, 
+    50% 0%,
+    100% 25%,
+    100% 75%,
+    50% 100%,
+    0% 75%,
     0% 25%
   );
   margin-right: 2px;
-  background: linear-gradient(135deg, #101010, #222222);
-  /* Remove any gold border: */
-  border: none;
+  margin-bottom: 0;
+
+  /* Electric blue gradient for the tile background */
+  background: linear-gradient(135deg, #001f3f 0%, #0076fc 100%);
+
+
 
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #fff;
-  font-size: 24px;
-  font-weight: bold;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 24px;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  transform-style: preserve-3d;
 }
 
-/* Hover glow */
+/* Hover glow = neon teal or neon greenish */
 .hex:hover {
-  box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+  box-shadow: 0 0 10px #00ff85, 0 0 20px #00ff85;
   transform: scale(1.05);
 }
 
-/* Flip animation */
+/* Flip animation classes */
 .hex.flipping {
   transform: rotateY(90deg);
   transition: transform 0.2s ease;
 }
 .hex.revealed {
-  background: linear-gradient(135deg, #ff66c4, #ff1493);
+  /* Lighter teal background for revealed tiles */
+  background: #00c3ff;
+  color: #fff;
   font-size: 16px;
   transform: rotateY(0);
   transition: transform 0.2s ease;
 }
 
-/* =======================================
-   3) Tabs & Bottom Nav
-   ======================================= */
-.tab-content {
-  display: none;
-  opacity: 0;
-  padding: 110px 20px 20px;
-  transition: opacity var(--transition-duration) ease;
-}
-.tab-content.active {
-  display: block;
-  opacity: 1;
-}
-
+/* ======== BOTTOM NAV BAR ======== */
 .bottom-nav {
   background: rgba(0,0,0,0.3);
   display: flex;
@@ -149,6 +324,7 @@ body {
   align-items: center;
   padding: 10px 0;
 }
+
 .bottom-nav button {
   background: none;
   border: none;
@@ -161,46 +337,67 @@ body {
   transition: background var(--transition-duration);
   transform: translateY(-4px);
 }
+
 .bottom-nav button.active,
 .bottom-nav button:hover {
-  background: rgba(255, 20, 147, 0.2);
+  background: rgba(255,255,255,0.2);
   border-radius: 4px;
 }
 
-/* =======================================
-   4) Buttons & General Utilities
-   ======================================= */
-button {
-  background: var(--accent-color);
-  color: #fff;
-  border: none;
-  padding: var(--button-padding);
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background var(--transition-duration);
-}
-button:hover {
-  background: #d4af37; /* brighter gold */
-}
-
+/* ======== INVITE-FRIEND BUTTONS ======== */
 .invite-friend-button {
+  display:inline-block;
   background: #2196F3;
-  font-size: 20px;
-  margin: 5px;
+  border:none;
+  color:#fff;
+  padding: var(--button-padding);
+  cursor:pointer;
+  font-size:20px;
+  border-radius:4px;
+  margin:5px;
+  transition: background var(--transition-duration);
+  z-index: 9999;
 }
+
 .invite-friend-button:hover {
-  background: #00f9ff;
+  background: var(--accent-color);
+}
+
+/* ======== CLUSTER BUTTONS ======== */
+.cluster-buttons {
+  position: fixed;
+  bottom: 90px; 
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 9999;
+  gap: 10px;
 }
 
 .random-cluster-button,
 .select-cluster-button {
   background: linear-gradient(135deg, #ff1493, #65094c);
+  border: none;
+  color: #fff;
+  padding: var(--button-padding);
+  cursor: pointer;
   font-size: 16px;
   border-radius: 4px;
+  margin: 0;
+  transition: background var(--transition-duration);
 }
+
 .random-cluster-button:hover,
 .select-cluster-button:hover {
-  background: #ff66c4;
+  background: #ff66c4; /* lighter pink on hover */
+}
+
+
+/* Buy cookie button disabled */
+.buy-choc-cookie-button:disabled {
+  background:#333;
+  cursor:not-allowed;
 }
 
 .clipboard-button {
@@ -208,45 +405,246 @@ button:hover {
   font-size: 18px;
 }
 
-/* =======================================
-   5) Popup Overlays
-   ======================================= */
-.popup-overlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
+/* ======== LEADERBOARD ======== */
+.leaderboard {
+  margin-top: 20px;
 }
-.popup-content {
-  background: #222;
-  padding: 20px;
+
+.leaderboard h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.leaderboard-item {
+  background: #111;
   border-radius: 8px;
-  text-align: center;
-  max-width: 300px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display:flex;
+  align-items:center;
+}
+
+.leaderboard-item-avatar {
+  width: 40px;
+  height:40px;
+  border-radius:50%;
+  overflow:hidden;
+  margin-right:10px;
+  background:#333;
+  flex-shrink:0;
+}
+
+.leaderboard-item-avatar img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.leaderboard-item-info {
+  flex:1;
+}
+
+.leaderboard-item-info h4 {
+  font-size:14px;
+  margin:0 0 5px 0;
+}
+.leaderboard-item-info p {
+  font-size:12px;
+  margin:0;
+  color:#fff;
+}
+
+.leaderboard-item-rank {
+  padding:5px 10px;
+  border-radius:4px;
+  margin-left:10px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+/* Rank colors */
+.rank-1 {
+  background:#ffdd00;
+  color:#000;
+}
+.rank-2 {
+  background:#879aff;
+  color:#000;
+}
+.rank-3 {
+  background:#ff9a66;
+  color:#000;
+}
+.rank-default {
+  background:#333;
+  color:#fff;
+}
+
+/* ======== AVATAR CONTAINER ======== */
+.avatar-container {
+  display:flex; 
+  align-items:center;
+}
+.avatar-container img {
+  width:60px; 
+  height:60px; 
+  border-radius:50%;
+  margin-right:10px; 
+  background:#111; 
+  object-fit:cover;
+}
+
+/* ======== POPUP OVERLAY ======== */
+.popup-overlay {
+  position:fixed; 
+  top:0; 
+  left:0; 
+  width:100%; 
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  display:flex; 
+  justify-content:center; 
+  align-items:center;
+  z-index:9999;
+}
+
+.popup-content {
+  background:#222; 
+  padding:20px; 
+  border-radius:8px;
+  text-align:center; 
+  max-width:300px;
+}
+
+.popup-content h2 {
+  margin-top:0; 
+  font-size:18px;
+}
+.popup-content button {
+  background:#444; 
+  border:none; 
+  color:#fff; 
+  padding:10px 20px;
+  margin-top:20px; 
+  border-radius:4px; 
+  cursor:pointer;
+  transition:background var(--transition-duration);
 }
 .popup-content button:hover {
   background: var(--accent-color);
 }
 
-/* Medium/Big popups */
-.popup-content.medium-popup {
-  max-width: 400px;
-  width: 65%;
-  padding: 30px;
+.button-animate {
+  animation: pop 0.3s ease;
 }
-.popup-content.big-popup {
-  max-width: 400px;
-  width: 90%;
-  padding: 30px;
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
 
-/* =======================================
-   6) Cards & Progress Bars
-   ======================================= */
+/* ======== FEEDING PROGRESS ======== */
+.feeding-progress-container {
+  background:#333; 
+  border-radius:4px; 
+  width:100%; 
+  height:20px;
+  position:relative; 
+  margin-top:10px;
+}
+.feeding-progress-fill {
+  background:#0f0; 
+  height:100%; 
+  width:0%; 
+  border-radius:4px; 
+  transition: width 0.3s ease;
+}
+
+/* ======== STORE ITEMS GRID ======== */
+.store-items {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.store-item {
+  width: 90%; 
+  max-width: 500px; 
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  text-align: left;
+}
+.store-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px; 
+}
+.store-item-header h4 {
+  margin: 0;
+  color: #fff;
+  font-size: 18px;
+}
+.store-item-cost {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: #fff;
+  font-size: 16px;
+}
+.store-star {
+  width: 1.5em;
+  height: 1.5em;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+.store-item p {
+  margin: 0 0 8px 0; 
+  color: #fff;
+  font-size: 14px;
+}
+
+/* ======== SPECIAL BACKGROUND ======== */
+.store-item.special {
+  background: linear-gradient(135deg, #2a2a2a 0%, #494949 100%);
+}
+
+/* locked but still appealing */
+.store-item.locked {
+  filter: grayscale(0.3) brightness(0.9);
+}
+
+/* Buy cookie button */
+.buy-cookie-button,
+.buy-choc-cookie-button {
+  width: 100%;
+  background: rgba(0,0,0,0.7);
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  text-align: center;
+  margin-bottom: 4px;
+}
+.buy-cookie-button:hover,
+.buy-choc-cookie-button:hover {
+  background: rgba(0,0,0,0.9);
+}
+
+.store-lock-text {
+  color: #fff;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* ======== BOXY CARD ======== */
 .boxy-card {
   background: rgba(255,255,255,0.1);
   border-radius: 12px;
@@ -261,26 +659,30 @@ button:hover {
   text-align: left;
 }
 
-.progress-bar,
-.feeding-progress-container {
-  background: #333;
-  border-radius: 4px;
-  position: relative;
+.invite-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
 }
-.progress-bar {
-  width: 100%;
-  height: 10px;
-  margin-top: 10px;
+.invite-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
 }
-.feeding-progress-container {
-  width: 100%;
-  height: 20px;
-  margin-top: 10px;
+.invite-count {
+  margin: 0;
 }
 
-/* The fill inside the bar */
-.progress-fill,
-.feeding-progress-fill {
+.progress-bar {
+  background: #333;
+  border-radius: 4px;
+  width: 100%;
+  height: 10px;
+  position: relative;
+  margin-top: 10px;
+}
+.progress-fill {
   background: #05e84d;
   height: 100%;
   width: 0%;
@@ -288,55 +690,455 @@ button:hover {
   transition: width 0.3s ease;
 }
 
-/* =======================================
-   7) Store Items, Lock States
-   ======================================= */
-.store-items {
+/* ======== COIN BALANCES ======== */
+.coin-row {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  margin-top: 20px;
+  margin-bottom: 0px;
 }
-.store-item {
-  width: 90%;
-  max-width: 500px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 12px;
-  padding: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  text-align: left;
-  color: #fff;
-}
-.item-with-image {
+.coin-col {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
+  text-align: center;
 }
-.store-item-image {
-  width: 60px;
-  height: auto;
-  border-radius: 4px;
-  flex-shrink: 0;
+.coin-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 5px;
 }
-.store-item-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 4px;
-}
-.store-star {
-  width: 1.5em;
-  height: 1.5em;
-  margin-left: 5px;
-  vertical-align: middle;
-}
-.store-item-cost {
-  font-weight: bold;
+.coin-amount {
   font-size: 16px;
 }
+.coin-amount span {
+  font-weight: bold;
+}
 
-/* Locked glow animation */
+/* ======== SPECIAL BACKGROUNDS / ANIMATIONS ======== */
+.special-magical {
+  background: linear-gradient(135deg, #262626, #494949);
+}
+
+.special-purple {
+  background: linear-gradient(135deg, #302b63, #24243e);
+}
+.special-neon {
+  background: linear-gradient(135deg, #00c3ff, #0061ff);
+}
+.special-gold {
+  background: linear-gradient(135deg, #f6d365, #fda085);
+}
+.special-galaxy {
+  background: radial-gradient(circle, #141E30 0%, #243B55 100%);
+}
+.special-magical2 {
+  border: 2px solid #fff;
+  box-shadow: 0 0 8px #0fd850;
+}
+
+/* Animated gradient example */
+.animated-gradient {
+  background: linear-gradient(135deg, #302b63, #24243e);
+  background-size: 400% 400%;
+  animation: shiftGradient 4s ease infinite;
+}
+@keyframes shiftGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Candy variant */
+.animated-gradient-candy {
+  background: linear-gradient(
+    135deg,
+    #302b63,
+    #24243e,
+    #001f3f,
+    #0076fc
+  );
+  background-size: 600% 600%;
+  animation: candyShift 6s ease infinite;
+}
+@keyframes candyShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Aurora variant - darker blues/purples */
+.animated-gradient-aurora {
+  background: linear-gradient(
+    135deg, 
+    #0f0c29, 
+    #302b63, 
+    #24243e
+  );
+  background-size: 400% 400%;
+  animation: auroraShift 8s ease infinite;
+}
+@keyframes auroraShift {
+  0%   { background-position: 0% 50%; }
+  25%  { background-position: 50% 50%; }
+  50%  { background-position: 100% 50%; }
+  75%  { background-position: 50% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Other possible shifting backgrounds */
+.animated-gradient-sunset {
+  background: linear-gradient(
+    135deg,
+    #ff9966, 
+    #ff5e62
+  );
+  background-size: 200% 200%;
+  animation: sunsetShift 5s ease-in-out infinite;
+}
+@keyframes sunsetShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animated-gradient-neon {
+  background: linear-gradient(
+    135deg,
+    #00c3ff,
+    #0061ff,
+    #39ff14
+  );
+  background-size: 600% 600%;
+  animation: neonShift 6s linear infinite;
+}
+@keyframes neonShift {
+  0%   { background-position: 0% 0%; }
+  50%  { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+.animated-gradient-fairy {
+  background: linear-gradient(
+    135deg, 
+    #141e30,
+    #243b55,
+    #0055ff
+  );
+  background-size: 200% 200%;
+  animation: fairyShift 5s ease-in-out infinite;
+}
+@keyframes fairyShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animated-gradient-bubblegum {
+  background: linear-gradient(
+    135deg, 
+    #302b63,
+    #24243e
+  );
+  background-size: 200% 200%;
+  animation: bubblegumShift 5s ease-in-out infinite;
+}
+@keyframes bubblegumShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animated-gradient-citrus {
+  background: linear-gradient(
+    135deg, 
+    #24c6dc,
+    #514a9d
+  );
+  background-size: 200% 200%;
+  animation: citrusShift 4s ease-in-out infinite;
+}
+@keyframes citrusShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ======== BUY COOKIE BUTTON STYLES ======== */
+.buy-cookie-button-lively {
+  background: linear-gradient(to right, #00c3ff, #39ff14);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: livelyPulse 2s infinite;
+}
+.buy-cookie-button-lively:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+@keyframes livelyPulse {
+  0%   { box-shadow: 0 0 8px rgba(0, 255, 133, 0.4); }
+  50%  { box-shadow: 0 0 16px rgba(57, 255, 20, 0.8); }
+  100% { box-shadow: 0 0 8px rgba(0, 255, 133, 0.4); }
+}
+
+.buy-cookie-button-rainbow {
+  background: linear-gradient(
+    45deg,
+    #00c3ff,
+    #0061ff,
+    #39ff14
+  );
+  background-size: 600% 600%;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  animation: animatedRainbow 5s ease infinite;
+}
+@keyframes animatedRainbow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Various gradient buttons if you want them */
+.btn-candy {
+  background: linear-gradient(to right, #302b63, #24243e);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.btn-lollipop {
+  background: linear-gradient(135deg, #0f0c29, #302b63);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.btn-sunny {
+  background: linear-gradient(to right, #00c3ff, #0061ff);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.btn-watermelon {
+  background: linear-gradient(135deg, #001f3f, #0076fc);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.btn-berry {
+  background: linear-gradient(to right, #262626, #494949);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.btn-mint {
+  background: linear-gradient(135deg, #00ff85, #00c3ff);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.btn-citrus {
+  background: linear-gradient(to right, #24c6dc, #514a9d);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ======== SPARKLE BUTTONS ======== */
+.sparkle-button {
+  position: relative;  
+  overflow: hidden;    
+  display: inline-block;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #00ff85, #00c3ff);
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+.sparkle-button:hover {
+  transform: scale(1.05);
+}
+.sparkle-button::before,
+.sparkle-button::after {
+  content: "★";
+  position: absolute;
+  font-size: 14px;
+  color: #fff5d0;
+  opacity: 0;
+}
+.sparkle-button::before {
+  top: 10%;
+  left: 5%;
+  animation: starMove1 2.5s infinite ease-in-out;
+}
+.sparkle-button::after {
+  bottom: 10%;
+  left: 15%;
+  animation: starMove2 2.5s infinite ease-in-out;
+}
+@keyframes starMove1 {
+  0% {
+    transform: translate(0, 0) scale(0.5);
+    opacity: 0;
+  }
+  25% { opacity: 1; }
+  50% {
+    transform: translate(60px, 40px) scale(1);
+    opacity: 1;
+  }
+  75% { opacity: 0.5; }
+  100% {
+    transform: translate(80px, 60px) scale(0.5);
+    opacity: 0;
+  }
+}
+@keyframes starMove2 {
+  0% {
+    transform: translate(0, 0) scale(0.5);
+    opacity: 0;
+  }
+  25% { opacity: 1; }
+  50% {
+    transform: translate(40px, -40px) scale(1);
+    opacity: 1;
+  }
+  75% { opacity: 0.5; }
+  100% {
+    transform: translate(60px, -60px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* ======== DARK STAR BUTTON ======== */
+.dark-star-button {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  padding: 12px 28px;
+  background: #333;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+  user-select: none;
+}
+.dark-star-button:hover {
+  transform: scale(1.05);
+}
+.dark-star-button .star {
+  position: absolute;
+  font-size: 16px; 
+  color: gold; 
+  opacity: 0; 
+  pointer-events: none;
+  animation: starTwinkle 3s infinite;
+}
+.dark-star-button .star1 {
+  top: 10%; left: 15%;
+  animation-delay: 0.2s;
+}
+.dark-star-button .star2 {
+  top: 40%; left: 8%;
+  animation-delay: 0.6s;
+}
+.dark-star-button .star3 {
+  top: 70%; left: 20%;
+  animation-delay: 1.0s;
+}
+.dark-star-button .star4 {
+  top: 20%; left: 70%;
+  animation-delay: 1.4s;
+}
+.dark-star-button .star5 {
+  top: 50%; left: 80%;
+  animation-delay: 1.8s;
+}
+.dark-star-button .star6 {
+  top: 80%; left: 60%;
+  animation-delay: 2.2s;
+}
+.dark-star-button .star7 {
+  top: -20%;
+  left: 120%;
+  animation-delay: 0.8s;
+}
+.dark-star-button .star8 {
+  top: 60%; left: 55%;
+  animation-delay: 1.6s;
+}
+@keyframes starTwinkle {
+  0% {
+    transform: scale(0.5) translate(0, 0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1.2) translate(3px, -3px);
+  }
+  40% {
+    transform: scale(1) translate(0, 0);
+    opacity: 1;
+  }
+  60% {
+    transform: scale(1.2) translate(-3px, 2px);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(0.5) translate(0, 0);
+    opacity: 0;
+  }
+}
+
+/* ======== LOCKED ITEM GLOW ======== */
 .store-item.locked {
   position: relative;
   filter: brightness(0.8);
@@ -355,118 +1157,192 @@ button:hover {
   color: #fff;
   font-weight: bold;
   font-size: 18px;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   padding: 6px 12px;
   border-radius: 8px;
   letter-spacing: 1px;
+  text-shadow: 1px 1px 2px #000;
   pointer-events: none;
 }
+.store-item.locked button,
 .store-item.locked * {
   pointer-events: none;
 }
 
-/* Animated backgrounds used in the store */
-.animated-gradient-candy {
-  background: linear-gradient(135deg, #302b63, #24243e, #001f3f, #0076fc);
-  background-size: 600% 600%;
-  animation: candyShift 6s ease infinite;
-}
-@keyframes candyShift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-.animated-gradient-aurora {
-  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-  background-size: 400% 400%;
-  animation: auroraShift 8s ease infinite;
-}
-@keyframes auroraShift {
-  0%   { background-position: 0% 50%; }
-  25%  { background-position: 50% 50%; }
-  50%  { background-position: 100% 50%; }
-  75%  { background-position: 50% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Special "sparkle" and "dark-star" buttons */
-.sparkle-button {
+/* ======== WELCOME PACKAGE DISCOUNT BADGE ======== */
+.store-item.welcome-package {
   position: relative;
-  overflow: hidden;
-  padding: 12px 20px;
-  background: linear-gradient(135deg, #00ff85, #00c3ff);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  transition: transform 0.3s ease;
 }
-.sparkle-button:hover {
-  transform: scale(1.05);
-}
-.dark-star-button {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-  padding: 12px 28px;
-  background: #333;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  transition: transform 0.3s ease;
-}
-.dark-star-button:hover {
-  transform: scale(1.05);
-}
-
-/* Star Twinkle (optional if you want the star flicker) */
-.dark-star-button .star {
+.store-item.welcome-package .discount-label {
   position: absolute;
-  font-size: 16px;
-  color: gold;
-  opacity: 0;
-  pointer-events: none;
-  animation: starTwinkle 3s infinite;
-}
-/* ... star1, star2, star3, etc. styles if needed ... */
-@keyframes starTwinkle {
-  0% { transform: scale(0.5); opacity: 0; }
-  20% { transform: scale(1.2); opacity: 1; }
-  40% { transform: scale(1);   opacity: 1; }
-  60% { transform: scale(1.2); opacity: 1; }
-  80% { transform: scale(1);   opacity: 0.6; }
-  100% { transform: scale(0.5); opacity: 0; }
+  top: 8px;
+  left: -10px;
+  transform: rotate(-15deg);
+  background: #ff0000;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  letter-spacing: 1px;
+  z-index: 999;
 }
 
-/* =======================================
-   8) Misc. 
-   ======================================= */
-.cat-container img {
+/* ======== DONUT DESTINY LABEL ======== */
+.store-item.donut-destiny {
+  position: relative;
+}
+.donut-destiny .founders-label {
+  position: absolute;
+  top: -10px;
+  left: 12%;
+  transform: rotate(-5deg);
+  background: #e91e63;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  letter-spacing: 0.5px;
+  z-index: 999;
+}
+
+/* ======== POPUP BIG/MEDIUM ======== */
+.popup-content.big-popup {
+  max-width: 400px;
+  width: 90%;
+  padding: 30px;
+}
+.popup-content.medium-popup {
+  max-width: 400px;
+  width: 65%;
+  padding: 30px;
+}
+
+.popup-image-wrapper {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.popup-image-wrapper img {
   width: 100%;
   height: auto;
-  display: block;
-  margin-bottom: 10px;
+  max-width: 250px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
-.cluster-buttons {
-  position: fixed;
-  bottom: 90px;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  z-index: 9999;
-  gap: 10px;
-}
-
-.boxy-card h3 {
+.popup-content.big-popup h2 {
+  font-size: 24px;
   margin-top: 0;
-  font-size: var(--heading-font-size);
-}
-.button-animate {
-  animation: pop 0.3s ease;
-}
-@keyframes pop {
-  50% { transform: scale(1.2); }
+  margin-bottom: 16px;
+  text-align: center;
 }
 
+.popup-content.big-popup p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.popup-content.big-popup button {
+  display: inline-block;
+  margin: 10px auto 0; 
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(to right, #2196F3, #E91E63);
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.popup-content.big-popup button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* ======== PROGRESS BAR BONUS ======== */
+.progress-bar-bonuses {
+  background: #333;
+  border-radius: 4px;
+  width: 276px;
+  height: 10px;
+  position: relative;
+  margin-top: 10px;
+  box-sizing: border-box;
+}
+
+/* ======== LOADING DOTS ======== */
+.loading-dots span {
+  animation: blink 1.2s infinite;
+  font-weight: bold;
+  font-size: 20px;
+  opacity: 0;
+  display: inline-block;
+}
+.loading-dots span:nth-child(1) {
+  animation-delay: 0.0s;
+}
+.loading-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.loading-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+@keyframes blink {
+  0%, 80%  { opacity: 0; }
+  40%      { opacity: 1; }
+}
+
+:root {
+  --bg-start: #0a0f5e;     /* deep navy */
+  --bg-end: #020111;       /* near-black */
+  --text-color: #f5f5f5;
+  --accent-color: #b8860b; /* gold */
+}
+
+body {
+  background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+  color: var(--text-color);
+  font-family: "Montserrat", sans-serif;
+}
+
+/* Hex Tiles */
+.hex {
+  background: linear-gradient(135deg, #101010, #222222);
+  transition: 0.2s;
+}
+
+.hex:hover {
+  box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+  transform: scale(1.06);
+}
+
+/* Buttons */
+button {
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  background: #d4af37; /* a brighter gold for hover */
+}
+
+.hex.revealed {
+  background: linear-gradient(135deg, #ff66c4, #ff1493);
+}
+
+.bottom-nav button.active,
+.bottom-nav button:hover {
+  background: rgba(255, 20, 147, 0.2);
+}
 
 
 
