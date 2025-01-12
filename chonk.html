@@ -1383,6 +1383,12 @@ button {
   padding: 30px;     /* More padding for extra space around content */
 }
 
+.popup-content.medium-popup {
+  max-width: 400px;  /* Increase width for a bigger feel */
+  width: 70%;        /* Let it be responsive on mobile */
+  padding: 30px;     /* More padding for extra space around content */
+}
+
 /* A wrapper for your image if you want it to be centered or scaled nicely */
 .popup-image-wrapper {
   text-align: center;
@@ -1493,7 +1499,7 @@ button {
 
 <!-- Cluster Completed Popup -->
 <div class="popup-overlay" id="clusterCompletePopup" style="display: none;">
-  <div class="popup-content">
+  <div class="popup-content medium-popup">
     <h2>Cluster Completed!</h2>
     <img id="clusterRewardImage" src="" alt="" style="width: 100px; height: auto; margin-bottom: 10px;" />
     <p id="clusterCompleteMessage">
