@@ -712,88 +712,84 @@ async function useChonkBomb() {
     return;
   }
 
-  const confirmUse = confirm("Use 1 Chonk-Bomb to reveal 10 partial clusters at once?");
+  const confirmUse = confirm("Use 1 Chonk-Bomb to reveal multiple clusters?");
   if (!confirmUse) return;
+
+  // 1) Show the popup in “loading” mode
+  showChonkBombLoadingPopup();
 
   try {
     const res = await fetch(`${BASE_API_URL}/api/useChonkBomb`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        initData: tg.initData
-      })
+      body: JSON.stringify({ initData: tg.initData })
     });
     const data = await res.json();
-    if (data.error) {
-      alert(data.error);
+
+    if (!res.ok || data.error) {
+      // Show an error message in the results area
+      setChonkBombResults(`
+        <p style="color:red;">
+          ${data.error || 'Server error'} 
+        </p>
+      `);
       return;
     }
 
-    // data => { newlyRevealedRewards, totalBTC, totalTON, totalUSDT, message, ... }
+    // Suppose data => { message, totalBTC, totalTON, totalUSDT, newlyRevealedRewards: [...] }
+    // 2) Build the final HTML for results
+    const totalTiles = data.newlyRevealedRewards?.length ?? 0;
+    const summaryHTML = `
+      <p><strong>${data.message}</strong></p>
+      <p>Found: ${data.totalBTC.toFixed(4)} BTC, 
+                ${data.totalTON.toFixed(2)} TON,
+                ${data.totalUSDT.toFixed(2)} USDT
+      </p>
+      <p>Total new tiles: ${totalTiles}</p>
+    `;
 
-    // Show a fancy popup summarizing the results, or just alert:
-    console.log("ChonkBomb results =>", data);
-    alert(
-      data.message
-      + `\nFound: ${data.totalBTC.toFixed(4)} BTC, ${data.totalTON.toFixed(2)} TON, ${data.totalUSDT.toFixed(2)} USDT`
-      + `\nTiles revealed: ${data.newlyRevealedRewards.length}`
-    );
+    // 3) Switch from “loading” to “results”
+    setChonkBombResults(summaryHTML);
 
-    if (data?.newlyRevealedRewards) {
-  showChonkBombRewardsPopup(data.newlyRevealedRewards);
-  }
+    // 4) Update local userState, do any UI updates
+    userState.chonkBombs = data.chonkBombs;
+    userState.totalFeeds = data.totalFeeds;
+    await fetchUserState(); // or do partial updates
 
-
-    // Update local userState
-    userState.chonkBombs   = data.chonkBombs;
-    userState.totalFeeds   = data.totalFeeds;
-    // If you want to update total BTC, etc.:
-    // userState.totalBTC  += data.totalBTC;
-    // userState.totalTON  += data.totalTON;
-    // userState.totalUSDT += data.totalUSDT;
-
-    // If you want to do a fresh /api/userState after:
-    await fetchUserState();
-
-    // Optionally confetti
+    // 5) Optional confetti
     shoot();
+    
   } catch (err) {
     console.error("useChonkBomb error:", err);
-    alert("Error: " + err.message);
+    setChonkBombResults(`<p style="color:red;">${err.message}</p>`);
   }
 }
 
 
 
-function showChonkBombRewardsPopup(data) {
-  // data => { newlyRevealedRewards: [...], totalBTC, totalUSDT, totalTON, cookiesOwned, ... }
-
-  // Build a nice HTML summary, e.g. show the total BTC, TON, USDT found, plus partial details?
-  const summary = `
-    <p>You revealed 10 clusters!</p>
-    <p>Found: 
-      ${data.totalBTC.toFixed(4)} BTC, 
-      ${data.totalTON.toFixed(2)} TON, 
-      ${data.totalUSDT.toFixed(2)} USDT
-    </p>
-    <p>Total new tiles: ${data.newlyRevealedRewards.length}</p>
-  `;
-
-  // Or show a table if you want to list each cluster’s tiles:
-  // ...
-  
-  // Then show a popup overlay
+function showChonkBombLoadingPopup() {
+  // 1) Show the overall popup
   const overlay = document.getElementById('chonkBombPopup');
-  document.getElementById('chonkBombPopupBody').innerHTML = summary;
-  overlay.style.display = 'flex';
+  overlay.style.display = 'flex';  // or block, whichever you do for your other popups
 
-  // Optionally confetti
-  shoot();
+  // 2) Show loading section, hide results
+  document.getElementById('chonkBombLoadingSection').style.display = 'block';
+  document.getElementById('chonkBombResultsSection').style.display = 'none';
+}
+
+function setChonkBombResults(html) {
+  // 1) Hide loading, show results
+  document.getElementById('chonkBombLoadingSection').style.display = 'none';
+  document.getElementById('chonkBombResultsSection').style.display = 'block';
+
+  // 2) Insert the final HTML
+  document.getElementById('chonkBombResultsBody').innerHTML = html;
 }
 
 function closeChonkBombPopup() {
   document.getElementById('chonkBombPopup').style.display = 'none';
 }
+
 
 
 function flipAllNewlyRevealedTiles(newRewards) {
@@ -1366,7 +1362,7 @@ function updateBalances() {
     updateInviteProgress('bunchofcookiesBonusesProgress', 3);
     updateInviteProgress('candyBonusesProgress', 5);
     updateInviteProgress('donutBonusesProgress', 10);
-    updateInviteProgress('pawBonusesProgress', 12);
+    updateInviteProgress('pawBonusesProgress', 10);
     updateInviteProgress('freeCookieProgress', 2);
     updateInviteProgress('secretTreasureProgress', 3);
     
