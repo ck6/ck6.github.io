@@ -518,7 +518,7 @@ function showClusterCompletePopup(rewardObj) {
   if (rarity === "Rare") {
     imageUrl = "cookie.webp";
   } else if (rarity === "Legendary") {
-    imageUrl = "crown.png";
+    imageUrl = "golden_crown.png";
   }
   imageEl.src = imageUrl;
 
