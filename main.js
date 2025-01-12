@@ -1053,6 +1053,20 @@ function showTab(tab) {
     }
   }
 
+  const chonkBombContainer = document.getElementById('chonkBombContainer');
+  if (chonkBombContainer) {
+    if (tab === 'field') {
+      // Only show if userState.chonkBombs > 0, or you can just always show
+      if (userState?.chonkBombs > 0) {
+        chonkBombContainer.style.display = 'block';
+      } else {
+        chonkBombContainer.style.display = 'none';
+      }
+    } else {
+      chonkBombContainer.style.display = 'none';
+    }
+  }
+
   if (tab === 'stats') {
     fetchLeaderboard();  // load or refresh the top chonkers
   }
