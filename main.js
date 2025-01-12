@@ -84,10 +84,18 @@ const pastelGradients = [
   "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)"
 ];
 
-const neonGradients = [
+const neonGradients2 = [
   "linear-gradient(135deg, #001f3f 0%, #0076fc 100%)",
   "linear-gradient(135deg, #00c3ff, #0061ff)",
   "linear-gradient(135deg, #39ff14, #00ff85)",
+];
+
+const neonGradients = [
+  "linear-gradient(135deg, #1f005c, #5f2ddb)",   // deep purple → bright violet
+  "linear-gradient(135deg, #0a0f5e, #4e00c2)",   // midnight blue → royal purple
+  "linear-gradient(135deg, #001f3f, #0076fc)",   // navy → electric blue
+  "linear-gradient(135deg, #3b005c, #6a00ba)",   // dark plum → bold violet
+  "linear-gradient(135deg, #371242, #7a1da3)"    // deep maroon → vibrant purple
 ];
 
 //const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🦴","💎","📦","🎀","💕"];
@@ -408,14 +416,14 @@ function createHexGrid() {
         hex.innerHTML = tileHTML;
       } else {
         // Not revealed => pastel background + random emoji
-        const decor = clusterDecor[currentClusterIndex][r][c];
-        hex.textContent = decor.emoji;
-        const { gradient, emoji } = clusterDecor[currentClusterIndex][r][c];
-        hex.textContent = emoji;
-        hex.style.background = neonGradients[Math.floor(Math.random() * neonGradients.length)];
+          const randomIndex = Math.floor(Math.random() * neonGradients.length);
+          hex.style.background = neonGradients[randomIndex];
 
-        // On click, attempt to reveal
-        hex.onclick = () => onHexClick(r, c, hex);
+          // Also choose an emoji from your new list
+          const randomEmojiIndex = Math.floor(Math.random() * emojis.length);
+          hex.textContent = emojis[randomEmojiIndex];
+          // On click, attempt to reveal
+          hex.onclick = () => onHexClick(r, c, hex);
       }
 
       rowDiv.appendChild(hex);
