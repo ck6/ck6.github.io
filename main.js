@@ -1261,7 +1261,7 @@ function updateBalances() {
     updateInviteProgress('candyBonusesProgress', 5);
     updateInviteProgress('donutBonusesProgress', 10);
     updateInviteProgress('pawBonusesProgress', 12);
-    updateInviteProgress('freeCookieProgress', 3);
+    updateInviteProgress('freeCookieProgress', 2);
     updateInviteProgress('secretTreasureProgress', 3);
     
 
