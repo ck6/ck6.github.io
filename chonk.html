@@ -300,6 +300,35 @@ p {
   transform-style: preserve-3d;
 }
 
+.hex::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+
+  /* match the same polygon shape. 
+     Slightly bigger (2px offset) to appear like an outline. */
+  clip-path: polygon(
+    50% 0%,
+    100% 25%,
+    100% 75%,
+    50% 100%,
+    0% 75%,
+    0% 25%
+  );
+
+  /* The actual glow */
+  box-shadow: 
+    0 0 8px #ffd700,
+    0 0 16px #ffd700;
+
+  /* Make sure it doesn’t block clicks */
+  pointer-events: none;
+  z-index: 1;
+}
+
 /* Hover glow = neon teal or neon greenish */
 .hex:hover {
   box-shadow: 0 0 10px #00ff85, 0 0 20px #00ff85;
