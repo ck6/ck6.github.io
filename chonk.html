@@ -1722,36 +1722,36 @@ button {
 
 
  <!-- Are you following our channel?-->
-<div class="boxy-card special-magical item-with-image"
-     id="channelRewardCard"
-     style="display: flex; align-items: center; gap: 10px; justify-content: flex-start;">
+<div class="boxy-card special-magical item-with-image" id="channelRewardCard"
+     style="
+       display: flex; 
+       align-items: center; 
+       gap: 10px; 
+       justify-content: flex-start;
+     ">
 
-  <!-- Left side: text label -->
-  <div style="display:flex; flex-direction:column; align-items:flex-start;">
-    <p style="margin: 0;  font-weight: bold;">
-      Follow our channel to get <strong>a free cookie</strong>
-    </p>
+    <!-- Text label -->
+  <p style="margin: 0; font-weight: bold;">
+    Follow our channel to get <strong>a free cookie</strong>
+  </p>
 
-    <!-- Middle: The check or cross icon -->
-    <div id="channelRewardStatus" style="font-size:24px; margin-top:8px;">
-      <!-- Will be set by JS: "✅" or "❌" -->
-    </div>
-  </div>
-
-  <!-- Button: opens channel link -->
-  <button class="invite-friend-button"
-          onclick="openChannelLink()" 
-          style="font-size: 18px; margin-left:auto;">
+    <!-- Button: opens channel link -->
+  <button class="invite-friend-button" onclick="openChannelLink()" 
+          style="font-size: 18px;">
     📣
   </button>
 
-  <!-- Cookie image -->
-  <img id="channelCookieImage"
-       src="cookie.webp"
-       alt="Cookie" 
-       style="width: 40px; height: auto; margin-left:10px;">
-</div>
+    <!-- Middle: The check or cross icon -->
+  <div id="channelRewardStatus" style="font-size: 24px; margin-right: 8px;">
+    <!-- Will be set by JS: "✅" or "❌" -->
+  </div>
 
+    <!-- Cookie image -->
+  <img id="channelCookieImage" src="cookie.webp" 
+       alt="Cookie" 
+       style="width: 40px; height: auto;">
+
+</div>
 
 
 
