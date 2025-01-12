@@ -469,7 +469,7 @@ if (userState.cookiesOwned <= 0 && userState.chocolateReveals <= 0) {
 
     if (data.clusterCompletedReward) {
     // Show the new popup
-    showClusterCompletePopup(data.clusterCompletedReward);
+    showClusterCompletePopup(data.clusterCompletedReward, false);
     }
     //await loadCluster(currentClusterIndex);
 
@@ -484,7 +484,7 @@ if (userState.cookiesOwned <= 0 && userState.chocolateReveals <= 0) {
 
 
 
-function showClusterCompletePopup(rewardObj) {
+function showClusterCompletePopup(rewardObj, wasBombUsed = false) {
   // rewardObj might look like: { text: "2 Cookies", rarity: "Rare" }
 
   const overlay    = document.getElementById("clusterCompletePopup");
@@ -496,6 +496,8 @@ function showClusterCompletePopup(rewardObj) {
     overlay.style.display = "none";
     return;
   }
+
+  window.clusterCompletedViaBomb = wasBombUsed;
 
   // 1) Reward text (e.g. "2 Cookies")
   textEl.textContent = rewardObj.text;
@@ -540,8 +542,12 @@ function closeClusterCompletePopup() {
     overlay.style.display = "none";
   }
 
-  const randIndex = Math.floor(Math.random() * 3333334); //1818181 //2_380_953
-  loadCluster(randIndex);
+    if (!window.clusterCompletedViaBomb) {
+    // was NOT bomb => load random cluster
+    const randIndex = Math.floor(Math.random() * 3333334);
+    loadCluster(randIndex);
+  }
+
   updateBalances();
 
 }
@@ -621,7 +627,7 @@ async function useBombOnCurrentCluster() {
     setTimeout(shoot, 200);
 
     if (data.clusterCompletedReward) {
-    showClusterCompletePopup(data.clusterCompletedReward);
+    showClusterCompletePopup(data.clusterCompletedReward, true);
     }
 
     // Now re-render the cluster to show everything as revealed
