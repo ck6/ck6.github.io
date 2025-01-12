@@ -1290,12 +1290,16 @@ function updateStoreItemsUI() {
 
 function updateChonkBombUI() {
   const container = document.getElementById('chonkBombContainer');
-  if (userState.chonkBombs && userState.chonkBombs > 0) {
+  const activeTab = document.querySelector('.bottom-nav button.active')?.id; 
+    // e.g. 'fieldTab', 'storeTab', etc.
+    
+  if (activeTab === 'fieldTab' && userState.chonkBombs > 0) {
     container.style.display = "block";
   } else {
     container.style.display = "none";
   }
 }
+
 
 
 
