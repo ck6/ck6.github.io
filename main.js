@@ -507,7 +507,7 @@ function showClusterCompletePopup(rewardObj) {
   // 3) Color-code the rarity
   let color = "#00ff00"; // a bright green for Common
   if (rarity === "Rare") {
-    color = "#3374ff"; // a light purple #c084fc
+    color = "#2196F3"; // a light purple #c084fc
   } else if (rarity === "Legendary") {
     color = "#ffa500"; // a standard orange
   }
