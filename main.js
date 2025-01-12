@@ -609,7 +609,7 @@ function showSecretTreasurePopup(cookiesCount = 2) {
   if (msgEl) {
     msgEl.innerHTML = `
       You got <strong>${cookiesCount} Cookie${cookiesCount > 1 ? 's' : ''}</strong>
-      and a <strong>Crown (10% bonus for 30 min)</strong>!
+      and a <strong>Crown (10% bonus on all rewards for 30 min)</strong>!
     `;
   }
 
