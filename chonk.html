@@ -1516,6 +1516,57 @@ button {
 </div>
 
 
+<!-- Secret Treasure Popup -->
+<div class="popup-overlay" id="secretTreasurePopup" style="display: none;">
+  <div class="popup-content medium-popup">
+
+    <h2>Secret Treasure</h2>
+    
+    <!-- A wrapper for an optional “fancy” chest image up top -->
+    <div class="popup-image-wrapper">
+      <img
+        id="secretTreasureMainImage"
+        src="secret-chest.png"
+        alt="Secret Chest"
+        style="width: 120px; height: auto; margin-bottom: 15px;"
+      />
+    </div>
+
+    <!-- Treasure Popup -->
+    <p style="font-size:18px; line-height:1.4;" id="secretTreasureMessage">
+      <!-- We can fill this via JS, or keep it static. Example: -->
+      You got <strong>2 Cookies</strong> and a <strong>Crown</strong>!
+    </p>
+
+    <!-- Show the cookie + crown side by side -->
+    <div
+      class="reward-items"
+      style="display: flex; justify-content: center; align-items: center; gap: 20px; margin: 20px 0;"
+    >
+      <img
+        id="secretTreasureCookieImage"
+        src="cookie.webp"
+        alt="Cookie"
+        style="width: 60px; height: auto;"
+      />
+      <img
+        id="secretTreasureCrownImage"
+        src="golden_crown.png"
+        alt="Crown"
+        style="width: 60px; height: auto;"
+      />
+    </div>
+
+    <!-- Close button -->
+    <button
+      onclick="closeSecretTreasurePopup()"
+      style="font-size: 20px; padding: 14px 24px;"
+    >
+      Woohoo! 🎉
+    </button>
+  </div>
+</div>
+
 
 
 <!-- Big Intro Popup 
@@ -1593,18 +1644,7 @@ button {
 
 
 
-    <!-- Invite 3 friends to get a free cookie -->
-  <div class="boxy-card" style="display: flex; align-items: center; justify-content: space-between;">
-    <div>
-      <p>Invite 3 frends to get a <strong>free cookie</strong></p>
-      <div class="progress-bar-bonuses">
-        <div id="freeCookieProgress" class="progress-fill"></div>
-      </div>
-    </div>
-    <img src="cookie.webp" 
-         alt="Cookie" 
-         style="width: 40px; height: auto; margin-left: 8px;" />
-  </div>
+
 
 
 
@@ -1639,6 +1679,22 @@ button {
        style="width: 40px; height: auto;">
 
 </div>
+
+
+
+  <!-- Invite 3 friends to get a free cookie -->
+  <div class="boxy-card" style="display: flex; align-items: center; justify-content: space-between;">
+    <div>
+      <p>Invite 3 frends to get a <strong>free cookie</strong></p>
+      <div class="progress-bar-bonuses">
+        <div id="freeCookieProgress" class="progress-fill"></div>
+      </div>
+    </div>
+    <img src="cookie.webp" 
+         alt="Cookie" 
+         style="width: 40px; height: auto; margin-left: 8px;" />
+  </div>
+
 
 
   <!-- Secret Treasure Invite Card -->
@@ -2045,14 +2101,11 @@ button {
   <div class="store-item-content">
     <div class="store-item-header">
       <h4>Secret Treasure</h4>
-      <div class="store-item-cost">
-        0
-        <img src="tgstar2.png" alt="Star" class="store-star">
-      </div>
+
     </div>
     <p><strong>Open this mysterious chest to claim hidden rewards!</strong></p>
-    <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'secretTreasure')">
-      Buy ✨
+    <button class="buy-cookie-button" onclick="openSecretTreasure()">
+      Open ✨
     </button>
   </div>
 </div>

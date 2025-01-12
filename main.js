@@ -565,6 +565,70 @@ function getRewardType(rewardString) {
 }
 
 
+async function openSecretTreasure() {
+  try {
+    const res = await fetch(`${BASE_API_URL}/api/openSecretTreasure`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        initData: tg.initData
+      })
+    });
+    const data = await res.json();
+    if (!res.ok) {
+      alert(data.error || "Error opening Secret Treasure.");
+      return;
+    }
+
+    // Suppose the backend always gives 2 cookies + Crown
+    // but if you want to return "cookiesAwarded" from the server, do:
+    // let cookiesGot = data.cookiesAwarded || 2;
+
+    // Show the popup
+    showSecretTreasurePopup(/* cookiesGot */);
+
+    // Update local state for immediate UI
+    userState.cookiesOwned = (userState.cookiesOwned || 0) + 2;
+    await fetchUserState();
+
+    // Hide the unlocked item in the store after opening
+    const secretChest = document.getElementById('secretTreasureUnlocked');
+    if (secretChest) secretChest.style.display = 'none';
+
+  } catch (err) {
+    console.error("Error opening secret treasure:", err);
+    alert("Error: " + err.message);
+  }
+}
+
+
+
+function showSecretTreasurePopup(cookiesCount = 2) {
+  // 1) If you want a dynamic message, build it here:
+  const msgEl = document.getElementById("secretTreasureMessage");
+  if (msgEl) {
+    msgEl.innerHTML = `
+      You got <strong>${cookiesCount} Cookie${cookiesCount > 1 ? 's' : ''}</strong>
+      and a <strong>Crown (10% bonus for 30 min)</strong>!
+    `;
+  }
+
+  // 2) Show the overlay
+  const overlay = document.getElementById("secretTreasurePopup");
+  overlay.style.display = "flex";
+
+  // 3) Optional: some confetti
+  setTimeout(shoot, 0);
+  setTimeout(shoot, 100);
+  setTimeout(shoot, 200);
+}
+
+function closeSecretTreasurePopup() {
+  const overlay = document.getElementById("secretTreasurePopup");
+  overlay.style.display = "none";
+}
+
+
 
 
 //BOMB REVEAL
@@ -1116,6 +1180,10 @@ function updateStoreItemsUI() {
     donutUnlockedEl.style.display = 'none';
   }
 
+
+  if (userState.store?.secretTreasureOpened) {
+    document.getElementById('secretTreasureUnlocked').style.display = 'none';
+  }
 
 
 
