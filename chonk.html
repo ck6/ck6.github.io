@@ -1299,35 +1299,43 @@ p {
 }
 
 :root {
-  --bg-start: #1e0028; 
-  --bg-end: #340047;
-  --text-color: #fff;
-  --accent-color: #ff1493;
-  --font-family: "Poppins", sans-serif;
-  --heading-font-size: 22px;
-  --body-font-size: 16px;
-  --section-spacing: 20px;
-  --button-padding: 10px 20px;
-  --transition-duration: 0.3s;
-  --hex-size: calc(100vw / 5.5);
+  --bg-start: #0a0f5e;     /* deep navy */
+  --bg-end: #020111;       /* near-black */
+  --text-color: #f5f5f5;
+  --accent-color: #b8860b; /* gold */
 }
 
 body {
   background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
   color: var(--text-color);
-  font-family: var(--font-family);
+  font-family: "Montserrat", sans-serif;
 }
 
+/* Hex Tiles */
 .hex {
-  background: linear-gradient(135deg, #2a003e, #ff1493);
-  font-size: 24px;
-  color: #fff;
+  background: linear-gradient(135deg, #101010, #222222);
+  border: 2px solid var(--accent-color);
   transition: 0.2s;
 }
+
 .hex:hover {
-  box-shadow: 0 0 8px #ff1493, 0 0 16px #ff1493;
-  transform: scale(1.05);
+  box-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--accent-color);
+  transform: scale(1.06);
 }
+
+/* Buttons */
+button {
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  background: #d4af37; /* a brighter gold for hover */
+}
+
 .hex.revealed {
   background: linear-gradient(135deg, #ff66c4, #ff1493);
 }
