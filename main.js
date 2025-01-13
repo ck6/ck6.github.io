@@ -108,7 +108,8 @@ const pastelGradients = [
   "linear-gradient(135deg, #6a0dad, #8f00ff)",
   "linear-gradient(135deg, #6a0dad, #8f00ff)",
   // Hot pink → vivid purple
-  "linear-gradient(135deg, #FF1493, #8B00FF)"
+  "linear-gradient(135deg, #FF1493, #8B00FF)",
+  "linear-gradient(135deg, #00a3ff, #88e0ff)"
 ];
 
 
