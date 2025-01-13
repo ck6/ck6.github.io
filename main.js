@@ -94,14 +94,18 @@ const pastelGradients3 = [
 
 const pastelGradients = [
   // Deep purple → pink
-  "linear-gradient(135deg, #39006F, #9C00BD)",  
+  "linear-gradient(135deg, #39006F, #9C00BD)",
+   "linear-gradient(135deg, #39006F, #9C00BD)",  
   // Magenta → neon pink
   "linear-gradient(135deg, #B4009E, #FF29C8)",
   // Indigo → electric blue
   "linear-gradient(135deg, #2A0061, #4439FF)",
+  "linear-gradient(135deg, #2A0061, #4439FF)",
   // Midnight navy → bright aqua
   "linear-gradient(135deg, #001F3F, #00E0FF)",
+  "linear-gradient(135deg, #001F3F, #00E0FF)",
   //Royal purple → neon violet
+  "linear-gradient(135deg, #6a0dad, #8f00ff)",
   "linear-gradient(135deg, #6a0dad, #8f00ff)",
   // Hot pink → vivid purple
   "linear-gradient(135deg, #FF1493, #8B00FF)"
