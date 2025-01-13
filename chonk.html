@@ -989,22 +989,30 @@ p {
 
 /* ======== SPARKLE BUTTONS ======== */
 .sparkle-button {
-  position: relative;  
-  overflow: hidden;    
+  position: relative;
+  overflow: hidden;
   display: inline-block;
   padding: 12px 20px;
-  background: linear-gradient(135deg, #00ff85, #00c3ff);
+  
+  /* <--- THIS is the gold-to-orange gradient ---> */
+  background: linear-gradient(135deg, #ffc107, #ff9800);
+
   color: #fff;
   font-size: 16px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  
+  /* Adds a slight box shadow & smooth hover effect */
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
   transition: transform 0.3s ease;
 }
+
 .sparkle-button:hover {
   transform: scale(1.05);
 }
+
+/* Then it adds little "★" sparkles floating across the button */
 .sparkle-button::before,
 .sparkle-button::after {
   content: "★";
@@ -1013,48 +1021,35 @@ p {
   color: #fff5d0;
   opacity: 0;
 }
+
 .sparkle-button::before {
   top: 10%;
   left: 5%;
   animation: starMove1 2.5s infinite ease-in-out;
 }
+
 .sparkle-button::after {
   bottom: 10%;
   left: 15%;
   animation: starMove2 2.5s infinite ease-in-out;
 }
+
 @keyframes starMove1 {
-  0% {
-    transform: translate(0, 0) scale(0.5);
-    opacity: 0;
-  }
-  25% { opacity: 1; }
-  50% {
-    transform: translate(60px, 40px) scale(1);
-    opacity: 1;
-  }
-  75% { opacity: 0.5; }
-  100% {
-    transform: translate(80px, 60px) scale(0.5);
-    opacity: 0;
-  }
+  0%   { transform: translate(0, 0) scale(0.5); opacity: 0; }
+  25%  { opacity: 1; }
+  50%  { transform: translate(60px, 40px) scale(1); opacity: 1; }
+  75%  { opacity: 0.5; }
+  100% { transform: translate(80px, 60px) scale(0.5); opacity: 0; }
 }
+
 @keyframes starMove2 {
-  0% {
-    transform: translate(0, 0) scale(0.5);
-    opacity: 0;
-  }
-  25% { opacity: 1; }
-  50% {
-    transform: translate(40px, -40px) scale(1);
-    opacity: 1;
-  }
-  75% { opacity: 0.5; }
-  100% {
-    transform: translate(60px, -60px) scale(0.5);
-    opacity: 0;
-  }
+  0%   { transform: translate(0, 0) scale(0.5); opacity: 0; }
+  25%  { opacity: 1; }
+  50%  { transform: translate(40px, -40px) scale(1); opacity: 1; }
+  75%  { opacity: 0.5; }
+  100% { transform: translate(60px, -60px) scale(0.5); opacity: 0; }
 }
+
 
 /* ======== DARK STAR BUTTON ======== */
 .dark-star-button {
