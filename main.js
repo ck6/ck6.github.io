@@ -1743,7 +1743,7 @@ function shoot() {
     ...defaults,
     particleCount: 40,
     scalar: 1.2,
-    shapes: ["star"],
+    shapes: ["clubs"], //star
   });
   confetti({
     ...defaults,
