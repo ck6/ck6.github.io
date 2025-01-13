@@ -101,8 +101,8 @@ const pastelGradients = [
   // Indigo → electric blue
   "linear-gradient(135deg, #2A0061, #4439FF)",
   "linear-gradient(135deg, #2A0061, #4439FF)",
+   "linear-gradient(135deg, #2A0061, #4439FF)",
   // Midnight navy → bright aqua
-  "linear-gradient(135deg, #001F3F, #00E0FF)",
   "linear-gradient(135deg, #001F3F, #00E0FF)",
   "linear-gradient(135deg, #001F3F, #00E0FF)",
   //Royal purple → neon violet
