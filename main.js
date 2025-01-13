@@ -73,7 +73,7 @@ let invitedFriends = 0;
  * We'll also replicate your original pastel & emoji logic
  * for the UNREVEALED tiles. This is purely client-side "decoration".
  ************************************************************/
-const pastelGradients = [
+const pastelGradients2 = [
   "linear-gradient(135deg, #fbc2eb 0%, #a18cd1 100%)",
   "linear-gradient(135deg, #fdcbf1 0%, #e6dee9 100%)",
   "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
@@ -83,6 +83,14 @@ const pastelGradients = [
   "linear-gradient(135deg, #fddb92 0%, #d1fdff 100%)",
   "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)"
 ];
+
+const pastelGradients = [
+  "linear-gradient(135deg, #450000, #8b0000)", // deep reds
+  "linear-gradient(135deg, #2a0031, #4b0061)", // purples
+  "linear-gradient(135deg, #3a0032, #bb0099)", // pinkish
+  "linear-gradient(135deg, #560027, #ad004f)"  // magenta
+];
+
 //const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🦴","💎","📦","🎀","💕"];
 //const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🐭","💎","📦","💕", "🐹","🐥","🐣", "🐟", "🍣"];
 const emojis = [
