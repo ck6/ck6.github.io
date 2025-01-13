@@ -85,6 +85,14 @@ const pastelGradients2 = [
 ];
 
 const pastelGradients = [
+  "linear-gradient(135deg, #300025, #70003c)",  // Dark cherry → vibrant magenta
+  "linear-gradient(135deg, #4b0061, #9400b3)",  // Deep purple → bold violet
+  "linear-gradient(135deg, #581845, #900c3f)",  // Wine purple → scarlet
+  "linear-gradient(135deg, #6a0dad, #8f00ff)",  // Royal purple → neon violet
+  "linear-gradient(135deg, #b4009e, #ff29c8)",  // Hot magenta → electric pink
+];
+
+const pastelGradients22 = [
   "linear-gradient(135deg, #450000, #8b0000)", // deep reds
   "linear-gradient(135deg, #2a0031, #4b0061)", // purples
   "linear-gradient(135deg, #3a0032, #bb0099)", // pinkish
@@ -367,6 +375,7 @@ function createHexGrid() {
     for (let c = 0; c < cols; c++) {
       const hex = document.createElement('div');
       hex.className = 'hex';
+      hex.classList.add('animated-tile');
 
       // The server’s global tile state
       const globalVal = tiles2D[r][c]; // "???" or "0.25 USDT" etc.
