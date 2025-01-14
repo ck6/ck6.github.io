@@ -80,11 +80,10 @@ button {
 
 /* ======== CAT CONTAINER (IMAGE) ======== */
 .cat-container {
-  position: relative;
+  position: relative; /* so it can size itself normally */
   width: 100%;
-  max-width: 600px; 
-  margin: 0 auto;   
-  padding-top: 0px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .cat-container img {
@@ -92,31 +91,12 @@ button {
   width: 100%;
   height: auto;
   object-fit: cover;
-  /* You can remove the margin if you want no gap at the bottom */
-  margin-bottom: 0;
+
+  /* ---- The magic: a mask that goes from transparent at top to opaque at bottom ---- */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 20%);
 }
 
-.cat-container::after {
-  content: "";
-  position: absolute;
-  /* Cover the entire container */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-
-  /* Fade from transparent at 70% down to your BG color at 100%. 
-     Adjust the color/position stops to taste. */
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 70%,
-    /* Or use your own var(--bg-end) or a solid color: #243b55 */
-    var(--bg-end) 100%
-  );
-
-  pointer-events: none; /* So clicks pass through to the image if needed */
-  z-index: 2;           /* Make sure it's on top of the image */
-}
 
 
 /* Buttons at bottom of cat-container */
