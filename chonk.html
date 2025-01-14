@@ -92,9 +92,19 @@ button {
   height: auto;
   object-fit: cover;
 
-  /* This is the key to fade the image to fully transparent */
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0) 100%);
-  mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0) 100%);
+  /* Fully opaque from top (0%) through 80%, then fade to transparent at bottom */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 80%,
+    rgba(0,0,0,0) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 80%,
+    rgba(0,0,0,0) 100%
+  );
 }
 
 
@@ -220,6 +230,7 @@ button {
   /* If you want a certain height to ensure the cat image covers the area, 
      you can specify min-height or something similar, 
      or let the .hex-grid’s content define height. */
+  padding-top: 300px; 
   min-height: 100vh; /* Example: fill the entire viewport. */
   z-index: 1; /* A new stacking context. */
 }
