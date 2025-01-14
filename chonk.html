@@ -80,7 +80,7 @@ button {
 
 /* ======== CAT CONTAINER (IMAGE) ======== */
 .cat-container {
-  position: relative; /* so it can size itself normally */
+  position: relative;
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
@@ -91,10 +91,27 @@ button {
   width: 100%;
   height: auto;
   object-fit: cover;
+  margin-bottom: 0; /* remove bottom margin if you want a seamless fade */
+}
 
-  /* ---- The magic: a mask that goes from transparent at top to opaque at bottom ---- */
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%);
-  mask-image: linear-gradient(to bottom, transparent 0%, black 20%);
+.cat-container::after {
+  content: "";
+  position: absolute;
+  /* Cover the bottom portion of the container (for a bottom fade) */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;  /* how tall the fade area is */
+  
+  /* Fade from fully transparent to some semi-transparent */
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,0.8) 100%
+  );
+  
+  z-index: 2;
+  pointer-events: none;
 }
 
 
