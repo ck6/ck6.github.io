@@ -559,9 +559,9 @@ function showClusterCompletePopup(rewardObj, wasBombUsed = false) {
   rarityEl.style.color = color;
 
   // 4) Pick an image based on rarity (or any logic you prefer)
-  let imageUrl = "cookie.webp";  // default image for Common
+  let imageUrl = "kiss.png";  // default image for Common
   if (rarity === "Rare") {
-    imageUrl = "cookie.webp";
+    imageUrl = "kiss.png";
   } else if (rarity === "Legendary") {
     imageUrl = "golden_crown.png";
   }
