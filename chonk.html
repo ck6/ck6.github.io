@@ -1403,31 +1403,13 @@ button:hover {
 .special-hex-region {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between; /* KEY: L-col pinned left, R-col pinned right */
+  justify-content: space-between;
   width: 100%;
-  margin-bottom: 0;
-  position: relative; 
-  /* so it lines up with honeycomb’s first row */
+  margin-bottom: 0; /* remove negative margin here */
+  position: relative;
 }
 
-/* The tall image container in the middle */
-.tall-image-container {
-  /* Make sure it stands out in the center */
-  margin: 0; /* some horizontal spacing from columns */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
 
-/* The image itself can have a fixed height or be flexible */
-.tall-image-container img {
-  max-height: 500px;  /* Example: or any vertical size you want */
-  width: auto;
-  object-fit: cover;
-  border-radius: 8px;  /* optional */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-}
 
 /* The special left / right columns */
 .special-column {
@@ -1470,7 +1452,7 @@ button:hover {
 }
 
 .special-hex:not(:first-child) {
-  margin-top: 0;
+  margin-top: calc(var(--hex-size) * -0.25);
 }
 
 .left-col, .right-col {
