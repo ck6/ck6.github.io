@@ -385,7 +385,7 @@ function createHexGrid() {
   const tiles2D = currentClusterData.tiles; // e.g. 2D array of size rows×cols
   //const rows = tiles2D.length;
 
-  const maxRows = 5;
+  const maxRows = 4;
   const rawRows = currentClusterData?.tiles || [];
   const rows = rawRows.slice(0, maxRows); // take the first 5
 
