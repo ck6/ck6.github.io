@@ -389,7 +389,7 @@ function createHexGrid() {
   // Ensure we have enough pastel decor for this dimension
   ensureDecorForCluster(currentClusterIndex, rows, cols);
 
-  const maxRows = 6;
+  const maxRows = 5;
   for (let r = 0; r < Math.min(rows, maxRows); r++) {
     const rowDiv = document.createElement('div');
     rowDiv.className = 'hex-row';
