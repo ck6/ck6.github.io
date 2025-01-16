@@ -1264,8 +1264,8 @@ function updateStoreItemsUI() {
   //}
 
   // 1) Grab the locked/unlocked store elements
-  const bunchofcookiesLockedEl = document.getElementById('bunchofcookiesLocked');
-  const bunchofcookiesUnlockedEl = document.getElementById('bunchofcookiesUnlocked');
+  //const bunchofcookiesLockedEl = document.getElementById('bunchofcookiesLocked');
+  //const bunchofcookiesUnlockedEl = document.getElementById('bunchofcookiesUnlocked');
 
   const secretTreasureLockedEl   = document.getElementById('secretTreasureLocked');
   const secretTreasureUnlockedEl = document.getElementById('secretTreasureUnlocked');
@@ -1304,8 +1304,8 @@ function updateStoreItemsUI() {
   //candyLockedEl.style.display = 'none';      // always hide the locked version
   //candyUnlockedEl.style.display = 'flex';    // always show
 
-  bunchofcookiesLockedEl.style.display = 'none';
-  bunchofcookiesUnlockedEl.style.display = 'none';
+  //bunchofcookiesLockedEl.style.display = 'none';
+  //bunchofcookiesUnlockedEl.style.display = 'none';
 
   
   if (friendsInvited >= 10) {
@@ -1398,7 +1398,7 @@ function updateBalances() {
     //UPDATE FRIENDS-INVITE PROGRESS
 
     //STORE TAB
-    updateInviteProgress('bunchofcookiesLockedProgress', 3);
+    //updateInviteProgress('bunchofcookiesLockedProgress', 3);
     updateInviteProgress('candyLockedProgress', 5);
     updateInviteProgress('donutLockedProgress', 10);
     updateInviteProgress('pawLockedProgress', 12);
@@ -1406,7 +1406,7 @@ function updateBalances() {
 
     //BONUSES TAB
 
-    updateInviteProgress('bunchofcookiesBonusesProgress', 3);
+    //updateInviteProgress('bunchofcookiesBonusesProgress', 3);
     updateInviteProgress('candyBonusesProgress', 5);
     updateInviteProgress('donutBonusesProgress', 10);
     updateInviteProgress('pawBonusesProgress', 10);
