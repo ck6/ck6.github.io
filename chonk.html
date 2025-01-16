@@ -233,6 +233,13 @@ button {
   padding-top: 0px; 
   min-height: 100vh; /* Example: fill the entire viewport. */
   z-index: 1; /* A new stacking context. */
+
+    display: flex;
+  flex-direction: column;
+  justify-content: center; /* centers child(ren) vertically if there's enough height */
+  align-items: center;     /* centers horizontally */
+  min-height: 100vh;       /* fill the viewport */
+  box-sizing: border-box;
 }
 
 /* 2) Absolutely position the .cat-container inside #fieldContent */
@@ -281,10 +288,7 @@ p {
 }
 
 #clusterHeading {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+ margin-bottom: 20px; 
   text-align: center;
   z-index: 9000; /* so it stays on top of your background image */
 }
