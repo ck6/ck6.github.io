@@ -1367,6 +1367,9 @@ function updateBalances() {
   document.getElementById('storeCookieBalances').textContent = 
   `💋 ${cookiesOwned} | 💣 ${bombs}`;
 
+  document.getElementById('storeCookieBalances2').textContent = 
+  `💋 ${cookiesOwned} | 💣 ${bombs}`;
+
 
   // Balance tab
   //document.getElementById('cookieLine').textContent = 
