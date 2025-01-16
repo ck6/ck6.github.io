@@ -1402,17 +1402,23 @@ button:hover {
 /* A wrapper around everything in the special top region */
 .special-hex-region {
   display: flex;
-  align-items: flex-start;  /* or center, or whatever you prefer */
-  justify-content: center;  /* keep everything aligned nicely */
-  margin-bottom: 30px;      /* some spacing before honeycomb */
-  position: relative;
+  align-items: flex-start;
+  /* Instead of center, use space-between so left-col pins to left,
+     right-col pins to right, and tall-image stays in between. */
+  justify-content: space-between;
+
+  /* Keep or tweak the bottom margin if needed for seamless flow: */
   margin-bottom: calc(var(--hex-size) * -0.25);
+
+  /* Make sure it spans full width: */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* The tall image container in the middle */
 .tall-image-container {
   /* Make sure it stands out in the center */
-  margin: 0 20px; /* some horizontal spacing from columns */
+  margin: 0; /* some horizontal spacing from columns */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1431,6 +1437,8 @@ button:hover {
 /* The special left / right columns */
 .special-column {
   display: flex;
+  margin: 0;  /* if needed */
+  padding: 0; /* if needed */
   flex-direction: column;
   align-items: center;
   gap: 10px; /* spacing between the stacked hexes */
@@ -1462,6 +1470,11 @@ button:hover {
 .special-hex:hover {
   box-shadow: 0 0 10px #00ff85, 0 0 20px #00ff85;
   transform: scale(1.05);
+}
+
+.left-col, .right-col {
+  margin: 0;
+  padding: 0;
 }
 
 
