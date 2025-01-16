@@ -383,11 +383,7 @@ function createHexGrid() {
 
   // The server’s “tiles” array is the global source of truth
   const tiles2D = currentClusterData.tiles; // e.g. 2D array of size rows×cols
-  //const rows = tiles2D.length;
-
-  const maxRows = 4;
-  const rawRows = currentClusterData?.tiles || [];
-  const rows = rawRows.slice(0, maxRows); // take the first 5
+  const rows = tiles2D.length;
 
 
   const cols = tiles2D[0].length;
