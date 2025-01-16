@@ -1399,6 +1399,72 @@ button:hover {
 }
 
 
+/* A wrapper around everything in the special top region */
+.special-hex-region {
+  display: flex;
+  align-items: flex-start;  /* or center, or whatever you prefer */
+  justify-content: center;  /* keep everything aligned nicely */
+  margin-bottom: 30px;      /* some spacing before honeycomb */
+  position: relative;
+}
+
+/* The tall image container in the middle */
+.tall-image-container {
+  /* Make sure it stands out in the center */
+  margin: 0 20px; /* some horizontal spacing from columns */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The image itself can have a fixed height or be flexible */
+.tall-image-container img {
+  max-height: 500px;  /* Example: or any vertical size you want */
+  width: auto;
+  object-fit: cover;
+  border-radius: 8px;  /* optional */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* The special left / right columns */
+.special-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* spacing between the stacked hexes */
+}
+
+/* Make sure to apply your hex shape to .special-hex too */
+.special-hex {
+  width: var(--hex-size);
+  height: calc(var(--hex-size) * 1.1547);
+  clip-path: polygon(
+      50% 0%,
+      100% 25%,
+      100% 75%,
+      50% 100%,
+      0% 75%,
+      0% 25%
+  );
+  /* background, box-shadow, etc. can match your normal .hex styles */
+  background: linear-gradient(135deg, #0076fc 0%, #001f3f 100%);
+  margin: 0 auto; /* center each hex in its column */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.special-hex:hover {
+  box-shadow: 0 0 10px #00ff85, 0 0 20px #00ff85;
+  transform: scale(1.05);
+}
+
+
+
 </style>
   
 
@@ -1817,8 +1883,34 @@ button:hover {
    </div>
 
     <div style="text-align:center;">
-
     </div>
+
+
+
+<!-- The special region (3 tiles left, tall image center, 2 tiles right) -->
+<div class="special-hex-region">
+  <!-- Left column of 3 tiles -->
+  <div class="special-column left-col">
+    <div class="hex special-hex">Tile 1</div>
+    <div class="hex special-hex">Tile 2</div>
+    <div class="hex special-hex">Tile 3</div>
+  </div>
+
+  <!-- Center: the tall image -->
+  <div class="tall-image-container">
+    <img src="YOUR_IMAGE_HERE.png" alt="Tall Image" />
+  </div>
+
+  <!-- Right column of 2 tiles -->
+  <div class="special-column right-col">
+    <div class="hex special-hex">Tile A</div>
+    <div class="hex special-hex">Tile B</div>
+  </div>
+</div>
+
+
+
+
 <div class="honeycomb-wrapper">
 
   <!-- 2) Move the buttons above the grid
