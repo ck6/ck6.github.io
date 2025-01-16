@@ -92,7 +92,7 @@ const pastelGradients3 = [
   "linear-gradient(135deg, #b4009e, #ff29c8)",  // Hot magenta → electric pink
 ];
 
-const pastelGradients = [
+const pastelGradientsx = [
   // Deep purple → pink
   "linear-gradient(135deg, #39006F, #9C00BD)",
    "linear-gradient(135deg, #39006F, #9C00BD)",  
@@ -110,6 +110,24 @@ const pastelGradients = [
   "linear-gradient(135deg, #6a0dad, #8f00ff)",
   // Hot pink → vivid purple
   "linear-gradient(135deg, #FF1493, #8B00FF)",
+];
+
+// Some fun neon combos:
+const pastelGradients = [
+  // Electric pink → neon purple
+  "linear-gradient(135deg, #ff00ee, #9c00bd)",
+  // Magenta → hot pink
+  "linear-gradient(135deg, #ff0080, #ff29c8)",
+  // Aqua → electric blue
+  "linear-gradient(135deg, #00FFFF, #4439FF)",
+  // Lime green → teal
+  "linear-gradient(135deg, #39ff14, #00ffa5)",
+  // Neon orange → bright pink
+  "linear-gradient(135deg, #ff5f00, #ff00aa)",
+  // Ultra purple → bright pink
+  "linear-gradient(135deg, #b4009e, #ff29c8)",
+  // More pink → violet
+  "linear-gradient(135deg, #ff1493, #8b00ff)",
 ];
 
 
