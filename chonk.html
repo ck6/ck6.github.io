@@ -1403,16 +1403,11 @@ button:hover {
 .special-hex-region {
   display: flex;
   align-items: flex-start;
-  /* Instead of center, use space-between so left-col pins to left,
-     right-col pins to right, and tall-image stays in between. */
-  justify-content: space-between;
-
-  /* Keep or tweak the bottom margin if needed for seamless flow: */
-  margin-bottom: calc(var(--hex-size) * -0.25);
-
-  /* Make sure it spans full width: */
+  justify-content: space-between; /* KEY: L-col pinned left, R-col pinned right */
   width: 100%;
-  box-sizing: border-box;
+  margin-bottom: calc(var(--hex-size) * -0.25);
+  position: relative; 
+  /* so it lines up with honeycomb’s first row */
 }
 
 /* The tall image container in the middle */
@@ -1441,8 +1436,10 @@ button:hover {
   padding: 0; /* if needed */
   flex-direction: column;
   align-items: center;
-  gap: 10px; /* spacing between the stacked hexes */
+  gap: 0px; /* spacing between the stacked hexes */
 }
+
+
 
 /* Make sure to apply your hex shape to .special-hex too */
 .special-hex {
@@ -1472,11 +1469,22 @@ button:hover {
   transform: scale(1.05);
 }
 
+.special-hex:not(:first-child) {
+  margin-top: calc(var(--hex-size) * -0.25);
+}
+
 .left-col, .right-col {
   margin: 0;
   padding: 0;
 }
 
+.dummy-space {
+  /* Same width/height as one hex slot */
+  width: var(--hex-size);
+  height: calc(var(--hex-size) * 1.1547);
+
+  /* No background or border, so it's invisible */
+}
 
 
 </style>
@@ -1910,13 +1918,12 @@ button:hover {
     <div class="hex special-hex">Tile 3</div>
   </div>
 
-  <!-- Center: the tall image -->
-  <div class="tall-image-container">
-    <img src="YOUR_IMAGE_HERE.png" alt="Tall Image" />
-  </div>
+ 
 
   <!-- Right column of 2 tiles -->
   <div class="special-column right-col">
+      <!-- Invisible placeholder for the top slot -->
+  <div class="dummy-space"></div>
     <div class="hex special-hex">Tile A</div>
     <div class="hex special-hex">Tile B</div>
   </div>
