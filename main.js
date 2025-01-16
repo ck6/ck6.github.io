@@ -1464,7 +1464,7 @@ function updateBalances() {
   const totalBonusRate = calculateTotalBonusFromUserState();
   const bonusPercent = (totalBonusRate * 100).toFixed(1);
   document.getElementById("playerFeeds").textContent =
-  `Total Feeds: ${userState.totalFeeds} (Bonus: +${bonusPercent}%)`;
+  `Total Kisses: ${userState.totalFeeds} (Bonus: +${bonusPercent}%)`;
 
 
 
@@ -1674,7 +1674,7 @@ function updateFeedingProgress() {
   } else {
     const nextBonusDecimal = LEVEL_BONUSES[nextLevel];
     const nextBonusPct = (nextBonusDecimal).toFixed(2) + "%";
-    nextThresholdRewardEl.textContent = nextBonusPct + " at " + nextThreshold + " feeds";
+    nextThresholdRewardEl.textContent = nextBonusPct + " at " + nextThreshold + " kisses";
   }
 }
 
