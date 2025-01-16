@@ -1395,7 +1395,83 @@ button:hover {
 }
 
 .honeycomb-wrapper {
-  padding-top: 300px; /* or however much space you want */
+  padding-top: 0px; /* or however much space you want */
+}
+
+
+/* A wrapper around everything in the special top region */
+.special-hex-region {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 0; /* remove negative margin here */
+  position: relative;
+  margin-bottom: calc(var(--hex-size) * -0.25);
+}
+
+
+
+/* The special left / right columns */
+.special-column {
+  display: flex;
+  margin: 0;  /* if needed */
+  padding: 0; /* if needed */
+  flex-direction: column;
+  align-items: center;
+  gap: 0px; /* spacing between the stacked hexes */
+}
+
+
+
+/* Make sure to apply your hex shape to .special-hex too */
+.special-hex {
+  width: var(--hex-size);
+  height: calc(var(--hex-size) * 1.1547);
+  clip-path: polygon(
+      50% 0%,
+      100% 25%,
+      100% 75%,
+      50% 100%,
+      0% 75%,
+      0% 25%
+  );
+  /* background, box-shadow, etc. can match your normal .hex styles */
+  background: linear-gradient(135deg, #0076fc 0%, #001f3f 100%);
+  margin: 0 auto; /* center each hex in its column */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.special-hex:hover {
+  box-shadow: 0 0 10px #00ff85, 0 0 20px #00ff85;
+  transform: scale(1.05);
+}
+
+.special-hex:not(:first-child) {
+  margin-top: 0;
+}
+
+.left-col, .right-col {
+  margin: 0;
+  padding: 0;
+}
+
+.right-col {
+  /* Shift horizontally half a hex to match row 2 of honeycomb */
+  margin-left: calc(var(--hex-size) / 2);
+}
+
+.dummy-space {
+  /* Same width/height as one hex slot */
+  width: var(--hex-size);
+  height: calc(var(--hex-size) * 1.1547);
+
+  /* No background or border, so it's invisible */
 }
 
 
@@ -1742,12 +1818,12 @@ button:hover {
   <div class="boxy-card" style="display: flex; align-items: center; justify-content: space-between;">
     <!-- Left side: text & progress bar -->
     <div>
-      <p>Invite 10 frens to unlock <strong>meowgical paw for a 3% lifetime bonus on rewards</strong></p>
+      <p>Invite 10 frens to unlock <strong>champaign for a 3% lifetime bonus on rewards</strong></p>
       <div class="progress-bar-bonuses">
         <div id="pawBonusesProgress" class="progress-fill"></div>
       </div>
     </div>
-    <img src="redpump.png" 
+    <img src="bottle.jpeg" 
          alt="Paw" 
          style="width: 40px; height: auto; margin-left: 8px;" />
   </div>
@@ -1812,13 +1888,38 @@ button:hover {
   <!-- Field tab (active by default) 45-->
   <div id="fieldContent" class="tab-content active">
       <div class="cat-container">
-    <img src="btchonky16.png" alt="Chonk"/>
+    <img src="btchonky60.png" alt="Chonk"/>
 
    </div>
 
     <div style="text-align:center;">
-
     </div>
+
+<br><br><br><br>
+
+<!-- The special region (3 tiles left, tall image center, 2 tiles right) -->
+<div class="special-hex-region">
+  <!-- Left column of 3 tiles -->
+  <div class="special-column left-col">
+    <div class="hex special-hex">Tile 1</div>
+    <div class="hex special-hex">Tile 2</div>
+    <div class="hex special-hex">Tile 3</div>
+  </div>
+
+ 
+
+  <!-- Right column of 2 tiles -->
+  <div class="special-column right-col">
+      <!-- Invisible placeholder for the top slot -->
+  <div class="dummy-space"></div>
+    <div class="hex special-hex">Tile A</div>
+    <div class="hex special-hex">Tile B</div>
+  </div>
+</div>
+
+
+
+
 <div class="honeycomb-wrapper">
 
   <!-- 2) Move the buttons above the grid
@@ -1829,11 +1930,7 @@ button:hover {
   -->
 
   <!-- 1) A heading for the cluster number   ✨ <span id="clusterChocolate"></span> | -->
-<h5 id="clusterHeading" style="text-align:center;">
-  Cluster #<span id="clusterNumber"></span> | 
-  💋 <span id="clusterCookies"></span> | 
-  💣 <span id="clusterBombs"></span>
-</h5>
+
   
 
 
@@ -1845,7 +1942,16 @@ button:hover {
   </h5>
     <div class="hex-grid" id="hexGridContainer"></div><br>
     <div style="text-align:center;">
-  </div></div></div>
+  </div></div>
+
+<h5 id="clusterHeading" style="text-align:center;">
+  Cluster #<span id="clusterNumber"></span> | 
+  💋 <span id="clusterCookies"></span> | 
+  💣 <span id="clusterBombs"></span>
+</h5>
+
+
+</div>
 
 <!-- Stats Tab -->
 <div id="statsContent" class="tab-content">

@@ -386,6 +386,18 @@ function createHexGrid() {
   const rows = tiles2D.length;
   const cols = tiles2D[0].length;
 
+  const specialHexes = document.querySelectorAll('.special-hex');
+specialHexes.forEach(hex => {
+  const gradient = pastelGradients[
+    Math.floor(Math.random() * pastelGradients.length)
+  ];
+  hex.style.background = gradient;
+
+  const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+  hex.textContent = emoji;
+});
+
+
   // Ensure we have enough pastel decor for this dimension
   ensureDecorForCluster(currentClusterIndex, rows, cols);
 
@@ -1464,7 +1476,7 @@ function updateBalances() {
   const totalBonusRate = calculateTotalBonusFromUserState();
   const bonusPercent = (totalBonusRate * 100).toFixed(1);
   document.getElementById("playerFeeds").textContent =
-  `Total Feeds: ${userState.totalFeeds} (Bonus: +${bonusPercent}%)`;
+  `Total Kisses: ${userState.totalFeeds} (Bonus: +${bonusPercent}%)`;
 
 
 
@@ -1674,7 +1686,7 @@ function updateFeedingProgress() {
   } else {
     const nextBonusDecimal = LEVEL_BONUSES[nextLevel];
     const nextBonusPct = (nextBonusDecimal).toFixed(2) + "%";
-    nextThresholdRewardEl.textContent = nextBonusPct + " at " + nextThreshold + " feeds";
+    nextThresholdRewardEl.textContent = nextBonusPct + " at " + nextThreshold + " kisses";
   }
 }
 
@@ -1990,5 +2002,6 @@ document.addEventListener(
   },
   { passive: false }
 );
+
 
 
