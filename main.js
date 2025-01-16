@@ -360,66 +360,9 @@ async function loadCluster(index) {
   // else handle error
 }
 
+
+
 function createHexGrid() {
-  // Grab or create a container
-  const container = document.getElementById('hexGridContainer');
-  if (!container) {
-    console.error('No element with ID "hexGridContainer" found!');
-    return;
-  }
-  // Clear old content
-  container.innerHTML = "";
-
-  // Let’s do a simple 4×4 for testing
-  const rows = 4;
-  const cols = 4;
-
-  for (let r = 0; r < rows; r++) {
-    const rowDiv = document.createElement('div');
-    // Just arrange items horizontally
-    rowDiv.style.display = 'flex';
-
-    for (let c = 0; c < cols; c++) {
-      const hex = document.createElement('div');
-
-      // Basic neon hex style inline
-      hex.style.width      = "80px";
-      hex.style.height     = "80px";
-      hex.style.margin     = "6px";
-      hex.style.clipPath   = "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)";
-      hex.style.background = "#ff0080";
-      hex.style.boxShadow  = "0 0 10px #ff0080, 0 0 20px #ff0080, 0 0 40px #ff0080";
-      hex.style.transition = "transform 0.3s, box-shadow 0.3s";
-      hex.style.cursor     = "pointer";
-      // Center any text
-      hex.style.display          = "flex";
-      hex.style.alignItems       = "center";
-      hex.style.justifyContent   = "center";
-      hex.style.fontSize         = "20px";
-      hex.style.fontWeight       = "bold";
-      hex.style.color            = "#fff";
-
-      // Example hover effect using mouse events
-      hex.onmouseover = () => {
-        hex.style.transform = "scale(1.08)";
-        hex.style.boxShadow = "0 0 15px #ff0080, 0 0 30px #ff0080, 0 0 60px #ff0080";
-      };
-      hex.onmouseleave = () => {
-        hex.style.transform = "none";
-        hex.style.boxShadow = "0 0 10px #ff0080, 0 0 20px #ff0080, 0 0 40px #ff0080";
-      };
-
-      // For demonstration, place a random emoji or text
-      hex.textContent = "💖";
-
-      rowDiv.appendChild(hex);
-    }
-    container.appendChild(rowDiv);
-  }
-}
-
-
-function createHexGrid2() {
   const container = document.getElementById('hexGridContainer');
   container.innerHTML = "";
 
