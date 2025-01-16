@@ -1425,8 +1425,8 @@ button:hover {
 <!-- No Cookies Popup -->
 <div class="popup-overlay" id="noCookiesPopup" style="display: none;">
   <div class="popup-content">
-    <h2>You have no cookies!</h2>
-    <p>Buy some from the Store to reveal tiles.</p>
+    <h2>You have no unveils!</h2>
+    <p>Buy some gifts for Luna from the Store to reveal tiles.</p>
     <button onclick="goToStore()" style="font-size: 20px; padding: 14px 24px;">Go to store 😺</button><br>
     <button onclick="goToBonuses()" style="font-size: 20px; padding: 14px 24px;">Or get it for free 🍪</button>
   </div>
@@ -1437,7 +1437,7 @@ button:hover {
   <div class="popup-content">
     <h2>Congrats!</h2>
     <img src="cookie.webp" alt="Free Cookie" style="width: 150px; height: auto; margin-bottom: 10px;" />
-    <p>0-0-0 Streak! You just earned a free cookie!</p>
+    <p>0-0-0 Streak! You just earned a free kiss!</p>
     <button onclick="closeFreeCookiePopup()" style="margin-top: 20px; font-size:16px;">
       Yay!
     </button>
@@ -1504,7 +1504,7 @@ button:hover {
     <div class="popup-image-wrapper">
       <img
         id="secretTreasureMainImage"
-        src="secret-chest.png"
+        src="question.png"
         alt="Secret Chest"
         style="width: 120px; height: auto; margin-bottom: 15px;"
       />
@@ -1513,7 +1513,7 @@ button:hover {
     <!-- Treasure Popup -->
     <p style="font-size:18px; line-height:1.4;" id="secretTreasureMessage">
       <!-- We can fill this via JS, or keep it static. Example: -->
-      You got <strong>2 Cookies</strong> and a <strong>Crown</strong>!
+      You got <strong>2 Kisses</strong> and a <strong>Crown</strong>!
     </p>
 
     <!-- Show the cookie + crown side by side -->
@@ -1523,7 +1523,7 @@ button:hover {
     >
       <img
         id="secretTreasureCookieImage"
-        src="cookie.webp"
+        src="kiss.png"
         alt="Cookie"
         style="width: 60px; height: auto;"
       />
@@ -1581,11 +1581,11 @@ button:hover {
 
 <div class="popup-overlay" id="onLoadPopup">
   <div class="popup-content" style="text-align: center;">
-    <h2>Dare to satisfy me with 🍒 and find my hidden treasure?</h2>
+    <h2>Dare to satisfy me and find my hidden treasure?</h2>
 
     <!-- Use a <p> or <h3> instead of nested <p><h2> > <strong>5 x 1 BTC<br>50 x 2K TON<br><br>and a total of<br><br>500K TON<br>14.5M USDT</strong>  and a TON of USDT<br-->
     <p style="font-size: 18px; line-height: 1.5;">
-      <strong>5 x 1 BTC<br>50 x 2K TON<br><br>and a TON of USDT<br><br>One tap might change your life!</strong>
+      <strong>5 x 1 BTC<br>50 x 2K TON<br><br>and a TON of USDT<br><br>One tap might change your life, if you are brave enough!</strong>
     </p>
     <br>
     <!-- The image on its own line -->
@@ -1635,7 +1635,7 @@ button:hover {
 
     <!-- Text label -->
   <p style="margin: 0; font-weight: bold;">
-    Follow our channel to get <strong>a free cookie</strong>
+    Follow our channel to get <strong>a free kiss</strong>
   </p>
 
     <!-- Button: opens channel link -->
@@ -1650,7 +1650,7 @@ button:hover {
   </div>
 
     <!-- Cookie image -->
-  <img id="channelCookieImage" src="cookie.webp" 
+  <img id="channelCookieImage" src="kiss.png" 
        alt="Cookie" 
        style="width: 40px; height: auto;">
 
@@ -1661,12 +1661,12 @@ button:hover {
  <!-- Invite 2 friends to get a free cookie -->
   <div class="boxy-card animated-gradient-candy item-with-image" style="display: flex; align-items: center; justify-content: space-between;">
     <div>
-      <p>Invite 2 frens to get a <strong>free cookie</strong></p>
+      <p>Invite 2 frens to get a <strong>free kiss</strong></p>
       <div class="progress-bar-bonuses">
         <div id="freeCookieProgress" class="progress-fill"></div>
       </div>
     </div>
-    <img src="cookie.webp" 
+    <img src="kiss.png" 
          alt="Cookie" 
          style="width: 40px; height: auto; margin-left: 8px;" />
   </div>
@@ -1678,13 +1678,13 @@ button:hover {
 <div class="boxy-card animated-gradient-candy item-with-image" style="display: flex; align-items: center; justify-content: space-between;">
   <!-- Left side: text & progress bar -->
   <div>
-    <p>Invite 3 frens to get <strong>Secret Treasure</strong></p>
+    <p>Invite 3 frens to get <strong>Secret Surprise</strong></p>
     <div class="progress-bar-bonuses">
       <div id="secretTreasureProgress" class="progress-fill"></div>
     </div>
   </div>
   <!-- Right side: a chest image -->
-  <img src="secret-chest.png" 
+  <img src="question.png" 
        alt="Secret Treasure" 
        style="width: 40px; height: auto; margin-left: 8px;" />
 </div>
