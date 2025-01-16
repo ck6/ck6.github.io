@@ -458,8 +458,6 @@ function createHexGrid() {
         const decor = clusterDecor[currentClusterIndex][r][c];
         hex.textContent = decor.emoji;
         hex.style.background = decor.gradient;
-hex.style.boxShadow  = "0 0 20px #ff00ff, 0 0 40px #ff00ff";
-hex.style.filter     = "brightness(1.2) saturate(1.4)";
         // On click, attempt to reveal
         hex.onclick = () => onHexClick(r, c, hex);
       }
