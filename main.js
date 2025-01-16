@@ -112,23 +112,30 @@ const pastelGradientsx = [
   "linear-gradient(135deg, #FF1493, #8B00FF)",
 ];
 
-// Some fun neon combos:
-const pastelGradients = [
+
+
+const pastelGradients  = [
+  // Use colors near 100% saturation, e.g. #ff00ff, #00ffff, #39ff14, #ff29c8, etc.
+
   // Electric pink → neon purple
-  "linear-gradient(135deg, #ff00ee, #9c00bd)",
-  // Magenta → hot pink
+  "linear-gradient(135deg, #ff00ee, #c400ff)",
+  
+  // Hot pink → bright magenta
   "linear-gradient(135deg, #ff0080, #ff29c8)",
-  // Aqua → electric blue
-  "linear-gradient(135deg, #00FFFF, #4439FF)",
-  // Lime green → teal
+
+  // Aqua → bright blue
+  "linear-gradient(135deg, #00fff0, #4439ff)",
+
+  // Neon green → teal
   "linear-gradient(135deg, #39ff14, #00ffa5)",
-  // Neon orange → bright pink
+
+  // Orange → pink
   "linear-gradient(135deg, #ff5f00, #ff00aa)",
-  // Ultra purple → bright pink
-  "linear-gradient(135deg, #b4009e, #ff29c8)",
-  // More pink → violet
-  "linear-gradient(135deg, #ff1493, #8b00ff)",
+  
+  // Pure magenta → pinkish purple
+  "linear-gradient(135deg, #ff00ff, #b400ff)",
 ];
+
 
 
 const pastelGradients22 = [
@@ -451,6 +458,8 @@ function createHexGrid() {
         const decor = clusterDecor[currentClusterIndex][r][c];
         hex.textContent = decor.emoji;
         hex.style.background = decor.gradient;
+hex.style.boxShadow  = "0 0 20px #ff00ff, 0 0 40px #ff00ff";
+hex.style.filter     = "brightness(1.2) saturate(1.4)";
         // On click, attempt to reveal
         hex.onclick = () => onHexClick(r, c, hex);
       }
