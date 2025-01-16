@@ -360,88 +360,57 @@ async function loadCluster(index) {
   // else handle error
 }
 
-
 function createHexGrid() {
+  // Grab or create a container
   const container = document.getElementById('hexGridContainer');
-  container.innerHTML = "";
-
-  if (!userState) return;
-  if (!currentClusterData || !currentClusterData.tiles) {
-    console.warn("No cluster data loaded!");
+  if (!container) {
+    console.error('No element with ID "hexGridContainer" found!');
     return;
   }
+  // Clear old content
+  container.innerHTML = "";
 
-  let revealedTiles = userState.revealedTiles?.[currentClusterIndex] || [];
-  const revealedMap = new Map();
-  revealedTiles.forEach(obj => {
-    const key = `${obj.row},${obj.col}`;
-    revealedMap.set(key, obj.reward);
-  });
+  // Let’s do a simple 4×4 for testing
+  const rows = 4;
+  const cols = 4;
 
-  const tiles2D = currentClusterData.tiles;
-  const rows = tiles2D.length;
-  const cols = tiles2D[0].length;
-
-  const maxRows = 5;
-  for (let r = 0; r < Math.min(rows, maxRows); r++) {
+  for (let r = 0; r < rows; r++) {
     const rowDiv = document.createElement('div');
-    rowDiv.className = 'hex-row';
+    // Just arrange items horizontally
+    rowDiv.style.display = 'flex';
 
     for (let c = 0; c < cols; c++) {
       const hex = document.createElement('div');
-      hex.classList.add('hex', 'animated-tile');
 
-      // ### HERE’S THE QUICK IN-LINE NEON STYLING ###
-      hex.style.width = "80px";
-      hex.style.height = "80px";
-      hex.style.margin = "6px";
-      // Hex shape
-      hex.style.clipPath = "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)";
-      // Neon background
+      // Basic neon hex style inline
+      hex.style.width      = "80px";
+      hex.style.height     = "80px";
+      hex.style.margin     = "6px";
+      hex.style.clipPath   = "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)";
       hex.style.background = "#ff0080";
-      // Multiple box-shadows for glow
-      hex.style.boxShadow = "0 0 10px #ff0080, 0 0 20px #ff0080, 0 0 40px #ff0080";
-      // Some transitions + pointer
+      hex.style.boxShadow  = "0 0 10px #ff0080, 0 0 20px #ff0080, 0 0 40px #ff0080";
       hex.style.transition = "transform 0.3s, box-shadow 0.3s";
-      hex.style.cursor = "pointer";
-      // Center text (e.g., emojis)
-      hex.style.display = "flex";
-      hex.style.alignItems = "center";
-      hex.style.justifyContent = "center";
-      hex.style.fontSize = "20px";
-      hex.style.color = "#fff";
+      hex.style.cursor     = "pointer";
+      // Center any text
+      hex.style.display          = "flex";
+      hex.style.alignItems       = "center";
+      hex.style.justifyContent   = "center";
+      hex.style.fontSize         = "20px";
+      hex.style.fontWeight       = "bold";
+      hex.style.color            = "#fff";
 
-      // Add hover effect in JS:
+      // Example hover effect using mouse events
       hex.onmouseover = () => {
         hex.style.transform = "scale(1.08)";
-        hex.style.boxShadow =
-          "0 0 15px #ff0080, 0 0 30px #ff0080, 0 0 60px #ff0080";
+        hex.style.boxShadow = "0 0 15px #ff0080, 0 0 30px #ff0080, 0 0 60px #ff0080";
       };
       hex.onmouseleave = () => {
         hex.style.transform = "none";
-        hex.style.boxShadow =
-          "0 0 10px #ff0080, 0 0 20px #ff0080, 0 0 40px #ff0080";
+        hex.style.boxShadow = "0 0 10px #ff0080, 0 0 20px #ff0080, 0 0 40px #ff0080";
       };
-      // ### END NEON STYLES ###
 
-      const globalVal = tiles2D[r][c];
-      if (globalVal !== "???") {
-        // revealed tile
-        hex.classList.add("revealed");
-        hex.innerHTML = `
-          <div style="display: flex; flex-direction: column; align-items: center;">
-            <div style="font-size: 16px; margin-bottom: 5px;">
-              ${globalVal}
-            </div>
-          </div>
-        `;
-      } else {
-        // unrevealed tile -> maybe show an emoji
-        const decor = clusterDecor[currentClusterIndex][r][c];
-        hex.textContent = decor.emoji;
-        // On click, reveal
-        hex.onclick = () => onHexClick(r, c, hex);
-      }
+      // For demonstration, place a random emoji or text
+      hex.textContent = "💖";
 
       rowDiv.appendChild(hex);
     }
