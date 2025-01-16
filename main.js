@@ -749,11 +749,11 @@ async function useBombOnCurrentCluster() {
 
 async function useChonkBomb() {
   if (!userState || (userState.chonkBombs ?? 0) < 1) {
-    alert("No Chonk-Bombs available!");
+    alert("No Handcuffs available!");
     return;
   }
 
-  const confirmUse = confirm("Use 1 Chonk-Bomb to reveal multiple clusters?");
+  const confirmUse = confirm("Use Handcuffs to reveal multiple clusters?");
   if (!confirmUse) return;
 
   // 1) Show the popup in “loading” mode
@@ -1038,7 +1038,7 @@ function shareMiniApp() {
   //    - This is a standard approach to let the user pick a chat to send it to.
   //    - You can also add a custom text or message if you want.
   const encodedLink = encodeURIComponent(personalLink);
-  const encodedMessage = encodeURIComponent("Check out the Lucky Chonk, find 5 BTC, 100K TON, 15M USDT, and change your life!");
+  const encodedMessage = encodeURIComponent("Check out Lucky Luna, find 5 BTC, 100K TON, lots of USDT, and change your life!");
   const shareUrl = `https://t.me/share/url?url=${encodedLink}&text=${encodedMessage}`;
 
   window.open(shareUrl, "_blank");
