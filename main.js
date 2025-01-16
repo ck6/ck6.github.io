@@ -114,28 +114,31 @@ const pastelGradientsx = [
 
 
 
-const pastelGradients  = [
-  // Use colors near 100% saturation, e.g. #ff00ff, #00ffff, #39ff14, #ff29c8, etc.
-
-  // Electric pink → neon purple
-  "linear-gradient(135deg, #ff00ee, #c400ff)",
+const pastelGradients = [
+  // Magenta → Bright Pink
+  "linear-gradient(135deg, #ff00ee, #ff59c8)",
   
-  // Hot pink → bright magenta
-  "linear-gradient(135deg, #ff0080, #ff29c8)",
-
-  // Aqua → bright blue
-  "linear-gradient(135deg, #00fff0, #4439ff)",
-
-  // Neon green → teal
+  // Hot Pink → Lighter Hot Pink
+  "linear-gradient(135deg, #ff0080, #ff6bd5)",
+  
+  // Magenta → Neon Cyan
+  "linear-gradient(135deg, #ff00ff, #00ffff)",
+  
+  // Neon Green → Aqua
   "linear-gradient(135deg, #39ff14, #00ffa5)",
-
-  // Orange → pink
+  
+  // Electric Blue → Neon Purple
+  "linear-gradient(135deg, #00bfff, #b400ff)",
+  
+  // Neon Orange → Pink
   "linear-gradient(135deg, #ff5f00, #ff00aa)",
   
-  // Pure magenta → pinkish purple
-  "linear-gradient(135deg, #ff00ff, #b400ff)",
+  // Lime Yellow → Electric Green
+  "linear-gradient(135deg, #eeff00, #39ff14)",
+  
+  // Bright Purple → Vivid Pink
+  "linear-gradient(135deg, #c400ff, #ff29c8)"
 ];
-
 
 
 const pastelGradients22 = [
