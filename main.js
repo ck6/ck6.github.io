@@ -384,15 +384,9 @@ function createHexGrid() {
   // The server’s “tiles” array is the global source of truth
   const tiles2D = currentClusterData.tiles; // e.g. 2D array of size rows×cols
   const rows = tiles2D.length;
-
-
   const cols = tiles2D[0].length;
 
-  // Ensure we have enough pastel decor for this dimension
-  ensureDecorForCluster(currentClusterIndex, rows, cols);
-
-  // in your code where you create the special hex:
-const specialHexes = document.querySelectorAll('.special-hex');
+  const specialHexes = document.querySelectorAll('.special-hex');
 specialHexes.forEach(hex => {
   const gradient = pastelGradients[
     Math.floor(Math.random() * pastelGradients.length)
@@ -403,6 +397,9 @@ specialHexes.forEach(hex => {
   hex.textContent = emoji;
 });
 
+
+  // Ensure we have enough pastel decor for this dimension
+  ensureDecorForCluster(currentClusterIndex, rows, cols);
 
   for (let r = 0; r < rows; r++) {
     const rowDiv = document.createElement('div');
