@@ -10,13 +10,10 @@ switch (true) {
     BASE_API_URL = "http://localhost:3000";
     break;
   case hostname.includes("experiments.services.fluffychonk.com"):
-    BASE_API_URL = "https://chonk-2.services.fluffychonk.com";
-    break;
-  case hostname.includes("ck6.github.io"):
-    BASE_API_URL = "https://chonk.fly.dev";
+    BASE_API_URL = "https://chonk-1.services.fluffychonk.com";
     break;
   default:
-    BASE_API_URL = "https://chonk-2.services.fluffychonk.com"; // fallback
+    BASE_API_URL = "https://chonk-1.services.fluffychonk.com"; // fallback
 }
 
 
@@ -73,7 +70,7 @@ let invitedFriends = 0;
  * We'll also replicate your original pastel & emoji logic
  * for the UNREVEALED tiles. This is purely client-side "decoration".
  ************************************************************/
-const pastelGradients2 = [
+const pastelGradients = [
   "linear-gradient(135deg, #fbc2eb 0%, #a18cd1 100%)",
   "linear-gradient(135deg, #fdcbf1 0%, #e6dee9 100%)",
   "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
@@ -83,88 +80,8 @@ const pastelGradients2 = [
   "linear-gradient(135deg, #fddb92 0%, #d1fdff 100%)",
   "linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%)"
 ];
-
-const pastelGradients3 = [
-  "linear-gradient(135deg, #300025, #70003c)",  // Dark cherry → vibrant magenta
-  "linear-gradient(135deg, #4b0061, #9400b3)",  // Deep purple → bold violet
-  "linear-gradient(135deg, #581845, #900c3f)",  // Wine purple → scarlet
-  "linear-gradient(135deg, #6a0dad, #8f00ff)",  // Royal purple → neon violet
-  "linear-gradient(135deg, #b4009e, #ff29c8)",  // Hot magenta → electric pink
-];
-
-const pastelGradientsx = [
-  // Deep purple → pink
-  "linear-gradient(135deg, #39006F, #9C00BD)",
-   "linear-gradient(135deg, #39006F, #9C00BD)",  
-  // Magenta → neon pink
-  "linear-gradient(135deg, #B4009E, #FF29C8)",
-  // Indigo → electric blue
-  "linear-gradient(135deg, #2A0061, #4439FF)",
-  "linear-gradient(135deg, #2A0061, #4439FF)",
-   "linear-gradient(135deg, #2A0061, #4439FF)",
-  // Midnight navy → bright aqua
-  "linear-gradient(135deg, #001F3F, #00E0FF)",
-  "linear-gradient(135deg, #001F3F, #00E0FF)",
-  //Royal purple → neon violet
-  "linear-gradient(135deg, #6a0dad, #8f00ff)",
-  "linear-gradient(135deg, #6a0dad, #8f00ff)",
-  // Hot pink → vivid purple
-  "linear-gradient(135deg, #FF1493, #8B00FF)",
-];
-
-
-
-const pastelGradients = [
-  // Magenta → Bright Pink
-  "linear-gradient(135deg, #ff00ee, #ff59c8)",
-  
-  // Hot Pink → Lighter Hot Pink
-  "linear-gradient(135deg, #ff0080, #ff6bd5)",
-  
-  // Magenta → Neon Cyan
-  "linear-gradient(135deg, #ff00ff, #00ffff)",
-  
-  // Neon Green → Aqua
-  //"linear-gradient(135deg, #39ff14, #00ffa5)",
-  
-  // Electric Blue → Neon Purple
-  "linear-gradient(135deg, #00bfff, #b400ff)",
-  
-  
-  // Bright Purple → Vivid Pink
-  "linear-gradient(135deg, #c400ff, #ff29c8)",
-    "linear-gradient(135deg, #39006F, #9C00BD)",
-   "linear-gradient(135deg, #39006F, #9C00BD)",  
-  // Magenta → neon pink
-  "linear-gradient(135deg, #B4009E, #FF29C8)",
-  // Indigo → electric blue
-  "linear-gradient(135deg, #2A0061, #4439FF)",
-  "linear-gradient(135deg, #2A0061, #4439FF)",
-   "linear-gradient(135deg, #2A0061, #4439FF)",
-  // Midnight navy → bright aqua
-  "linear-gradient(135deg, #001F3F, #00E0FF)",
-  "linear-gradient(135deg, #001F3F, #00E0FF)",
-  //Royal purple → neon violet
-  "linear-gradient(135deg, #6a0dad, #8f00ff)",
-  "linear-gradient(135deg, #6a0dad, #8f00ff)",
-  // Hot pink → vivid purple
-  "linear-gradient(135deg, #FF1493, #8B00FF)"
-
-];
-
-
-const pastelGradients22 = [
-  "linear-gradient(135deg, #450000, #8b0000)", // deep reds
-  "linear-gradient(135deg, #2a0031, #4b0061)", // purples
-  "linear-gradient(135deg, #3a0032, #bb0099)", // pinkish
-  "linear-gradient(135deg, #560027, #ad004f)"  // magenta
-];
-
 //const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🦴","💎","📦","🎀","💕"];
-//const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🐭","💎","📦","💕", "🐹","🐥","🐣", "🐟", "🍣"];
-const emojis = [
-  "🍒","🍑","💋","🌶️","😈","👠","💄","❤️","🔥","😏","👄", "🔗", "👅", "🍭", "💦"
-];
+const emojis = ["🐱","🐾","🌸","💖","🍀","🌙","⭐","🐭","💎","📦","💕", "🐹","🐥","🐣", "🐟", "🍣"];
 
 
 // We'll store "decorations" for 10 clusters × (5 rows × 5 cols)
@@ -429,15 +346,13 @@ function createHexGrid() {
   // Ensure we have enough pastel decor for this dimension
   ensureDecorForCluster(currentClusterIndex, rows, cols);
 
-  const maxRows = 5;
-  for (let r = 0; r < Math.min(rows, maxRows); r++) {
+  for (let r = 0; r < rows; r++) {
     const rowDiv = document.createElement('div');
     rowDiv.className = 'hex-row';
 
     for (let c = 0; c < cols; c++) {
       const hex = document.createElement('div');
       hex.className = 'hex';
-      hex.classList.add('animated-tile');
 
       // The server’s global tile state
       const globalVal = tiles2D[r][c]; // "???" or "0.25 USDT" etc.
@@ -600,9 +515,9 @@ function showClusterCompletePopup(rewardObj, wasBombUsed = false) {
   rarityEl.style.color = color;
 
   // 4) Pick an image based on rarity (or any logic you prefer)
-  let imageUrl = "kiss.png";  // default image for Common
+  let imageUrl = "cookie.webp";  // default image for Common
   if (rarity === "Rare") {
-    imageUrl = "kiss.png";
+    imageUrl = "cookie.webp";
   } else if (rarity === "Legendary") {
     imageUrl = "golden_crown.png";
   }
@@ -790,11 +705,11 @@ async function useBombOnCurrentCluster() {
 
 async function useChonkBomb() {
   if (!userState || (userState.chonkBombs ?? 0) < 1) {
-    alert("No Handcuffs available!");
+    alert("No Chonk-Bombs available!");
     return;
   }
 
-  const confirmUse = confirm("Use Handcuffs to reveal multiple clusters?");
+  const confirmUse = confirm("Use 1 Chonk-Bomb to reveal multiple clusters?");
   if (!confirmUse) return;
 
   // 1) Show the popup in “loading” mode
@@ -1079,7 +994,7 @@ function shareMiniApp() {
   //    - This is a standard approach to let the user pick a chat to send it to.
   //    - You can also add a custom text or message if you want.
   const encodedLink = encodeURIComponent(personalLink);
-  const encodedMessage = encodeURIComponent("Check out Lucky Luna, find 5 BTC, 100K TON, lots of USDT, and change your life!");
+  const encodedMessage = encodeURIComponent("Check out the Lucky Chonk, find 5 BTC, 100K TON, 15M USDT, and change your life!");
   const shareUrl = `https://t.me/share/url?url=${encodedLink}&text=${encodedMessage}`;
 
   window.open(shareUrl, "_blank");
@@ -1305,8 +1220,8 @@ function updateStoreItemsUI() {
   //}
 
   // 1) Grab the locked/unlocked store elements
-  //const bunchofcookiesLockedEl = document.getElementById('bunchofcookiesLocked');
-  //const bunchofcookiesUnlockedEl = document.getElementById('bunchofcookiesUnlocked');
+  const bunchofcookiesLockedEl = document.getElementById('bunchofcookiesLocked');
+  const bunchofcookiesUnlockedEl = document.getElementById('bunchofcookiesUnlocked');
 
   const secretTreasureLockedEl   = document.getElementById('secretTreasureLocked');
   const secretTreasureUnlockedEl = document.getElementById('secretTreasureUnlocked');
@@ -1345,8 +1260,8 @@ function updateStoreItemsUI() {
   //candyLockedEl.style.display = 'none';      // always hide the locked version
   //candyUnlockedEl.style.display = 'flex';    // always show
 
-  //bunchofcookiesLockedEl.style.display = 'none';
-  //bunchofcookiesUnlockedEl.style.display = 'none';
+  bunchofcookiesLockedEl.style.display = 'none';
+  bunchofcookiesUnlockedEl.style.display = 'none';
 
   
   if (friendsInvited >= 10) {
@@ -1406,7 +1321,7 @@ function updateBalances() {
   
   // Store tab
   document.getElementById('storeCookieBalances').textContent = 
-  `💋 ${cookiesOwned} | 💣 ${bombs}`;
+  `🍪 ${cookiesOwned} | 💣 ${bombs}`;
 
 
   // Balance tab
@@ -1439,7 +1354,7 @@ function updateBalances() {
     //UPDATE FRIENDS-INVITE PROGRESS
 
     //STORE TAB
-    //updateInviteProgress('bunchofcookiesLockedProgress', 3);
+    updateInviteProgress('bunchofcookiesLockedProgress', 3);
     updateInviteProgress('candyLockedProgress', 5);
     updateInviteProgress('donutLockedProgress', 10);
     updateInviteProgress('pawLockedProgress', 12);
@@ -1447,7 +1362,7 @@ function updateBalances() {
 
     //BONUSES TAB
 
-    //updateInviteProgress('bunchofcookiesBonusesProgress', 3);
+    updateInviteProgress('bunchofcookiesBonusesProgress', 3);
     updateInviteProgress('candyBonusesProgress', 5);
     updateInviteProgress('donutBonusesProgress', 10);
     updateInviteProgress('pawBonusesProgress', 10);
@@ -1789,7 +1704,7 @@ function shoot() {
     ...defaults,
     particleCount: 40,
     scalar: 1.2,
-    shapes: ["clubs"], //star
+    shapes: ["star"],
   });
   confetti({
     ...defaults,
@@ -2018,8 +1933,6 @@ async function fetchLeaderboard() {
 }
 
 
-
-
 //PREVENT DOUBLE TAP
 let lastTouchEnd = 0;
 document.addEventListener(
@@ -2033,5 +1946,6 @@ document.addEventListener(
   },
   { passive: false }
 );
+
 
 

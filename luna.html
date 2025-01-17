@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0", maximum-scale=1.0, user-scalable=no"/>
-<meta property="og:title" content="Lucky BTC Chonk" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0", viewport-fit=cover, maximum-scale=1.0, user-scalable=no"/>
+<meta property="og:title" content="Lucky Luna" />
 <meta property="og:description" content="I've hidden 5 BTC, 100K TON and 15M USDT. Can you find them and change your life forever?" />
-<meta property="og:image" content="btc_chonk.jpg" />
+<meta property="og:image" content="btchonky25.jpg" />
 
-<title>Lucky BTC Chonk</title>
+<title>Lucky Luna</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <!-- Particles for confetti -->
@@ -16,96 +16,112 @@
 
 <style>
 
+/* ======== ROOT VARIABLES ======== */
+:root {
+  /* Dark navy → subtle navy background gradient */
+  --bg-start: #141e30;
+  --bg-end: #243b55;
 
-  :root {
-    --bg-start: #2d1b64;
-    --bg-end: #f8cdda;
-    --text-color: #fff;
-    --accent-color: #ff9a9e;
-    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-             "Helvetica Neue", Arial, sans-serif;
-    --heading-font-size: 20px;
-    --heading-font-size2: 10px;
-    --body-font-size: 16px;
-    --line-height: 1.5;
-    --section-spacing: 20px;
-    --button-padding: 10px 20px;
-    --transition-duration: 0.3s;
-    --tooltip-bg: rgba(0,0,0,0.8);
-    --tooltip-color: #fff;
-      --num-cols: 5; /* how many columns of hexes in your honeycomb */
-  /* Because of the half-hex offset, effectively ~5.5 columns wide
-     might be needed. Adjust to 5.5, 5.6, etc. as needed. 
---font-family: 'Roboto', sans-serif;
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-     */
+  /* White text, neon aqua accent */
+  --text-color: #fff;
+  --accent-color: #00f9ff;
+
+  /* Font & sizing vars */
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --heading-font-size: 20px;
+  --heading-font-size2: 10px;
+  --body-font-size: 16px;
+  --line-height: 1.5;
+  --section-spacing: 20px;
+  --button-padding: 10px 20px;
+  --transition-duration: 0.3s;
+  --tooltip-bg: rgba(0,0,0,0.8);
+  --tooltip-color: #fff;
   --hex-size: calc(100vw / 5.5);
-  }
+}
 
-  body {
-    margin: 0;
-    font-family: var(--font-family);
-    font-size: var(--body-font-size);
-    line-height: var(--line-height);
-    background: linear-gradient(to bottom, var(--bg-start), var(--bg-end));
-    color: var(--text-color);
-    display: flex;
-    flex-direction: column;
-    height: 100vh; 
-    overflow: hidden;
-  }
+/* ======== BODY / GLOBAL ======== */
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--body-font-size);
+  line-height: var(--line-height);
 
-  .top-bar {
-    background: rgba(0,0,0,0.3);
-    position: relative;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-bottom: 0px;
-  }
+  /* Darker neon-friendly gradient */
+  background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+  color: var(--text-color);
 
-  .top-bar h1 {
-    font-size: var(--heading-font-size);
-    margin: 0;
-    z-index: 2;
-  }
-
+  display: flex;
+  flex-direction: column;
+  height: 100vh; 
+  overflow: hidden;
+}
 
 button {
   touch-action: manipulation;
 }
 
+.top-bar {
+  background: rgba(0,0,0,0.3);
+  position: relative;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 0px;
+}
 
+.top-bar h1 {
+  font-size: var(--heading-font-size);
+  margin: 0;
+  z-index: 2;
+}
+
+/* ======== CAT CONTAINER (IMAGE) ======== */
 .cat-container {
-  /* Let it fill the screen width on mobile, but never exceed 600px on desktops */
+  position: relative;
   width: 100%;
-  max-width: 600px; /* adjust as you wish */
-  margin: 0 auto;   /* center horizontally on larger screens */
-  padding-top: 0px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .cat-container img {
   display: block;
-  width: 100%;  /* fill the container’s width (whatever that may be) */
-  height: auto; /* keep aspect ratio */
+  width: 100%;
+  height: auto;
   object-fit: cover;
-  margin-bottom: 10px;
+
+  /* Fully opaque from top (0%) through 80%, then fade to transparent at bottom */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 50%,
+    rgba(0,0,0,0) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 50%,
+    rgba(0,0,0,0) 100%
+  );
 }
 
 
-/* Absolutely position the button group at the bottom of the container */
+
+
+
+/* Buttons at bottom of cat-container */
 .cat-buttons {
   position: absolute;
-  bottom: 0;            /* pins it to the bottom of the cat-container */
-  left: 50%;            /* start at the horizontal center */
-  transform: translateX(-50%);  /* truly center it */
-  display: flex;        /* layout for side-by-side buttons */
-  gap: 10px;            /* space between them */
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
   padding: 10px;
 }
 
-/* Example button styling */
 .cat-buttons button {
   background: rgba(0, 0, 0, 0.6); 
   color: #fff;
@@ -114,10 +130,12 @@ button {
   border-radius: 4px;
   cursor: pointer;
 }
+
 .cat-buttons button:hover {
   background: rgba(255,255,255,0.2);
 }
 
+/* ======== STORE BUTTON ======== */
 .store-button {
   background: #444;
   border: none;
@@ -126,48 +144,42 @@ button {
   cursor: pointer;
   font-size: 16px;
   border-radius: 4px;
-  margin: 5px; /* or 0 if you'd rather control spacing differently */
+  margin: 5px; 
   transition: background var(--transition-duration);
 }
-
 .store-button:hover {
   background: var(--accent-color);
 }
 
-/* Our special Jar item with an image + content side-by-side */
+/* ======== ITEM-WITH-IMAGE LAYOUT ======== */
 .item-with-image {
-  display: flex;            /* horizontal layout */
-  align-items: center;      /* vertically center them */
-  gap: 10px;                /* space between image & text */
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* The image on the left */
 .store-item-image {
-  width: 60px;              /* or 80px, adjust as needed */
-  height: auto;             /* keep aspect ratio */
-  border-radius: 4px;       /* optional if you want rounding */
-  flex-shrink: 0;           /* don’t let the image shrink below 60px */
+  width: 60px;
+  height: auto;
+  border-radius: 4px;
+  flex-shrink: 0;
 }
 
-/* The text + button on the right take the remaining space */
 .store-item-content {
   display: flex;
-  flex-direction: column;   /* stack the header & button vertically */
-  flex: 1;                  /* fill any leftover horizontal space */
+  flex-direction: column;
+  flex: 1;
 }
 
-/* Keep .store-item-header and .store-item-cost as is, or tweak margins if needed */
-
+/* ======== LOCKED STORE ITEMS ======== */
 .store-item.locked {
   position: relative;
   filter: grayscale(0.5) brightness(0.8);
   transition: filter 0.3s ease;
 }
-
 .store-item.locked:hover {
   filter: grayscale(0.5) brightness(1) drop-shadow(0 0 6px rgba(255, 215, 0, 0.4));
 }
-
 .store-item.locked::before {
   content: "🔒 LOCKED";
   position: absolute;
@@ -184,109 +196,116 @@ button {
   text-shadow: 1px 1px 2px #000;
   pointer-events: none;
 }
-
 .store-item.locked button {
-  pointer-events: none; /* prevent clicks on the buy button */
+  pointer-events: none; 
 }
 
-
-
-  .content {
-    flex: 1;
-    overflow: auto;
-    box-sizing: border-box;
-    position: relative;
-    
- 
-  }
-
-
+/* ======== CONTENT / TABS ======== */
+.content {
+  flex: 1;
+  overflow: auto;
+  box-sizing: border-box;
+  position: relative;
+}
 
 .tab-content {
-  display: none;   
+  display: none;
   opacity: 0;
   transition: opacity var(--transition-duration) ease;
   padding: 110px 20px 20px;
 }
-
-/* But for the field tab with the cat image, override that padding */
-#fieldContent.tab-content {
-  padding: 30px 0px 2px;
+.tab-content.active {
+  display: block;
+  opacity: 1;
 }
-
-  .tab-content.active {
-    display: block;
-    opacity: 1;
-  }
-
-
-/* Specifically remove or reduce for the field tab padding: var(--section-spacing) 0;*/
+/* Field tab override */
 #fieldContent.tab-content {
   padding: 0;
 }
 
-  h2, h3 {
-    font-size: var(--heading-font-size);
-    margin-bottom: var(--section-spacing);
-    margin-top: 0;
-  }
+/* 1) Make the FIELD tab container position: relative 
+   so absolutely positioned children can sit inside it. */
+#fieldContent {
+  position: relative; 
+  /* If you want a certain height to ensure the cat image covers the area, 
+     you can specify min-height or something similar, 
+     or let the .hex-grid’s content define height. */
+  padding-top: 0px; 
+  /* min-height: 100vh;  Example: fill the entire viewport. */
+  z-index: 1; /* A new stacking context. */
+}
 
-    h4 {
-    font-size: var(--heading-font-size);
-    margin-bottom: 0;
-    margin-top: 0;
-  }
+/* 2) Absolutely position the .cat-container inside #fieldContent */
+#fieldContent .cat-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: none;  /* remove the 600px limit so it spans the entire width */
+  z-index: -1;      /* behind the text & hex tiles */
+  pointer-events: none; /* so clicks pass through to the tiles/text */
+  height: 600px;       /* or whatever height you want for the cat image */
+  overflow: hidden;    /* hide anything below 600px */
+}
 
-      h5 {
-    font-size: var(--heading2-font-size);
-    margin-bottom: 0;
-    margin-top: 0;
-  }
 
-  p {
-    margin: 10px 0;
-  }
+h2, h3 {
+  font-size: var(--heading-font-size);
+  margin-bottom: var(--section-spacing);
+  margin-top: 0;
+}
 
+h4 {
+  font-size: var(--heading-font-size);
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+h5 {
+  font-size: var(--heading2-font-size);
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+p {
+  margin: 10px 0;
+}
+
+/* ======== HONEYCOMB WRAPPER & HEX GRID ======== */
 .honeycomb-wrapper {
-  width: 100vw;       /* occupy the full viewport width */
-  max-width: 100vw;         /* keep it from overflowing the viewport */
-  overflow-x: hidden; /* hide any accidental overflow */
-  margin: 0 auto;     /* center it if you want */
-  margin-bottom: 40px;
+  width: 100vw;
+  max-width: 100vw;
+  overflow-x: hidden;
+  margin: 0 auto;
+  margin-bottom: 10px;
 }
 
 #clusterHeading {
   position: relative; 
-  /*margin-top: 500px;*/
-  z-index: 9000; /* higher than your cat-container’s z-index of 5 */
+ 
+  z-index: 9000;
+  margin-top: 37.5vh;
 }
 
 .hex-grid {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* let row offsets do their job */
-  max-width: 100vw;        /* never exceed the screen width */
-    margin-top: 25px;
-    margin-botton: 0px;
-  /* margin: 0 auto;       (optional if you want to center the entire grid) */
+  align-items: flex-start;
+  max-width: 100vw;
+  margin-top: 10px;
+  margin-botton: 0px;
 }
-
 
 .hex-row {
   display: flex;
   margin-top: calc(var(--hex-size) * -0.29);
 }
-
 .hex-row:first-child {
   margin-top: 0;
 }
-
 .hex-row:nth-child(even) {
   margin-left: calc(var(--hex-size)/2);
 }
-
-/* Pull subsequent rows up so the lower hex corners meet the upper row’s hex corners.
-   You may need to tweak the 0.25 factor if the corners don’t line up perfectly. */
 .hex-row:not(:first-child) {
   margin-top: calc(var(--hex-size) * -0.25);
 }
@@ -302,285 +321,327 @@ button {
     0% 75%,
     0% 25%
   );
-  margin-right: 2px; /* or 0 if you truly want no horizontal gap */
+  margin-right: 2px;
   margin-bottom: 0;
-    background: #444; /* // background: #ccc;  or your pastel gradient */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    font-size: 24px;
-    text-align: center;
-    color: #333;
-    font-weight: bold;
-    transform-style: preserve-3d;
 
-  }
-  .hex:hover {
-    transform: scale(1.0);
-  }
-  /* Flip animation classes */
-  .hex.flipping {
-    transform: rotateY(90deg);
-    transition: transform 0.2s ease;
-  }
-  .hex.revealed {
-    background: #2196F3; /* #007f5f; */
-    color: #fff;
-    font-size: 16px;
-    transform: rotateY(0);
-    transition: transform 0.2s ease;
-  }
-
-  .bottom-nav {
-    background: rgba(0,0,0,0.3);
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 10px 0;
-  
-  }
-  .bottom-nav button {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 14px;
-    /* font-weight: bold;*/
-    padding: var(--button-padding);
-    cursor: pointer;
-    flex: 1;
-    text-align: center;
-    transition: background var(--transition-duration);
-    transform: translateY(-4px);
-  }
-  .bottom-nav button.active,
-  .bottom-nav button:hover {
-    background: rgba(255,255,255,0.2);
-    border-radius: 4px;
-  }
+  /* Electric blue gradient for the tile background */
+  background: linear-gradient(135deg, #001f3f 0%, #0076fc 100%);
 
 
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 24px;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  transform-style: preserve-3d;
+}
 
-  .invite-friend-button {
-    display:inline-block;
-    background: #2196F3;
-    border:none;
-    color:#fff;
-    padding: var(--button-padding);
-    cursor:pointer;
-    font-size:20px;
-    border-radius:4px;
-    margin:5px;
-    transition: background var(--transition-duration);
-    z-index: 9999; /* higher than your cat-container’s z-index of 5 */
-  }
+/* Hover glow = neon teal or neon greenish */
+.hex:hover {
+  box-shadow: 0 0 10px #00ff85, 0 0 20px #00ff85;
+  transform: scale(1.05);
+}
 
+/* Flip animation classes */
+.hex.flipping {
+  transform: rotateY(90deg);
+  transition: transform 0.2s ease;
+}
+.hex.revealed {
+  /* Lighter teal background for revealed tiles */
+  background: #00c3ff;
+  color: #fff;
+  font-size: 16px;
+  transform: rotateY(0);
+  transition: transform 0.2s ease;
+}
 
+/* ======== BOTTOM NAV BAR ======== */
+.bottom-nav {
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 10px 0;
+  padding-left: calc(10px + env(safe-area-inset-left, 0));
+  padding-right: calc(10px + env(safe-area-inset-right, 0));
+/*padding-bottom: calc(20px + env(safe-area-inset-bottom, 0));*/
+}
+
+.bottom-nav button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  padding: var(--button-padding);
+  cursor: pointer;
+  flex: 1;
+  text-align: center;
+  transition: background var(--transition-duration);
+  transform: translateY(-4px);
+}
+
+.bottom-nav button.active,
+.bottom-nav button:hover {
+  background: rgba(255,255,255,0.2);
+  border-radius: 4px;
+}
+
+/* ======== INVITE-FRIEND BUTTONS ======== */
+.invite-friend-button {
+  display:inline-block;
+  background: #2196F3;
+  border:none;
+  color:#fff;
+  padding: var(--button-padding);
+  cursor:pointer;
+  font-size:20px;
+  border-radius:4px;
+  margin:5px;
+  transition: background var(--transition-duration);
+  z-index: 9999;
+}
+
+.invite-friend-button:hover {
+  background: var(--accent-color);
+}
+
+/* ======== CLUSTER BUTTONS ======== bottom: 90px; */
 .cluster-buttons {
   position: fixed;
-  bottom: 90px; /* adjust this so it sits right above .bottom-nav */
+  bottom: calc( var(--bottom-nav-height, 60px) + 35px );
   left: 0;
   width: 100%;
   display: flex;
   justify-content: center;
-  z-index: 9999; /* ensure it’s on top */
-  gap: 10px;     /* spacing between buttons if desired */
+  z-index: 9999;
+  gap: 10px;
 }
-
-
 
 .random-cluster-button,
 .select-cluster-button {
-  background: #444;
+  background: linear-gradient(135deg, #302b63, #24243e);
   border: none;
   color: #fff;
   padding: var(--button-padding);
   cursor: pointer;
   font-size: 16px;
   border-radius: 4px;
-  margin: 0; /* let the gap handle spacing */
+  margin: 0;
   transition: background var(--transition-duration);
+
+  /* This is the neon “glow” */
+  box-shadow: 0 0 8px rgba(255, 20, 147, 0.4);
+  transition: transform 0.2s ease;
+}
+
+.random-cluster-button:hover,
+.select-cluster-button:hover {
+  background: #3f2b96; /* lighter pink on hover */
 }
 
 
+/* Buy cookie button disabled */
+.buy-choc-cookie-button:disabled {
+  background:#333;
+  cursor:not-allowed;
+}
 
-  .random-cluster-button:hover,
-  .select-cluster-button:hover,
-  .clipboard-button:hover,
-  .invite-friend-button:hover {
-    background: var(--accent-color);
-  }
-  .buy-choc-cookie-button:disabled {
-    background:#333;
-    cursor:not-allowed;
-  }
-
-  .clipboard-button {
+.clipboard-button {
   padding: 8px;
-  font-size: 18px; /* bigger icon or adjust as you like */
+  font-size: 18px;
 }
 
- /* Leaderboard styling */
-  .leaderboard {
-    margin-top: 20px;
-  }
+/* ======== LEADERBOARD ======== */
+.leaderboard {
+  margin-top: 20px;
+}
 
-  .leaderboard h3 {
-    margin-bottom: 15px;
-    font-size: 18px;
-  }
+.leaderboard h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
 
-  .leaderboard-item {
-    background: #111;
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 10px;
-    display:flex;
-    align-items:center;
-  }
+.leaderboard-item {
+  background: #111;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display:flex;
+  align-items:center;
+}
 
-  .leaderboard-item-avatar {
-    width: 40px;
-    height:40px;
-    border-radius:50%;
-    overflow:hidden;
-    margin-right:10px;
-    background:#333;
-    flex-shrink:0;
-  }
+.leaderboard-item-avatar {
+  width: 40px;
+  height:40px;
+  border-radius:50%;
+  overflow:hidden;
+  margin-right:10px;
+  background:#333;
+  flex-shrink:0;
+}
 
-  .leaderboard-item-avatar img {
-    width:100%;
-    height:100%;
-    object-fit:cover;
-  }
+.leaderboard-item-avatar img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
 
-  .leaderboard-item-info {
-    flex:1;
-  }
+.leaderboard-item-info {
+  flex:1;
+}
 
-  .leaderboard-item-info h4 {
-    font-size:14px;
-    margin:0 0 5px 0;
-  }
+.leaderboard-item-info h4 {
+  font-size:14px;
+  margin:0 0 5px 0;
+}
+.leaderboard-item-info p {
+  font-size:12px;
+  margin:0;
+  color:#fff;
+}
 
-  .leaderboard-item-info p {
-    font-size:12px;
-    margin:0;
-    color:#fff;
-  }
+.leaderboard-item-rank {
+  padding:5px 10px;
+  border-radius:4px;
+  margin-left:10px;
+  font-size:12px;
+  font-weight:bold;
+}
 
-  .leaderboard-item-rank {
-    padding:5px 10px;
-    border-radius:4px;
-    margin-left:10px;
-    font-size:12px;
-    font-weight:bold;
-  }
+/* Rank colors */
+.rank-1 {
+  background:#ffdd00;
+  color:#000;
+}
+.rank-2 {
+  background:#879aff;
+  color:#000;
+}
+.rank-3 {
+  background:#ff9a66;
+  color:#000;
+}
+.rank-default {
+  background:#333;
+  color:#fff;
+}
 
-  /* Rank colors */
-  .rank-1 {
-    background:#ffdd00;
-    color:#000;
-  }
+/* ======== AVATAR CONTAINER ======== */
+.avatar-container {
+  display:flex; 
+  align-items:center;
+}
+.avatar-container img {
+  width:60px; 
+  height:60px; 
+  border-radius:50%;
+  margin-right:10px; 
+  background:#111; 
+  object-fit:cover;
+}
 
-  .rank-2 {
-    background:#879aff;
-    color:#000;
-  }
+/* ======== POPUP OVERLAY ======== */
+.popup-overlay {
+  position:fixed; 
+  top:0; 
+  left:0; 
+  width:100%; 
+  height:100%;
+  background:rgba(0,0,0,0.7);
+  display:flex; 
+  justify-content:center; 
+  align-items:center;
+  z-index: 999999;
+}
 
-  .rank-3 {
-    background:#ff9a66;
-    color:#000;
-  }
+.popup-content {
+  background:#222; 
+  padding:20px; 
+  border-radius:8px;
+  text-align:center; 
+  max-width:300px;
+}
 
-  .rank-default {
-    background:#333;
-    color:#fff;
-  }
+.popup-content h2 {
+  margin-top:0; 
+  font-size:18px;
+}
+.popup-content button {
+  background:#444; 
+  border:none; 
+  color:#fff; 
+  padding:10px 20px;
+  margin-top:20px; 
+  border-radius:4px; 
+  cursor:pointer;
+  transition:background var(--transition-duration);
+}
+.popup-content button:hover {
+  background: var(--accent-color);
+}
 
-  .avatar-container {
-    display:flex; align-items:center;
-  }
-  .avatar-container img {
-    width:60px; height:60px; border-radius:50%;
-    margin-right:10px; background:#111; object-fit:cover;
-  }
+.button-animate {
+  animation: pop 0.3s ease;
+}
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
 
-  /* Popup overlay */
-  .popup-overlay {
-    position:fixed; top:0; left:0; width:100%; height:100%;
-    background:rgba(0,0,0,0.7);
-    display:flex; justify-content:center; align-items:center;
-    z-index:9999;
-  }
-  .popup-content {
-    background:#222; padding:20px; border-radius:8px;
-    text-align:center; max-width:300px;
-  }
-  .popup-content h2 {
-    margin-top:0; font-size:18px;
-  }
-  .popup-content button {
-    background:#444; border:none; color:#fff; padding:10px 20px;
-    margin-top:20px; border-radius:4px; cursor:pointer;
-    transition:background var(--transition-duration);
-  }
-  .popup-content button:hover {
-    background: var(--accent-color);
-  }
+/* ======== FEEDING PROGRESS ======== */
+.feeding-progress-container {
+  background:#333; 
+  border-radius:4px; 
+  width:100%; 
+  height:20px;
+  position:relative; 
+  margin-top:10px;
+}
+.feeding-progress-fill {
+  background:#0f0; 
+  height:100%; 
+  width:0%; 
+  border-radius:4px; 
+  transition: width 0.3s ease;
+}
 
-  .button-animate {
-    animation: pop 0.3s ease;
-  }
-  @keyframes pop {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-  }
-
-  .feeding-progress-container {
-    background:#333; border-radius:4px; width:100%; height:20px;
-    position:relative; margin-top:10px;
-  }
-  .feeding-progress-fill {
-    background:#0f0; height:100%; width:0%;
-    border-radius:4px; transition: width 0.3s ease;
-  }
-
+/* ======== STORE ITEMS GRID ======== */
 .store-items {
   display: flex;
-  flex-wrap: wrap; /* multiple rows */
+  flex-wrap: wrap; 
   justify-content: center;
   gap: 20px;
   margin-top: 20px;
 }
 
 .store-item {
-  width: 90%;           /* fill ~90% of container */
-  max-width: 500px;     /* optionally limit on large screens */
-  background: rgba(255,255,255,0.1);
+  width: 90%; 
+  max-width: 500px; 
+  background: linear-gradient(135deg, #29002f, #420057);
   border-radius: 12px;
   padding: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  text-align: left;     /* left-align content */
+  box-shadow: 0 0 10px #ff29c8; /* neon pink glow */
+  /*box-shadow: 0 4px 8px rgba(0,0,0,0.2);*/
+  text-align: left;
 }
-
 .store-item-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 4px;   /* less space between title and description */
+  margin-bottom: 4px; 
 }
-
 .store-item-header h4 {
   margin: 0;
   color: #fff;
   font-size: 18px;
 }
-
 .store-item-cost {
   display: flex;
   align-items: center;
@@ -588,32 +649,29 @@ button {
   color: #fff;
   font-size: 16px;
 }
-
 .store-star {
   width: 1.5em;
   height: 1.5em;
   margin-left: 5px;
   vertical-align: middle;
 }
-
 .store-item p {
-  margin: 0 0 8px 0;     /* keep short spacing between paragraphs */
+  margin: 0 0 8px 0; 
   color: #fff;
   font-size: 14px;
 }
 
-/* special = gold background */
+/* ======== SPECIAL BACKGROUND ======== */
 .store-item.special {
-  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+  background: linear-gradient(135deg, #2a2a2a 0%, #494949 100%);
 }
-
 
 /* locked but still appealing */
 .store-item.locked {
   filter: grayscale(0.3) brightness(0.9);
-  /* pointer-events: auto;  // allow text highlight if you wish   */
 }
 
+/* Buy cookie button */
 .buy-cookie-button,
 .buy-choc-cookie-button {
   width: 100%;
@@ -628,7 +686,6 @@ button {
   text-align: center;
   margin-bottom: 4px;
 }
-
 .buy-cookie-button:hover,
 .buy-choc-cookie-button:hover {
   background: rgba(0,0,0,0.9);
@@ -640,47 +697,36 @@ button {
   margin: 0;
 }
 
-
+/* ======== BOXY CARD ======== */
 .boxy-card {
   background: rgba(255,255,255,0.1);
   border-radius: 12px;
   padding: 12px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  margin-bottom: 20px;  /* space below each box */
-  color: #fff;          /* or #333 if you want dark text on a light background */
+  margin-bottom: 20px;
+  color: #fff;
   width: 95%;
-  max-width: 500px;     /* optional: limit on large screens */
+  max-width: 500px;
   margin-left: auto;
-  margin-right: auto;   /* center horizontally */
-  text-align: left;     /* or center, up to you */
+  margin-right: auto;
+  text-align: left;
 }
-
-
 
 .invite-row {
   display: flex;
-  gap: 10px;               /* space between buttons */
-  margin-bottom: 10px;     /* space below the row */
+  gap: 10px;
+  margin-bottom: 10px;
 }
-
 .invite-column {
   display: flex;
-  flex-direction: column;    /* Stack the buttons + text vertically */
-  align-items: flex-start;   /* Left-align them */
-  gap: 8px;                  /* space between each item */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
 }
-
 .invite-count {
-  margin: 0;                 /* remove extra default <p> margin */
+  margin: 0;
 }
 
-/* .invite-friend-button {
-  display: inline-block; 
-  margin-right: 10px;   
-}*/
-
-
-/* Generic progress bar container + fill classes (if you don't already have them) */
 .progress-bar {
   background: #333;
   border-radius: 4px;
@@ -689,265 +735,191 @@ button {
   position: relative;
   margin-top: 10px;
 }
-
 .progress-fill {
   background: #05e84d;
   height: 100%;
-  width: 0%;    /* default 0% until we update it via JS */
+  width: 0%;
   border-radius: 4px;
   transition: width 0.3s ease;
 }
 
-
-
+/* ======== COIN BALANCES ======== */
 .coin-row {
   display: flex;
-  justify-content: center;  /* center horizontally, or use space-between, etc. */
-  gap: 20px;                /* space between columns */
+  justify-content: center;
+  gap: 20px;
   margin-bottom: 0px;
 }
-
 .coin-col {
   display: flex;
-  flex-direction: column;   /* icon above the text */
-  align-items: center;      /* center everything in this column */
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
-
 .coin-icon {
-  width: 48px;              /* adjust icon size as desired */
+  width: 48px;
   height: 48px;
-  margin-bottom: 5px;       /* space between icon and text */
+  margin-bottom: 5px;
 }
-
 .coin-amount {
-  font-size: 16px;          /* adjust as needed */
+  font-size: 16px;
 }
-
 .coin-amount span {
   font-weight: bold;
 }
 
-
+/* ======== SPECIAL BACKGROUNDS / ANIMATIONS ======== */
 .special-magical {
-  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+  background: linear-gradient(135deg, #262626, #494949);
 }
 
 .special-purple {
-  background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+  background: linear-gradient(135deg, #302b63, #24243e);
 }
-
 .special-neon {
-  background: linear-gradient(135deg, #cc2b5e 0%, #753a88 100%);
+  background: linear-gradient(135deg, #00c3ff, #0061ff);
 }
-
 .special-gold {
-  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+  background: linear-gradient(135deg, #f6d365, #fda085);
 }
-
 .special-galaxy {
   background: radial-gradient(circle, #141E30 0%, #243B55 100%);
 }
-
 .special-magical2 {
   border: 2px solid #fff;
   box-shadow: 0 0 8px #0fd850;
 }
 
+/* Animated gradient example */
 .animated-gradient {
-  /* Start with a gradient */
-  background: linear-gradient(135deg, #a18cd1, #fbc2eb);
-  background-size: 400% 400%; /* bigger than normal so it can move */
-
-  /* Apply the animation: 'shiftGradient' is our custom name */
+  background: linear-gradient(135deg, #302b63, #24243e);
+  background-size: 400% 400%;
   animation: shiftGradient 4s ease infinite;
-  /* 4s = duration, 'ease' = timing function, 'infinite' = loop forever */
 }
-
-/* Keyframes describing how the background-position changes */
 @keyframes shiftGradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
+/* Candy variant */
 .animated-gradient-candy {
   background: linear-gradient(
     135deg,
-    #ff9a9e,
-    #fbc2eb,
-    #a18cd1,
-    #fad0c4
+    #302b63,
+    #24243e,
+    #001f3f,
+    #0076fc
   );
   background-size: 600% 600%;
   animation: candyShift 6s ease infinite;
 }
-
 @keyframes candyShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
+/* Aurora variant - darker blues/purples */
 .animated-gradient-aurora {
   background: linear-gradient(
     135deg, 
-    #f093fb, 
-    #f5576c, 
-    #4facfe, 
-    #00f2fe
+    #0f0c29, 
+    #302b63, 
+    #24243e
   );
   background-size: 400% 400%;
   animation: auroraShift 8s ease infinite;
 }
-
 @keyframes auroraShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  25% {
-    background-position: 50% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  75% {
-    background-position: 50% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0%   { background-position: 0% 50%; }
+  25%  { background-position: 50% 50%; }
+  50%  { background-position: 100% 50%; }
+  75%  { background-position: 50% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
+/* Other possible shifting backgrounds */
 .animated-gradient-sunset {
   background: linear-gradient(
     135deg,
     #ff9966, 
-    #ff5e62, 
-    #ff9966
+    #ff5e62
   );
   background-size: 200% 200%;
   animation: sunsetShift 5s ease-in-out infinite;
 }
-
 @keyframes sunsetShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
+
 .animated-gradient-neon {
   background: linear-gradient(
     135deg,
-    #f6d365,
-    #fda085,
-    #ee0979,
-    #ff6a00
+    #00c3ff,
+    #0061ff,
+    #39ff14
   );
   background-size: 600% 600%;
   animation: neonShift 6s linear infinite;
 }
-
 @keyframes neonShift {
-  0% {
-    background-position: 0% 0%;
-  }
-  50% {
-    background-position: 100% 100%;
-  }
-  100% {
-    background-position: 0% 0%;
-  }
+  0%   { background-position: 0% 0%; }
+  50%  { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
 }
 
 .animated-gradient-fairy {
   background: linear-gradient(
     135deg, 
-    #84fab0, 
-    #8fd3f4, 
-    #84fab0
+    #141e30,
+    #243b55,
+    #0055ff
   );
   background-size: 200% 200%;
   animation: fairyShift 5s ease-in-out infinite;
 }
-
 @keyframes fairyShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
+
 .animated-gradient-bubblegum {
   background: linear-gradient(
     135deg, 
-    #ff6fd8,
-    #c782ff,
-    #ff6fd8
+    #302b63,
+    #24243e
   );
   background-size: 200% 200%;
   animation: bubblegumShift 5s ease-in-out infinite;
 }
-
 @keyframes bubblegumShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .animated-gradient-citrus {
   background: linear-gradient(
     135deg, 
-    #f9d423, 
-    #ff4e50, 
-    #f9d423
+    #24c6dc,
+    #514a9d
   );
   background-size: 200% 200%;
   animation: citrusShift 4s ease-in-out infinite;
 }
-
 @keyframes citrusShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
+/* ======== BUY COOKIE BUTTON STYLES ======== */
 .buy-cookie-button-lively {
-  /* Base gradient (like #1) */
-  background: linear-gradient(to right, #f093fb, #f5576c);
+  background: linear-gradient(to right, #00c3ff, #39ff14);
   color: #fff;
   border: none;
   padding: 12px 20px;
@@ -955,43 +927,26 @@ button {
   font-size: 16px;
   cursor: pointer;
 
-  /* Subtle box shadow for depth */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-
-  /* Smooth scaling on hover & shadow changes */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  /* Continuous pulsing glow (like #2) */
   animation: livelyPulse 2s infinite;
 }
-
 .buy-cookie-button-lively:hover {
-  /* Slightly enlarge & intensify the shadow on hover */
   transform: scale(1.05);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
 }
-
 @keyframes livelyPulse {
-  0% {
-    box-shadow: 0 0 8px rgba(240, 147, 251, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 16px rgba(245, 87, 108, 0.8);
-  }
-  100% {
-    box-shadow: 0 0 8px rgba(240, 147, 251, 0.4);
-  }
+  0%   { box-shadow: 0 0 8px rgba(0, 255, 133, 0.4); }
+  50%  { box-shadow: 0 0 16px rgba(57, 255, 20, 0.8); }
+  100% { box-shadow: 0 0 8px rgba(0, 255, 133, 0.4); }
 }
 
 .buy-cookie-button-rainbow {
   background: linear-gradient(
     45deg,
-    #ff0057,
-    #ff7b00,
-    #ffe400,
-    #00f9ff,
-    #00ff85,
-    #ff00f7
+    #00c3ff,
+    #0061ff,
+    #39ff14
   );
   background-size: 600% 600%;
   color: #fff;
@@ -1000,27 +955,17 @@ button {
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
-
-  /* Animate the gradient movement */
   animation: animatedRainbow 5s ease infinite;
 }
-
 @keyframes animatedRainbow {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-
-/* 1) Candy Pink */
+/* Various gradient buttons if you want them */
 .btn-candy {
-  background: linear-gradient(to right, #ff9a9e, #fecfef);
+  background: linear-gradient(to right, #302b63, #24243e);
   color: #fff;
   border: none;
   padding: 12px 20px;
@@ -1029,10 +974,8 @@ button {
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
-/* 2) Lollipop Purple */
 .btn-lollipop {
-  background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+  background: linear-gradient(135deg, #0f0c29, #302b63);
   color: #fff;
   border: none;
   padding: 12px 20px;
@@ -1041,10 +984,8 @@ button {
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
-/* 3) Sunny Orange */
 .btn-sunny {
-  background: linear-gradient(to right, #f6d365, #fda085);
+  background: linear-gradient(to right, #00c3ff, #0061ff);
   color: #fff;
   border: none;
   padding: 12px 20px;
@@ -1053,10 +994,8 @@ button {
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
-/* 4) Watermelon Burst */
 .btn-watermelon {
-  background: linear-gradient(135deg, #fa709a, #fee140);
+  background: linear-gradient(135deg, #001f3f, #0076fc);
   color: #fff;
   border: none;
   padding: 12px 20px;
@@ -1065,10 +1004,8 @@ button {
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
-/* 5) Berry Smoothie */
 .btn-berry {
-  background: linear-gradient(to right, #ff9966, #ff5e62);
+  background: linear-gradient(to right, #262626, #494949);
   color: #fff;
   border: none;
   padding: 12px 20px;
@@ -1077,10 +1014,8 @@ button {
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
-/* 6) Minty Fresh */
 .btn-mint {
-  background: linear-gradient(135deg, #84fab0, #8fd3f4);
+  background: linear-gradient(135deg, #00ff85, #00c3ff);
   color: #fff;
   border: none;
   padding: 12px 20px;
@@ -1089,10 +1024,8 @@ button {
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
-/* 7) Citrus Splash */
 .btn-citrus {
-  background: linear-gradient(to right, #f9d423, #ff4e50);
+  background: linear-gradient(to right, #24c6dc, #514a9d);
   color: #fff;
   border: none;
   padding: 12px 20px;
@@ -1102,17 +1035,23 @@ button {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* ======== SPARKLE BUTTONS ======== */
 .sparkle-button {
-  position: relative;          /* so pseudo-elements can be positioned inside */
-  overflow: hidden;            /* hide anything that goes outside the button edges */
-  display: inline-block;       /* ensure it can contain absolutely positioned children */
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
   padding: 12px 20px;
+  
+  /* <--- THIS is the gold-to-orange gradient ---> */
   background: linear-gradient(135deg, #ffc107, #ff9800);
+
   color: #fff;
   font-size: 16px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  
+  /* Adds a slight box shadow & smooth hover effect */
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
   transition: transform 0.3s ease;
 }
@@ -1121,80 +1060,53 @@ button {
   transform: scale(1.05);
 }
 
-/* We'll place 2 sparkles via pseudo-elements */
+/* Then it adds little "★" sparkles floating across the button */
 .sparkle-button::before,
 .sparkle-button::after {
-  content: "★";                /* unicode star (you can use different shapes or an image) */
+  content: "★";
   position: absolute;
   font-size: 14px;
-  color: #fff5d0;              /* pale gold color for the star */
-  opacity: 0;                  /* start invisible */
+  color: #fff5d0;
+  opacity: 0;
 }
 
-/* One star (::before) moves from top-left to bottom-right */
 .sparkle-button::before {
   top: 10%;
   left: 5%;
   animation: starMove1 2.5s infinite ease-in-out;
 }
 
-/* The other star (::after) moves from bottom-left to top-right */
 .sparkle-button::after {
   bottom: 10%;
   left: 15%;
   animation: starMove2 2.5s infinite ease-in-out;
 }
 
-/* Keyframe 1: moves diagonally & fades in/out */
 @keyframes starMove1 {
-  0% {
-    transform: translate(0, 0) scale(0.5);
-    opacity: 0;
-  }
-  25% {
-    opacity: 1;
-  }
-  50% {
-    transform: translate(60px, 40px) scale(1);
-    opacity: 1;
-  }
-  75% {
-    opacity: 0.5;
-  }
-  100% {
-    transform: translate(80px, 60px) scale(0.5);
-    opacity: 0;
-  }
+  0%   { transform: translate(0, 0) scale(0.5); opacity: 0; }
+  25%  { opacity: 1; }
+  50%  { transform: translate(60px, 40px) scale(1); opacity: 1; }
+  75%  { opacity: 0.5; }
+  100% { transform: translate(80px, 60px) scale(0.5); opacity: 0; }
 }
 
-/* Keyframe 2: similar idea, different direction or timing */
 @keyframes starMove2 {
-  0% {
-    transform: translate(0, 0) scale(0.5);
-    opacity: 0;
-  }
-  25% {
-    opacity: 1;
-  }
-  50% {
-    transform: translate(40px, -40px) scale(1);
-    opacity: 1;
-  }
-  75% {
-    opacity: 0.5;
-  }
-  100% {
-    transform: translate(60px, -60px) scale(0.5);
-    opacity: 0;
-  }
+  0%   { transform: translate(0, 0) scale(0.5); opacity: 0; }
+  25%  { opacity: 1; }
+  50%  { transform: translate(40px, -40px) scale(1); opacity: 1; }
+  75%  { opacity: 0.5; }
+  100% { transform: translate(60px, -60px) scale(0.5); opacity: 0; }
 }
 
+
+/* ======== DARK STAR BUTTON ======== */
 .dark-star-button {
   position: relative;
-  display: inline-block;       /* so it can contain absolutely-positioned spans */
-  overflow: hidden;            /* hide star edges if they move outside */
+  display: inline-block;
+  overflow: hidden;
   padding: 12px 28px;
-  background: #333;            /* Dark background */
+  background: linear-gradient(135deg, #ffc107, #ff9800);
+
   color: #fff;
   font-size: 16px;
   border: none;
@@ -1202,26 +1114,19 @@ button {
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
   transition: transform 0.3s ease;
-  user-select: none;           /* don’t let user highlight the stars */
+  user-select: none;
 }
-
 .dark-star-button:hover {
   transform: scale(1.05);
 }
-
-/* Common star styling */
 .dark-star-button .star {
   position: absolute;
-  font-size: 16px;            /* size of star */
-  color: gold;                /* golden color */
-  opacity: 0;                 /* start invisible */
-  pointer-events: none;       /* clicks pass through */
+  font-size: 16px; 
+  color: gold; 
+  opacity: 0; 
+  pointer-events: none;
   animation: starTwinkle 3s infinite;
 }
-
-/* You can tweak each star’s top/left to spread them around the button. */
-/* Also vary the animation-delay for a random effect. */
-
 .dark-star-button .star1 {
   top: 10%; left: 15%;
   animation-delay: 0.2s;
@@ -1246,26 +1151,22 @@ button {
   top: 80%; left: 60%;
   animation-delay: 2.2s;
 }
-
 .dark-star-button .star7 {
-  top: -20%; /* negative so it's above the button entirely 30*/
-  left: 120%; /* move it way to the right so it's off the text 45 */
+  top: -20%;
+  left: 120%;
   animation-delay: 0.8s;
 }
-
 .dark-star-button .star8 {
   top: 60%; left: 55%;
   animation-delay: 1.6s;
 }
-
-/* Keyframes for a twinkling + slight movement effect */
 @keyframes starTwinkle {
   0% {
     transform: scale(0.5) translate(0, 0);
     opacity: 0;
   }
   20% {
-    opacity: 1;               /* star fully appears */
+    opacity: 1;
     transform: scale(1.2) translate(3px, -3px);
   }
   40% {
@@ -1286,26 +1187,16 @@ button {
   }
 }
 
+/* ======== LOCKED ITEM GLOW ======== */
 .store-item.locked {
   position: relative;
-  /* Start slightly dimmer */
   filter: brightness(0.8);
   animation: lockedGlow 2.5s infinite alternate ease-in-out;
 }
-
-/* Keyframe animation: from dim to bright glow */
 @keyframes lockedGlow {
-  0% {
-    /* Dim state */
-    filter: brightness(0.8);
-  }
-  100% {
-    /* Bright glow */
-    filter: brightness(1) drop-shadow(0 0 6px rgba(255, 215, 0, 0.4));
-  }
+  0% { filter: brightness(0.8); }
+  100% { filter: brightness(1) drop-shadow(0 0 6px rgba(255, 215, 0, 0.4)); }
 }
-
-/* "LOCKED" overlay in the center */
 .store-item.locked::before {
   content: "🔒 LOCKED";
   position: absolute;
@@ -1322,89 +1213,75 @@ button {
   text-shadow: 1px 1px 2px #000;
   pointer-events: none;
 }
-
-/* Prevent interactions with the locked item’s content */
 .store-item.locked button,
 .store-item.locked * {
   pointer-events: none;
 }
 
-
-/* Ensure the .welcome-package has position: relative
-   so the discount label can be placed absolutely inside it. */
+/* ======== WELCOME PACKAGE DISCOUNT BADGE ======== */
 .store-item.welcome-package {
   position: relative;
 }
-
-/* The discount label in the top-left corner, angled slightly */
 .store-item.welcome-package .discount-label {
   position: absolute;
-  top: 8px;             /* near the top edge */
-  left: -10px;          /* push it slightly left so angled text fits */
-  transform: rotate(-15deg); /* slight tilt */
-  
-  background: #ff0000;  /* bright red or any color you like */
+  top: 8px;
+  left: -10px;
+  transform: rotate(-15deg);
+  background: #ff0000;
   color: #fff;
   padding: 4px 8px;
   font-size: 14px;
   font-weight: bold;
   border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* small shadow for pop */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
   letter-spacing: 1px;
-  z-index: 999;         /* ensures it sits on top of images/text below */
+  z-index: 999;
 }
 
-/* Ensure the Donut of Destiny item can contain the absolutely-positioned label */
+/* ======== DONUT DESTINY LABEL ======== */
 .store-item.donut-destiny {
   position: relative;
 }
-
-/* The Founders label: top-left-ish, slightly above, a small angle, bright color. */
 .donut-destiny .founders-label {
   position: absolute;
-  top: -10px;      /* moves it ~10px above the box’s top */
-  left: 12%;       /* left “12%” from the left edge for a nice offset */
-  transform: rotate(-5deg); /* slight tilt if you want that angled look */
-  
-  background: #e91e63;  /* a pink/red color, tweak as desired */
+  top: -10px;
+  left: 12%;
+  transform: rotate(-5deg);
+  background: #e91e63;
   color: #fff;
   padding: 4px 8px;
   font-size: 13px;
   font-weight: bold;
   border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3); /* small shadow to pop */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
   letter-spacing: 0.5px;
-  z-index: 999;   /* ensures it’s on top of the item’s content */
+  z-index: 999;
 }
 
-/* Larger, more spacious popup */
+/* ======== POPUP BIG/MEDIUM ======== */
 .popup-content.big-popup {
-  max-width: 400px;  /* Increase width for a bigger feel */
-  width: 90%;        /* Let it be responsive on mobile */
-  padding: 30px;     /* More padding for extra space around content */
+  max-width: 400px;
+  width: 90%;
+  padding: 30px;
 }
-
 .popup-content.medium-popup {
-  max-width: 400px;  /* Increase width for a bigger feel */
-  width: 65%;        /* Let it be responsive on mobile */
-  padding: 30px;     /* More padding for extra space around content */
+  max-width: 400px;
+  width: 65%;
+  padding: 30px;
 }
 
-/* A wrapper for your image if you want it to be centered or scaled nicely */
 .popup-image-wrapper {
   text-align: center;
   margin-bottom: 20px;
 }
-
 .popup-image-wrapper img {
   width: 100%;
   height: auto;
-  max-width: 250px;  /* Make sure it doesn't get too large on big screens */
-  border-radius: 8px;/* Slight rounding if you like */
+  max-width: 250px;
+  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
-/* Headings can be bigger or bolder if you want them to pop */
 .popup-content.big-popup h2 {
   font-size: 24px;
   margin-top: 0;
@@ -1412,18 +1289,16 @@ button {
   text-align: center;
 }
 
-/* Body text */
 .popup-content.big-popup p {
   font-size: 16px;
   line-height: 1.5;
   margin-bottom: 12px;
-  text-align: center; /* optional, can do left or justify */
+  text-align: center;
 }
 
-/* Style the button to stand out */
 .popup-content.big-popup button {
   display: inline-block;
-  margin: 10px auto 0; /* center horizontally */
+  margin: 10px auto 0; 
   padding: 12px 20px;
   font-size: 16px;
   font-weight: bold;
@@ -1434,13 +1309,12 @@ button {
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
-/* On hover, enlarge and shadow */
 .popup-content.big-popup button:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
+/* ======== PROGRESS BAR BONUS ======== */
 .progress-bar-bonuses {
   background: #333;
   border-radius: 4px;
@@ -1451,6 +1325,7 @@ button {
   box-sizing: border-box;
 }
 
+/* ======== LOADING DOTS ======== */
 .loading-dots span {
   animation: blink 1.2s infinite;
   font-weight: bold;
@@ -1458,10 +1333,6 @@ button {
   opacity: 0;
   display: inline-block;
 }
-
-/* Dot #1 blinks with no delay,
-   Dot #2 has a slight delay,
-   Dot #3 has a bigger delay. */
 .loading-dots span:nth-child(1) {
   animation-delay: 0.0s;
 }
@@ -1471,33 +1342,68 @@ button {
 .loading-dots span:nth-child(3) {
   animation-delay: 0.4s;
 }
-
 @keyframes blink {
   0%, 80%  { opacity: 0; }
   40%      { opacity: 1; }
 }
 
-.special-magical {
-  background: linear-gradient(135deg, #ff9a9e, #fecfef);
-  /* or an animated one: */
-  /* background: linear-gradient(135deg, #ff9a9e, #fecfef, #a18cd1, #fbc2eb);
-     background-size: 400% 400%;
-     animation: magicalGradient 8s ease infinite; */
-  border-radius: 12px;
-  padding: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+:root {
+  --bg-start: #0a0f5e;     /* deep navy */
+  --bg-end: #020111;       /* near-black */
+  --text-color: #f5f5f5;
+  --accent-color: #b8860b; /* gold */
 }
 
-/* optional keyframes for an animated background gradient */
-@keyframes magicalGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+body {
+  background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+  color: var(--text-color);
+  font-family: "Montserrat", sans-serif;
+}
+
+/* Hex Tiles */
+.hex {
+  background: linear-gradient(135deg, #101010, #222222);
+  transition: 0.2s;
+}
+
+
+/* Buttons */
+button {
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  background: #d4af37; /* a brighter gold for hover */
+}
+
+
+
+.bottom-nav button.active,
+.bottom-nav button:hover {
+  background: rgba(255, 20, 147, 0.2);
+}
+
+.animated-tile {
+  background: linear-gradient(135deg, #6a0dad, #ff29c8);
+  background-size: 200% 200%;
+  animation: pulseBG 3s ease-in-out infinite;
+}
+
+@keyframes pulseBG {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
 
-</style>
 
+
+</style>
+  
 
     <!-- Meta Pixel Code -->
     <script>
@@ -1523,10 +1429,10 @@ button {
 <!-- No Cookies Popup -->
 <div class="popup-overlay" id="noCookiesPopup" style="display: none;">
   <div class="popup-content">
-    <h2>You have no cookies!</h2>
-    <p>Buy some from the Store to reveal tiles.</p>
-    <button onclick="goToStore()" style="font-size: 20px; padding: 14px 24px;">Go to store 😺</button><br>
-    <button onclick="goToBonuses()" style="font-size: 20px; padding: 14px 24px;">Or get it for free 🍪</button>
+    <h2>You have no unveils!</h2>
+    <p>Buy some gifts for Luna from the Store to reveal tiles.</p>
+    <button onclick="goToStore()" style="font-size: 20px; padding: 14px 24px;">Go to store 😏</button><br>
+    <button onclick="goToBonuses()" style="font-size: 20px; padding: 14px 24px;">Or get it for free 💋</button>
   </div>
 </div>
 
@@ -1534,8 +1440,8 @@ button {
 <div class="popup-overlay" id="freeCookiePopup" style="display: none;">
   <div class="popup-content">
     <h2>Congrats!</h2>
-    <img src="cookie.webp" alt="Free Cookie" style="width: 150px; height: auto; margin-bottom: 10px;" />
-    <p>0-0-0 Streak! You just earned a free cookie!</p>
+    <img src="kiss.png" alt="Free Cookie" style="width: 150px; height: auto; margin-bottom: 10px;" />
+    <p>0-0-0 Streak! You just earned a free kiss!</p>
     <button onclick="closeFreeCookiePopup()" style="margin-top: 20px; font-size:16px;">
       Yay!
     </button>
@@ -1570,7 +1476,7 @@ button {
     <div id="chonkBombLoadingSection">
       <h2 style="margin-top:0;">Please Wait</h2>
       <p>
-        The Chonk is revealing tiles 
+        Luna is getting handcuffed 😏🔗💦
         <span class="loading-dots"><span>.</span><span>.</span><span>.</span></span>
         <br>
         (It could take a minute!)
@@ -1602,7 +1508,7 @@ button {
     <div class="popup-image-wrapper">
       <img
         id="secretTreasureMainImage"
-        src="secret-chest.png"
+        src="question.png"
         alt="Secret Chest"
         style="width: 120px; height: auto; margin-bottom: 15px;"
       />
@@ -1611,7 +1517,7 @@ button {
     <!-- Treasure Popup -->
     <p style="font-size:18px; line-height:1.4;" id="secretTreasureMessage">
       <!-- We can fill this via JS, or keep it static. Example: -->
-      You got <strong>2 Cookies</strong> and a <strong>Crown</strong>!
+      You got <strong>2 Kisses</strong> and a <strong>Crown</strong>!
     </p>
 
     <!-- Show the cookie + crown side by side -->
@@ -1621,7 +1527,7 @@ button {
     >
       <img
         id="secretTreasureCookieImage"
-        src="cookie.webp"
+        src="kiss.png"
         alt="Cookie"
         style="width: 60px; height: auto;"
       />
@@ -1679,7 +1585,7 @@ button {
 
 <div class="popup-overlay" id="onLoadPopup">
   <div class="popup-content" style="text-align: center;">
-    <h2>Find the chonk's hidden treasure</h2>
+    <h2>Dare to find my hidden rewards?<br>💋💋</h2>
 
     <!-- Use a <p> or <h3> instead of nested <p><h2> > <strong>5 x 1 BTC<br>50 x 2K TON<br><br>and a total of<br><br>500K TON<br>14.5M USDT</strong>  and a TON of USDT<br-->
     <p style="font-size: 18px; line-height: 1.5;">
@@ -1709,7 +1615,7 @@ button {
   <h2>Bonuses</h2>
 
   <!-- Box #1: Invite Buttons + Friends Invited -->
-  <div class="boxy-card special-magical">
+  <div class="boxy-card store-item item-with-image">
       <button class="invite-friend-button" onclick="shareMiniApp()">Invite frens</button>
       <button class="invite-friend-button" onclick="copyLinkToClipboard()">📋</button>
        <p class="invite-count" style="padding-left: 10px;">
@@ -1723,7 +1629,7 @@ button {
 
 
  <!-- Are you following our channel? special-magical-->
-<div class="boxy-card special-magical item-with-image" id="channelRewardCard"
+<div class="boxy-card store-item item-with-image" id="channelRewardCard"
      style="
        display: flex; 
        align-items: center; 
@@ -1733,7 +1639,7 @@ button {
 
     <!-- Text label -->
   <p style="margin: 0; font-weight: bold;">
-    Follow our channel to get <strong>a free cookie</strong>
+    Follow our channel to get <strong>a free kiss</strong>
   </p>
 
     <!-- Button: opens channel link -->
@@ -1748,7 +1654,7 @@ button {
   </div>
 
     <!-- Cookie image -->
-  <img id="channelCookieImage" src="cookie.webp" 
+  <img id="channelCookieImage" src="kiss.png" 
        alt="Cookie" 
        style="width: 40px; height: auto;">
 
@@ -1759,12 +1665,12 @@ button {
  <!-- Invite 2 friends to get a free cookie -->
   <div class="boxy-card animated-gradient-candy item-with-image" style="display: flex; align-items: center; justify-content: space-between;">
     <div>
-      <p>Invite 2 frens to get a <strong>free cookie</strong></p>
+      <p>Invite 2 frens to get a <strong>free kiss</strong></p>
       <div class="progress-bar-bonuses">
         <div id="freeCookieProgress" class="progress-fill"></div>
       </div>
     </div>
-    <img src="cookie.webp" 
+    <img src="kiss.png" 
          alt="Cookie" 
          style="width: 40px; height: auto; margin-left: 8px;" />
   </div>
@@ -1776,13 +1682,13 @@ button {
 <div class="boxy-card animated-gradient-candy item-with-image" style="display: flex; align-items: center; justify-content: space-between;">
   <!-- Left side: text & progress bar -->
   <div>
-    <p>Invite 3 frens to get <strong>Secret Treasure</strong></p>
+    <p>Invite 3 frens to get <strong>Secret Surprise</strong></p>
     <div class="progress-bar-bonuses">
       <div id="secretTreasureProgress" class="progress-fill"></div>
     </div>
   </div>
   <!-- Right side: a chest image -->
-  <img src="secret-chest.png" 
+  <img src="question.png" 
        alt="Secret Treasure" 
        style="width: 40px; height: auto; margin-left: 8px;" />
 </div>
@@ -1799,7 +1705,7 @@ button {
         <div id="bunchofcookiesBonusesProgress" class="progress-fill"></div>
       </div>
     </div>
-    <img src="cookiesnew.png" 
+    <img src="kiss.png" 
          alt="Bunch of Cookies" 
          style="width: 40px; height: auto; margin-left: 8px;" />
   </div>
@@ -1844,7 +1750,7 @@ button {
         <div id="pawBonusesProgress" class="progress-fill"></div>
       </div>
     </div>
-    <img src="paw.png" 
+    <img src="redpump.png" 
          alt="Paw" 
          style="width: 40px; height: auto; margin-left: 8px;" />
   </div>
@@ -1874,22 +1780,21 @@ button {
 
 
   <!-- Box #5: Feeding the Chonk -->
-  <div class="boxy-card">
-    <h3>Feeding the Chonk</h3>
-    <p>Total Feeds: <span id="totalFeeds">0</span></p>
-    <p>Chonk Level: <span id="chonkLevel">0</span>
-       (Bonus: <span id="chonkBonus">0%</span> on all wins)</p>
-    <p>Next Level Reward: <span id="nextLevelReward">N/A</span></p>
-    
-    <!-- feeding progress container -->
-    <div class="feeding-progress-container">
-      <div class="feeding-progress-fill" id="feedingProgress"></div>
-    </div>
-     <div style="text-align:center; margin-top:10px;">
-    <img src="hungry-chonk.png" alt="Hungry Chonk" 
-         style="width: 150px; height: auto; border-radius: 8px;" />
+<div class="boxy-card">
+  <h3>Satisfy Luna</h3>
+  <p>Total Gifts Offered: <span id="totalFeeds">0</span></p>
+  <p>Luna’s Favor: <span id="chonkLevel">0</span>
+     (Current Bonus: <span id="chonkBonus">0%</span>)
+  </p>
+  <p>Next Favor Bonus: <span id="nextLevelReward">N/A</span></p>
+  
+  <div class="feeding-progress-container">
+    <div class="feeding-progress-fill" id="feedingProgress"></div>
   </div>
+  <div style="text-align:center; margin-top:10px;">
+    <img src="sultryMistress.png" alt="Mistress" style="width: 150px; border-radius:8px;">
   </div>
+</div>
 
 
     <div class="boxy-card">
@@ -1907,10 +1812,10 @@ button {
 
 
 
-  <!-- Field tab (active by default) -->
+  <!-- Field tab (active by default) 45-->
   <div id="fieldContent" class="tab-content active">
       <div class="cat-container">
-    <img src="btcchonky.jpg" alt="Chonk"/>
+    <img src="btchonky25.jpg" alt="Chonk"/>
 
    </div>
 
@@ -1927,9 +1832,10 @@ button {
   -->
 
   <!-- 1) A heading for the cluster number   ✨ <span id="clusterChocolate"></span> | -->
+
 <h5 id="clusterHeading" style="text-align:center;">
   Cluster #<span id="clusterNumber"></span> | 
-  🍪 <span id="clusterCookies"></span> | 
+  💋 <span id="clusterCookies"></span> | 
   💣 <span id="clusterBombs"></span>
 </h5>
   
@@ -1993,7 +1899,7 @@ button {
     </div>
   </div>
 
-<h3 style="font-size:16px;margin-bottom:10px;">Top Chonkers</h3>
+<h3 style="font-size:16px;margin-bottom:10px;">Top Players</h3>
 <div id="leaderboardContainer"></div>
 
 
@@ -2051,9 +1957,9 @@ button {
     </div>
 
     <div style="text-align:center;font-size:14px;color:#ddd;margin-top:20px;">
-      <a href="https://experiments.services.fluffychonk.com/chonk/faq.html" target="_blank" rel="noopener noreferrer" 
+      <a href="https://experiments.services.fluffychonk.com/chonk/luna-faq.html" target="_blank" rel="noopener noreferrer" 
       style="color:#ddd;text-decoration:none;margin:0 5px;">FAQ</a> •       
-      <a href="https://experiments.services.fluffychonk.com/chonk/terms.html" target="_blank" rel="noopener noreferrer" 
+      <a href="https://experiments.services.fluffychonk.com/chonk/luna-terms.html" target="_blank" rel="noopener noreferrer" 
       style="color:#ddd;text-decoration:none;margin:0 5px;">Terms of service</a> • 
       <a href="https://experiments.services.fluffychonk.com/chonk/privacy.html" target="_blank" rel="noopener noreferrer" 
       style="color:#ddd;text-decoration:none;margin:0 5px;">Privacy</a> • 
@@ -2086,14 +1992,14 @@ button {
 </div>
 
   <div style="font-size:17px;color:#FFFFFF margin-top:10px;">
-    <p>Buy sweets to distract the chonk and reveal tiles!</p>
+    <p>Buy gifts for Luna to reveal tiles</p>
 
     <div class="store-items">
 
-      <!-- Welcome Package (Jar of Cookies + Donut) -->
-<div class="store-item animated-gradient-aurora item-with-image donut-destiny" id="welcomePackageItem">
+      <!-- Welcome Package (Jar of Cookies + Donut) welcome_package-->
+<div class="store-item animated-gradient-candy item-with-image donut-destiny" id="welcomePackageItem">
   <!-- Example combined image or a single icon that represents the package -->
-  <img src="welcome_package.png" alt="Welcome Package" class="store-item-image" />
+  <img src="mouthkiss.png" alt="Welcome Package" class="store-item-image" />
 
   <div class="store-item-content">
     <div class="store-item-header">
@@ -2105,7 +2011,7 @@ button {
     </div>
     <p id="welcomeCountdown"></p>
     <!-- Description: total of 15 unveils -->
-    <p>Includes<strong> 25 unveils and the Chonk's exclusive ring for a 1.5% lifetime bonus</strong> on all rewards!</p>
+    <p>Includes<strong> 25 unveils and an exclusive ring for a 1.5% lifetime bonus</strong> on all rewards!</p>
     <!-- Buy button (adjust the onclick revealType to match your logic) -->
     <button class="buy-cookie-button sparkle-button" onclick="handleBuyCookieButtonClick(event, 'welcomePackage')">
       Buy 🎉
@@ -2119,19 +2025,19 @@ button {
       <!-- Normal Cookie -->
   <div class="store-item item-with-image">
     <!-- Put the cookie image on the left -->
-    <img src="cookie.webp" alt="Normal Cookie" class="store-item-image" />
+    <img src="kiss.png" alt="Normal Cookie" class="store-item-image" />
 
     <div class="store-item-content">
       <div class="store-item-header">
-        <h4>Normal Cookie</h4>
+        <h4>Gentle Kiss</h4>
         <div class="store-item-cost">
           25
           <img src="tgstar2.png" alt="Star" class="store-star">
         </div>
       </div>
-      <p><strong>Unveils 1 tile</strong></p>
-      <button class="buy-cookie-button dark-star-button" onclick="handleBuyCookieButtonClick(event, 'cookie')">
-        Buy 🍪
+      <p><strong>Gives 1 unveil</strong></p>
+      <button class="buy-cookie-button sparkle-button" onclick="handleBuyCookieButtonClick(event, 'cookie')">
+        Buy 💋
          <!--<
           <span class="star star1">★</span>
           <span class="star star2">★</span>
@@ -2145,22 +2051,23 @@ button {
     </div>
   </div>
 
+
         <!-- Bunch of Cookies -->
   <div class="store-item animated-gradient-candy item-with-image">
     <!-- Put the cookie image on the left -->
-    <img src="cookiesnew.png" alt="Normal Cookie" class="store-item-image" />
+    <img src="lips5.png" alt="Normal Cookie" class="store-item-image" />
 
     <div class="store-item-content">
       <div class="store-item-header">
-        <h4>Bunch of Cookies</h4>
+        <h4>Tongue Kiss</h4>
         <div class="store-item-cost">
           60
           <img src="tgstar2.png" alt="Star" class="store-star">
         </div>
       </div>
-      <p><strong>Unveils 3 tiles</strong></p>
+      <p><strong>Gives 3 unveils</strong></p>
       <button class="buy-cookie-button dark-star-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
-        Buy 🍪
+        Buy 💋👅
           <span class="star star1">★</span>
           <span class="star star2">★</span>
           <span class="star star3">★</span>
@@ -2174,16 +2081,16 @@ button {
 
   <!-- Secret Treasure LOCKED -->
 <div id="secretTreasureLocked" style="display: flex;" class="store-item animated-gradient-candy item-with-image">
-  <img src="secret-chest.png" alt="Locked Secret Treasure" class="store-item-image" />
+  <img src="question.png" alt="Locked Secret Treasure" class="store-item-image" />
   <div class="store-item-content">
     <div class="store-item-header">
-      <h4>Secret Treasure</h4>
+      <h4>Secret Surprise</h4>
       <div class="store-item-cost">
         0
         <img src="tgstar2.png" alt="Star" class="store-star">
       </div>
     </div>
-    <p><strong>A mysterious chest containing special rewards...</strong></p>
+    <p><strong>A mysterious surpise containing special rewards and affections...</strong></p>
     <button class="buy-cookie-button" style="margin-bottom: 8px;">
       Locked 🔒
     </button>
@@ -2200,13 +2107,13 @@ button {
 
 <!-- Secret Treasure UNLOCKED -->
 <div id="secretTreasureUnlocked" style="display: flex;" class="store-item animated-gradient-candy item-with-image">
-  <img src="secret-chest.png" alt="Secret Treasure" class="store-item-image" />
+  <img src="lips44.png" alt="Secret Treasure" class="store-item-image" />
   <div class="store-item-content">
     <div class="store-item-header">
-      <h4>Secret Treasure</h4>
+      <h4>Secret Surprise</h4>
 
     </div>
-    <p><strong>Open this mysterious chest to claim hidden rewards!</strong></p>
+    <p><strong>Open the mysterious surprise to claim hidden rewards!</strong></p>
     <button class="buy-cookie-button" onclick="openSecretTreasure()">
       Open ✨
     </button>
@@ -2215,77 +2122,10 @@ button {
 
 
 
-  <!-- Bunch of Cookies LOCKED -->
-<div id="bunchofcookiesLocked" style="display: none;" class="store-item animated-gradient-candy item-with-image">
-  <img src="cookiesnew.png" alt="Locked Cookies" class="store-item-image" />
-  <div class="store-item-content">
-    <div class="store-item-header">
-      <h4>Bunch of Cookies</h4>
-      <div class="store-item-cost">
-        45
-        <img src="tgstar2.png" alt="Star" class="store-star">
-      </div>
-    </div>
-    <p><strong>Unveils 2 tiles</strong></p>
-    <button class="buy-cookie-button" style="margin-bottom: 8px;">
-      Locked 🔒
-    </button>
-    <div style="margin-top: 0;">
-      <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
-        Invite 3 friends to unlock
-      </p>
-      <div class="progress-bar" style="margin-top: 0;">
-        <div id="bunchofcookiesLockedProgress" class="progress-fill" style="width:75%"></div>
-      </div>
-    </div>
-  </div> 
-</div> 
-
-  <!-- Bunch of Cookies UNLOCKED -->
-  <div id="bunchofcookiesUnlocked" class="store-item animated-gradient-candy item-with-image">
-    <!-- Put the cookie image on the left -->
-    <img src="cookiesnew.png" alt="Bunch of Cookies" class="store-item-image" />
-
-    <div class="store-item-content">
-      <div class="store-item-header">
-        <h4>Bunch of Cookies</h4>
-        <div class="store-item-cost">
-          45
-          <img src="tgstar2.png" alt="Star" class="store-star">
-        </div>
-      </div>
-        <p><strong>Unveils 2 tiles</strong></p>
-        <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'bunch')">
-          Buy 🍪
-        </button>
-    </div>
-  </div>
-
-  <!-- Secret Treasure LOCKED -->
-<div id="bunchofcookiesLocked1" class="store-item animated-gradient-candy item-with-image" style="display:none;>
-  <img src="cookiesnew.png" alt="Locked Cookies" class="store-item-image" />
-  <div class="store-item-content">
-    <div class="store-item-header">
-      <h4>Secret Treasure</h4>
-    </div>
-    <p><strong>This will grant you a secret surprise treasure of immense value</strong></p>
-    <button class="buy-cookie-button" style="margin-bottom: 8px;">
-      Locked 🔒
-    </button>
-    <div style="margin-top: 0;">
-      <p class="store-lock-text" style="margin: 0 0 4px; font-weight: bold;">
-        Invite 3 friends to unlock
-      </p>
-      <div class="progress-bar" style="margin-top: 0;">
-        <div id="bunchofcookiesLockedProgress1" class="progress-fill" style="width:75%"></div>
-      </div>
-    </div>
-  </div> 
-</div> 
 
 
 <!-- CANDY LOCKED -->
-<div id="candyLocked" style="display: none;" class="store-item animated-gradient-candy item-with-image">
+<div id="candyLocked" style="display: none;" class="store-item animated-gradient-candy item-with-image" style="display:none;>
   <img src="pop.png" alt="Locked Donut" class="store-item-image" />
   <div class="store-item-content">
     <div class="store-item-header">
@@ -2311,7 +2151,7 @@ button {
 </div> 
 
          <!-- CANDY UNLOCKED -->
-  <div id="candyUnlocked" style="display: none;" class="store-item animated-gradient item-with-image">
+  <div id="candyUnlocked" style="display: none;" class="store-item animated-gradient item-with-image" style="display:none;>
     <!-- Put the cookie image on the left -->
     <img src="pop.png" alt="Crown" class="store-item-image" />
 
@@ -2360,7 +2200,7 @@ button {
 
 
    <!-- Donut UNLOCKED -->
-  <div id="donutUnlocked" class="store-item animated-gradient-candy item-with-image donut-destiny" style="display:none;>
+  <div id="donutUnlocked" class="store-item animated-gradient-candy item-with-image donut-destiny" style="display:none;">
     <img src="donutdestiny.png" alt="Donut" class="store-item-image" />
 
     <div class="store-item-content">
@@ -2383,7 +2223,7 @@ button {
       <!-- Meowgical Paw -->
   <div id="pawStore" class="store-item special-magical item-with-image" style="display:none;">
     <!-- Put the cookie image on the left -->
-    <img src="paw.png" alt="Normal Cookie" class="store-item-image" />
+    <img src="redpump.png" alt="Normal Cookie" class="store-item-image" />
 
     <div class="store-item-content">
       <div class="store-item-header">
@@ -2408,69 +2248,70 @@ button {
 
 
 <!-- Jar of Cookies (UNLOCKED) -->
-<div id="jarofcookiesUnlocked" class="store-item special item-with-image">
-  <img src="cookie_jar.png" alt="Jar of Cookies" class="store-item-image" />
+<div id="jarofcookiesUnlocked" class="store-item animated-gradient-candy item-with-image">
+  <img src="butt.png" alt="Jar of Cookies" class="store-item-image" />
   <div class="store-item-content">
     <div class="store-item-header">
-      <h4>Jar of Cookies</h4>
+      <h4>Lingerie</h4>
       <div class="store-item-cost">
         199
         <img src="tgstar2.png" alt="Star" class="store-star">
       </div>
     </div>
-    <p><strong>Unveils 10 tiles</strong></p>
+    <p><strong>Gives 10 unveils</strong></p>
     <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'jar')">
-      Buy 🫙
+      Buy 🩱
     </button>
   </div>
 </div>
 
 
 <!-- Stack of Cookies (UNLOCKED) -->
-<div id="stackofcookiesUnlocked" class="store-item special item-with-image">
-  <img src="stack.png" alt="Jar of Cookies" class="store-item-image" />
+<div id="stackofcookiesUnlocked" class="store-item animated-gradient-candy item-with-image">
+  <img src="candy2.png" alt="Jar of Cookies" class="store-item-image" />
   <div class="store-item-content">
     <div class="store-item-header">
-      <h4>Stack of Cookies</h4>
+      <h4>Lollipop</h4>
       <div class="store-item-cost">
         499
         <img src="tgstar2.png" alt="Star" class="store-star">
       </div>
     </div>
-    <p><strong>Unveils 25 tiles</strong></p>
+    <p><strong>Gives 25 unveils</strong></p>
     <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'stack')">
-      Buy 🍪
+      Buy 🍭
     </button>
   </div>
 </div>
 
 
 <!-- Treasure of Cookies (UNLOCKED) -->
-<div id="jarUnlockedItem6" class="store-item special item-with-image">
-  <img src="chest.png" alt="Jar of Cookies" class="store-item-image" />
+<div id="jarUnlockedItem6" class="store-item animated-gradient-candy item-with-image">
+  <img src="boots.png" alt="Jar of Cookies" class="store-item-image" />
   <div class="store-item-content">
     <div class="store-item-header">
-      <h4>Treasure of Cookies</h4>
+      <h4>Pumps</h4>
       <div class="store-item-cost">
         1450
         <img src="tgstar2.png" alt="Star" class="store-star">
       </div>
     </div>
-    <p><strong>Unveils 80 tiles</strong></p>
+    <p><strong>Gives 80 unveils</strong></p>
     <button class="buy-cookie-button" onclick="handleBuyCookieButtonClick(event, 'treasure')">
-      Buy 💰
+      Buy 👠
     </button>
   </div>
 </div>
 
+
     <!-- Bomb <button class="buy-cookie-button-lively">-->
   <div class="store-item item-with-image">
     <!-- Put the cookie image on the left -->
-    <img src="bomb.png" alt="Bomb" class="store-item-image" />
+    <img src="lipscherry.png" alt="Bomb" class="store-item-image" />
 
     <div class="store-item-content">
       <div class="store-item-header">
-        <h4>Bomb</h4>
+        <h4>Cherry Bomb</h4>
         <div class="store-item-cost">
           549
           <img src="tgstar2.png" alt="Star" class="store-star">
@@ -2478,19 +2319,20 @@ button {
       </div>
       <p><strong>Reveals an entire cluster</strong></p>
         <button class="buy-cookie-button sparkle-button" onclick="handleBuyCookieButtonClick(event, 'bomb')">
-          Buy 💣
+          Buy 🍒💣
         </button>
     </div>
   </div>
 
+
      <!-- Bomb <button class="buy-cookie-button-lively">-->
-  <div class="store-item item-with-image">
+  <div class="store-item animated-gradient-candy item-with-image">
     <!-- Put the cookie image on the left -->
-    <img src="chonkbomb.png" alt="Bomb" class="store-item-image" />
+    <img src="handcuffs.png" alt="Bomb" class="store-item-image" />
 
     <div class="store-item-content">
       <div class="store-item-header">
-        <h4>Chonk Bomb</h4>
+        <h4>Handcuffs</h4>
         <div class="store-item-cost">
           5400
           <img src="tgstar2.png" alt="Star" class="store-star">
@@ -2498,12 +2340,17 @@ button {
       </div>
       <p><strong>Reveals 10 entire clusters</strong></p>
         <button class="buy-cookie-button sparkle-button" onclick="handleBuyCookieButtonClick(event, 'chonkBomb')">
-          Buy 💣💥💥
+          Buy 💣🔗💥
         </button>
     </div>
   </div>
 
 
+
+
+
+
+ 
 
 
   <br>
@@ -2521,12 +2368,13 @@ button {
 
 
 
-  <p id="storeCookieBalances" style="font-size:16px; margin-top:10px;">
-    
-  </p>
-</div>
 
 </div>
+
+
+
+</div>
+
 
 
 
@@ -2536,9 +2384,11 @@ button {
     style="background: #b71c1c; color: #fff; padding: 12px 20px; font-size: 16px; border-radius: 6px; cursor: pointer;"
     onclick="useChonkBomb()"
   >
-    💣 Use Chonk-Bomb (Reveals 10 clusters)
+    🔗💣 Use Handcuffs (Reveals 10 clusters)
   </button>
 </div>
+
+
 
 
 <div class="cluster-buttons">
@@ -2550,16 +2400,16 @@ button {
 <button class="select-cluster-button" onclick="selectCluster()">Select Cluster</button>
 </div>
 
-<div class="bottom-nav">
-  <button id="bonusesTab" onclick="showTab('bonuses')">🌟 Bonuses</button>
-  <button id="storeTab" onclick="showTab('store')">🍪 Store</button>
-  <button id="fieldTab" class="active" onclick="showTab('field')">💰😺 Treasure</button>
-  <button id="statsTab" onclick="showTab('stats')">👑 Stats</button>
-  <button id="balanceTab" onclick="showTab('balance')">💎 Wallet</button>
 
+<div class="bottom-nav">
+  <button id="bonusesTab" onclick="showTab('bonuses')"> 🔥  Bonuses</button>
+  <button id="storeTab" onclick="showTab('store')">💋 Store</button>
+  <button id="fieldTab" class="active" onclick="showTab('field')">🍒 Desires</button>
+  <button id="statsTab" onclick="showTab('stats')">😈 Stats</button>
+  <button id="balanceTab" onclick="showTab('balance')">💎  Wallet </button>
 </div>
 
-  <script src="main.js"></script>
+  <script src="main-luna.js"></script>
 
 </body>
 </html>
