@@ -1524,7 +1524,7 @@ function updateBalances() {
 
 function openChannelLink() {
   // Replace with your actual Telegram channel link
-  const channelUrl = "https://t.me/LuckyChonk";
+  const channelUrl = "https://t.me/LuckyLuna_channel";
   window.open(channelUrl, "_blank");
 }
 
