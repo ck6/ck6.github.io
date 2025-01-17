@@ -2017,55 +2017,6 @@ async function fetchLeaderboard() {
   }
 }
 
-function positionClusterButtons() {
-  const honeycombGrid = document.querySelector('.hex-grid');
-  const clusterButtons = document.querySelector('.cluster-buttons');
-  const bottomNav = document.querySelector('.bottom-nav');
-
-  if (!honeycombGrid || !clusterButtons || !bottomNav) return;
-
-  // Measure heights
-  const gridRect = honeycombGrid.getBoundingClientRect();
-  const navHeight = bottomNav.offsetHeight;
-  const viewportHeight = window.innerHeight;
-
-  // Distance from top of viewport to bottom of the grid
-  // = top of grid + grid's height
-  const gridBottom = gridRect.top + gridRect.height;
-
-  // The available space for cluster buttons = viewportHeight - navHeight
-  const availableSpace = viewportHeight - navHeight;
-
-  // If the entire grid + top bar + some buffer fits in availableSpace:
-  // i.e., the bottom of the grid is above the "availableSpace",
-  // we can center the buttons. Otherwise, keep them pinned.
-  if (gridBottom < availableSpace) {
-    // The midpoint between the bottom of the grid and the top of the nav
-    // = (gridBottom + (viewportHeight - navHeight)) / 2
-    const midpoint = (gridBottom + availableSpace) / 2;
-
-    // cluster-buttons is absolutely or fixed-positioned from the top
-    // so let's place it so that its top is near 'midpoint'
-    // But we also need the cluster-buttons' own height
-    const clusterButtonsHeight = clusterButtons.offsetHeight;
-    const offsetTop = midpoint - (clusterButtonsHeight / 2);
-
-    // Assign position
-    clusterButtons.style.position = 'absolute'; // or 'fixed', but likely absolute if inside #fieldContent
-    clusterButtons.style.top = `${offsetTop}px`;
-    clusterButtons.style.bottom = 'auto';
-  } else {
-    // If the grid is taller than the space, just pin to bottom
-    clusterButtons.style.position = 'fixed';
-    clusterButtons.style.top = 'auto';
-    clusterButtons.style.bottom = '80px'; 
-    // ...or whatever offset to keep above the nav bar
-  }
-}
-
-// Then call this on load/resize
-window.addEventListener('load', positionClusterButtons);
-window.addEventListener('resize', positionClusterButtons);
 
 
 
