@@ -626,7 +626,7 @@ function closeClusterCompletePopup() {
 
     if (!window.clusterCompletedViaBomb) {
     // was NOT bomb => load random cluster
-    const randIndex = Math.floor(Math.random() * 3333334);
+    const randIndex = Math.floor(Math.random() * 3999999);
     loadCluster(randIndex);
   }
 
@@ -928,18 +928,18 @@ function flipTile(row, col, reward, index) {
  * 4) Random or selected cluster
  ************************************************************/
 function loadRandomCluster() {
-  const randIndex = Math.floor(Math.random() * 3333334); //1818181 //2_380_953
+  const randIndex = Math.floor(Math.random() * 3999999); //1818181 //2_380_953
   loadCluster(randIndex);
   updateBalances();
 }
 function selectCluster() {
-  const clusterNumber = prompt("Enter cluster number (1-3,333,334):");
+  const clusterNumber = prompt("Enter cluster number (1-3,999,999):");
   const num = parseInt(clusterNumber, 10);
-  if (!isNaN(num) && num >= 1 && num <= 3333334) {
+  if (!isNaN(num) && num >= 1 && num <= 3999999) {
     loadCluster(num - 1);
     updateBalances();
   } else {
-    alert("Invalid cluster number. Please enter a number between 1 and 3,333,334.");
+    alert("Invalid cluster number. Please enter a number between 1 and 3,999,999.");
   }
 }
 
