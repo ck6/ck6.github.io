@@ -1399,6 +1399,20 @@ button:hover {
   100% { background-position: 0% 50%; }
 }
 
+.animated-gradient-pinkish {
+  background: linear-gradient(135deg, #ff00ee, #ff59c8);
+  background-size: 200% 200%;
+  animation: pinkishShift 4s ease-in-out infinite;
+  /* Add a neon glow around the box: */
+  box-shadow: 0 0 8px #ff59c8, 0 0 16px #ff29c8;
+  border: 2px solid #ff29c8;
+  border-radius: 12px;
+}
+@keyframes pinkishShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
 
 
@@ -1615,7 +1629,7 @@ button:hover {
   <h2>Bonuses</h2>
 
   <!-- Box #1: Invite Buttons + Friends Invited -->
-  <div class="boxy-card store-item item-with-image">
+  <div class="boxy-card store-item item-with-image animated-gradient-pinkish">
       <button class="invite-friend-button" onclick="shareMiniApp()">Invite frens</button>
       <button class="invite-friend-button" onclick="copyLinkToClipboard()">📋</button>
        <p class="invite-count" style="padding-left: 10px;">
@@ -1629,7 +1643,7 @@ button:hover {
 
 
  <!-- Are you following our channel? special-magical-->
-<div class="boxy-card store-item item-with-image" id="channelRewardCard"
+<div class="boxy-card store-item item-with-image animated-gradient-pinkish" id="channelRewardCard"
      style="
        display: flex; 
        align-items: center; 
