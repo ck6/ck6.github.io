@@ -129,6 +129,8 @@ const pastelGradients = [
   
   // Electric Blue → Neon Purple
   "linear-gradient(135deg, #00bfff, #b400ff)",
+  "linear-gradient(135deg, #00bfff, #b400ff)",
+  "linear-gradient(135deg, #00bfff, #b400ff)",
   
   
   // Bright Purple → Vivid Pink
