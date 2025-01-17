@@ -371,6 +371,9 @@ p {
   justify-content: space-evenly;
   align-items: center;
   padding: 10px 0;
+  padding-left: calc(10px + env(safe-area-inset-left, 0));
+  padding-right: calc(10px + env(safe-area-inset-right, 0));
+
 }
 
 .bottom-nav button {
@@ -411,10 +414,11 @@ p {
   background: var(--accent-color);
 }
 
-/* ======== CLUSTER BUTTONS ======== */
+/* ======== CLUSTER BUTTONS ======== bottom: 90px; */
 .cluster-buttons {
   position: fixed;
-  bottom: 90px; 
+  
+  bottom: clamp(70px, 8vw, 140px);
   left: 0;
   width: 100%;
   display: flex;
