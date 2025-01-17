@@ -1650,18 +1650,14 @@ button:hover {
   <h2>Bonuses</h2>
 
   <!-- Box #1: Invite Buttons + Friends Invited -->
-<div class="boxy-card animated-gradient-pinkish">
-  <!-- Buttons in one row -->
-  <div style="display: flex; gap: 10px;">
-    <button class="invite-friend-button" onclick="shareMiniApp()">Invite frens</button>
-    <button class="invite-friend-button" onclick="copyLinkToClipboard()">📋</button>
+  <div class="boxy-card special-magical">
+      <button class="invite-friend-button" onclick="shareMiniApp()">Invite frens</button>
+      <button class="invite-friend-button" onclick="copyLinkToClipboard()">📋</button>
+       <p class="invite-count" style="padding-left: 10px;">
+        <b>frens invited: <span id="friendsInvitedCount">0</span></b>
+      </p>
   </div>
-  
-  <!-- Invited count in its own row -->
-  <p class="invite-count">
-    <b>frens invited: <span id="friendsInvitedCount">0</span></b>
-  </p>
-</div>
+
 
 
 
@@ -1670,7 +1666,7 @@ button:hover {
 
 
  <!-- Are you following our channel? special-magical-->
-<div class="boxy-card store-item item-with-image animated-gradient-pinkish" id="channelRewardCard"
+<div class="boxy-card special-magical item-with-image" id="channelRewardCard"
      style="
        display: flex; 
        align-items: center; 
@@ -1680,7 +1676,7 @@ button:hover {
 
     <!-- Text label -->
   <p style="margin: 0; font-weight: bold;">
-    Follow our channel to get <strong>a free kiss</strong>
+    Follow our channel to get <strong>a free cookie</strong>
   </p>
 
     <!-- Button: opens channel link -->
@@ -1696,7 +1692,7 @@ button:hover {
 
     <!-- Cookie image -->
   <img id="channelCookieImage" src="kiss.png" 
-       alt="Cookie" 
+       alt="Kiss" 
        style="width: 40px; height: auto;">
 
 </div>
