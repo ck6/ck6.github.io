@@ -1255,6 +1255,7 @@ function setupWelcomeCountdown() {
       clearInterval(intervalId);
       return;
     }
+    else{welcomeItem.style.display = "inline";}
 
     // still time left => show h/m/s
     const totalSec = Math.floor(diff / 1000);
