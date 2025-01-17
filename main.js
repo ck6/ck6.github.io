@@ -125,7 +125,7 @@ const pastelGradients = [
   "linear-gradient(135deg, #ff00ff, #00ffff)",
   
   // Neon Green → Aqua
-  "linear-gradient(135deg, #39ff14, #00ffa5)",
+  //"linear-gradient(135deg, #39ff14, #00ffa5)",
   
   // Electric Blue → Neon Purple
   "linear-gradient(135deg, #00bfff, #b400ff)",
