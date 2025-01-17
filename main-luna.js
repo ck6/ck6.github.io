@@ -12,9 +12,6 @@ switch (true) {
   case hostname.includes("experiments.services.fluffychonk.com"):
     BASE_API_URL = "https://chonk-2.services.fluffychonk.com";
     break;
-  case hostname.includes("ck6.github.io"):
-    BASE_API_URL = "https://chonk.fly.dev";
-    break;
   default:
     BASE_API_URL = "https://chonk-2.services.fluffychonk.com"; // fallback
 }
@@ -1079,7 +1076,7 @@ function shareMiniApp() {
   //    - This is a standard approach to let the user pick a chat to send it to.
   //    - You can also add a custom text or message if you want.
   const encodedLink = encodeURIComponent(personalLink);
-  const encodedMessage = encodeURIComponent("Check out Lucky Luna, find 5 BTC, 100K TON, lots of USDT, and change your life!");
+  const encodedMessage = encodeURIComponent("Check out sexy Lucky Luna, find 5 BTC, 100K TON, lots of USDT, and change your life!");
   const shareUrl = `https://t.me/share/url?url=${encodedLink}&text=${encodedMessage}`;
 
   window.open(shareUrl, "_blank");
