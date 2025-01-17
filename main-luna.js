@@ -1073,7 +1073,7 @@ async function handleBuyCookieButtonClick(event, revealType) {
 function shareMiniApp() {
   // 1) Construct your personal link
   //    - If you have a Telegram Bot with a start param, do something like:
-  const personalLink = `https://t.me/LuckyChonkBot/LuckyChonk?startapp=${userId}`;
+  const personalLink = `https://t.me/LuckyLunaBot/Luna?startapp=${userId}`;
 
   // 2) Open Telegram's share URL in a new tab.
   //    - This is a standard approach to let the user pick a chat to send it to.
@@ -1087,7 +1087,7 @@ function shareMiniApp() {
 
 function copyLinkToClipboard() {
   // 1. Construct the same personal link you use for the share
-  const personalLink = `https://t.me/LuckyChonkBot/LuckyChonk?startapp=${userId}`;
+  const personalLink = `https://t.me/LuckyLunaBot/Luna?startapp=${userId}`;
   
   // 2. Copy to clipboard using the modern Clipboard API
   navigator.clipboard.writeText(personalLink)
