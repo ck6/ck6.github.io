@@ -1255,7 +1255,7 @@ function setupWelcomeCountdown() {
       clearInterval(intervalId);
       return;
     }
-    else{welcomeItem.style.display = "inline";}
+    else{welcomeItem.style.display = "flex";}
 
     // still time left => show h/m/s
     const totalSec = Math.floor(diff / 1000);
@@ -1824,7 +1824,7 @@ function closeFreeCookiePopup() {
 
 // Create a connector
     const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-        manifestUrl: 'https://experiments.services.fluffychonk.com/chonk/tonconnect-manifest.json',
+        manifestUrl: 'https://experiments.services.fluffychonk.com/chonk/tonconnect-manifest-luna.json',
         buttonRootId: 'ton-connect'
     });
 
