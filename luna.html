@@ -1398,29 +1398,37 @@ button:hover {
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-
 .animated-gradient-pinkish {
-  /* Softer purple → pink gradient */
+  /* Dark purple gradient with a bit of pinkish tone */
   background: linear-gradient(
     135deg,
-    #b440d1,  /* a medium purple */
-    #e077d5   /* a lighter pinkish-purple */
+    #29002f,   /* very dark purple */
+    #420057,   /* deeper purple */
+    #5e0072    /* a hint more pinkish-purple */
   );
   background-size: 200% 200%;
   animation: pinkishShift 4s ease-in-out infinite;
 
-  /* Subtle neon-style border & glow (tweaked for softness) */
-  border: 2px solid #db70ce; 
+  /* Softer neon-style border & glow */
+  border: 2px solid #8338ec; /* mild neon purple */
   border-radius: 12px;
-  box-shadow: 0 0 8px rgba(219, 112, 206, 0.5),
-              0 0 16px rgba(224, 119, 213, 0.3);
+  box-shadow: 
+    0 0 8px rgba(131, 56, 236, 0.5),
+    0 0 16px rgba(131, 56, 236, 0.3);
 }
 
 @keyframes pinkishShift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
+
 
 
 
