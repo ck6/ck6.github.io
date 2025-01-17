@@ -1175,7 +1175,7 @@ function setupWelcomeCountdown() {
     }
     else{
 
-      welcomeItem.style.display = "inline";
+      welcomeItem.style.display = "block";
     }
 
     // still time left => show h/m/s
